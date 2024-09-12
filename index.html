@@ -9,12 +9,145 @@
 </head>
 
 <body>
-    <form action="./index.html" target="_self" method="get" autocomplete="off" novalidate>
+    <form action="./index.html" target="_blank" autocomplete="off" novalidate>
+
         <label for="name">
             Name:
-            <input type="text" />
         </label>
+        <input type="text" id="name" value="" />
+        <br />
 
+        <label for="email">
+            Email:
+        </label>
+        <input type="email" />
+        <br />
+
+        <label for="checkbox1">
+            Yes
+        </label>
+        <input type="checkbox" id="checkbox1" />
+        <br />
+
+        <label for="colorpicker">
+            Color Picker
+        </label>
+        <input type="color" id="colorpicker" />
+        <br />
+
+        <label for="colorpicker">
+            Date Picker
+        </label>
+        <input type="date" />
+        <br />
+
+        <label for="datetime-local">
+            Datetime Local
+        </label>
+        <input type="datetime-local" />
+        <br />
+
+        <label for="filePicker">
+            File Picker
+        </label>
+        <input type="file" />
+        <br />
+
+        <input type="hidden" />
+        <br />
+
+        <input type="image" alt="image alternative" />
+        <br />
+
+        <label for="password">
+            Password Filed
+        </label>
+        <input type="password" />
+        <br />
+
+        <label for="radio1">
+            Male
+        </label>
+        <input type="radio" />
+        <br />
+
+        <label for="radio2">
+            Female
+        </label>
+        <input type="radio" />
+        <br />
+
+        <label for="rangePicker">
+            Range Picker
+        </label>
+        <input type="range" />
+        <br />
+
+        <label for="time">
+            Timne
+        </label>
+        <input type="time" />
+        <br />
+
+        <label for="url">
+            URL
+        </label>
+        <input type="url" />
+        <br />
+
+        <label for="cars">
+            Choose A Car :
+        </label>
+        <select name="card" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="defender" selected>Defender</option>
+            <option value="range-rover">Range Rover</option>
+            <option value="safari">Safari</option>
+        </select>
+        <br />
+
+        <label for="textarea">
+            Textarea
+        </label>
+        <textarea rows="1" cols="5"></textarea>
+        <br />
+
+        <fieldset>
+            <legend>Personalia:</legend>
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" value="John"><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" value="Doe"><br><br>
+            <input type="submit" value="Submit">
+        </fieldset>
+        <br />
+
+        <form action="/action_page.php">
+            <input list="browsers">
+            <datalist id="browsers">
+                <option value="Edge">
+                <option value="Firefox">
+                <option value="Chrome">
+                <option value="Opera">
+                <option value="Safari">
+            </datalist>
+        </form>
+        <br />
+
+        <form action="/action_page.php" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+            0
+            <input type="range" id="a" name="a" value="50">
+            100 +
+            <input type="number" id="b" name="b" value="50">
+            =
+            <output name="x" for="a b"></output>
+            <br><br>
+            <input type="submit">
+        </form>
+
+        <input type="reset" />
+        <br />
+        <button type="submit">Submit</button>
     </form>
 
 </body>
