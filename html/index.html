@@ -122,7 +122,7 @@
         </fieldset>
         <br />
 
-        <form action="/action_page.php">
+        <form action="./index.html">
             <input list="browsers">
             <datalist id="browsers">
                 <option value="Edge">
@@ -134,16 +134,42 @@
         </form>
         <br />
 
-        <form action="/action_page.php" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+        <form action="./index.html" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
             0
             <input type="range" id="a" name="a" value="50">
             100 +
             <input type="number" id="b" name="b" value="50">
             =
             <output name="x" for="a b"></output>
-            <br><br>
+            <br />
             <input type="submit">
         </form>
+
+        <form action="./index.html" method="get">
+            Choose your favorite subject:
+            <button name="subject" type="submit" value="HTML">HTML</button>
+            <button name="subject" type="submit" value="CSS">CSS</button>
+        </form>
+
+        <input type="text" name="username" />
+        <br />
+        <input type="text" value="yash" />
+        <br />
+        <input type="text" class="container" />
+        <br />
+        <input type="text" id="heading" />
+        <br />
+
+        <img src="./image.jpg" alt="tree" width="500" height="300">
+        <br />
+
+        <a href="https://www.google.com" target="_blank">Google</a>
+        <br />
+
+        <a href="https://www.google.com" target="_blank">
+            <img src="./image.jpg" alt="tree" width="500" height="300">
+        </a>
+        <br />
 
         <input type="reset" />
         <br />
