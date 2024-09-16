@@ -1,0 +1,44 @@
+* {
+    font-family: "Inter", sans-serif;
+}
+
+
+body {
+    opacity: 0.7;
+    background-color: white;
+    background-image: url("https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+#id-selecter {
+    text-align: center;
+}
+
+.class-selecter {
+    text-align: center;
+}
+
+h3,
+h6 {
+
+    text-align: center;
+}
+
+.external {
+    text-align: center;
+    border: 2px solid black;
+    border-style: dashed;
+    border-width: 3px;
+    border-color: black;
+    border-radius: 2px;
+}
