@@ -15,7 +15,7 @@
     <header>
         <h1>Hii, I'm Yash Khokhar</h1>
         <h4>Full Stack Developer</h4>
-        <img src="profile.jpg" alt="Yash Khokhar">
+        <img src="profile.jpg" width="100" height="100" alt="Yash Khokhar">
     </header>
     <section id="about">
         Motivated Computer Engineering student with a strong desire to learn and grow in the IT industry. Passionate
@@ -118,27 +118,27 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <form action="./index.html" target="_blank" method="POST">
+        <form action="./index.html" target="_blank" method="POST" autocomplete="off">
             <label for="name">Name:</label>&nbsp;&nbsp;
-            <input type="text" name="name" placeholder="Your Name">
+            <input type="text" name="name" placeholder="Your Name" required>
             <br />
             <br />
             <label for="email">Email:</label>&nbsp;&nbsp;
-            <input type="email" name="email" placeholder="Your Email">
+            <input type="email" name="email" placeholder="Your Email" required>
             <br />
             <br />
             <label for="phone-number">Phone Number:</label>&nbsp;&nbsp;
-            <input type="number" name="phone" placeholder="Your Phone Number">
+            <input type="number" name="phone" placeholder="Your Phone Number" required>
             <br />
             <br />
             <label for="user-type">I am : </label>&nbsp;&nbsp;
-            <input type="radio" name="user-type" value="Student">Student
-            <input type="radio" name="user-type" value="PtentialClient">Potential Client
-            <input type="radio" name="user-type" value="BusinessPartner">Business Partner
+            <input type="radio" name="user-type" value="Student" required>Student
+            <input type="radio" name="user-type" value="PtentialClient" required>Potential Client
+            <input type="radio" name="user-type" value="BusinessPartner" required>Business Partner
             <br />
             <br />
             <label for="work-type">Work Type:</label>&nbsp;&nbsp;
-            <select name="work-type">
+            <select name="work-type" required>
                 <option value="Backend Developer">Backend Developer</option>
                 <option value="Frontend Developer">Frontend Developer</option>
                 <option value="DevOps Developer">DevOps Developer</option>
@@ -147,14 +147,14 @@
             <br />
             <br />
             <label for="file">Attachements</label>
-            <input type="file" name="file" accept="pdf/*">
+            <input type="file" name="file" required>
             <br />
             <br />
             <label for="message">Message:</label>&nbsp;&nbsp;
-            <textarea name="message" placeholder="Your Message"></textarea>
+            <textarea name="message" placeholder="Your Message" required></textarea>
             <br />
             <br />
-            <input type="checkbox" name="subscribe" value="yes">
+            <input type="checkbox" name="subscribe" value="yes" required>
             Subscribe to my newsletter
             </label>
             <br />
