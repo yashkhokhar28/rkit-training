@@ -18,6 +18,8 @@ h1 {
 
 p {
     text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 #id-selecter {
@@ -41,4 +43,15 @@ h6 {
     border-width: 3px;
     border-color: black;
     border-radius: 2px;
+    margin: 100px;
+    padding: 50px;
+}
+
+.check-hw {
+    border: 3px solid red;
+    border-radius: 5px;
+    margin: 70px;
+    padding: 70px;
+    width: 100%;
+    max-width: 50%;
 }
