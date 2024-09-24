@@ -4,11 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RKIT Trainig</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for hover effect on the cards */
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <a href="./html/Live Demo/index.html">html live demo</a>
+    <div class="container my-5">
+        <div class="row">
+            <!-- Card 1: HTML -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                        class="card-img-top" alt="HTML Logo">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HTML</h5>
+                        <p class="card-text">Hypertext Markup Language is the standard language for creating web pages.
+                        </p>
+                        <a href="./html/index.html" class="btn btn-outline-primary">Practice</a>
+                        <a href="./html/Live Demo/index.html" class="btn btn-outline-primary">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: CSS -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+                        class="card-img-top" alt="CSS Logo">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">CSS</h5>
+                        <p class="card-text">Cascading Style Sheets is used to style and layout web pages.</p>
+                        <a href="./css/index.html" class="btn btn-outline-primary">Practice</a>
+                        <a href="./css/Live Demo/index.html" class="btn btn-outline-primary">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Bootstrap -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"
+                        class="card-img-top" alt="Bootstrap Logo">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Bootstrap</h5>
+                        <p class="card-text">Bootstrap is a free and open-source CSS framework for responsive web
+                            design.</p>
+                        <a href="./bootstrap/index.html" class="btn btn-outline-primary">Practice</a>
+                        <a href="./bootstrap/Live Demo/index.html" class="btn btn-outline-primary">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, if you need interactive components like modals or dropdowns) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
