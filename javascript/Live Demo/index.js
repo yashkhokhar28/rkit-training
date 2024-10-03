@@ -41,14 +41,14 @@ document
     e.preventDefault();
 
     // Validate Name
-    const name = document.getElementById("name").value.trim();
+    let name = document.getElementById("name").value.trim();
     if (name === "") {
       alert("Please enter your name.");
       return false;
     }
 
     // Validate Email
-    const email = document.getElementById("email").value.trim();
+    let email = document.getElementById("email").value.trim();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email === "" || !emailPattern.test(email)) {
       alert("Please enter a valid email address.");
@@ -56,14 +56,14 @@ document
     }
 
     // Validate Phone
-    const phone = document.getElementById("phone").value.trim();
+    let phone = document.getElementById("phone").value.trim();
     if (phone === "" || isNaN(phone) || phone.length < 10) {
       alert("Please enter a valid phone number (minimum 10 digits).");
       return false;
     }
 
     // Validate Radio Button for User Type
-    const userTypeSelected = document.querySelector(
+    let userTypeSelected = document.querySelector(
       'input[name="user-type"]:checked'
     );
     if (!userTypeSelected) {
@@ -72,14 +72,14 @@ document
     }
 
     // Validate Dropdown for Work Type
-    const workType = document.getElementById("floatingSelect").value;
+    let workType = document.getElementById("floatingSelect").value;
     if (workType === "") {
       alert("Please select your work type.");
       return false;
     }
 
     // Validate Message (Optional, but checking if it exists)
-    const message = document
+    let message = document
       .getElementById("exampleFormControlTextarea1")
       .value.trim();
     if (message === "") {
@@ -89,5 +89,4 @@ document
 
     // If all validations pass, allow form submission
     alert("Form submitted successfully!");
-    e.target.submit();
   });
