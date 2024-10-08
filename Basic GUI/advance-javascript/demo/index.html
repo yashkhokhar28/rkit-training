@@ -14,18 +14,21 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 text-gray-800" onload="checkCookie()">
+<body class="bg-gray-100 text-gray-800" onload="CheckCookie()">
+    <!-- Header Section -->
     <header class="text-center p-4">
-        <h1 class="text-gray-800 text-3xl font-bold">Hii, I'm Yash Khokhar</h1>
+        <h1 class="text-gray-800 text-3xl font-bold">Hi, I'm Yash Khokhar</h1>
         <h4 class="text-gray-600 text-xl" id="dynamicText">Full Stack Developer</h4>
+        <!-- Profile Image -->
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrsChRo4n43ldWvA_SxnEUdkmG24uWi8C3xg&s"
             class="rounded-full w-24 h-24 mx-auto my-4" alt="Yash Khokhar">
     </header>
 
+    <!-- About Section -->
     <h2 class="text-center text-2xl font-semibold border border-gray-400 rounded-lg py-2 my-4">About</h2>
     <section id="about" class="px-6 py-4 text-center">
         <p>
@@ -35,8 +38,10 @@
         </p>
     </section>
 
+    <!-- Projects Section -->
     <h2 class="text-center text-2xl font-semibold border border-gray-400 rounded-lg py-2 my-4">Projects</h2>
     <section id="projects" class="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project 1: Vehicle Manager -->
         <div class="bg-white p-4 rounded-lg shadow-md">
             <img src="./images/project-1.png" id="project-1" class="w-20 h-auto mx-auto mb-4" alt="Project 1">
             <b>Vehicle Manager <br /> <i>May 2023 - Sept 2023</i></b>
@@ -47,6 +52,7 @@
             </ul>
         </div>
 
+        <!-- Project 2: Quotation Generator -->
         <div class="bg-white p-4 rounded-lg shadow-md">
             <img src="./images/project-2.png" id="project-2" class="w-20 h-auto mx-auto mb-4" alt="Project 2">
             <b>Quotation Generator <br /> <i>Jan 2024 - May 2024</i></b>
@@ -58,6 +64,7 @@
             </ul>
         </div>
 
+        <!-- Project 3: E-Commerce Portal -->
         <div class="bg-white p-4 rounded-lg shadow-md">
             <img src="./images/project-3.jpg" id="project-3" class="w-20 h-auto mx-auto mb-4" alt="Project 3">
             <b>Shoppers - E-Commerce Portal <br /> <i>Oct 2023 - April 2024</i></b>
@@ -69,6 +76,7 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
     <h2 class="text-center text-2xl font-semibold border border-gray-400 rounded-lg py-2 my-4">Skills</h2>
     <section id="skills" class="px-6 py-4 text-center">
         <p><b>Languages:</b> Python, SQL, HTML, JavaScript, Java, C, Dart, C#</p>
@@ -77,6 +85,7 @@
         <p><b>UI Libraries:</b> Material, Cupertino</p>
     </section>
 
+    <!-- Experience Section -->
     <h2 class="text-center text-2xl font-semibold border border-gray-400 rounded-lg py-2 my-4">Experience</h2>
     <section id="experience" class="px-6 py-4">
         <b>aiDopS, Rajkot, Gujarat <i>Intern May 2023 - Present</i></b>
@@ -87,22 +96,26 @@
         </ul>
     </section>
 
+    <!-- Contact Form -->
     <h2 class="text-center text-2xl font-semibold border border-gray-400 rounded-lg py-2 my-4">Contact Me</h2>
     <section id="contact" class="px-6 py-4 text-center">
         <form action="./index.html" id="contact-form" target="_blank" method="POST" autocomplete="off"
             class="space-y-4">
+            <!-- Name Field -->
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
                 <input type="text" id="name"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     name="name" placeholder="Your Name">
             </div>
+            <!-- Email Field -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
                 <input type="email" id="email"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     name="email" placeholder="Your Email">
             </div>
+            <!-- Phone Number Field -->
             <div>
                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number:</label>
                 <input type="number" id="phone"
@@ -110,6 +123,7 @@
                     name="phone" placeholder="Your Phone Number">
             </div>
 
+            <!-- User Type Selection (Radio buttons) -->
             <div>
                 <label for="user-type" class="block text-sm font-medium text-gray-700">I am:</label>
                 <div class="flex space-x-4">
@@ -131,6 +145,7 @@
                 </div>
             </div>
 
+            <!-- Work Type Selection (Dropdown) -->
             <div>
                 <label for="floatingSelect" class="block text-sm font-medium text-gray-700">Work Type</label>
                 <select id="floatingSelect"
@@ -143,11 +158,13 @@
                 </select>
             </div>
 
+            <!-- File Attachment -->
             <div>
                 <label for="formFile" class="block text-sm font-medium text-gray-700">Attachments</label>
                 <input class="block w-full text-gray-500 mt-1" type="file" id="formFile">
             </div>
 
+            <!-- Message Field -->
             <div>
                 <label for="message" class="block text-sm font-medium text-gray-700">Message:</label>
                 <textarea id="message"
@@ -155,6 +172,7 @@
                     rows="3"></textarea>
             </div>
 
+            <!-- Newsletter Subscription Checkbox -->
             <div class="flex items-start space-x-4">
                 <div class="flex items-center h-5">
                     <input id="newsletter" type="checkbox"
@@ -163,6 +181,7 @@
                 <label for="newsletter" class="font-medium text-gray-700">Subscribe to my newsletter</label>
             </div>
 
+            <!-- Submit and Reset Buttons -->
             <div class="grid grid-cols-2 gap-4">
                 <button class="bg-gray-800 text-white py-2 px-4 rounded-lg shadow hover:bg-gray-700"
                     type="submit">Submit</button>
@@ -171,14 +190,15 @@
             </div>
 
         </form>
+        <!-- Action Buttons for Viewing Data and Clearing Local Storage -->
         <div class="grid grid-cols-2 gap-4 py-2 my-4">
             <button class="bg-gray-800 text-white py-2 px-4 rounded-lg shadow hover:bg-gray-700"
-                onclick="populateModal()" type="button">View
-                Data</button>
+                onclick="PopulateModal()" type="button">View Data</button>
             <button class="bg-gray-800 text-white py-2 px-4 rounded-lg shadow hover:bg-gray-700"
-                onclick="clearLocalStorage()" type="button">Clear Local Storage</button>
+                onclick="ClearLocalStorage()" type="button">Clear Local Storage</button>
         </div>
 
+        <!-- Social Media Links -->
         <div class="social-links flex justify-center space-x-4 mt-4">
             <a href="https://www.linkedin.com/in/yashkhokhar28/">
                 <img src="https://img.icons8.com/?size=100&id=xuvGCOXi8Wyg&format=png&color=000000" class="w-6 h-6"
@@ -190,6 +210,7 @@
             </a>
         </div>
     </section>
+
     <!-- Bootstrap Modal to Display LocalStorage Data -->
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -201,9 +222,12 @@
         </div>
     </div>
 
+    <!-- Footer Section -->
     <footer class="text-center py-4">
         <p>&copy; 2021 Yash Khokhar</p>
     </footer>
+
+    <!-- JavaScript for form handling and local storage operations -->
     <script src="./index.js"></script>
 </body>
 

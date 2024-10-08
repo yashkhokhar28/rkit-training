@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a Portfolio Website of Yash Khokhar">
+    <meta name="keywords"
+        content="Yash Khokhar, Yash, Khokhar, Portfolio, Web Developer, Web Designer, Frontend Developer, Backend Developer, Full Stack Developer">
+    <meta name="author" content="Yash Khokhar">
+    <title>OOJS Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Form for user input -->
+    <form onsubmit="MyFunc(event)"> <!-- Updated to PascalCase -->
+        <label for="name">Name:</label><br />
+        <input type="text" id="name" placeholder="Enter your name"><br />
+        <label for="age">Age:</label><br />
+        <input type="number" id="age" placeholder="Enter your age"><br />
+        <button type="submit">Submit</button> <!-- Submits form and triggers MyFunc -->
+    </form>
+
+    <!-- Placeholders for results -->
+    <h4 id="result-name"></h4> <!-- Will display the user's name -->
+    <h4 id="result-age"></h4> <!-- Will display the user's age -->
+    <h4 id="api-data"></h4> <!-- Will display API data -->
+
+    <!-- Buttons to trigger engine start/stop and fetch API data -->
+    <button type="button" onclick="TestTraditionalWay()">Start Engine</button>
+    <!-- Updated function name to PascalCase -->
+    <button type="button" onclick="FetchData()">Test API</button> <!-- Updated function name to PascalCase -->
+
+    <!-- Linking the JavaScript file -->
+    <script src="./index1.js"></script>
+</body>
+
+</html>

@@ -1,8 +1,10 @@
-const project1 = document.getElementById("project-1");
-const project2 = document.getElementById("project-2");
-const project3 = document.getElementById("project-3");
+// Select project elements by their ID
+const Project1 = document.getElementById("project-1");
+const Project2 = document.getElementById("project-2");
+const Project3 = document.getElementById("project-3");
 
-project1.addEventListener("click", () => {
+// Add click event listener for Project 1
+Project1.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 1?");
   if (res) {
     window.open(
@@ -14,7 +16,8 @@ project1.addEventListener("click", () => {
   }
 });
 
-project2.addEventListener("click", () => {
+// Add click event listener for Project 2
+Project2.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 2?");
   if (res) {
     window.open(
@@ -26,7 +29,8 @@ project2.addEventListener("click", () => {
   }
 });
 
-project3.addEventListener("click", () => {
+// Add click event listener for Project 3
+Project3.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 3?");
   if (res) {
     window.open("http://shoppers.somee.com", "_blank");
@@ -35,11 +39,11 @@ project3.addEventListener("click", () => {
   }
 });
 
+// Add event listener for the contact form submission
 document
   .getElementById("contact-form")
   .addEventListener("submit", function (e) {
-    // Stop form submission
-    e.preventDefault();
+    e.preventDefault(); // Stop form submission
 
     // Validate Name
     let name = document.getElementById("name").value.trim();
@@ -90,7 +94,8 @@ document
     alert("Form submitted successfully!");
   });
 
-const saveFormData = () => {
+// Save form data to localStorage
+const SaveFormData = () => {
   const formData = {
     name: document.getElementById("name").value,
     email: document.getElementById("email").value,
@@ -100,45 +105,47 @@ const saveFormData = () => {
     message: document.getElementById("message").value,
   };
   localStorage.setItem("formData", JSON.stringify(formData));
+  sessionStorage.setItem("formData", JSON.stringify(formData));
 };
 
 // Populate the modal with localStorage data
-const populateModal = () => {
+const PopulateModal = () => {
   const formData = JSON.parse(localStorage.getItem("formData"));
   if (formData) {
     const reviewData = `
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Name:</strong> ${formData.name}</li>
-                <li class="list-group-item"><strong>Email:</strong> ${formData.email}</li>
-                <li class="list-group-item"><strong>Phone:</strong> ${formData.phone}</li>
-                <li class="list-group-item"><strong>User Type:</strong> ${formData.userType}</li>
-                <li class="list-group-item"><strong>Work Type:</strong> ${formData.workType}</li>
-                <li class="list-group-item"><strong>Message:</strong> ${formData.message}</li>
-            </ul>
-        `;
+      <ul class="list-group">
+          <li class="list-group-item"><strong>Name:</strong> ${formData.name}</li>
+          <li class="list-group-item"><strong>Email:</strong> ${formData.email}</li>
+          <li class="list-group-item"><strong>Phone:</strong> ${formData.phone}</li>
+          <li class="list-group-item"><strong>User Type:</strong> ${formData.userType}</li>
+          <li class="list-group-item"><strong>Work Type:</strong> ${formData.workType}</li>
+          <li class="list-group-item"><strong>Message:</strong> ${formData.message}</li>
+      </ul>
+    `;
     document.getElementById("reviewData").innerHTML = reviewData;
   } else {
     alert("No Data Found");
   }
 };
 
-// Save form data to localStorage on form submission (example usage)
+// Save form data to localStorage on form submission
 document
   .getElementById("contact-form")
   .addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent actual submission for demonstration
-    saveFormData(); // Save data to localStorage
+    SaveFormData(); // Save data to localStorage
     alert("Data Saved to LocalStorage");
   });
 
-const clearLocalStorage = () => {
+// Clear localStorage data
+const ClearLocalStorage = () => {
   localStorage.clear();
   alert("Local Storage Cleared");
   window.location.reload();
 };
 
 // Set a cookie with a 1-day expiration
-const setCookie = () => {
+const SetCookie = () => {
   var name = prompt("Please enter your name:");
   if (name == null || name == "") {
     alert("Name must be filled out");
@@ -152,17 +159,17 @@ const setCookie = () => {
 };
 
 // Check if the cookie exists, otherwise set it
-const checkCookie = () => {
-  let name = getCookie("name"); // Check if "name" cookie exists
+const CheckCookie = () => {
+  let name = GetCookie("name"); // Check if "name" cookie exists
   if (name) {
     alert("Welcome again " + name); // If cookie exists, greet the user
   } else {
-    setCookie(); // Otherwise, set the cookie
+    SetCookie(); // Otherwise, set the cookie
   }
 };
 
 // Retrieve a specific cookie by name
-const getCookie = (cname) => {
+const GetCookie = (cname) => {
   let name = cname + "=";
   let ca = document.cookie.split(";"); // Split cookies by ';'
   for (let i = 0; i < ca.length; i++) {
@@ -174,7 +181,8 @@ const getCookie = (cname) => {
   return ""; // Return empty string if cookie not found
 };
 
-const deleteCookie = () => {
+// Delete all cookies
+const DeleteCookie = () => {
   let ca = document.cookie.split(";"); // Split cookies by ';'
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i].trim(); // Remove leading spaces
