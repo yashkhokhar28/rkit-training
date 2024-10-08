@@ -16,16 +16,16 @@ Car.prototype.stop = function () {
 };
 
 // Function to create multiple Car objects and test the start/stop methods
-const TestTraditionalWay = () => {
-  const car1 = new Car("Toyota", "Corolla", 2019);
+let TestTraditionalWay = () => {
+  let car1 = new Car("Toyota", "Corolla", 2019);
   car1.start(); // Starting car1
   car1.stop(); // Stopping car1
 
-  const car2 = new Car("Honda", "Civic", 2020);
+  let car2 = new Car("Honda", "Civic", 2020);
   car2.start(); // Starting car2
   car2.stop(); // Stopping car2
 
-  const car3 = new Car("Ford", "Fiesta", 2018);
+  let car3 = new Car("Ford", "Fiesta", 2018);
   car3.start(); // Starting car3
   car3.stop(); // Stopping car3
 };
@@ -51,16 +51,16 @@ class Person {
 }
 
 // Function triggered on form submission to handle Person creation and display
-const MyFunc = (event) => {
+let MyFunc = (event) => {
   event.preventDefault(); // Prevent the form from submitting and reloading the page
 
   // Getting input values for name and age
-  const name = document.getElementById("name").value;
-  const age = document.getElementById("age").value;
+  let name = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
 
   if (name && age) {
     // Creating a Person object and displaying name and age
-    const person1 = new Person(name, age);
+    let person1 = new Person(name, age);
     person1.printName(); // Display name
     Person.printAge(age); // Display age
   } else {
@@ -70,7 +70,7 @@ const MyFunc = (event) => {
 };
 
 // Async function to fetch data from an API and display it on the webpage
-const FetchData = async () => {
+let FetchData = async () => {
   try {
     // Fetching data from a sample API
     let response = await fetch("https://jsonplaceholder.typicode.com/todos/1");

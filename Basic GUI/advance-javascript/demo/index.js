@@ -1,11 +1,11 @@
 // Select project elements by their ID
-const Project1 = document.getElementById("project-1");
-const Project2 = document.getElementById("project-2");
-const Project3 = document.getElementById("project-3");
+let Project1 = document.getElementById("project-1");
+let Project2 = document.getElementById("project-2");
+let Project3 = document.getElementById("project-3");
 
 // Add click event listener for Project 1
 Project1.addEventListener("click", () => {
-  const res = confirm("Are you sure you want to go to project 1?");
+  let res = confirm("Are you sure you want to go to project 1?");
   if (res) {
     window.open(
       "https://play.google.com/store/apps/details?id=com.vh.vehiclemanager&pcampaignid=web_share",
@@ -18,7 +18,7 @@ Project1.addEventListener("click", () => {
 
 // Add click event listener for Project 2
 Project2.addEventListener("click", () => {
-  const res = confirm("Are you sure you want to go to project 2?");
+  let res = confirm("Are you sure you want to go to project 2?");
   if (res) {
     window.open(
       "https://play.google.com/store/apps/details?id=com.aswdc_quotationgenerator&pcampaignid=web_share",
@@ -31,7 +31,7 @@ Project2.addEventListener("click", () => {
 
 // Add click event listener for Project 3
 Project3.addEventListener("click", () => {
-  const res = confirm("Are you sure you want to go to project 3?");
+  let res = confirm("Are you sure you want to go to project 3?");
   if (res) {
     window.open("http://shoppers.somee.com", "_blank");
   } else {
@@ -54,7 +54,7 @@ document
 
     // Validate Email
     let email = document.getElementById("email").value.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email === "" || !emailPattern.test(email)) {
       alert("Please enter a valid email address.");
       return false;
@@ -95,8 +95,8 @@ document
   });
 
 // Save form data to localStorage
-const SaveFormData = () => {
-  const formData = {
+let SaveFormData = () => {
+  let formData = {
     name: document.getElementById("name").value,
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
@@ -109,10 +109,10 @@ const SaveFormData = () => {
 };
 
 // Populate the modal with localStorage data
-const PopulateModal = () => {
-  const formData = JSON.parse(localStorage.getItem("formData"));
+let PopulateModal = () => {
+  let formData = JSON.parse(localStorage.getItem("formData"));
   if (formData) {
-    const reviewData = `
+    let reviewData = `
       <ul class="list-group">
           <li class="list-group-item"><strong>Name:</strong> ${formData.name}</li>
           <li class="list-group-item"><strong>Email:</strong> ${formData.email}</li>
@@ -138,20 +138,20 @@ document
   });
 
 // Clear localStorage data
-const ClearLocalStorage = () => {
+let ClearLocalStorage = () => {
   localStorage.clear();
   alert("Local Storage Cleared");
   window.location.reload();
 };
 
 // Set a cookie with a 1-day expiration
-const SetCookie = () => {
+let SetCookie = () => {
   var name = prompt("Please enter your name:");
   if (name == null || name == "") {
     alert("Name must be filled out");
     return false;
   }
-  const d = new Date();
+  let d = new Date();
   d.setTime(d.getTime() + 24 * 60 * 60 * 1000); // Adds 1 day in milliseconds
   let expires = "expires=" + d.toUTCString(); // Formats the expiration date
   console.log(expires);
@@ -159,7 +159,7 @@ const SetCookie = () => {
 };
 
 // Check if the cookie exists, otherwise set it
-const CheckCookie = () => {
+let CheckCookie = () => {
   let name = GetCookie("name"); // Check if "name" cookie exists
   if (name) {
     alert("Welcome again " + name); // If cookie exists, greet the user
@@ -169,7 +169,7 @@ const CheckCookie = () => {
 };
 
 // Retrieve a specific cookie by name
-const GetCookie = (cname) => {
+let GetCookie = (cname) => {
   let name = cname + "=";
   let ca = document.cookie.split(";"); // Split cookies by ';'
   for (let i = 0; i < ca.length; i++) {
@@ -182,7 +182,7 @@ const GetCookie = (cname) => {
 };
 
 // Delete all cookies
-const DeleteCookie = () => {
+let DeleteCookie = () => {
   let ca = document.cookie.split(";"); // Split cookies by ';'
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i].trim(); // Remove leading spaces
