@@ -1,40 +1,40 @@
 // Car constructor function with properties: make, model, and year
 function Car(make, model, year) {
-  this.make = make; // Assigns the make of the car
-  this.model = model; // Assigns the model of the car
-  this.year = year; // Assigns the year of the car
+  this.make = make;
+  this.model = model;
+  this.year = year;
 }
 
 // Method to start the car engine
 Car.prototype.start = function () {
-  alert(`Engine started of ${this.make} ${this.model} ${this.year}`); // Displaying car details
+  alert(`Engine started of ${this.make} ${this.model} ${this.year}`);
 };
 
 // Method to stop the car engine
 Car.prototype.stop = function () {
-  alert(`Engine stopped of ${this.make} ${this.model} ${this.year}`); // Displaying car details
+  alert(`Engine stopped of ${this.make} ${this.model} ${this.year}`);
 };
 
 // Function to create multiple Car objects and test the start/stop methods
 let TestTraditionalWay = () => {
   let car1 = new Car("Toyota", "Corolla", 2019);
-  car1.start(); // Starting car1
-  car1.stop(); // Stopping car1
+  car1.start();
+  car1.stop();
 
   let car2 = new Car("Honda", "Civic", 2020);
-  car2.start(); // Starting car2
-  car2.stop(); // Stopping car2
+  car2.start();
+  car2.stop();
 
   let car3 = new Car("Ford", "Fiesta", 2018);
-  car3.start(); // Starting car3
-  car3.stop(); // Stopping car3
+  car3.start();
+  car3.stop();
 };
 
 // ES6 Class: Person
 class Person {
   constructor(name, age) {
-    this.name = name; // Assigns the person's name
-    this.age = age; // Assigns the person's age
+    this.name = name;
+    this.age = age;
   }
 
   // Instance method to display person's name on the webpage
@@ -52,7 +52,7 @@ class Person {
 
 // Function triggered on form submission to handle Person creation and display
 let MyFunc = (event) => {
-  event.preventDefault(); // Prevent the form from submitting and reloading the page
+  event.preventDefault();
 
   // Getting input values for name and age
   let name = document.getElementById("name").value;
@@ -61,8 +61,8 @@ let MyFunc = (event) => {
   if (name && age) {
     // Creating a Person object and displaying name and age
     let person1 = new Person(name, age);
-    person1.printName(); // Display name
-    Person.printAge(age); // Display age
+    person1.printName();
+    Person.printAge(age);
   } else {
     // Displaying error message if fields are not filled
     document.getElementById("result").innerHTML = "Please fill in both fields.";
@@ -78,7 +78,7 @@ let FetchData = async () => {
 
     // Displaying fetched data on the webpage
     document.getElementById("api-data").innerHTML = JSON.stringify(data);
-    console.log(data); // Logging the data in the console
+    console.log(data);
   } catch (error) {
     // Handling and logging any errors
     console.error("Error fetching data:", error);
