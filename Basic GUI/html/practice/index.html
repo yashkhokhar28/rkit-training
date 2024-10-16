@@ -4,101 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>HTML Practice</title>
 </head>
 
 <body>
+    <!-- Main Form Section -->
     <form action="./index.html" target="_blank" autocomplete="off" novalidate>
-
-        <label for="name">
-            Name:
-        </label>
-        <input type="text" id="name" value="" />
+        <!-- Name Input -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="" />
         <br />
 
-        <label for="email">
-            Email:
-        </label>
-        <input type="email" />
+        <!-- Email Input -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
         <br />
 
-        <label for="checkbox1">
-            Yes
-        </label>
-        <input type="checkbox" id="checkbox1" />
+        <!-- Checkbox -->
+        <label for="checkbox1">Yes</label>
+        <input type="checkbox" id="checkbox1" name="checkbox1" />
         <br />
 
-        <label for="colorpicker">
-            Color Picker
-        </label>
-        <input type="color" id="colorpicker" />
+        <!-- Color Picker -->
+        <label for="colorpicker">Color Picker:</label>
+        <input type="color" id="colorpicker" name="colorpicker" />
         <br />
 
-        <label for="colorpicker">
-            Date Picker
-        </label>
-        <input type="date" />
+        <!-- Date Picker -->
+        <label for="datePicker">Date Picker:</label>
+        <input type="date" id="datePicker" name="datePicker" />
         <br />
 
-        <label for="datetime-local">
-            Datetime Local
-        </label>
-        <input type="datetime-local" />
+        <!-- DateTime Local Picker -->
+        <label for="datetimeLocal">Datetime Local:</label>
+        <input type="datetime-local" id="datetimeLocal" name="datetimeLocal" />
         <br />
 
-        <label for="filePicker">
-            File Picker
-        </label>
-        <input type="file" />
+        <!-- File Picker -->
+        <label for="filePicker">File Picker:</label>
+        <input type="file" id="filePicker" name="filePicker" />
         <br />
 
-        <input type="hidden" />
+        <!-- Hidden Input -->
+        <input type="hidden" id="hiddenField" name="hiddenField" />
         <br />
 
+        <!-- Image Input -->
         <input type="image" alt="image alternative" />
         <br />
 
-        <label for="password">
-            Password Filed
-        </label>
-        <input type="password" />
+        <!-- Password Input -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
         <br />
 
-        <label for="radio1">
-            Male
-        </label>
-        <input type="radio" />
+        <!-- Radio Buttons for Gender -->
+        <label for="radio1">Male</label>
+        <input type="radio" id="radio1" name="gender" value="male" />
         <br />
 
-        <label for="radio2">
-            Female
-        </label>
-        <input type="radio" />
+        <label for="radio2">Female</label>
+        <input type="radio" id="radio2" name="gender" value="female" />
         <br />
 
-        <label for="rangePicker">
-            Range Picker
-        </label>
-        <input type="range" />
+        <!-- Range Picker -->
+        <label for="rangePicker">Range Picker:</label>
+        <input type="range" id="rangePicker" name="rangePicker" />
         <br />
 
-        <label for="time">
-            Timne
-        </label>
-        <input type="time" />
+        <!-- Time Picker -->
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" />
         <br />
 
-        <label for="url">
-            URL
-        </label>
-        <input type="url" />
+        <!-- URL Input -->
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url" />
         <br />
 
-        <label for="cars">
-            Choose A Car :
-        </label>
-        <select name="card" id="cars">
+        <!-- Car Selection Dropdown -->
+        <label for="cars">Choose A Car:</label>
+        <select name="cars" id="cars">
             <option value="volvo">Volvo</option>
             <option value="defender" selected>Defender</option>
             <option value="range-rover">Range Rover</option>
@@ -106,76 +92,79 @@
         </select>
         <br />
 
-        <label for="textarea">
-            Textarea
-        </label>
-        <textarea rows="1" cols="5"></textarea>
+        <!-- Textarea -->
+        <label for="textarea">Textarea:</label>
+        <textarea rows="1" cols="5" id="textarea" name="textarea"></textarea>
         <br />
 
+        <!-- Fieldset for Personal Information -->
         <fieldset>
             <legend>Personalia:</legend>
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname" value="John"><br>
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname" value="Doe"><br><br>
+            <label for="fname">First name:</label><br />
+            <input type="text" id="fname" name="fname" value="John"><br />
+            <label for="lname">Last name:</label><br />
+            <input type="text" id="lname" name="lname" value="Doe"><br /><br />
             <input type="submit" value="Submit">
         </fieldset>
         <br />
 
-        <form action="./index.html">
-            <input list="browsers">
-            <datalist id="browsers">
-                <option value="Edge">
-                <option value="Firefox">
-                <option value="Chrome">
-                <option value="Opera">
-                <option value="Safari">
-            </datalist>
-        </form>
+        <!-- Datalist Example -->
+        <input list="browsers" id="browserList" name="browser">
+        <datalist id="browsers">
+            <option value="Edge">
+            <option value="Firefox">
+            <option value="Chrome">
+            <option value="Opera">
+            <option value="Safari">
+        </datalist>
         <br />
 
+        <!-- Range Calculation Form -->
         <form action="./index.html" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
             0
-            <input type="range" id="a" name="a" value="50">
-            100 +
-            <input type="number" id="b" name="b" value="50">
-            =
+            <input type="range" id="a" name="a" value="50"> 100 +
+            <input type="number" id="b" name="b" value="50"> =
             <output name="x" for="a b"></output>
             <br />
             <input type="submit">
         </form>
 
+        <!-- Subject Selection with Buttons -->
         <form action="./index.html" method="get">
             Choose your favorite subject:
             <button name="subject" type="submit" value="HTML">HTML</button>
             <button name="subject" type="submit" value="CSS">CSS</button>
         </form>
 
-        <input type="text" name="username" />
+        <!-- Miscellaneous Inputs -->
+        <input type="text" id="username" name="username" />
         <br />
         <input type="text" value="yash" />
         <br />
         <input type="text" class="container" />
         <br />
-        <input type="text" id="heading" />
+        <input type="text" id="heading" name="heading" />
         <br />
 
+        <!-- Image Example -->
         <img src="./image.jpg" alt="tree" width="500" height="300">
         <br />
 
+        <!-- Link Example -->
         <a href="https://www.google.com" target="_blank">Google</a>
         <br />
 
+        <!-- Image Inside Link -->
         <a href="https://www.google.com" target="_blank">
             <img src="./image.jpg" alt="tree" width="500" height="300">
         </a>
         <br />
 
+        <!-- Reset and Submit Buttons -->
         <input type="reset" />
         <br />
         <button type="submit">Submit</button>
     </form>
-
 </body>
 
 </html>

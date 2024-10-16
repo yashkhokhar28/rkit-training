@@ -1,44 +1,47 @@
-const project1 = document.getElementById("project-1");
-const project2 = document.getElementById("project-2");
-const project3 = document.getElementById("project-3");
+// Get project elements
+const Project1 = document.getElementById("project-1");
+const Project2 = document.getElementById("project-2");
+const Project3 = document.getElementById("project-3");
 
-project1.addEventListener("click", () => {
+// Add click event listeners to project images
+Project1.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 1?");
   if (res) {
-    window.location.href =
-      "https://play.google.com/store/apps/details?id=com.vh.vehiclemanager&pcampaignid=web_share";
-    window.location.target = "_blank";
+    window.open(
+      "https://play.google.com/store/apps/details?id=com.vh.vehiclemanager&pcampaignid=web_share",
+      "_blank"
+    );
   } else {
     alert("You chose not to go to project 1.");
   }
 });
 
-project2.addEventListener("click", () => {
+Project2.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 2?");
   if (res) {
-    window.location.href =
-      "https://play.google.com/store/apps/details?id=com.aswdc_quotationgenerator&pcampaignid=web_share";
-    window.location.target = "_blank";
+    window.open(
+      "https://play.google.com/store/apps/details?id=com.aswdc_quotationgenerator&pcampaignid=web_share",
+      "_blank"
+    );
   } else {
     alert("You chose not to go to project 2.");
   }
 });
 
-project3.addEventListener("click", () => {
+Project3.addEventListener("click", () => {
   const res = confirm("Are you sure you want to go to project 3?");
   if (res) {
-    window.location.href = "http://shoppers.somee.com";
-    window.location.target = "_blank";
+    window.open("http://shoppers.somee.com", "_blank");
   } else {
     alert("You chose not to go to project 3.");
   }
 });
 
+// Form submission handling
 document
   .getElementById("contact-form")
   .addEventListener("submit", function (e) {
-    // Stop form submission
-    e.preventDefault();
+    e.preventDefault(); // Stop form submission
 
     // Validate Name
     let name = document.getElementById("name").value.trim();
@@ -79,9 +82,7 @@ document
     }
 
     // Validate Message (Optional, but checking if it exists)
-    let message = document
-      .getElementById("exampleFormControlTextarea1")
-      .value.trim();
+    let message = document.getElementById("message").value.trim();
     if (message === "") {
       alert("Please enter a message.");
       return false;

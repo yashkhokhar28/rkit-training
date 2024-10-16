@@ -1,8 +1,10 @@
-function callPopup(params) {
-  alert("hii");
+// Function to display an alert
+function CallPopup() {
+  alert("Hii");
 }
 
-const checkAge = () => {
+// Function to check the user's age
+const CheckAge = () => {
   const ageInput = document.getElementById("age");
   const age = ageInput.value;
   console.log(age);
@@ -13,9 +15,10 @@ const checkAge = () => {
     alert("Minor");
   }
 
-  ageInput.value = "";
+  ageInput.value = ""; // Clear input field after checking
 };
 
+// Array of button IDs for mouse events
 const buttonIds = [
   "mouse-over",
   "click",
@@ -27,6 +30,7 @@ const buttonIds = [
   "mouseenter",
 ];
 
+// Adding event listeners for mouse events
 buttonIds.forEach((id) => {
   const button = document.getElementById(id);
 
