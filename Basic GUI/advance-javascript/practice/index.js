@@ -1,11 +1,19 @@
 // Display the name from local storage on page load
 document.getElementById("before").innerHTML = localStorage.getItem("name");
 
-// Function to set the name in local storage
+/**
+ * Function: SetLocalStorage
+ * Description: Sets the name from the input field into local storage.
+ * This function is triggered on form submission, preventing the default
+ * behavior, and updates the displayed name on the page.
+ * Parameters:
+ *   - event (Event): The form submission event.
+ * Returns: None
+ */
 const SetLocalStorage = (event) => {
-  event.preventDefault(); // Prevent the default form submission behavior
+  event.preventDefault();
   const value = document.getElementById("name").value;
-  localStorage.setItem("name", value); // Store the name in local storage
+  localStorage.setItem("name", value);
 
   // Update the displayed name after setting it
   if (localStorage.getItem("name")) {
@@ -13,14 +21,26 @@ const SetLocalStorage = (event) => {
   }
 };
 
-// Function to clear local storage
+/**
+ * Function: ClearLocalStorage
+ * Description: Clears all entries in local storage and reloads the page
+ * to reflect the changes. Alerts the user that local storage has been cleared.
+ * Parameters: None
+ * Returns: None
+ */
 const ClearLocalStorage = () => {
-  localStorage.clear(); // Clear local storage
+  localStorage.clear();
   alert("Local Storage Cleared");
-  window.location.reload(); // Reload the page to reflect changes
+  window.location.reload();
 };
 
-// Function to set a cookie with a 1-day expiration
+/**
+ * Function: SetCookie
+ * Description: Prompts the user for their name and sets a cookie with
+ * that name, expiring in one day.
+ * Parameters: None
+ * Returns: None
+ */
 const SetCookie = () => {
   const name = prompt("Please enter your name:");
   if (!name) {
@@ -28,42 +48,61 @@ const SetCookie = () => {
     return;
   }
   const d = new Date();
-  d.setTime(d.getTime() + 24 * 60 * 60 * 1000); // Adds 1 day in milliseconds
-  const expires = "expires=" + d.toUTCString(); // Formats the expiration date
-  document.cookie = "name=" + name + ";" + expires + ";path=/"; // Set the cookie
+  d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
+  const expires = "expires=" + d.toUTCString();
+  document.cookie = "name=" + name + ";" + expires + ";path=/";
 };
 
-// Function to check if the cookie exists, otherwise set it
+/**
+ * Function: CheckCookie
+ * Description: Checks if a specific cookie (name) exists. If it does,
+ * greets the user, otherwise prompts to set a new cookie.
+ * Parameters: None
+ * Returns: None
+ */
 const CheckCookie = () => {
-  const name = getCookie("name"); // Check if "name" cookie exists
+  const name = GetCookie("name");
   if (name) {
-    alert("Welcome again " + name); // If cookie exists, greet the user
+    alert("Welcome again " + name);
   } else {
-    setCookie(); // Otherwise, set the cookie
+    SetCookie();
   }
 };
 
-// Function to retrieve a specific cookie by name
+/**
+ * Function: GetCookie
+ * Description: Retrieves the value of a specified cookie by its name.
+ * Parameters:
+ *   - cname (string): The name of the cookie to retrieve.
+ * Returns:
+ *   - string: The value of the cookie, or an empty string if not found.
+ */
 const GetCookie = (cname) => {
   const name = cname + "=";
-  const ca = document.cookie.split(";"); // Split cookies by ';'
+  const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
-    let c = ca[i].trim(); // Remove leading spaces
+    let c = ca[i].trim();
     if (c.indexOf(name) === 0) {
       document.getElementById("cookie").innerHTML = c.substring(name.length);
-      return c.substring(name.length); // Return the cookie value
+      return c.substring(name.length);
     }
   }
-  return ""; // Return empty string if cookie not found
+  return "";
 };
 
-// Function to delete the cookie
+/**
+ * Function: DeleteCookie
+ * Description: Deletes the specified cookie by setting its expiration
+ * date to the past. Alerts the user that the cookie has been deleted.
+ * Parameters: None
+ * Returns: None
+ */
 const DeleteCookie = () => {
-  const ca = document.cookie.split(";"); // Split cookies by ';'
+  const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
-    const c = ca[i].trim(); // Remove leading spaces
-    document.cookie = c + "; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // Delete the cookie
+    const c = ca[i].trim();
+    document.cookie = c + "; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
   alert("Cookie Deleted");
-  window.location.reload(); // Reload the page to reflect changes
+  window.location.reload();
 };

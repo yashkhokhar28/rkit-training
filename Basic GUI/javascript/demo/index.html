@@ -125,37 +125,37 @@
         <form action="./index.html" id="contact-form" target="_blank" method="POST" autocomplete="off">
             <!-- Form fields for user input -->
             <div class="form-floating mb-3 text-black">
-                <input type="text" id="name" class="form-control" name="name" placeholder="Your Name" required>
+                <input type="text" id="name" class="form-control" name="name" placeholder="Your Name" cookieAll>
                 <label for="name">Name:</label>
             </div>
             <div class="form-floating mb-3 text-black">
-                <input type="email" id="email" class="form-control" name="email" placeholder="Your Email" required>
+                <input type="email" id="email" class="form-control" name="email" placeholder="Your Email" cookieAll>
                 <label for="email">Email:</label>
             </div>
             <div class="form-floating mb-3 text-black">
                 <input type="number" id="phone" class="form-control" name="phone" placeholder="Your Phone Number"
-                    required>
+                    cookieAll>
                 <label for="phone">Phone Number:</label>
             </div>
 
             <label for="user-type">I am:</label>
             <div class="form-check mb-3">
                 <input class="form-check-input" value="BusinessPartner" type="radio" name="user-type"
-                    id="businessPartner" required>
+                    id="businessPartner" cookieAll>
                 <label class="form-check-label" for="businessPartner">Business Partner</label>
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" value="PotentialClient" type="radio" name="user-type"
-                    id="potentialClient" required>
+                    id="potentialClient" cookieAll>
                 <label class="form-check-label" for="potentialClient">Potential Client</label>
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input" value="Student" type="radio" name="user-type" id="student" required>
+                <input class="form-check-input" value="Student" type="radio" name="user-type" id="student" cookieAll>
                 <label class="form-check-label" for="student">Student</label>
             </div>
 
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" name="work-type" required>
+                <select class="form-select" id="floatingSelect" name="work-type" cookieAll>
                     <option selected disabled value="">Select your work type</option>
                     <option value="Backend Developer">Backend Developer</option>
                     <option value="Frontend Developer">Frontend Developer</option>

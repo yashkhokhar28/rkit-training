@@ -1,5 +1,11 @@
-// Function: CheckCookie
-// Called in: <body onload="CheckCookie()"> in the HTML file
+/**
+ * Function: CheckCookie
+ * Description: Checks if the "name" cookie exists in the browser.
+ * If found, it alerts a welcome message with the name. If not,
+ * it calls SetCookie() to prompt the user for a name and sets the cookie.
+ * Called in: <body onload="CheckCookie()"> in the HTML file.
+ * Parameters: None
+ */
 let CheckCookie = () => {
   let name = GetCookie("name");
   if (name) {
@@ -9,8 +15,16 @@ let CheckCookie = () => {
   }
 };
 
-// Function: GetCookie
-// Called in: CheckCookie() function in this JavaScript file
+/**
+ * Function: GetCookie
+ * Description: Retrieves the value of a specific cookie by its name.
+ * Loops through all available cookies, and if the cookie with the
+ * given name exists, it returns its value.
+ * Called in: CheckCookie() function in this JavaScript file.
+ * Parameters:
+ *   - cname (string): The name of the cookie to retrieve.
+ * Returns: The value of the cookie or an empty string if not found.
+ */
 let GetCookie = (cname) => {
   let name = cname + "=";
   let cookieAll = document.cookie.split(";");
@@ -23,8 +37,15 @@ let GetCookie = (cname) => {
   return ""; // Return empty string if cookie not found
 };
 
-// Function: SetCookie
-// Called in: CheckCookie() function in this JavaScript file
+/**
+ * Function: SetCookie
+ * Description: Prompts the user to enter their name and sets a cookie
+ * with that name that expires in 1 day. The cookie is stored in the
+ * user's browser with a path of '/'.
+ * Called in: CheckCookie() function in this JavaScript file.
+ * Parameters: None
+ * Returns: None
+ */
 let SetCookie = () => {
   var name = prompt("Please enter your name:");
   if (name == null || name == "") {
@@ -38,8 +59,15 @@ let SetCookie = () => {
   document.cookie = "name=" + name + ";" + expires + ";path=/"; // Set the cookie
 };
 
-// Function: SaveFormData
-// Called in: <form id="contact-form"> submit event listener in this JavaScript file
+/**
+ * Function: SaveFormData
+ * Description: Collects the form data (name, email, phone, user type,
+ * work type, and message) from the DOM and saves it to both
+ * localStorage and sessionStorage as a JSON string.
+ * Called in: <form id="contact-form"> submit event listener in this JavaScript file.
+ * Parameters: None
+ * Returns: None
+ */
 let SaveFormData = () => {
   let formData = {
     name: document.getElementById("name").value,
@@ -53,8 +81,15 @@ let SaveFormData = () => {
   sessionStorage.setItem("formData", JSON.stringify(formData));
 };
 
-// Function: PopulateModal
-// Called in: <button onclick="PopulateModal()"> in the HTML file
+/**
+ * Function: PopulateModal
+ * Description: Retrieves the form data from localStorage, formats it
+ * into an HTML list, and populates the modal with this data. If no data
+ * is found, an alert is shown.
+ * Called in: <button onclick="PopulateModal()"> in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 let PopulateModal = () => {
   let formData = JSON.parse(localStorage.getItem("formData"));
   if (formData) {
@@ -74,16 +109,28 @@ let PopulateModal = () => {
   }
 };
 
-// Function: ClearLocalStorage
-// Called in: <button onclick="ClearLocalStorage()"> in the HTML file
+/**
+ * Function: ClearLocalStorage
+ * Description: Clears all data from localStorage and reloads the page.
+ * It also shows an alert confirming the clearance of local storage.
+ * Called in: <button onclick="ClearLocalStorage()"> in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 let ClearLocalStorage = () => {
   localStorage.clear();
   alert("Local Storage Cleared");
   window.location.reload();
 };
 
-// Function: DeleteCookie
-// Called in: Not called explicitly in the HTML file
+/**
+ * Function: DeleteCookie
+ * Description: Deletes all cookies by setting their expiration date
+ * to January 1, 1970, which effectively removes them from the browser.
+ * Called in: Not explicitly called in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 let DeleteCookie = () => {
   let cookieAll = document.cookie.split(";"); // Split cookies by ';'
   for (let i = 0; i < cookieAll.length; i++) {
@@ -93,8 +140,14 @@ let DeleteCookie = () => {
   alert("All Cookies Deleted");
 };
 
-// Project click event listeners
-// Called in: <img id="project-1">, <img id="project-2">, <img id="project-3"> in the HTML file
+/**
+ * Event Listener: Project1
+ * Description: Prompts the user with a confirmation to open project 1.
+ * If confirmed, it opens the project in a new tab.
+ * Called in: <img id="project-1"> in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 Project1.addEventListener("click", () => {
   let res = confirm("Are you sure you want to go to project 1?");
   if (res) {
@@ -107,8 +160,14 @@ Project1.addEventListener("click", () => {
   }
 });
 
-// Project click event listeners
-// Called in: <img id="project-2"> in the HTML file
+/**
+ * Event Listener: Project2
+ * Description: Prompts the user with a confirmation to open project 2.
+ * If confirmed, it opens the project in a new tab.
+ * Called in: <img id="project-2"> in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 Project2.addEventListener("click", () => {
   let res = confirm("Are you sure you want to go to project 2?");
   if (res) {
@@ -121,8 +180,14 @@ Project2.addEventListener("click", () => {
   }
 });
 
-// Project click event listeners
-// Called in: <img id="project-3"> in the HTML file
+/**
+ * Event Listener: Project3
+ * Description: Prompts the user with a confirmation to open project 3.
+ * If confirmed, it opens the project in a new tab.
+ * Called in: <img id="project-3"> in the HTML file.
+ * Parameters: None
+ * Returns: None
+ */
 Project3.addEventListener("click", () => {
   let res = confirm("Are you sure you want to go to project 3?");
   if (res) {
