@@ -4,15 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery Practice</title>
+    <title>jQuery Demo</title>
 </head>
 
 <body>
-    <h1>jQuery Practice</h1>
+    <h2 id="example">jQuery Demo</h2>
+    <div id="class-selector" class="class-selector">Class Selector Example</div>
+    <button id="clickButton">Click Me</button>
+    <button id="fireEventButton">Fire Event Programmatically</button>
+    <div id="customEvent">Custom Event Element</div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <form id="form">
+        <label for="email">Email: </label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <button id="ajaxButton">Fetch Data with AJAX</button>
+    <div id="ajaxContent"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./index.js"></script>
 </body>
 
 </html>
