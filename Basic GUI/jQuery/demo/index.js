@@ -186,13 +186,8 @@ const fetchUserAndPosts = () => {
       postsDeferred.reject("Failed to fetch posts data"); // Reject on error
     });
 
-  // Combine promises
-  $.when(userDeferred.promise(), postsDeferred.promise()).done(
-    (userData, postsData) => {
-      console.log("User Data:", userData);
-      console.log("User Posts:", postsData);
-    }
-  );
+  console.log("User Deferred:", userDeferred.promise());
+  console.log("Posts Deferred:", postsDeferred.promise());
 
   $.when(userDeferred.promise(), postsDeferred.promise())
     .done((userData, postsData) => {
@@ -206,3 +201,75 @@ const fetchUserAndPosts = () => {
 
 // Call the function to fetch data
 fetchUserAndPosts();
+
+const numbers = [1, 2, 3, 4, 5];
+
+const squares = $.map(numbers, (num) => {
+  return num * num; // Square each number
+});
+
+console.log(squares); // Output: [1, 4, 9, 16, 25]
+
+const evens = $.grep(numbers, (num) => {
+  return num % 2 === 0; // Filter out odd numbers
+});
+
+console.log(evens); // Output: [2, 4, 6, 8, 10]
+
+const defaultConfig = {
+  backgroundColor: "white",
+  fontSize: "14px",
+  fontFamily: "Arial",
+};
+
+const userConfig = {
+  fontSize: "16px", // Override the font size
+  fontFamily: "Verdana", // Override the font family
+};
+
+const finalConfig = $.extend({}, defaultConfig, userConfig);
+
+console.log(finalConfig);
+// Output: { backgroundColor: "white", fontSize: "16px", fontFamily: "Verdana" }
+
+const colors = ["red", "green", "blue"];
+
+$.each(colors, (index, color) => {
+  console.log(`Color at index ${index} is ${color}`);
+});
+// Output:
+// Color at index 0 is red
+// Color at index 1 is green
+// Color at index 2 is blue
+
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+
+const mergedArray = $.merge(array1, array2);
+
+console.log(mergedArray); // Output: [1, 2, 3, 4, 5, 6]
+
+// Prepare data to send
+const userData = {
+  name: "Alice",
+  age: 25,
+};
+
+// Serialize data to JSON format
+const jsonUserData = JSON.stringify(userData);
+console.log("Serialized data:", jsonUserData);
+
+$.ajax({
+  url: "https://example.com/api/users",
+  type: "POST",
+  contentType: "application/json", // Specify JSON content type
+  data: jsonUserData, // Send serialized data
+  success: (response) => {
+    // Deserialize JSON response
+    const responseData = JSON.parse(response);
+    console.log("Response data:", responseData);
+  },
+  error: (error) => {
+    console.error("Error:", error);
+  },
+});
