@@ -29,11 +29,11 @@ body {
     margin-bottom: 12px;
     border-radius: 8px;
     border: 1px solid #ddd;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .option:hover {
-    background-color: #f1f8ff;
+    background-color: #343a40;
     cursor: pointer;
 }
 
@@ -44,6 +44,6 @@ body {
 
 .option label {
     font-size: 1rem;
-    color: #495057;
+    color: white;
     margin: 0;
 }
