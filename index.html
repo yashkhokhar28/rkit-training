@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RKIT Training</title>
-    <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom CSS for hover effect on the cards */
         .card:hover {
             transform: scale(1.05);
             transition: transform 0.3s ease;
@@ -36,6 +34,9 @@
                         </p>
                         <a href="./Basic GUI/html/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/html/demo/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/HTML.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +51,9 @@
                         <p class="card-text">Cascading Style Sheets is used to style and layout web pages.</p>
                         <a href="./Basic GUI/css/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/css/demo/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/CSS.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -65,6 +69,9 @@
                             design.</p>
                         <a href="./Basic GUI/bootstrap/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/bootstrap/demo/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/Bootstrap.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -79,10 +86,13 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">JavaScript</h5>
                         <p class="card-text">JavaScript is a powerful scripting language used to add interactivity to
-                            web pages, such as dynamic content, form validation, and user interface enhancements.</p>
+                            web pages.</p>
                         <a href="./Basic GUI/javascript/practice/index.html"
                             class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/javascript/demo/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/JavaScript.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -95,11 +105,14 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Advanced JavaScript</h5>
                         <p class="card-text">Learn more advanced topics in JavaScript, including asynchronous
-                            programming, design patterns, and performance optimization.</p>
+                            programming and design patterns.</p>
                         <a href="./Basic GUI/advance-javascript/practice/index.html"
                             class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/advance-javascript/demo/index.html"
                             class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/AdvanceJavaScript.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -111,10 +124,13 @@
                         alt="jQuery Logo">
                     <div class="card-body text-center">
                         <h5 class="card-title">jQuery</h5>
-                        <p class="card-text">jQuery is a fast, small, and feature-rich JavaScript library that
-                            simplifies HTML document traversal and manipulation, event handling, and animation.</p>
+                        <p class="card-text">jQuery is a fast, small, and feature-rich JavaScript library for HTML
+                            document traversal.</p>
                         <a href="./Basic GUI/jQuery/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Basic GUI/jQuery/demo/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/jQuery.md')">View
+                            Documentation</button>
                     </div>
                 </div>
             </div>
@@ -129,18 +145,24 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Combined Demo</h5>
                         <p class="card-text">Explore a comprehensive demo that integrates HTML, CSS, Bootstrap,
-                            JavaScript,
-                            and
-                            jQuery.</p>
+                            JavaScript, and jQuery.</p>
                         <a href="./Basic GUI/final-demo/screens/index.html" class="btn btn-outline-primary">View
                             Demo</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap JS (optional, if you need interactive components like modals or dropdowns) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.0/marked.min.js"></script>
+    <script>
+        // Function to store the file path in localStorage and navigate to documentation.html
+        const ShowDocumentation = (filePath) => {
+            localStorage.setItem("markdownFilePath", filePath); // Store the file path in localStorage
+            window.location.href = "documentation.html"; // Navigate to the documentation page
+        };
+    </script>
 </body>
 
 </html>

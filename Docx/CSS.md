@@ -227,5 +227,3 @@
     </body>
   </html>
   ```
-
-This structured and example-rich content should help you understand CSS concepts more effectively. CSS Guide
