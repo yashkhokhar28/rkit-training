@@ -6,29 +6,29 @@ document.addEventListener("DOMContentLoaded", () => {
   /**
    * Function: FetchQuestions
    * Description: Asynchronously fetches questions from a given URL and stores them in the QuestionList.
-   * Shows a spinner while loading and hides it when questions are loaded.
+   * Shows a Spinner while loading and hides it when questions are loaded.
    * Calls DisplayQuestion() and DisplayTotalQuestions() once the questions are loaded.
    * Parameters: None
    * Returns: None
    */
 
   const FetchQuestions = async () => {
-    const spinner = document.querySelector(".spinner-border");
-    const questionContainer = document.getElementById("question-container");
+    const Spinner = document.querySelector(".spinner-border");
+    const QuestionContainer = document.getElementById("question-container");
 
-    // Show the spinner and hide the question container initially
-    if (spinner) spinner.style.display = "block";
-    if (questionContainer) questionContainer.style.display = "none";
+    // Show the Spinner and hide the question container initially
+    if (Spinner) Spinner.style.display = "block";
+    if (QuestionContainer) QuestionContainer.style.display = "none";
 
     try {
-      let response = await fetch(
+      let Response = await fetch(
         "https://gist.githubusercontent.com/yashkhokhar28/ca43e3f93db86ebbb7f9a3c0a8fdf808/raw/question.json"
       );
-      QuestionList = await response.json();
+      QuestionList = await Response.json();
 
-      // Hide the spinner and show the question container when data is loaded
-      if (spinner) spinner.style.display = "none";
-      if (questionContainer) questionContainer.style.display = "block";
+      // Hide the Spinner and show the question container when data is loaded
+      if (Spinner) Spinner.style.display = "none";
+      if (QuestionContainer) QuestionContainer.style.display = "block";
 
       DisplayQuestion();
       DisplayTotalQuestions();
@@ -62,27 +62,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Create options
     CurrentQuestion.options.forEach((option, index) => {
-      const optionDiv = document.createElement("div");
-      optionDiv.classList.add("option");
+      const OptionDiv = document.createElement("div");
+      OptionDiv.classList.add("option");
 
-      const radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "option";
-      radioInput.id = `option${index + 1}`;
-      radioInput.value = option;
+      const RadioInput = document.createElement("input");
+      RadioInput.type = "radio";
+      RadioInput.name = "option";
+      RadioInput.id = `option${index + 1}`;
+      RadioInput.value = option;
 
-      const label = document.createElement("label");
-      label.setAttribute("for", `option${index + 1}`);
-      label.textContent = option;
+      const Label = document.createElement("Label");
+      Label.setAttribute("for", `option${index + 1}`);
+      Label.textContent = option;
 
       // Set checked if the user has answered this question
       if (UserAnswer[CurrentQuestionIndex] === option) {
-        radioInput.checked = true;
+        RadioInput.checked = true;
       }
 
-      optionDiv.appendChild(radioInput);
-      optionDiv.appendChild(label);
-      OptionContainer.appendChild(optionDiv);
+      OptionDiv.appendChild(RadioInput);
+      OptionDiv.appendChild(Label);
+      OptionContainer.appendChild(OptionDiv);
     });
   };
 
@@ -173,23 +173,27 @@ document.addEventListener("DOMContentLoaded", () => {
    * Parameters: None
    * Returns: None
    */
-  document.getElementById("next-btn")?.addEventListener("click", () => {
-    let SelectedOption = document.querySelector("input[name='option']:checked");
-    if (!SelectedOption) {
-      alert("Please select an option before proceeding.");
-      return;
-    }
+  $(document).ready(() => {
+    $("#next-btn").click(() => {
+      let SelectedOption = document.querySelector(
+        "input[name='option']:checked"
+      );
+      if (!SelectedOption) {
+        alert("Please select an option before proceeding.");
+        return;
+      }
 
-    UserAnswer[CurrentQuestionIndex] = SelectedOption.value;
+      UserAnswer[CurrentQuestionIndex] = SelectedOption.value;
 
-    if (CurrentQuestionIndex < QuestionList.length - 1) {
-      CurrentQuestionIndex++;
-      DisplayQuestion();
-      ProgressBar();
-      DisplayTotalQuestions();
-    } else {
-      DisplayResult();
-    }
+      if (CurrentQuestionIndex < QuestionList.length - 1) {
+        CurrentQuestionIndex++;
+        DisplayQuestion();
+        ProgressBar();
+        DisplayTotalQuestions();
+      } else {
+        DisplayResult();
+      }
+    });
   });
 
   /**
@@ -198,13 +202,15 @@ document.addEventListener("DOMContentLoaded", () => {
    * Parameters: None
    * Returns: None
    */
-  document.getElementById("prev-btn")?.addEventListener("click", () => {
-    if (CurrentQuestionIndex > 0) {
-      CurrentQuestionIndex--;
-      DisplayQuestion();
-      ProgressBar();
-      DisplayTotalQuestions();
-    }
+  $(document).ready(() => {
+    $("#prev-btn").click(() => {
+      if (CurrentQuestionIndex > 0) {
+        CurrentQuestionIndex--;
+        DisplayQuestion();
+        ProgressBar();
+        DisplayTotalQuestions();
+      }
+    });
   });
 
   // Initial call to fetch and display questions
