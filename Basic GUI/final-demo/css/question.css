@@ -1,6 +1,5 @@
 body {
     background-color: #f4f7fa;
-    font-family: Arial, sans-serif;
 }
 
 .question-container {
@@ -18,7 +17,7 @@ body {
 #question-text {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #343a40;
+    color: #000000;
     padding: 10px;
 }
 
@@ -33,7 +32,7 @@ body {
 }
 
 .option:hover {
-    background-color: #343a40;
+    background-color: #f4f7fa;
     cursor: pointer;
 }
 
@@ -44,6 +43,6 @@ body {
 
 .option label {
     font-size: 1rem;
-    color: white;
+    color: black;
     margin: 0;
 }

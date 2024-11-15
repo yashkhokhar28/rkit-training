@@ -33,7 +33,6 @@
             <h1>Sign In</h1>
             <input type="text" id="username" name="username" placeholder="User Name" autocomplete="off">
             <input type="password" id="password" name="password" placeholder="Password" autocomplete="off">
-            <a href="#">Forgot your password?</a>
             <button type="submit">Sign In</button>
             <p>Don't have an account? <a href="./sign-up.html">Sign Up</a></p>
         </form>
@@ -46,7 +45,20 @@
     <!-- jQuery Validation Plugin -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <!-- Custom JavaScript file -->
-    <script type="module" src="../scripts/sign-in.js"></script>
+    <script type="module">
+        import { Auth } from "../scripts/Auth.js";
+
+        $(document).ready(() => {
+            $("#sign-in").submit((e) => {
+                e.preventDefault();
+                let username = $("#username").val();
+                let password = $("#password").val();
+
+                // Call the SignIn method from the Auth class
+                Auth.SignIn({ UserNameValue: username, PasswordValue: password });
+            });
+        });
+    </script>
 </body>
 
 </html>
