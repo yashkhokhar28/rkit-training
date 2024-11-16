@@ -35,7 +35,7 @@
                         <a href="./Code/html/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/html/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/HTML.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/html.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <a href="./Code/css/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/css/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/CSS.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/css.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <a href="./Code/bootstrap/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/bootstrap/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/Bootstrap.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/bootstrap.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         <a href="./Code/javascript/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/javascript/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/JavaScript.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/javascript.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                             class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/advance-javascript/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/AdvanceJavaScript.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/advance-javascript.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                         <a href="./Code/jQuery/practice/index.html" class="btn btn-outline-primary">Practice</a>
                         <a href="./Code/jQuery/demo/index.html" class="btn btn-outline-primary">Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/jQuery.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/jQuery.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         <a href="./Code/final-demo/screens/index.html" class="btn btn-outline-primary">View
                             Demo</a>
                         <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Docx/FullDemo.md')">View
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Basic%20GUI/Documentation/full-demo.md')">View
                             Documentation</button>
                     </div>
                 </div>
@@ -160,8 +160,9 @@
     <script>
         // Function to store the file path in localStorage and navigate to documentation.html
         const ShowDocumentation = (filePath) => {
+            console.log(filePath);
             localStorage.setItem("markdownFilePath", filePath); // Store the file path in localStorage
-            window.location.href = "documentation.html"; // Navigate to the documentation page
+            window.location.href = "/documentation.html"; // Navigate to the documentation page
         };
     </script>
 </body>
