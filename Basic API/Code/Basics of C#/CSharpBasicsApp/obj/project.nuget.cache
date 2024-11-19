@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DFZawBTkb68aVeRqE6UA0/x1YrQCaLPINIH8LjXAPhVoIKGTA7Rj5olR+DmFRtSeeoEd8HlWB8yCOQI9zVb2yA==",
+  "success": true,
+  "projectFilePath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics of C#/CSharpBasicsApp/CSharpBasicsApp.csproj",
+  "expectedPackageFiles": [
+    "/Users/yashkhokhar/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
