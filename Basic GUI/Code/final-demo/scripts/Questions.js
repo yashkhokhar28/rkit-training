@@ -1,3 +1,8 @@
+/**
+ * Class: Questions
+ * Description: Handles quiz-related functionalities, including fetching questions,
+ * displaying them, saving user answers, updating progress, and submitting the quiz.
+ */
 import { Cookies } from "./Cookies.js";
 import { Auth } from "./Auth.js";
 
@@ -8,13 +13,16 @@ export class Questions {
 
   /**
    * Function: FetchQuestions
-   * Description: Fetches questions from an API, handles the loading state, and initializes the first question.
+   * Description: Fetches quiz questions from the API, displays a loading spinner,
+   * and initializes the quiz once the data is retrieved.
+   * Called in: Init() function of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static FetchQuestions = async () => {
     const Spinner = document.querySelector(".spinner-border");
     const QuestionContainer = document.getElementById("question-container");
 
-    // Show the spinner and hide the question container initially
     if (Spinner) Spinner.style.display = "block";
     if (QuestionContainer) QuestionContainer.style.display = "none";
 
@@ -24,7 +32,6 @@ export class Questions {
       );
       Questions.QuestionList = await Response.json();
 
-      // Hide the spinner and show the question container when data is loaded
       if (Spinner) Spinner.style.display = "none";
       if (QuestionContainer) QuestionContainer.style.display = "block";
 
@@ -38,7 +45,10 @@ export class Questions {
 
   /**
    * Function: DisplayQuestion
-   * Description: Displays the current question and options based on the index.
+   * Description: Displays the current question and its options based on the current index.
+   * Called in: FetchQuestions(), NextQuestion(), PreviousQuestion() functions of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static DisplayQuestion = () => {
     const CurrentQuestion =
@@ -48,15 +58,11 @@ export class Questions {
 
     if (!CurrentQuestion || !QuestionText || !OptionContainer) return;
 
-    // Update question text
     QuestionText.innerHTML = `Q${Questions.CurrentQuestionIndex + 1}: ${
       CurrentQuestion.question
     }`;
-
-    // Clear previous options
     OptionContainer.innerHTML = "";
 
-    // Create options dynamically
     CurrentQuestion.options.forEach((option, index) => {
       const OptionDiv = document.createElement("div");
       OptionDiv.classList.add("option");
@@ -71,7 +77,6 @@ export class Questions {
       Label.setAttribute("for", `option${index + 1}`);
       Label.textContent = option;
 
-      // Set the radio button as checked if the user has selected this option
       if (Questions.UserAnswer[Questions.CurrentQuestionIndex] === option) {
         RadioInput.checked = true;
       }
@@ -84,7 +89,10 @@ export class Questions {
 
   /**
    * Function: ProgressBar
-   * Description: Updates the progress bar based on the current question index.
+   * Description: Updates the progress bar to reflect the user's progress in the quiz.
+   * Called in: NextQuestion(), PreviousQuestion() functions of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static ProgressBar = () => {
     const ProgressBar = document.getElementById("progress-bar");
@@ -103,7 +111,10 @@ export class Questions {
 
   /**
    * Function: DisplayTotalQuestions
-   * Description: Updates the DOM to show the current question number and total questions.
+   * Description: Updates the DOM to display the current question number and total number of questions.
+   * Called in: FetchQuestions(), NextQuestion(), PreviousQuestion() functions of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static DisplayTotalQuestions = () => {
     const TotalQuestions = document.getElementById("total-questions");
@@ -117,7 +128,10 @@ export class Questions {
 
   /**
    * Function: SaveUserAnswer
-   * Description: Saves the selected answer for the current question.
+   * Description: Saves the user's selected answer for the current question.
+   * Called in: NextQuestion(), PreviousQuestion(), SubmitQuiz() functions of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static SaveUserAnswer = () => {
     let Options = document.getElementsByName("option");
@@ -130,7 +144,11 @@ export class Questions {
 
   /**
    * Function: NextQuestion
-   * Description: Moves to the next question and updates the question display and progress bar.
+   * Description: Advances to the next question if the user has selected an answer.
+   * Updates the question display, progress bar, and total questions display.
+   * Called in: EventListeners() function of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static NextQuestion = () => {
     let SelectedOption = document.querySelector("input[name='option']:checked");
@@ -149,7 +167,10 @@ export class Questions {
 
   /**
    * Function: PreviousQuestion
-   * Description: Moves to the previous question and updates the question display and progress bar.
+   * Description: Returns to the previous question, updating the display and progress bar.
+   * Called in: EventListeners() function of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static PreviousQuestion = () => {
     Questions.SaveUserAnswer();
@@ -163,7 +184,10 @@ export class Questions {
 
   /**
    * Function: SubmitQuiz
-   * Description: Submits the quiz and sends the user's score to the server. If the username exists, update the score; otherwise, create a new entry.
+   * Description: Submits the user's answers, calculates the score, and updates the database.
+   * Called in: EventListeners() function of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static SubmitQuiz = () => {
     Questions.SaveUserAnswer();
@@ -176,14 +200,12 @@ export class Questions {
 
     let { username, password } = cookieData || {};
 
-    // Check if the username exists in the score database
     fetch(
       `https://673596e65995834c8a934a4d.mockapi.io/score?username=${username}`
     )
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
-          // Username exists, update the score
           let existingRecord = data[0];
           let updatedData = {
             username: existingRecord.username,
@@ -194,53 +216,31 @@ export class Questions {
             `https://673596e65995834c8a934a4d.mockapi.io/score/${existingRecord.id}`,
             {
               method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify(updatedData),
             }
           )
-            .then((response) => response.json())
-            .then((data) => {
-              window.location.href = "leaderboard.html";
-            })
-            .catch((error) => {
-              console.error("Error updating score:", error);
-              alert("Failed to update score. Please try again later.");
-            });
+            .then(() => (window.location.href = "leaderboard.html"))
+            .catch((error) => console.error("Error updating score:", error));
         } else {
-          // Username doesn't exist, create a new score entry
-          let newData = {
-            username: username,
-            score: Score,
-          };
-
           fetch("https://673596e65995834c8a934a4d.mockapi.io/score", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newData),
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, score: Score }),
           })
-            .then((response) => response.json())
-            .then((data) => {
-              window.location.href = "leaderboard.html";
-            })
-            .catch((error) => {
-              console.error("Error submitting quiz:", error);
-              alert("Failed to submit quiz. Please try again later.");
-            });
+            .then(() => (window.location.href = "leaderboard.html"))
+            .catch((error) => console.error("Error submitting quiz:", error));
         }
       })
-      .catch((error) => {
-        console.error("Error checking user score:", error);
-        alert("Failed to check user score. Please try again later.");
-      });
+      .catch((error) => console.error("Error checking user score:", error));
   };
 
   /**
    * Function: CalculateResult
-   * Description: Calculates the user's total score by comparing their answers with the correct answers.
+   * Description: Compares the user's answers with correct answers to calculate the total score.
+   * Called in: SubmitQuiz() function of this class.
+   * Parameters: None.
+   * Returns: (number) The user's total score.
    */
   static CalculateResult = () => {
     let Score = 0;
@@ -254,18 +254,15 @@ export class Questions {
 
   /**
    * Function: EventListeners
-   * Description: Sets up event listeners for the navigation buttons.
+   * Description: Adds event listeners for the quiz navigation buttons (Next, Previous, Submit).
+   * Called in: Init() function of this class.
+   * Parameters: None.
+   * Returns: None.
    */
   static EventListeners = () => {
     $(document).ready(() => {
-      $("#next-btn").click(() => {
-        Questions.NextQuestion();
-      });
-
-      $("#prev-btn").click(() => {
-        Questions.PreviousQuestion();
-      });
-
+      $("#next-btn").click(() => Questions.NextQuestion());
+      $("#prev-btn").click(() => Questions.PreviousQuestion());
       $("#submit-btn").click(() => {
         if (
           Questions.CurrentQuestionIndex <
@@ -278,7 +275,6 @@ export class Questions {
       });
     });
   };
-
   /**
    * Function: Init
    * Description: Initializes the quiz by fetching questions and setting up event listeners.
