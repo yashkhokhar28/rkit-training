@@ -1,6 +1,3 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json; // Example of using a NuGet package reference
 
 namespace CSharpBasicsApp;

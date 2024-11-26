@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using CSharpBasicsApp;
+﻿using CSharpBasicsApp;
 
 class Program
 {
@@ -19,16 +17,19 @@ class Program
         Console.WriteLine("3. StatementsDemo");
         Console.WriteLine("4. ArraysDemo");
         Console.WriteLine("5. MethodsDemo");
-        Console.WriteLine("6. OOPS Concepts");
-        Console.WriteLine("7. ScopeAndAccessModifierDemo");
-        Console.WriteLine("8. Assemblies and Namespaces");
-        Console.WriteLine("9. CollectionsDemo");
-        Console.WriteLine("10. EnumerationsDemo");
-        Console.WriteLine("11. DatatableDemo");
-        Console.WriteLine("12. ExceptionHandlingDemo");
-        Console.WriteLine("13. StringClassDemo");
-        Console.WriteLine("14. DateTimeClassDemo");
-        Console.WriteLine("15. FileOperationDemo");
+        Console.WriteLine("6. InheritanceDemo");
+        Console.WriteLine("7. PolymorphismDemo");
+        Console.WriteLine("8. EncapsulationDemo");
+        Console.WriteLine("9. AbstractionDemo");
+        Console.WriteLine("10. ScopeAndAccessModifierDemo");
+        Console.WriteLine("11. Assemblies and Namespaces");
+        Console.WriteLine("12. CollectionsDemo");
+        Console.WriteLine("13. EnumerationsDemo");
+        Console.WriteLine("14. DatatableDemo");
+        Console.WriteLine("15. ExceptionHandlingDemo");
+        Console.WriteLine("16. StringClassDemo");
+        Console.WriteLine("17. DateTimeClassDemo");
+        Console.WriteLine("18. FileOperationDemo");
 
         // Read and convert the user's choice from the console input
         int choice = Convert.ToInt32(Console.ReadLine());
@@ -62,52 +63,65 @@ class Program
                 break;
 
             case 6:
-                // Run OOPSDemo when the user selects option 6
-                OOPSDemo.RunOOPSDemo();
+                // Run InheritanceDemo when the user selects option 6
+                InheritanceDemo.RunInheritanceDemo();
                 break;
 
             case 7:
+                // Run PolymorphismDemo when the user selects option 7
+                PolymorphismDemo.RunPolymorphismDemo();
+                break;
+            case 8:
+                // Run EncapsulationDemo when the user selects option 7
+                EncapsulationDemo.RunEncapsulationDemo();
+                break;
+            case 9:
+                // Run AbstractionDemo when the user selects option 7
+                AbstractionDemo.RunAbstractionDemo();
+                break;
+
+            case 10:
                 // Run ScopeAndAccessModifierDemo when the user selects option 7
                 ScopeAndAccessModifierDemo.RunScopeAndAccessModifierDemo();
                 break;
 
-            case 8:
+            case 11:
                 // Run AssembliesReferencesDemo when the user selects option 8
                 // The 'await' keyword is used since this method is asynchronous
                 await AssembliesReferencesDemo.RunAssembliesReferencesDemo();
                 break;
 
-            case 9:
+            case 12:
                 // Run CollectionClassDemo when the user selects option 9
                 CollectionClassDemo.RunCollectionClassDemo();
                 break;
 
-            case 10:
+            case 13:
                 // Run EnumerationsDemo when the user selects option 10
                 EnumerationsDemo.RunEnumerationsDemo();
                 break;
 
-            case 11:
+            case 14:
                 // Run DataTableDemo when the user selects option 11
                 DataTableDemo.RunDataTableDemo();
                 break;
 
-            case 12:
+            case 15:
                 // Run ExceptionHandlingDemo when the user selects option 12
                 ExceptionHandlingDemo.RunExceptionHandlingDemo();
                 break;
 
-            case 13:
+            case 16:
                 // Run StringClassDemo when the user selects option 13
                 StringClassDemo.RunStringClassDemo();
                 break;
 
-            case 14:
+            case 17:
                 // Run DateTimeClassDemo when the user selects option 14
                 DateTimeClassDemo.RunDateTimeClassDemo();
                 break;
 
-            case 15:
+            case 18:
                 // Run FileOperationDemo when the user selects option 15
                 FileOperationDemo.RunFileOperationDemo();
                 break;
