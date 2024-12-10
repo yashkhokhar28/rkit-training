@@ -1,39 +1,87 @@
--- Get all borrowed books along with the borrower’s name. (INNER JOIN)
+-- INNER JOIN
+-- Find all students along with their city and state names.
 SELECT 
-	b.Title AS BookTitle,
-    m.Name AS BorrowerName,
-    br.BorrowDate 
+	Student.FirstName,
+	Student.LastName,
+	City.CityName,
+    State.StateName
 FROM 
-	Borrow br
-JOIN 
-	Books b ON br.BookID = b.BookID
-JOIN 
-	Members m ON br.MemberID = m.MemberID;
+	Student
+INNER JOIN 
+	City ON Student.CityID = City.CityID
+INNER JOIN 
+	State ON Student.StateID = State.StateID;
     
--- Get all members and the books they borrowed (if any).
+-- LEFT JOIN (or LEFT OUTER JOIN)
+-- Find all students, along with their city and state names. Include students even if they don’t have a city or state associated.
 SELECT 
-	m.Name AS MemberName, b.Title AS BookTitle, br.BorrowDate 
+	Student.FirstName,
+    Student.LastName,
+    City.CityName,
+    State.StateName
 FROM 
-	Members m
-LEFT JOIN
-	Borrow br ON m.MemberID = br.MemberID
+	Student
 LEFT JOIN 
-	Books b ON br.BookID = b.BookID;
+	City ON Student.CityID = City.CityID
+LEFT JOIN 
+	State ON Student.StateID = State.StateID;
     
--- Get all borrow records and their corresponding member names.
+-- RIGHT JOIN (or RIGHT OUTER JOIN)
+-- Find all cities, along with the students and their state names. Include cities even if no student is associated with them.
 SELECT 
-	br.BorrowID, m.Name AS MemberName, b.Title AS BookTitle 
+	City.CityName,
+	Student.FirstName,
+    Student.LastName,
+    State.StateName
 FROM 
-	Borrow br
+	City
 RIGHT JOIN 
-	Members m ON br.MemberID = m.MemberID
+	Student ON City.CityID = Student.CityID
 RIGHT JOIN 
-	Books b ON br.BookID = b.BookID;
+	State ON Student.StateID = State.StateID;
     
--- Get all possible pairs of members and books.
+-- FULL JOIN (or FULL OUTER JOIN)
+-- Find all students, cities, and states, even if they are not all associated.
 SELECT 
-	m.Name AS MemberName, b.Title AS BookTitle 
+	Student.FirstName,
+    Student.LastName,
+    City.CityName,
+    State.StateName
 FROM 
-	Members m
-CROSS JOIN 
-	Books b;    
+	Student
+FULL JOIN 
+	City ON Student.CityID = City.CityID
+FULL JOIN 
+	State ON Student.StateID = State.StateID;
+
+-- SELF JOIN
+-- Find pairs of students who live in the same city.
+SELECT 
+	A.FirstName AS Student1_FirstName,
+	A.LastName AS Student1_LastName, 
+	B.FirstName AS Student2_FirstName,
+    B.LastName AS Student2_LastName, 
+	City.CityName
+FROM 
+	Student A
+INNER JOIN 
+	Student B ON A.CityID = B.CityID AND A.StudentID != B.StudentID
+INNER JOIN 
+	City ON A.CityID = City.CityID;
+    
+-- JOIN with Multiple Tables
+-- Find all students along with their country, state, and city names.
+SELECT 
+	Student.FirstName,
+    Student.LastName,
+    Country.CountryName,
+    State.StateName,
+    City.CityName
+FROM 
+	Student
+JOIN 
+	Country ON Student.CountryID = Country.CountryID
+JOIN 
+	State ON Student.StateID = State.StateID
+JOIN 
+	City ON Student.CityID = City.CityID;

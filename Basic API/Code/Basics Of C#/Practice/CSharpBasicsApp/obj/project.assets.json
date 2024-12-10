@@ -60,11 +60,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
+      "projectUniqueName": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
       "projectName": "CSharpBasicsApp",
-      "projectPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
+      "projectPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
       "packagesPath": "/Users/yashkhokhar/.nuget/packages/",
-      "outputPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Practice/CSharpBasicsApp/obj/",
+      "outputPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/yashkhokhar/.nuget/NuGet/NuGet.Config"
