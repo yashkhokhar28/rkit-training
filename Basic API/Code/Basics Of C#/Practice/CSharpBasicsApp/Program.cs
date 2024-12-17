@@ -1,6 +1,6 @@
 ﻿using CSharpBasicsApp;
 
-class Program
+public class Program
 {
     /// <summary>
     /// The entry point for the program that displays a menu for the user to select 

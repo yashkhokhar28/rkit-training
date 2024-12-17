@@ -1,11 +1,11 @@
 -- COMMIT Statement
-BEGIN TRANSACTION;
+BEGIN;
 UPDATE Student SET GPA = 9.0 WHERE StudentID = 1;
 INSERT INTO Student (FirstName, Gender, BirthDate) VALUES ('Emma', 'Female', '2002-04-15');
 COMMIT;
 
 -- ROLLBACK Statement
-BEGIN TRANSACTION;
+BEGIN;
 UPDATE Student SET GPA = 8.0 WHERE StudentID = 1;
 DELETE FROM Student WHERE StudentID = 10;
 
@@ -13,7 +13,7 @@ DELETE FROM Student WHERE StudentID = 10;
 ROLLBACK;
 
 -- SAVEPOINT Statement
-BEGIN TRANSACTION;
+BEGIN;
 
 UPDATE Student SET GPA = 9.5 WHERE StudentID = 2;
 SAVEPOINT SavePoint1;

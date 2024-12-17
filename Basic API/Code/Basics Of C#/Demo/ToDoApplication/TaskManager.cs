@@ -1,18 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 namespace ToDoApplication;
 
 /// <summary>
 /// Manages tasks by adding, updating, deleting, viewing, saving, and loading tasks.
 /// Implements the ITaskOperations interface.
 /// </summary>
-public class TaskManager : ITaskOperations
+public class TaskManager : DisplayTasks, ITaskOperations
 {
-    private List<Task> tasks = new List<Task>();
+    #region Fields
+
+    private List<Task> lstTasks = new List<Task>();
     private int nextId = 1;
+
+    #endregion
+
+    #region Task Management Methods
 
     /// <summary>
     /// Adds a new task to the list.
@@ -26,8 +27,8 @@ public class TaskManager : ITaskOperations
             Console.WriteLine("Title cannot be empty.");
             return;
         }
-        var task = new Task(nextId++, title, description);
-        tasks.Add(task);
+        Task task = new Task(nextId++, title, description);
+        lstTasks.Add(task);
         Console.WriteLine("Task added successfully.");
     }
 
@@ -38,7 +39,7 @@ public class TaskManager : ITaskOperations
     /// <param name="status">The new status of the task.</param>
     public void UpdateTaskStatus(int taskId, EnmTaskStatus status)
     {
-        var task = tasks.FirstOrDefault(t => t.Id == taskId);
+        Task task = lstTasks.FirstOrDefault(t => t.Id == taskId);
         if (task != null)
         {
             task.Status = status;
@@ -56,10 +57,10 @@ public class TaskManager : ITaskOperations
     /// <param name="taskId">The ID of the task to delete.</param>
     public void DeleteTask(int taskId)
     {
-        var task = tasks.FirstOrDefault(t => t.Id == taskId);
+        Task task = lstTasks.FirstOrDefault(t => t.Id == taskId);
         if (task != null)
         {
-            tasks.Remove(task);
+            lstTasks.Remove(task);
             Console.WriteLine("Task deleted successfully.");
         }
         else
@@ -68,23 +69,31 @@ public class TaskManager : ITaskOperations
         }
     }
 
+    #endregion
+
+    #region Display Methods
+
     /// <summary>
     /// Displays all tasks in the list.
     /// </summary>
-    public void ViewTasks()
+    public override void ViewTasks()
     {
-        if (tasks.Count == 0)
+        if (lstTasks.Count == 0)
         {
             Console.WriteLine("No tasks available.");
             return;
         }
 
         Console.WriteLine("Task List:");
-        foreach (var task in tasks)
+        foreach (Task task in lstTasks)
         {
             Console.WriteLine(task);
         }
     }
+
+    #endregion
+
+    #region File Operations
 
     /// <summary>
     /// Saves the current tasks to a file.
@@ -94,9 +103,9 @@ public class TaskManager : ITaskOperations
     {
         try
         {
-            using (var writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                foreach (var task in tasks)
+                foreach (Task task in lstTasks)
                 {
                     writer.WriteLine($"{task.Id}|{task.Title}|{task.Description}|{task.Status}");
                 }
@@ -120,20 +129,31 @@ public class TaskManager : ITaskOperations
             Console.WriteLine("File not found.");
             return;
         }
+        else
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            Console.WriteLine($"Full Name: {fileInfo.FullName}");
+            Console.WriteLine($"Name: {fileInfo.Name}");
+            Console.WriteLine($"Length: {fileInfo.Length} bytes");
+            Console.WriteLine($"Extension: {fileInfo.Extension}");
+            Console.WriteLine($"Created: {fileInfo.CreationTime}");
+            Console.WriteLine($"Last Accessed: {fileInfo.LastAccessTime}");
+            Console.WriteLine($"Last Modified: {fileInfo.LastWriteTime}");
+        }
 
         try
         {
-            using (var reader = new StreamReader(filePath))
+            using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     var parts = line.Split('|');
-                    var task = new Task(int.Parse(parts[0]), parts[1], parts[2])
+                    Task task = new Task(int.Parse(parts[0]), parts[1], parts[2])
                     {
                         Status = (EnmTaskStatus)Enum.Parse(typeof(EnmTaskStatus), parts[3])
                     };
-                    tasks.Add(task);
+                    lstTasks.Add(task);
                 }
             }
             Console.WriteLine("Tasks loaded from file successfully.");
@@ -143,4 +163,6 @@ public class TaskManager : ITaskOperations
             Console.WriteLine($"Error loading from file: {ex.Message}");
         }
     }
+
+    #endregion
 }

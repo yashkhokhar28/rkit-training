@@ -1,42 +1,42 @@
-namespace CSharpBasicsApp;
+using CSharpBasicsApp;
 
 public class ArraysDemo
 {
     /// <summary>
     /// This method demonstrates various types of arrays in C# including single-dimensional,
-    /// multidimensional, jagged arrays, and arrays of different data types.
+    /// multidimensional, arrJagged arrays, and arrays of different data types.
     /// </summary>
     public static void RunArraysDemo()
     {
         #region Single-Dimensional Array
 
-        int[] numbers = new int[5];
-        numbers[0] = 10;
-        numbers[1] = 20;
-        numbers[2] = 30;
-        numbers[3] = 40;
-        numbers[4] = 50;
+        int[] arrNumbers = new int[5];
+        arrNumbers[0] = 10;
+        arrNumbers[1] = 20;
+        arrNumbers[2] = 30;
+        arrNumbers[3] = 40;
+        arrNumbers[4] = 50;
 
-        for (int i = 0; i < numbers.Length; i++)
+        for (int i = 0; i < arrNumbers.Length; i++)
         {
-            Console.WriteLine("numbers[" + i + "] = " + numbers[i]);
+            Console.WriteLine("arrNumbers[" + i + "] = " + arrNumbers[i]);
         }
 
         #endregion
 
         #region Multi-Dimensional Array
 
-        int[,] matrix = new int[2, 2];
-        matrix[0, 0] = 1;
-        matrix[0, 1] = 2;
-        matrix[1, 0] = 3;
-        matrix[1, 1] = 4;
+        int[,] arrMatrix = new int[2, 2];
+        arrMatrix[0, 0] = 1;
+        arrMatrix[0, 1] = 2;
+        arrMatrix[1, 0] = 3;
+        arrMatrix[1, 1] = 4;
 
         for (int i = 0; i < 2; i++)
         {
             for (int j = 0; j < 2; j++)
             {
-                Console.WriteLine("matrix[" + i + "," + j + "] = " + matrix[i, j]);
+                Console.WriteLine("arrMatrix[" + i + "," + j + "] = " + arrMatrix[i, j]);
             }
         }
 
@@ -44,15 +44,15 @@ public class ArraysDemo
 
         #region Jagged Array
 
-        int[][] jagged = new int[2][];
-        jagged[0] = new int[2] { 1, 2 };
-        jagged[1] = new int[3] { 3, 4, 5 };
+        int[][] arrJagged = new int[2][];
+        arrJagged[0] = new int[2] { 1, 2 };
+        arrJagged[1] = new int[3] { 3, 4, 5 };
 
-        for (int i = 0; i < jagged.Length; i++)
+        for (int i = 0; i < arrJagged.Length; i++)
         {
-            for (int j = 0; j < jagged[i].Length; j++)
+            for (int j = 0; j < arrJagged[i].Length; j++)
             {
-                Console.WriteLine("jagged[" + i + "][" + j + "] = " + jagged[i][j]);
+                Console.WriteLine("arrJagged[" + i + "][" + j + "] = " + arrJagged[i][j]);
             }
         }
 
@@ -60,28 +60,28 @@ public class ArraysDemo
 
         #region Array of Objects
 
-        object[] objects = new object[3];
-        objects[0] = 10;
-        objects[1] = "Hello, World!";
-        objects[2] = true;
+        object[] arrObjects = new object[3];
+        arrObjects[0] = 10;
+        arrObjects[1] = "Hello, World!";
+        arrObjects[2] = true;
 
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < arrObjects.Length; i++)
         {
-            Console.WriteLine("objects[" + i + "] = " + objects[i]);
+            Console.WriteLine("arrObjects[" + i + "] = " + arrObjects[i]);
         }
 
         #endregion
 
         #region Array of Strings
 
-        string[] names = new string[3];
-        names[0] = "Alice";
-        names[1] = "Bob";
-        names[2] = "Charlie";
+        string[] arrNames = new string[3];
+        arrNames[0] = "Alice";
+        arrNames[1] = "Bob";
+        arrNames[2] = "Charlie";
 
-        for (int i = 0; i < names.Length; i++)
+        for (int i = 0; i < arrNames.Length; i++)
         {
-            Console.WriteLine("names[" + i + "] = " + names[i]);
+            Console.WriteLine("arrNames[" + i + "] = " + arrNames[i]);
         }
 
         #endregion

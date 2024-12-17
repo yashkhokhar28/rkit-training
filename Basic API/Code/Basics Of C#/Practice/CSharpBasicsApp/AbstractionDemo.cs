@@ -1,5 +1,3 @@
-using System;
-
 namespace CSharpBasicsApp;
 
 /// <summary>
@@ -10,8 +8,7 @@ namespace CSharpBasicsApp;
 public class AbstractionDemo
 {
     /// <summary>
-    /// Runs a demonstration of abstraction by showcasing the use of an abstract class
-    /// and an interface in practical scenarios.
+    /// Runs the abstraction demo.
     /// </summary>
     public static void RunAbstractionDemo()
     {

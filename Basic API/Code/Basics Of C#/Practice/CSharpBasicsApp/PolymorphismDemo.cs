@@ -1,7 +1,6 @@
 using System;
 
 namespace CSharpBasicsApp;
-
 using MathLibrary;
 
 /// <summary>

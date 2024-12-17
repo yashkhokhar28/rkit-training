@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace CSharpBasicsApp;
 
@@ -18,11 +15,11 @@ public class CollectionClassDemo
     public static void RunCollectionClassDemo()
     {
         // List<T>: Demonstrate adding, inserting, and removing elements
-        var numbers = new List<int>();
-        numbers.AddRange(new[] { 10, 20, 30, 40, 50 });
-        numbers.Remove(20);
-        numbers.Insert(1, 15);
-        DisplayCollection(numbers, "List<T>");
+        var lstNumbers = new List<int>();
+        lstNumbers.AddRange(new[] { 10, 20, 30, 40, 50 });
+        lstNumbers.Remove(20);
+        lstNumbers.Insert(1, 15);
+        DisplayCollection(lstNumbers, "List<T>");
 
         // Dictionary<TKey, TValue>: Demonstrate adding, removing, and checking keys
         var names = new Dictionary<int, string>();

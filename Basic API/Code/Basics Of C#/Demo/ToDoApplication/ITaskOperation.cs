@@ -1,14 +1,18 @@
 namespace ToDoApplication;
+
 /// <summary>
 /// Defines the operations for managing tasks, such as adding, updating, deleting, viewing,
 /// saving, and loading tasks.
 /// </summary>
 public interface ITaskOperations
 {
+    #region Task Management
 
-    /// <summary>Adds the task.</summary>
-    /// <param name="title">The title.</param>
-    /// <param name="description">The description.</param>
+    /// <summary>
+    /// Adds a new task to the task list.
+    /// </summary>
+    /// <param name="title">The title of the task.</param>
+    /// <param name="description">The detailed description of the task.</param>
     void AddTask(string title, string description);
 
     /// <summary>
@@ -24,10 +28,9 @@ public interface ITaskOperations
     /// <param name="taskId">The unique identifier of the task to be deleted.</param>
     void DeleteTask(int taskId);
 
-    /// <summary>
-    /// Displays all tasks, including their ID, title, description, and status.
-    /// </summary>
-    void ViewTasks();
+    #endregion
+
+    #region File Operations
 
     /// <summary>
     /// Saves all tasks to a specified file in a structured format.
@@ -40,4 +43,6 @@ public interface ITaskOperations
     /// </summary>
     /// <param name="filePath">The file path from where tasks will be loaded.</param>
     void LoadFromFile(string filePath);
+
+    #endregion
 }
