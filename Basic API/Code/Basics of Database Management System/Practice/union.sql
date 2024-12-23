@@ -34,18 +34,6 @@ SELECT
 FROM 
 	Student;
     
--- UNION Across Multiple Tables
--- Combine the student names from the Student table and the country names from the Country table.
-SELECT 
-	FirstName AS Name
-FROM 
-	Student
-UNION
-SELECT 
-	CountryName AS Name
-FROM 
-	Country;
-    
 -- Using UNION to Combine Results from Different States
 -- Combine students from Gujarat (StateID = 1) and Maharashtra (StateID = 2) into one list.    
 SELECT 

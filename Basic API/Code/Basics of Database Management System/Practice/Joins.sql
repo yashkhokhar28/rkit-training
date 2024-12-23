@@ -41,7 +41,6 @@ RIGHT JOIN
 	State ON Student.StateID = State.StateID;
     
 -- FULL JOIN (or FULL OUTER JOIN)
--- Find all students, cities, and states, even if they are not all associated.
 SELECT 
 	Student.FirstName,
     Student.LastName,
@@ -49,9 +48,21 @@ SELECT
     State.StateName
 FROM 
 	Student
-FULL JOIN 
+LEFT JOIN 
 	City ON Student.CityID = City.CityID
-FULL JOIN 
+LEFT JOIN 
+	State ON Student.StateID = State.StateID;
+UNION
+SELECT 
+	City.CityName,
+	Student.FirstName,
+    Student.LastName,
+    State.StateName
+FROM 
+	City
+RIGHT JOIN 
+	Student ON City.CityID = Student.CityID
+RIGHT JOIN 
 	State ON Student.StateID = State.StateID;
 
 -- SELF JOIN

@@ -1,5 +1,5 @@
 -- Creating a View for Active Students
-CREATE VIEW ActiveStudents AS
+CREATE VIEW vws_ActiveStudents AS
 SELECT 
 	StudentID,
 	FirstName,
@@ -15,14 +15,14 @@ SELECT
     ActS.FirstName,
     C.CourseName
 FROM 
-	ActiveStudents AS ActS
+	vws_ActiveStudents AS ActS
 JOIN 
 	Enrollment E ON ActS.StudentID = E.StudentID
 JOIN 
 	Courses C ON E.CourseID = C.CourseID;
     
 -- Creating a View with Joins
-CREATE VIEW StudentCourses AS
+CREATE VIEW vws_StudentCourses AS
 SELECT 
 	S.StudentID,
     S.FirstName,
@@ -37,7 +37,7 @@ JOIN
     
 -- Updatable Views
 UPDATE 
-	ActiveStudents
+	vws_ActiveStudents
 SET 
 	Status = 'Inactive'
 WHERE 

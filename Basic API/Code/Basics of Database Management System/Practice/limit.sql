@@ -1,13 +1,31 @@
 -- Basic Example: Limit the number of rows returned.
 SELECT 
-	* 
+	CountryID,
+    StateID,
+    CityID,
+    FirstName,
+    LastName,
+    Gender,
+    BirthDate,
+    GPA,
+    Address,
+    PhoneNumber
 FROM 
 	Student
 LIMIT 5;
 
 -- Limiting Results with ORDER BY: Limiting the number of rows after sorting.
 SELECT 
-	* 
+	CountryID,
+    StateID,
+    CityID,
+    FirstName,
+    LastName,
+    Gender,
+    BirthDate,
+    GPA,
+    Address,
+    PhoneNumber
 FROM 
 	Student
 ORDER BY 
@@ -16,14 +34,32 @@ LIMIT 3;
 
 -- Paginated Results: Fetch rows in chunks, useful for pagination.
 SELECT 
-	* 
+	CountryID,
+    StateID,
+    CityID,
+    FirstName,
+    LastName,
+    Gender,
+    BirthDate,
+    GPA,
+    Address,
+    PhoneNumber
 FROM 
 	Student
 LIMIT 10 OFFSET 20;
 
 -- Top N Results: Limiting results to get the top N records.
 SELECT 
-	*
+	CountryID,
+    StateID,
+    CityID,
+    FirstName,
+    LastName,
+    Gender,
+    BirthDate,
+    GPA,
+    Address,
+    PhoneNumber
 FROM 
 	City
 ORDER BY 

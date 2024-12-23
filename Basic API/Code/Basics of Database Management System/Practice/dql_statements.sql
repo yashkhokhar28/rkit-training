@@ -2,7 +2,16 @@
 
 -- Select All Columns
 SELECT 
-	* 
+	CountryID,
+    StateID,
+    CityID,
+    FirstName,
+    LastName,
+    Gender,
+    BirthDate,
+    GPA,
+    Address,
+    PhoneNumber
 FROM 
 	Student;
 

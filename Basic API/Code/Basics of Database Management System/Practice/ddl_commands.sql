@@ -16,9 +16,14 @@ CREATE INDEX idx_CityName ON City(CityName);
 
 -- CREATE VIEW
 CREATE VIEW HighGPAStudents AS
-SELECT FirstName, LastName, GPA
-FROM Student
-WHERE GPA > 8;
+SELECT 
+	FirstName,
+    LastName,
+    GPA
+FROM 
+	Student
+WHERE 
+	GPA > 8;
 
 
 -- ALTER

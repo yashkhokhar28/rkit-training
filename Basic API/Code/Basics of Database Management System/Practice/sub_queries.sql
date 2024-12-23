@@ -63,29 +63,7 @@ WHERE
     )
 );
 
--- Subquery with EXISTS
--- Find all students who live in a city where there are students from multiple countries.
-SELECT 
-	FirstName,
-	LastName,
-    CityName
-FROM 
-	Student
-JOIN 
-	City ON Student.CityID = City.CityID
-WHERE 
-	EXISTS (
-		SELECT 1 
-		FROM 
-			Student AS s2 
-		WHERE 
-			s2.CityID = Student.CityID 
-		AND 
-			s2.CountryID != Student.CountryID
-);
-
 -- Subquery with IN
-
 -- Find students who live in cities located in the countries that are part of the European Union (assuming European countries have IDs in the Country table).
 SELECT 
 	FirstName,

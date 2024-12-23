@@ -1,6 +1,6 @@
 -- COUNT(): Count the number of rows in a table or a group.
 SELECT 
-	COUNT(*) AS TotalStudents
+	COUNT(StudentID) AS TotalStudents
 FROM 
 	Student;
     
@@ -33,5 +33,3 @@ SELECT
 	GROUP_CONCAT(CityName) AS Cities
 FROM 
 	City
-WHERE 
-	StateID = 1;

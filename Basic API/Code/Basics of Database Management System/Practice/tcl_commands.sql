@@ -1,24 +1,15 @@
--- COMMIT Statement
-BEGIN;
-UPDATE Student SET GPA = 9.0 WHERE StudentID = 1;
+START TRANSACTION;
+
 INSERT INTO Student (FirstName, Gender, BirthDate) VALUES ('Emma', 'Female', '2002-04-15');
-COMMIT;
 
--- ROLLBACK Statement
-BEGIN;
-UPDATE Student SET GPA = 8.0 WHERE StudentID = 1;
-DELETE FROM Student WHERE StudentID = 10;
+-- Set a savepoint before another update
+SAVEPOINT before_update;
 
--- An error occurs; roll back all changes
-ROLLBACK;
+-- Update a student's grade
+UPDATE Student SET Gender = 'Male' WHERE FirstName = 'Emma';
 
--- SAVEPOINT Statement
-BEGIN;
+-- If an issue occurs, rollback to the savepoint
+ROLLBACK TO SAVEPOINT before_update;
 
-UPDATE Student SET GPA = 9.5 WHERE StudentID = 2;
-SAVEPOINT SavePoint1;
-
-UPDATE Student SET GPA = 7.5 WHERE StudentID = 3;
-ROLLBACK TO SavePoint1;
-
+-- Finally, commit the transaction if all is good
 COMMIT;
