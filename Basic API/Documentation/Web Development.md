@@ -93,8 +93,6 @@ ASP.NET Web API is a framework for building HTTP-based services that can be cons
 - **Flexibility**: Can be used in web, mobile, IoT, or desktop applications.
 - **Extensibility**: Supports custom routing, authentication mechanisms (e.g., JWT), and more.
 
-Here’s a detailed explanation and example for both topics: **Building a Web API** and **Action Method Responses** in ASP.NET Web API using the .NET Framework.
-
 ---
 
 ## Building a Web API
@@ -520,10 +518,6 @@ config.EnableCors(cors);
 
 ---
 
-Here’s how to implement **Basic Authentication** using the `AuthorizationFilterAttribute` in **ASP.NET Web API**. This method provides a more flexible way to apply custom authentication and authorization logic directly via filters.
-
----
-
 ### **Basic Authentication in ASP.NET Web API using AuthorizationFilter Attribute**
 
 ---
@@ -567,7 +561,6 @@ To extend the `AuthorizationFilterAttribute`, create a custom filter class that 
 
 ```csharp
 using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
@@ -577,46 +570,81 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-public class BasicAuthenticationAttribute : AuthorizationFilterAttribute
+namespace AuthenticationInWebAPI.Filters
 {
-    public override void OnAuthorization(HttpActionContext actionContext)
+
+    public class CustomAuthenticationFilter : AuthorizationFilterAttribute
     {
-        var headers = actionContext.Request.Headers;
-
-        if (headers.Authorization == null || headers.Authorization.Scheme != "Basic")
+        public override void OnAuthorization(HttpActionContext actionContext)
         {
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
-            actionContext.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"localhost\"");
-            return;
-        }
-
-        var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(headers.Authorization.Parameter));
-        var parts = credentials.Split(':');
-
-        var username = parts[0];
-        var password = parts[1];
-
-        if (ValidateUser(username, password))
-        {
-            var identity = new GenericIdentity(username);
-            var principal = new GenericPrincipal(identity, null);
-
-            Thread.CurrentPrincipal = principal;
-            if (System.Web.HttpContext.Current != null)
+            // Check if the action allows anonymous access
+            if (actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Count > 0)
             {
-                System.Web.HttpContext.Current.User = principal;
+                // Skip authentication if the action has the [AllowAnonymous] attribute
+                return;
+            }
+
+            // Check if the Authorization header exists and is of type "Basic"
+            var authHeader = actionContext.Request.Headers.Authorization;
+            if (authHeader == null || authHeader.Scheme != "Basic")
+            {
+                // Handle cases where the Authorization header is missing or invalid
+                HandleUnauthorized(actionContext);
+                return;
+            }
+
+            try
+            {
+                // Decode and validate the credentials from the Authorization header
+                var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter));
+                var parts = credentials.Split(':');
+
+                if (parts.Length != 2)
+                {
+                    // Invalid credential format
+                    HandleUnauthorized(actionContext);
+                    return;
+                }
+
+                var username = parts[0];
+                var password = parts[1];
+
+                // Validate the user credentials
+                if (!IsAuthorizedUser(username, password))
+                {
+                    HandleUnauthorized(actionContext);
+                    return;
+                }
+
+                // Set the Principal for authenticated users
+                var identity = new GenericIdentity(username);
+                var principal = new GenericPrincipal(identity, null); // No roles specified
+                Thread.CurrentPrincipal = principal;
+
+                if (System.Web.HttpContext.Current != null)
+                {
+                    System.Web.HttpContext.Current.User = principal;
+                }
+            }
+            catch (FormatException)
+            {
+                // Handle invalid Base64 encoding in the Authorization header
+                HandleUnauthorized(actionContext);
             }
         }
-        else
-        {
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
-        }
-    }
 
-    private bool ValidateUser(string username, string password)
-    {
-        // Example: Hardcoded credentials (replace with database or other validation)
-        return username == "admin" && password == "password123";
+        private bool IsAuthorizedUser(string username, string password)
+        {
+            // Replace this with actual validation logic, such as checking against a database
+            return username == "admin" && password == "password";
+        }
+
+        private void HandleUnauthorized(HttpActionContext actionContext)
+        {
+            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
+            // Add the WWW-Authenticate header to prompt for credentials
+            actionContext.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"localhost\"");
+        }
     }
 }
 ```
@@ -628,16 +656,23 @@ public class BasicAuthenticationAttribute : AuthorizationFilterAttribute
 Once the custom filter is created, register it in the `WebApiConfig` file so that it applies globally or to specific controllers/actions.
 
 ```csharp
+using AuthenticationInWebAPI.Filters;
+using Swashbuckle.Application;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 
-namespace BasicAuthDemo
+namespace AuthenticationInWebAPI
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
+            // Web API configuration and services
+
             // Enable Basic Authentication globally by adding the custom filter
-            config.Filters.Add(new BasicAuthenticationAttribute());
+            config.Filters.Add(new CustomAuthenticationFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -646,6 +681,15 @@ namespace BasicAuthDemo
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+            );
+
+            // Swagger Redirect Route (Swagger UI configuration)
+            config.Routes.MapHttpRoute(
+                name: "SwaggerRedirect",
+                routeTemplate: "",
+                defaults: null,
+                constraints: null,
+                handler: new RedirectHandler(message => message.RequestUri.ToString(), "swagger")
             );
         }
     }
@@ -659,24 +703,39 @@ namespace BasicAuthDemo
 Create a controller to test authentication. The `[Authorize]` attribute can also be used to ensure only authenticated users can access the actions.
 
 ```csharp
+using AuthenticationInWebAPI.Filters;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
-namespace BasicAuthDemo.Controllers
+namespace AuthenticationInWebAPI.Controllers
 {
-    [Authorize] // This ensures the user is authenticated before accessing any action
+    [CustomAuthenticationFilter] // Custom authentication filter applied to the controller
     public class ProductsController : ApiController
     {
-        // GET api/products
-        public IHttpActionResult Get()
+        #region Public Actions
+
+        [HttpGet]
+        [Route("api/open/products")]
+        [AllowAnonymous] // Allows anonymous access to this endpoint
+        public IEnumerable<string> GetOpenData()
         {
-            return Ok(new string[] { "Product1", "Product2", "Product3" });
+            // Returning a static list of open data values as an example.
+            return new string[] { "value1", "value2" };
         }
 
-        // GET api/products/5
-        public IHttpActionResult Get(int id)
+        [HttpGet]
+        [Route("api/secure/products")]
+        public IEnumerable<string> GetSecureData()
         {
-            return Ok($"Product {id}");
+            // Returning a static list of secure data values as an example.
+            return new string[] { "value1", "value2" };
         }
+
+        #endregion
     }
 }
 ```
@@ -690,7 +749,7 @@ namespace BasicAuthDemo.Controllers
    - Use **Postman** to test the API.
    - Go to the **Authorization** tab.
    - Choose **Basic Auth**.
-   - Enter the `username` and `password` (`admin` and `password123` in this example).
+   - Enter the `username` and `password` (`admin` and `password` in this example).
 
 2. **curl**:
 
@@ -703,14 +762,14 @@ namespace BasicAuthDemo.Controllers
 
    - The server will return a response like:
      ```json
-     ["Product1", "Product2", "Product3"]
+     [{ "value1", "value2" }]
      ```
 
 4. **If Credentials are Incorrect**:
    - The server will return a `401 Unauthorized` response with a message like:
      ```json
      {
-       "Message": "Authorization has been denied for this request."
+       "Unauthorized"
      }
      ```
 
