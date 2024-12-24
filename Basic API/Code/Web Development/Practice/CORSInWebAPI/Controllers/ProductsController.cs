@@ -8,36 +8,27 @@ using System.Web.Http.Cors;
 
 namespace CORSInWebAPI.Controllers
 {
-    //[EnableCors(origins: "http://127.0.0.1:5500", headers: "*", methods: "*")]
+    /// <summary>
+    /// The ProductsController handles requests related to products.
+    /// </summary>
+    //[EnableCors(origins: "http://127.0.0.1:5500", headers: "*", methods: "*")] // Uncomment this to enable CORS for the entire controller
     public class ProductsController : ApiController
     {
-        // GET api/<controller>
-        //[EnableCors(origins: "http://127.0.0.1:5500", headers: "*", methods: "*")]
+        #region Actions
+
+        /// <summary>
+        /// Retrieves a list of product names.
+        /// </summary>
+        /// <returns>An enumerable collection of product names as strings.</returns>
+        // GET api/products
+        //[EnableCors(origins: "http://127.0.0.1:5500", headers: "*", methods: "*")] // Uncomment this to enable CORS for this specific action
         [Route("api/products")]
         public IEnumerable<string> Get()
         {
+            // Returning a static list of product values as an example.
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        #endregion
     }
 }
