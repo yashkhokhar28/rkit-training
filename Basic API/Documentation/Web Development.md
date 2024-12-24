@@ -572,9 +572,9 @@ using System.Web.Http.Filters;
 
 namespace AuthenticationInWebAPI.Filters
 {
-
     public class CustomAuthenticationFilter : AuthorizationFilterAttribute
     {
+
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             // Check if the action allows anonymous access
@@ -609,16 +609,17 @@ namespace AuthenticationInWebAPI.Filters
                 var username = parts[0];
                 var password = parts[1];
 
-                // Validate the user credentials
-                if (!IsAuthorizedUser(username, password))
+                // Validate the user credentials and get the role
+                var userRole = GetUserRole(username, password);
+                if (userRole == null)
                 {
                     HandleUnauthorized(actionContext);
                     return;
                 }
 
-                // Set the Principal for authenticated users
+                // Set the Principal for authenticated users with roles
                 var identity = new GenericIdentity(username);
-                var principal = new GenericPrincipal(identity, null); // No roles specified
+                var principal = new GenericPrincipal(identity, new[] { userRole }); // Assign userRole
                 Thread.CurrentPrincipal = principal;
 
                 if (System.Web.HttpContext.Current != null)
@@ -633,10 +634,20 @@ namespace AuthenticationInWebAPI.Filters
             }
         }
 
-        private bool IsAuthorizedUser(string username, string password)
+        private string GetUserRole(string username, string password)
         {
             // Replace this with actual validation logic, such as checking against a database
-            return username == "admin" && password == "password";
+            if (username == "admin" && password == "password")
+            {
+                return "admin"; // User role "admin"
+            }
+            if (username == "user" && password == "password")
+            {
+                return "user"; // User role "user"
+            }
+
+            // Invalid user credentials
+            return null;
         }
 
         private void HandleUnauthorized(HttpActionContext actionContext)
@@ -647,6 +658,7 @@ namespace AuthenticationInWebAPI.Filters
         }
     }
 }
+
 ```
 
 ---
@@ -716,8 +728,6 @@ namespace AuthenticationInWebAPI.Controllers
     [CustomAuthenticationFilter] // Custom authentication filter applied to the controller
     public class ProductsController : ApiController
     {
-        #region Public Actions
-
         [HttpGet]
         [Route("api/open/products")]
         [AllowAnonymous] // Allows anonymous access to this endpoint
@@ -728,16 +738,26 @@ namespace AuthenticationInWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/secure/products")]
-        public IEnumerable<string> GetSecureData()
+        [Route("api/secure/admin/products")] // Unique route for admin
+        [Authorize(Roles = "admin")] // Restricts this endpoint to users with the "admin" role
+        public IEnumerable<string> GetSecureDataForAdmin()
         {
             // Returning a static list of secure data values as an example.
-            return new string[] { "value1", "value2" };
+            return new string[] { "adminValue1", "adminValue2" };
         }
 
+        [HttpGet]
+        [Route("api/secure/user/products")] // Unique route for user
+        [Authorize(Roles = "user")] // Restricts this endpoint to users with the "user" role
+        public IEnumerable<string> GetSecureDataForUser()
+        {
+            // Returning a static list of secure data values as an example.
+            return new string[] { "userValue1", "userValue2" };
+        }
         #endregion
     }
 }
+
 ```
 
 ---
