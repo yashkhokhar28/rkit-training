@@ -13,8 +13,8 @@ namespace AuthenticationInWebAPI
         {
             // Web API configuration and services
 
-            // Enable Basic Authentication globally by adding the custom filter
-            config.Filters.Add(new CustomAuthenticationFilter());
+            // Register the custom authentication filter globally
+            config.Filters.Add(new BasicAuthenticationFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
