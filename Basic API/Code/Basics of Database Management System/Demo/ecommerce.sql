@@ -63,7 +63,7 @@ CREATE TABLE ord01 (
 ) COMMENT = 'Original Table: Order';
 
 -- Create OrderDetails Table as ord02
-CREATE TABLE ord01det (
+CREATE TABLE ord02 (
     d02f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: OrderDetailID',
     d02f02 INT COMMENT 'Original Column: OrderID',
     d02f03 INT COMMENT 'Original Column: ProductID',
@@ -128,7 +128,7 @@ VALUES
 (5, 249.98, 'P', 5);
 
 -- Insert data into ord01det (OrderDetails Table)
-INSERT INTO ord01det (d02f02, d02f03, d02f04, d02f05)
+INSERT INTO ord02 (d02f02, d02f03, d02f04, d02f05)
 VALUES
 (1, 1, 1, 699.99),
 (1, 2, 1, 1299.99),
