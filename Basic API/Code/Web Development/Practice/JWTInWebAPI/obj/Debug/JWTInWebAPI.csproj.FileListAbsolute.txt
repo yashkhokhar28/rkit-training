@@ -59,14 +59,8 @@ C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.Logging.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.Tokens.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.Jwt.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Newtonsoft.Json.Bson.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Newtonsoft.Json.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Owin.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Buffers.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Memory.dll
@@ -78,7 +72,6 @@ C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Threading.Tasks.Extensions.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.ValueTuple.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.dll
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.Owin.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.WebHost.dll
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Bcl.TimeProvider.xml
@@ -86,11 +79,6 @@ C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.Logging.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.IdentityModel.Tokens.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.Jwt.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Newtonsoft.Json.Bson.pdb
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Newtonsoft.Json.Bson.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Buffers.xml
@@ -104,7 +92,6 @@ C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.ValueTuple.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.xml
-C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.Owin.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\System.Web.Http.WebHost.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Newtonsoft.Json.xml
 C:\Users\yashk\OneDrive\Desktop\Web Developement\Code\Web Developement\Practice\JWTInWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

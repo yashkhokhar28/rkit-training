@@ -1,5 +1,4 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using Swashbuckle.Application;
+﻿using Swashbuckle.Application;
 using System.Web.Http;
 
 namespace JWTInWebAPI
