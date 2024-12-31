@@ -2,6 +2,7 @@
 using Swashbuckle.Application;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Dispatcher;
 
 namespace ECommercePortal
 {
@@ -10,6 +11,14 @@ namespace ECommercePortal
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Services.Replace(typeof(IHttpControllerSelector), new Custom.CustomControllerSelector(config));
+
+
+            config.Routes.MapHttpRoute(
+                name: "UriVersiondAPI",
+                routeTemplate: "api/v{version}/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+            );
 
             // Enable CORS globally
             EnableCorsAttribute cors = new EnableCorsAttribute("http://127.0.0.1:5500", "*", "*"); // Allow all origins, headers, and methods

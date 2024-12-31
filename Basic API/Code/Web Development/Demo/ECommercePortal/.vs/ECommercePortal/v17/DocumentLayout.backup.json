@@ -3,52 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\helpers\\cachehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:helpers\\cachehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\filters\\exceptionhandlingfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:filters\\exceptionhandlingfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\models\\errorresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\errorresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\controllers\\customerv2controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\customerv2controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\filters\\jwtauthorizationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:filters\\jwtauthorizationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\controllers\\customerv1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\customerv1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\custom\\customcontrollerselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:custom\\customcontrollerselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\app_start\\swaggerconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:app_start\\swaggerconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\helpers\\aeshelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\helpers\\aeshelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:helpers\\aeshelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\models\\tokenrequestmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\models\\tokenrequestmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\tokenrequestmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\demo\\ecommerceportal\\models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\productmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\models\\errorresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:models\\errorresponsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\helpers\\cachehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:helpers\\cachehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\filters\\jwtauthorizationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:filters\\jwtauthorizationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\filters\\exceptionhandlingfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:filters\\exceptionhandlingfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41A29337-1986-4A23-8A75-870068937151}|ECommercePortal.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,123 +83,97 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CacheHelper.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\CacheHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\CacheHelper.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\CacheHelper.cs",
-              "RelativeToolTip": "Helpers\\CacheHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
+              "Title": "CustomerV2Controller.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\CustomerV2Controller.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerV2Controller.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\CustomerV2Controller.cs",
+              "RelativeToolTip": "Controllers\\CustomerV2Controller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T15:19:04.106Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ErrorResponseModel.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ErrorResponseModel.cs",
-              "RelativeDocumentMoniker": "Models\\ErrorResponseModel.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ErrorResponseModel.cs",
-              "RelativeToolTip": "Models\\ErrorResponseModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBgAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T14:11:17.966Z",
+              "WhenOpened": "2024-12-31T13:02:57.574Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ExceptionHandlingFilter.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\ExceptionHandlingFilter.cs",
-              "RelativeDocumentMoniker": "Filters\\ExceptionHandlingFilter.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\ExceptionHandlingFilter.cs",
-              "RelativeToolTip": "Filters\\ExceptionHandlingFilter.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAqwBgAAAAuAAAAAAAAAA==",
+              "Title": "CustomerV1Controller.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\CustomerV1Controller.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerV1Controller.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\CustomerV1Controller.cs",
+              "RelativeToolTip": "Controllers\\CustomerV1Controller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T14:10:48.053Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "JWTAuthorizationFilter.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\JWTAuthorizationFilter.cs",
-              "RelativeDocumentMoniker": "Filters\\JWTAuthorizationFilter.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\JWTAuthorizationFilter.cs",
-              "RelativeToolTip": "Filters\\JWTAuthorizationFilter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:48:56.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "Controllers\\ProductsController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAowDsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:12:13.487Z",
+              "WhenOpened": "2024-12-31T13:02:35.884Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "CustomControllerSelector.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Custom\\CustomControllerSelector.cs",
+              "RelativeDocumentMoniker": "Custom\\CustomControllerSelector.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Custom\\CustomControllerSelector.cs",
+              "RelativeToolTip": "Custom\\CustomControllerSelector.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-31T13:02:00.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SwaggerConfig.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\App_Start\\SwaggerConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\SwaggerConfig.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\App_Start\\SwaggerConfig.cs",
+              "RelativeToolTip": "App_Start\\SwaggerConfig.cs",
+              "ViewState": "AgIAAO4AAAAAAAAAAAAAAPkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T10:47:09.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "WebApiConfig.cs",
               "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\App_Start\\WebApiConfig.cs",
               "RelativeDocumentMoniker": "App_Start\\WebApiConfig.cs",
               "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\App_Start\\WebApiConfig.cs",
               "RelativeToolTip": "App_Start\\WebApiConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAIBDwA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-29T13:03:23.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "AESHelper.cs",
               "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\AESHelper.cs",
               "RelativeDocumentMoniker": "Helpers\\AESHelper.cs",
               "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\AESHelper.cs",
               "RelativeToolTip": "Helpers\\AESHelper.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAwEoAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAA4wAoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-29T13:32:47.896Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABHAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowCUAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:34:42.755Z",
+              "WhenOpened": "2024-12-29T13:12:13.487Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "JWTHelper.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\JWTHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\JWTHelper.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\JWTHelper.cs",
-              "RelativeToolTip": "Helpers\\JWTHelper.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAtwEgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:32:39.462Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "TokenRequestModel.cs",
               "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\TokenRequestModel.cs",
               "RelativeDocumentMoniker": "Models\\TokenRequestModel.cs",
@@ -191,8 +181,32 @@
               "RelativeToolTip": "Models\\TokenRequestModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:34:13.042Z",
+              "WhenOpened": "2024-12-29T13:34:13.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "JWTHelper.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\JWTHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\JWTHelper.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\JWTHelper.cs",
+              "RelativeToolTip": "Helpers\\JWTHelper.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAWwA8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:32:39.462Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProductModel.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ProductModel.cs",
+              "RelativeDocumentMoniker": "Models\\ProductModel.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ProductModel.cs",
+              "RelativeToolTip": "Models\\ProductModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:13:21.215Z"
             },
             {
               "$type": "Document",
@@ -204,21 +218,67 @@
               "RelativeToolTip": "Models\\LoginModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:33:41.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T13:33:41.392Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "ProductModel.cs",
-              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ProductModel.cs",
-              "RelativeDocumentMoniker": "Models\\ProductModel.cs",
-              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ProductModel.cs",
-              "RelativeToolTip": "Models\\ProductModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
+              "Title": "ErrorResponseModel.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ErrorResponseModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorResponseModel.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Models\\ErrorResponseModel.cs",
+              "RelativeToolTip": "Models\\ErrorResponseModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:13:21.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T14:11:17.966Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CacheHelper.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\CacheHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\CacheHelper.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Helpers\\CacheHelper.cs",
+              "RelativeToolTip": "Helpers\\CacheHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T15:19:04.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "JWTAuthorizationFilter.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\JWTAuthorizationFilter.cs",
+              "RelativeDocumentMoniker": "Filters\\JWTAuthorizationFilter.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\JWTAuthorizationFilter.cs",
+              "RelativeToolTip": "Filters\\JWTAuthorizationFilter.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAiwA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:48:56.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ExceptionHandlingFilter.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\ExceptionHandlingFilter.cs",
+              "RelativeDocumentMoniker": "Filters\\ExceptionHandlingFilter.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Filters\\ExceptionHandlingFilter.cs",
+              "RelativeToolTip": "Filters\\ExceptionHandlingFilter.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAqwBgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T14:10:48.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Demo\\ECommercePortal\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:34:42.755Z"
             }
           ]
         }

@@ -121,7 +121,10 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CustomerV1Controller.cs" />
+    <Compile Include="Controllers\CustomerV2Controller.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Custom\CustomControllerSelector.cs" />
     <Compile Include="Filters\ExceptionHandlingFilter.cs" />
     <Compile Include="Filters\JWTAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">

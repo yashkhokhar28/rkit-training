@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\practice\\apiversoninginwebapi\\custom\\customcontrollerselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:custom\\customcontrollerselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\practice\\apiversoninginwebapi\\controllers\\customersv1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:controllers\\customersv1controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\practice\\apiversoninginwebapi\\controllers\\customersv2controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:controllers\\customersv2controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|c:\\users\\yashk\\onedrive\\desktop\\web developement\\code\\web developement\\practice\\apiversoninginwebapi\\app_start\\swaggerconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:app_start\\swaggerconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64093250-38E4-43D1-B957-8FC16C8E8F28}|APIVersoningInWebAPI.csproj|solutionrelative:global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SwaggerConfig.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\App_Start\\SwaggerConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\SwaggerConfig.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\App_Start\\SwaggerConfig.cs",
+              "RelativeToolTip": "App_Start\\SwaggerConfig.cs",
+              "ViewState": "AgIAAOYAAAAAAAAAAAA4wPAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T10:17:03.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WebApiConfig.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\App_Start\\WebApiConfig.cs",
+              "RelativeDocumentMoniker": "App_Start\\WebApiConfig.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\App_Start\\WebApiConfig.cs",
+              "RelativeToolTip": "App_Start\\WebApiConfig.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAiwBgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T03:24:35.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomControllerSelector.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Custom\\CustomControllerSelector.cs",
+              "RelativeDocumentMoniker": "Custom\\CustomControllerSelector.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Custom\\CustomControllerSelector.cs",
+              "RelativeToolTip": "Custom\\CustomControllerSelector.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAA4wC0AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T03:24:06.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomersV1Controller.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Controllers\\CustomersV1Controller.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomersV1Controller.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Controllers\\CustomersV1Controller.cs",
+              "RelativeToolTip": "Controllers\\CustomersV1Controller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T03:22:21.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomersV2Controller.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Controllers\\CustomersV2Controller.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomersV2Controller.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Controllers\\CustomersV2Controller.cs",
+              "RelativeToolTip": "Controllers\\CustomersV2Controller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T03:22:50.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Global.asax.cs",
+              "RelativeDocumentMoniker": "Global.asax.cs",
+              "ToolTip": "C:\\Users\\yashk\\OneDrive\\Desktop\\Web Developement\\Code\\Web Developement\\Practice\\APIVersoningInWebAPI\\Global.asax.cs",
+              "RelativeToolTip": "Global.asax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-30T03:50:03.308Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
