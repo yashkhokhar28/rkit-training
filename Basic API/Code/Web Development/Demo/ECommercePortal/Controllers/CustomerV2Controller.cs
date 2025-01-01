@@ -4,7 +4,7 @@ using System.Web.Http;
 namespace ECommercePortal.Controllers
 {
     /// <summary>
-    /// 
+    /// CustomerV2Controller
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
     public class CustomersV2Controller : ApiController
