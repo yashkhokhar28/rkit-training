@@ -13,3 +13,5 @@ F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\obj\Debug\
 F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\obj\Debug\net6.0\CSharpAdvanceApp.pdb
 F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\obj\Debug\net6.0\CSharpAdvanceApp.genruntimeconfig.cache
 F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\obj\Debug\net6.0\ref\CSharpAdvanceApp.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\bin\Debug\net6.0\Newtonsoft.Json.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Practice\CSharpAdvanceApp\obj\Debug\net6.0\CSharpAdvanceApp.csproj.CopyComplete

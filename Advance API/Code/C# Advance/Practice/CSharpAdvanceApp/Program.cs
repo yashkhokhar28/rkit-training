@@ -5,11 +5,9 @@ public class Program
     public static void Main()
     {
         Console.WriteLine("Enter Choice : ");
-        Console.WriteLine("1. Simple Class");
-        Console.WriteLine("2. Abstract Class");
-        Console.WriteLine("3. Partial Class");
-        Console.WriteLine("4. Sealed Class");
-        Console.WriteLine("5. Static Class");
+        Console.WriteLine("1. Class Demo");
+        Console.WriteLine("2. Generics Demo");
+        Console.WriteLine("3. Dynamic Type Demo");
 
         int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -26,6 +24,8 @@ public class Program
                 break;
 
             case 3:
+                DynamicTypeDemo objDynamicTypeDemo = new DynamicTypeDemo();
+                objDynamicTypeDemo.RunDynamicTypeDemo();
                 break;
 
             case 4:
