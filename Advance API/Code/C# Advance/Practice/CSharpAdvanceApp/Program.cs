@@ -21,7 +21,8 @@ public class Program
                 break;
 
             case 2:
-
+                GenericClassDemo objGenericClassDemo = new GenericClassDemo();
+                objGenericClassDemo.RunGenericClassDemo();
                 break;
 
             case 3:
