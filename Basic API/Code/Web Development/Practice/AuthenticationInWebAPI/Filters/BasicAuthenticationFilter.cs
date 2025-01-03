@@ -24,6 +24,7 @@ namespace AuthenticationInWebAPI.Filters
         /// </param>
         public override void OnAuthorization(HttpActionContext actionContext)
         {
+
             // Allow anonymous access if the action has the AllowAnonymousAttribute applied
             if (actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Count > 0)
             {

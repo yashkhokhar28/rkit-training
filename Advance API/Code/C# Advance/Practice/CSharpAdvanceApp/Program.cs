@@ -18,6 +18,8 @@ public class Program
         Console.WriteLine("3. Dynamic Type Demo");
         Console.WriteLine("4. File System Demo");
         Console.WriteLine("5. Data Serialization Demo");
+        Console.WriteLine("7. Lambda Expression Demo");
+        Console.WriteLine("8. Extension Methods Demo");
 
         // Get the user's choice
         int choice = Convert.ToInt32(Console.ReadLine());
@@ -55,8 +57,20 @@ public class Program
                 objDataSerializationDemo.RunDataSerializationDemo();
                 break;
 
-            // Case 6: Exit (though there is no implementation for this case)
+            // Case 6:
             case 6:
+                break;
+
+            // Case 7:
+            case 7:
+                LambdaExpressionDemo objLambdaExpressionDemo = new LambdaExpressionDemo();
+                objLambdaExpressionDemo.RunLambdaExpressionDemo();
+                break;
+
+            // Case 8:
+            case 8:
+                ExtensionMethodsDemo objExtensionMethodsDemo = new ExtensionMethodsDemo();
+                objExtensionMethodsDemo.RunExtensionMethodsDemo();
                 break;
 
             // Default case: If the user enters an invalid choice
