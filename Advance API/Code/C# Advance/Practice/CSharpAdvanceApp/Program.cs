@@ -8,6 +8,7 @@ public class Program
         Console.WriteLine("1. Class Demo");
         Console.WriteLine("2. Generics Demo");
         Console.WriteLine("3. Dynamic Type Demo");
+        Console.WriteLine("4. File System Demo");
 
         int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -29,6 +30,8 @@ public class Program
                 break;
 
             case 4:
+                FileSystemDemo objFileSystemDemo = new FileSystemDemo();
+                objFileSystemDemo.RunFileSystemDemo();
                 break;
 
             case 5:
