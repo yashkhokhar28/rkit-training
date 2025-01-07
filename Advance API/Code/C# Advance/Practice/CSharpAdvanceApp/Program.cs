@@ -60,6 +60,8 @@ public class Program
 
             // Case 6:
             case 6:
+                BaseClassLibrary objBaseClassLibrary = new BaseClassLibrary();
+                objBaseClassLibrary.RunBaseClassLibrary();
                 break;
 
             // Case 7:

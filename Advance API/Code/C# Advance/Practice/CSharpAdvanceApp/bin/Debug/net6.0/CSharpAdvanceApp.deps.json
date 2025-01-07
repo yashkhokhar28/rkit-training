@@ -9,7 +9,8 @@
       "CSharpAdvanceApp/1.0.0": {
         "dependencies": {
           "EPPlus": "7.5.2",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "CustomListLibrary": "1.0.0.0"
         },
         "runtime": {
           "CSharpAdvanceApp.dll": {}
@@ -268,6 +269,14 @@
             "fileVersion": "8.0.1024.46610"
           }
         }
+      },
+      "CustomListLibrary/1.0.0.0": {
+        "runtime": {
+          "CustomListLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -430,6 +439,11 @@
       "sha512": "sha512-0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg==",
       "path": "system.text.json/8.0.5",
       "hashPath": "system.text.json.8.0.5.nupkg.sha512"
+    },
+    "CustomListLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

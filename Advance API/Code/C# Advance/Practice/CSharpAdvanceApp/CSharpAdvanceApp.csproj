@@ -12,4 +12,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CustomListLibrary">
+      <HintPath>..\CustomListLibrary\bin\Debug\net6.0\CustomListLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
