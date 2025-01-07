@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web;
 using EFWebAPIProject.Extension;
+using System.Web.Http;
 
 namespace EFWebAPIProject.BL
 {
@@ -18,6 +19,8 @@ namespace EFWebAPIProject.BL
     /// </summary>
     public class BLStudent : IDataHandlerService<DTOSTU01>
     {
+        #region Fields
+
         /// <summary>
         /// Private field for storing a student object (POCO model).
         /// </summary>
@@ -38,10 +41,18 @@ namespace EFWebAPIProject.BL
         /// </summary>
         private Response _objResponse;
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// Gets or sets the type of operation (e.g., Add, Edit, Delete).
         /// </summary>
         public EntryType Type { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Constructor for initializing the BLStudent class.
@@ -61,6 +72,10 @@ namespace EFWebAPIProject.BL
             }
         }
 
+        #endregion
+
+        #region Get Operations
+
         /// <summary>
         /// Retrieves all students from the database.
         /// </summary>
@@ -69,8 +84,7 @@ namespace EFWebAPIProject.BL
         {
             using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
             {
-                var students = objIDbConnection.Select<STU01>();
-                return students;
+                return objIDbConnection.Select<STU01>();
             }
         }
 
@@ -83,8 +97,7 @@ namespace EFWebAPIProject.BL
         {
             using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
             {
-                var student = objIDbConnection.SingleById<STU01>(id);
-                return student;
+                return objIDbConnection.SingleById<STU01>(id);
             }
         }
 
@@ -101,6 +114,10 @@ namespace EFWebAPIProject.BL
             }
         }
 
+        #endregion
+
+        #region Delete Operations
+
         /// <summary>
         /// Prepares a student object for deletion by retrieving it from the database.
         /// </summary>
@@ -108,15 +125,7 @@ namespace EFWebAPIProject.BL
         /// <returns>The student object if found, otherwise null.</returns>
         public STU01 PreDelete(int id)
         {
-            bool isStudentExist = IsSTU01Exist(id);
-            if (isStudentExist)
-            {
-                return Get(id); // Get the student to be deleted
-            }
-            else
-            {
-                return null;
-            }
+            return IsSTU01Exist(id) ? Get(id) : null;
         }
 
         /// <summary>
@@ -162,6 +171,10 @@ namespace EFWebAPIProject.BL
             return _objResponse;
         }
 
+        #endregion
+
+        #region Save Operations
+
         /// <summary>
         /// Prepares the student data before saving it (for both adding and editing).
         /// </summary>
@@ -171,13 +184,9 @@ namespace EFWebAPIProject.BL
             // Convert DTO to POCO model
             _objSTU01 = objDTOSTU01.Convert<STU01>();
 
-            if (Type == EntryType.E)
+            if (Type == EntryType.E && objDTOSTU01.U01F01 > 0)
             {
-                // Set the student ID for edit operations
-                if (objDTOSTU01.U01F01 > 0)
-                {
-                    _id = objDTOSTU01.U01F01;
-                }
+                _id = objDTOSTU01.U01F01;
             }
         }
 
@@ -194,14 +203,10 @@ namespace EFWebAPIProject.BL
                     _objResponse.IsError = true;
                     _objResponse.Message = "Enter Correct Id";
                 }
-                else
+                else if (!IsSTU01Exist(_id))
                 {
-                    bool isStudentExist = IsSTU01Exist(_id);
-                    if (!isStudentExist)
-                    {
-                        _objResponse.IsError = true;
-                        _objResponse.Message = "User Not Found";
-                    }
+                    _objResponse.IsError = true;
+                    _objResponse.Message = "User Not Found";
                 }
             }
             return _objResponse;
@@ -222,7 +227,7 @@ namespace EFWebAPIProject.BL
                         db.Insert(_objSTU01); // Insert new student
                         _objResponse.Message = "Data Added";
                     }
-                    if (Type == EntryType.E)
+                    else if (Type == EntryType.E)
                     {
                         db.Update(_objSTU01); // Update existing student
                         _objResponse.Message = "Data Updated";
@@ -236,5 +241,137 @@ namespace EFWebAPIProject.BL
             }
             return _objResponse;
         }
+
+        #endregion
+
+        #region Extra Methods
+
+        /// <summary>
+        /// Retrieves the first student based on ascending order of their ID.
+        /// </summary>
+        /// <returns>First student from the database</returns>
+        public STU01 GetFirstStudent()
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.Single<STU01>("ORDER BY U01F01 ASC LIMIT 1");
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the last student based on descending order of their ID.
+        /// </summary>
+        /// <returns>Last student from the database</returns>
+        public STU01 GetLastStudent()
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.Single<STU01>("ORDER BY U01F01 DESC LIMIT 1");
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a list of students with paging (limit and skip).
+        /// </summary>
+        /// <param name="skip">Number of records to skip</param>
+        /// <param name="take">Number of records to retrieve</param>
+        /// <returns>List of students based on the paging parameters</returns>
+        public List<STU01> GetStudentsWithPaging(int skip, int take)
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                var query = objIDbConnection.From<STU01>();
+                query.Limit(skip, take); // Apply paging
+
+                return objIDbConnection.Select<STU01>(query); // Return paged students
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the total number of students in the database.
+        /// </summary>
+        /// <returns>Total count of students</returns>
+        public long GetTotalStudentCount()
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.Count<STU01>(); // Count total students
+            }
+        }
+
+        /// <summary>
+        /// Inserts a list of students into the database.
+        /// </summary>
+        /// <param name="students">List of students to insert</param>
+        public void InsertMultipleStudents(List<STU01> students)
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                objIDbConnection.InsertAll(students); // Insert all students into the database
+            }
+        }
+
+        /// <summary>
+        /// Updates a list of students in the database.
+        /// </summary>
+        /// <param name="students">List of students to update</param>
+        public void UpdateMultipleStudents(List<STU01> students)
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                objIDbConnection.UpdateAll(students); // Update all students in the database
+            }
+        }
+
+        /// <summary>
+        /// Deletes students who are above a specified age.
+        /// </summary>
+        /// <param name="age">The age threshold</param>
+        public void DeleteStudentsAboveAge(int age)
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                objIDbConnection.Delete<STU01>(x => x.U01F03 > age); // Delete students whose age is greater than the provided age
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a list of students whose names start with a specified prefix.
+        /// </summary>
+        /// <param name="prefix">The name prefix</param>
+        /// <returns>List of students whose names start with the given prefix</returns>
+        public List<STU01> GetStudentsByNamePrefix(string prefix)
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.Select<STU01>(x => x.U01F02.StartsWith(prefix)); // Select students with name prefix
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the average age of all students in the database.
+        /// </summary>
+        /// <returns>Average age of students</returns>
+        public double GetAverageStudentAge()
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.Scalar<double>("SELECT AVG(U01F03) FROM stu01"); // Get average age of students
+            }
+        }
+
+        /// <summary>
+        /// Retrieves a set of distinct student names from the database.
+        /// </summary>
+        /// <returns>HashSet of distinct student names</returns>
+        public HashSet<string> GetDistinctStudentNames()
+        {
+            using (IDbConnection objIDbConnection = _dbFactory.OpenDbConnection())
+            {
+                return objIDbConnection.ColumnDistinct<string>("SELECT DISTINCT U01F02 FROM stu01"); // Get distinct student names
+            }
+        }
+
+        #endregion
     }
 }
