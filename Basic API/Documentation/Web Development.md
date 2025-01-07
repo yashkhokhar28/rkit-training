@@ -97,7 +97,7 @@ ASP.NET Web API is a framework for building HTTP-based services that can be cons
 
 ## Building a Web API
 
-### **Step 1: Create a New Web API Project**
+### Step 1: Create a New Web API Project
 
 1. Open Visual Studio and create a new **ASP.NET Web Application (.NET Framework)**.
 2. Choose the **Empty** template and check the **Web API** checkbox to include Web API dependencies.
@@ -105,7 +105,7 @@ ASP.NET Web API is a framework for building HTTP-based services that can be cons
 
 ---
 
-### **Step 2: Project Structure**
+### Step 2: Project Structure
 
 The default structure includes:
 
@@ -115,7 +115,7 @@ The default structure includes:
 
 ---
 
-### **Step 3: Configure Web API Routing**
+### Step 3: Configure Web API Routing
 
 In `App_Start/WebApiConfig.cs`, ensure the default routing is set up:
 
@@ -141,7 +141,7 @@ public static class WebApiConfig
 
 ---
 
-### **Step 4: Create a Controller**
+### Step 4: Create a Controller
 
 Create a controller named `ProductsController`:
 
@@ -150,7 +150,7 @@ Create a controller named `ProductsController`:
 
 ---
 
-### **Step 5: Implement CRUD Operations**
+### Step 5: Implement CRUD Operations
 
 ```csharp
 using System.Collections.Generic;
@@ -221,7 +221,7 @@ namespace EmptyProject.Controllers
 
 ---
 
-## **2. Action Method Responses**
+## Action Method Responses
 
 Action methods in Web API return HTTP responses to the client. These responses typically include:
 
@@ -230,7 +230,7 @@ Action methods in Web API return HTTP responses to the client. These responses t
 
 ---
 
-### **Key HTTP Status Codes**
+### Key HTTP Status Codes
 
 - **200 OK**: Request was successful.
 - **201 Created**: A new resource was created.
@@ -241,7 +241,7 @@ Action methods in Web API return HTTP responses to the client. These responses t
 
 ---
 
-### **Example: Action Method Responses**
+### Example: Action Method Responses
 
 Here’s how to use different responses in the `ProductsController`:
 
@@ -309,7 +309,7 @@ Here’s how to use different responses in the `ProductsController`:
 
 ---
 
-### **Testing the API**
+### Testing the API
 
 - **Using Postman or Browser**:
   - Test endpoints like `GET api/Products` or `POST api/Products`.
@@ -317,480 +317,189 @@ Here’s how to use different responses in the `ProductsController`:
 
 ---
 
-### **CORS (Cross-Origin Resource Sharing)**
+## Security in ASP.NET Web API
 
-CORS is a mechanism that allows restricted resources (e.g., API data) on a web page to be requested from another domain outside the domain from which the resource originated. It is a security feature implemented in web browsers to prevent malicious scripts from accessing sensitive data on a different domain.
+Security is a critical aspect of any web application to protect it from unauthorized access, data breaches, and malicious attacks. ASP.NET Web API provides several mechanisms to implement security, including CORS, Authentication, Authorization, Exception Handling, and JWT Tokens.
 
-### **Key Points of CORS:**
+### CORS (Cross-Origin Resource Sharing)
 
-1. **Origin**: The domain, scheme, and port of a request (e.g., `https://example.com`).
-2. **Simple Requests**: Requests that use standard headers like `GET` or `POST`.
-3. **Preflight Requests**: Requests that browsers send to check if the server allows the actual request. These are sent before methods like `PUT`, `DELETE`, or non-standard headers are used.
+CORS allows web applications running on different domains to interact with your API. By default, web browsers restrict cross-origin requests for security purposes. To enable CORS in ASP.NET Web API:
 
----
+- Install the CORS package using NuGet.
+- Enable CORS globally or for specific controllers using `EnableCorsAttribute`.
 
-### **CORS in ASP.NET Framework Web API**
-
-In **ASP.NET Framework Web API**, enabling CORS involves:
-
-1. Installing the necessary package.
-2. Configuring CORS in the Web API pipeline.
-
----
-
-### **Step-by-Step Implementation**
-
-#### **1. Install the Required Package**
-
-Use the NuGet Package Manager to install the CORS package:
-
-```bash
-Install-Package Microsoft.AspNet.WebApi.Cors
-```
-
----
-
-#### **2. Enable CORS Globally**
-
-In your `WebApiConfig.cs`, enable CORS for the entire API:
+Example for enabling CORS globally in `WebApiConfig.cs`:
 
 ```csharp
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace WebAPIDemo
+public static class WebApiConfig
 {
-    public static class WebApiConfig
+    public static void Register(HttpConfiguration config)
     {
-        public static void Register(HttpConfiguration config)
+        var cors = new EnableCorsAttribute("*", "*", "*");
+        config.EnableCors(cors);
+        config.MapHttpAttributeRoutes();
+    }
+}
+```
+
+### Authentication and Authorization
+
+- **Authentication** verifies the identity of users.
+- **Authorization** determines the access level or permissions for authenticated users.
+
+ASP.NET Web API supports various authentication methods:
+
+- Basic Authentication
+- Token-Based Authentication (using JWT tokens)
+- OAuth and OpenID Connect
+
+Example: Securing an API endpoint using `AuthorizeAttribute`:
+
+```csharp
+[Authorize]
+public IHttpActionResult GetSecureData()
+{
+    return Ok("This is a secure endpoint.");
+}
+```
+
+### Exception Handling
+
+Exception handling is essential to ensure your API gracefully handles errors. In ASP.NET Web API, you can use Exception Filters and Global Exception Handling to manage exceptions.
+
+Example of a custom exception filter:
+
+```csharp
+public class CustomExceptionFilter : ExceptionFilterAttribute
+{
+    public override void OnException(HttpActionExecutedContext context)
+    {
+        // Log exception and return a custom response
+        context.Response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
         {
-            // Enable CORS globally
-            var cors = new EnableCorsAttribute("*", "*", "*"); // Allow all origins, headers, and methods
-            config.EnableCors(cors);
+            Content = new StringContent("An error occurred. Please try again later."),
+            ReasonPhrase = "Critical Exception"
+        };
+    }
+}
+```
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
+### JWT Token Authentication
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-        }
+JWT (JSON Web Token) is a popular method for securing APIs. It provides a compact and self-contained way to transmit information securely.
+
+Steps to implement JWT in ASP.NET Web API:
+
+1. Install `System.IdentityModel.Tokens.Jwt` package.
+2. Generate a JWT token on user authentication.
+3. Validate the token on every request to protected endpoints.
+
+---
+
+## HTTP Caching
+
+Caching improves performance by storing copies of responses and serving them without contacting the server repeatedly. ASP.NET Web API supports output caching and client-side caching.
+
+### Types of Caching
+
+1. **Server-Side Caching**: Store responses on the server.
+2. **Client-Side Caching**: Use cache-related headers like `Cache-Control`.
+
+Example of setting cache headers in an API response:
+
+```csharp
+[HttpGet]
+[OutputCache(Duration = 60)]
+public IHttpActionResult GetData()
+{
+    return Ok("This response is cached for 60 seconds.");
+}
+```
+
+---
+
+## API Versioning
+
+Versioning ensures backward compatibility and smooth upgrades. There are several ways to implement versioning in ASP.NET Web API:
+
+1. **URL Versioning** (e.g., `api/v1/products`)
+2. **Query String Versioning** (e.g., `api/products?version=1`)
+3. **Header Versioning** (e.g., `X-Version: 1`)
+
+Example using URL versioning:
+
+```csharp
+config.Routes.MapHttpRoute(
+    name: "VersionedApi",
+    routeTemplate: "api/v{version}/{controller}/{id}",
+    defaults: new { id = RouteParameter.Optional }
+);
+```
+
+---
+
+## Using Swagger for API Documentation
+
+Swagger is an open-source tool that provides an interactive interface to explore and test your APIs. It automatically generates API documentation and helps developers understand and test the endpoints.
+
+Steps to Use Swagger in ASP.NET Web API:
+
+1. Install `Swashbuckle` package using NuGet.
+2. Enable Swagger in your API project by modifying `WebApiConfig.cs`.
+
+Example:
+
+```csharp
+public static class WebApiConfig
+{
+    public static void Register(HttpConfiguration config)
+    {
+        // Enable Swagger
+        config.EnableSwagger(c =>
+        {
+            c.SingleApiVersion("v1", "My API");
+        }).EnableSwaggerUi();
     }
 }
 ```
 
 ---
 
-#### **3. Enable CORS for Specific Controllers or Actions**
+## Using POSTMAN for API Testing
 
-Instead of enabling CORS globally, you can apply it to specific controllers or action methods.
+Postman is a popular tool for testing APIs. It allows you to send requests to your API endpoints and analyze responses without needing a client application.
 
-##### Example: Apply CORS to a Controller
+### How to Test an API with POSTMAN
 
-```csharp
-using System.Web.Http;
-using System.Web.Http.Cors;
-
-namespace WebAPIDemo.Controllers
-{
-    [EnableCors(origins: "https://example.com", headers: "*", methods: "GET,POST")]
-    public class ProductsController : ApiController
-    {
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Product1", "Product2" };
-        }
-    }
-}
-```
-
-##### Example: Apply CORS to an Action Method
-
-```csharp
-using System.Web.Http;
-using System.Web.Http.Cors;
-
-namespace WebAPIDemo.Controllers
-{
-    public class ProductsController : ApiController
-    {
-        [EnableCors(origins: "https://example.com", headers: "*", methods: "GET")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Product1", "Product2" };
-        }
-    }
-}
-```
+1. Open Postman and create a new request.
+2. Enter the API endpoint URL (e.g., `https://localhost:5001/api/products`).
+3. Select the HTTP method (GET, POST, etc.).
+4. Add headers and body data if required.
+5. Click Send to see the response.
 
 ---
 
-### **Live Example**
+## Deployment of ASP.NET Web API
 
-#### **Scenario: Allow Specific Origins**
+Deploying an ASP.NET Web API application involves publishing the project and hosting it on a server. Common deployment options include IIS, Azure, and Docker.
 
-Assume your API at `https://api.example.com` is being consumed by a client hosted at `https://client.example.com`. Only this client should be allowed to access your API.
+### Steps to Deploy on IIS
 
-#### **Controller Code:**
+1. **Publish the Project**:
 
-```csharp
-using System.Web.Http;
-using System.Web.Http.Cors;
+   - In Visual Studio, right-click the project and select Publish.
+   - Choose File System and set a target folder.
 
-namespace WebAPIDemo.Controllers
-{
-    [EnableCors(origins: "https://client.example.com", headers: "*", methods: "*")]
-    public class ProductsController : ApiController
-    {
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Product1", "Product2" };
-        }
+2. **Set Up IIS**:
 
-        public string Get(int id)
-        {
-            return $"Product {id}";
-        }
-    }
-}
-```
+   - Open IIS Manager.
+   - Add a new Site pointing to the published folder.
+   - Set the application pool to use .NET Framework.
 
-#### **Client-Side Code (JavaScript):**
-
-```javascript
-fetch("https://api.example.com/api/products")
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error("Error:", error));
-```
-
-If the origin `https://client.example.com` is not allowed, the browser will block the request, and you will see a CORS error in the console.
-
----
-
-### **Common CORS Configurations**
-
-#### **Allow All Origins, Headers, and Methods (Not Recommended)**
-
-```csharp
-var cors = new EnableCorsAttribute("*", "*", "*");
-config.EnableCors(cors);
-```
-
-#### **Restrict to Specific Origins**
-
-```csharp
-var cors = new EnableCorsAttribute("https://example.com, https://another.com", "*", "*");
-config.EnableCors(cors);
-```
-
-#### **Allow Specific HTTP Methods**
-
-```csharp
-var cors = new EnableCorsAttribute("https://example.com", "*", "GET,POST");
-config.EnableCors(cors);
-```
-
-#### **Allow Specific Headers**
-
-```csharp
-var cors = new EnableCorsAttribute("https://example.com", "Content-Type,Authorization", "*");
-config.EnableCors(cors);
-```
-
----
-
-### **Testing CORS**
-
-1. **With a Browser**: Open the developer console and check the network request for CORS errors.
-2. **Using cURL**: Send a request with custom headers to test if preflight requests succeed.
-3. **Postman**: Postman bypasses CORS restrictions, so it won't raise CORS-related issues.
-
----
-
-### **Key Considerations**
-
-1. **Security**: Allowing all origins (`*`) is insecure and should only be used for testing.
-2. **Preflight Requests**: Ensure your server handles `OPTIONS` requests when a preflight request is sent.
-3. **Authorization**: CORS should work seamlessly with authentication mechanisms like JWT or cookies.
-
----
-
-### **Basic Authentication in ASP.NET Web API using AuthorizationFilter Attribute**
-
----
-
-### **How Basic Authentication Works**
-
-1. **Client Request**:
-
-   - The client sends a request with an `Authorization` header in the following format:
-     ```
-     Authorization: Basic Base64(username:password)
-     ```
-
-2. **Server Validation**:
-
-   - The server decodes the Base64-encoded string to retrieve the `username` and `password`.
-   - It validates the credentials, often against a user database or predefined values.
-
-3. **Response**:
-   - If credentials are valid:
-     - The request proceeds, and the server returns the appropriate response.
-   - If credentials are invalid:
-     - The server returns a `401 Unauthorized` status code.
-
----
-
-### **Security Considerations**
-
-- Always use HTTPS to prevent credentials from being intercepted during transmission.
-- Avoid storing plaintext passwords. Store passwords in a hashed and salted form for security.
-
----
-
-### **Live Example: Basic Authentication in ASP.NET Web API using AuthorizationFilterAttribute**
-
----
-
-#### **Step 1: Create a Custom Authorization Filter**
-
-To extend the `AuthorizationFilterAttribute`, create a custom filter class that will handle the Basic Authentication logic.
-
-```csharp
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Security.Principal;
-using System.Text;
-using System.Threading;
-using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
-
-namespace AuthenticationInWebAPI.Filters
-{
-    public class CustomAuthenticationFilter : AuthorizationFilterAttribute
-    {
-
-        public override void OnAuthorization(HttpActionContext actionContext)
-        {
-            // Check if the action allows anonymous access
-            if (actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Count > 0)
-            {
-                // Skip authentication if the action has the [AllowAnonymous] attribute
-                return;
-            }
-
-            // Check if the Authorization header exists and is of type "Basic"
-            var authHeader = actionContext.Request.Headers.Authorization;
-            if (authHeader == null || authHeader.Scheme != "Basic")
-            {
-                // Handle cases where the Authorization header is missing or invalid
-                HandleUnauthorized(actionContext);
-                return;
-            }
-
-            try
-            {
-                // Decode and validate the credentials from the Authorization header
-                var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter));
-                var parts = credentials.Split(':');
-
-                if (parts.Length != 2)
-                {
-                    // Invalid credential format
-                    HandleUnauthorized(actionContext);
-                    return;
-                }
-
-                var username = parts[0];
-                var password = parts[1];
-
-                // Validate the user credentials and get the role
-                var userRole = GetUserRole(username, password);
-                if (userRole == null)
-                {
-                    HandleUnauthorized(actionContext);
-                    return;
-                }
-
-                // Set the Principal for authenticated users with roles
-                var identity = new GenericIdentity(username);
-                var principal = new GenericPrincipal(identity, new[] { userRole }); // Assign userRole
-                Thread.CurrentPrincipal = principal;
-
-                if (System.Web.HttpContext.Current != null)
-                {
-                    System.Web.HttpContext.Current.User = principal;
-                }
-            }
-            catch (FormatException)
-            {
-                // Handle invalid Base64 encoding in the Authorization header
-                HandleUnauthorized(actionContext);
-            }
-        }
-
-        private string GetUserRole(string username, string password)
-        {
-            // Replace this with actual validation logic, such as checking against a database
-            if (username == "admin" && password == "password")
-            {
-                return "admin"; // User role "admin"
-            }
-            if (username == "user" && password == "password")
-            {
-                return "user"; // User role "user"
-            }
-
-            // Invalid user credentials
-            return null;
-        }
-
-        private void HandleUnauthorized(HttpActionContext actionContext)
-        {
-            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
-            // Add the WWW-Authenticate header to prompt for credentials
-            actionContext.Response.Headers.Add("WWW-Authenticate", "Basic realm=\"localhost\"");
-        }
-    }
-}
-
-```
-
----
-
-#### **Step 2: Register the Filter in Global Configuration**
-
-Once the custom filter is created, register it in the `WebApiConfig` file so that it applies globally or to specific controllers/actions.
-
-```csharp
-using AuthenticationInWebAPI.Filters;
-using Swashbuckle.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-
-namespace AuthenticationInWebAPI
-{
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
-            // Web API configuration and services
-
-            // Enable Basic Authentication globally by adding the custom filter
-            config.Filters.Add(new CustomAuthenticationFilter());
-
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
-            // Swagger Redirect Route (Swagger UI configuration)
-            config.Routes.MapHttpRoute(
-                name: "SwaggerRedirect",
-                routeTemplate: "",
-                defaults: null,
-                constraints: null,
-                handler: new RedirectHandler(message => message.RequestUri.ToString(), "swagger")
-            );
-        }
-    }
-}
-```
-
----
-
-#### **Step 3: Create a Sample Controller**
-
-Create a controller to test authentication. The `[Authorize]` attribute can also be used to ensure only authenticated users can access the actions.
-
-```csharp
-using AuthenticationInWebAPI.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-
-namespace AuthenticationInWebAPI.Controllers
-{
-    [CustomAuthenticationFilter] // Custom authentication filter applied to the controller
-    public class ProductsController : ApiController
-    {
-        [HttpGet]
-        [Route("api/open/products")]
-        [AllowAnonymous] // Allows anonymous access to this endpoint
-        public IEnumerable<string> GetOpenData()
-        {
-            // Returning a static list of open data values as an example.
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet]
-        [Route("api/secure/admin/products")] // Unique route for admin
-        [Authorize(Roles = "admin")] // Restricts this endpoint to users with the "admin" role
-        public IEnumerable<string> GetSecureDataForAdmin()
-        {
-            // Returning a static list of secure data values as an example.
-            return new string[] { "adminValue1", "adminValue2" };
-        }
-
-        [HttpGet]
-        [Route("api/secure/user/products")] // Unique route for user
-        [Authorize(Roles = "user")] // Restricts this endpoint to users with the "user" role
-        public IEnumerable<string> GetSecureDataForUser()
-        {
-            // Returning a static list of secure data values as an example.
-            return new string[] { "userValue1", "userValue2" };
-        }
-        #endregion
-    }
-}
-
-```
-
----
-
-#### **Step 4: Testing Basic Authentication**
-
-1. **Postman**:
-
-   - Use **Postman** to test the API.
-   - Go to the **Authorization** tab.
-   - Choose **Basic Auth**.
-   - Enter the `username` and `password` (`admin` and `password` in this example).
-
-2. **curl**:
-
-   - Use `curl` to test the API from the command line:
-     ```bash
-     curl -u admin:password123 https://localhost:44388/api/products
-     ```
-
-3. **If Credentials are Correct**:
-
-   - The server will return a response like:
-     ```json
-     [{ "value1", "value2" }]
-     ```
-
-4. **If Credentials are Incorrect**:
-   - The server will return a `401 Unauthorized` response with a message like:
-     ```json
-     {
-       "Unauthorized"
-     }
-     ```
+3. **Configure Firewall and Ports**:
+   - Ensure the server firewall allows traffic on the specified port (e.g., 80 for HTTP).
 
 ---
