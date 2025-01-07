@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using OfficeOpenXml.Style;
+using OfficeOpenXml;
+using System.Text;
 using System.Threading;
 
 namespace CSharpAdvanceApp
@@ -24,6 +26,10 @@ namespace CSharpAdvanceApp
             // Demonstrating FileStream class operations
             FileStreamClassDemo objFileStreamClassDemo = new FileStreamClassDemo();
             objFileStreamClassDemo.RunFileStreamClassDemo();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            EPPlusDemo objEPPlusDemo = new EPPlusDemo();
+            objEPPlusDemo.RunEPPlusDemo();
         }
     }
 
@@ -241,6 +247,125 @@ namespace CSharpAdvanceApp
                     Console.WriteLine(line); // Output each line
                 }
             }
+        }
+    }
+
+    public class EPPlusDemo
+    {
+        public void RunEPPlusDemo()
+        {
+            Console.WriteLine("============EPPlusDemo================\n");
+
+            // Get the current working directory
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine($"Current Directory: {currentDirectory}");
+
+            // Create a directory for file operations if it doesn't exist
+            string directoryPath = Path.Combine(currentDirectory, "FileSystem");
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath); // Create directory if not exists
+                Console.WriteLine($"Directory created: {directoryPath}");
+            }
+            else
+            {
+                Console.WriteLine($"Directory available: {directoryPath}");
+            }
+
+            // Create a subdirectory for the EPPlusDemo
+            DirectoryInfo objDirectoryInfo = new DirectoryInfo(directoryPath);
+            Console.WriteLine($"Newly Created Directory: {objDirectoryInfo.Name}");
+            objDirectoryInfo.CreateSubdirectory("EPPlusDemo"); // Create subdirectory for the demo
+
+            string directoryPath1 = Path.Combine(objDirectoryInfo.Name, "EPPlusDemo");
+            if (!Directory.Exists(directoryPath1))
+            {
+                Directory.CreateDirectory(directoryPath1); // Ensure subdirectory exists
+                Console.WriteLine($"Directory created: {directoryPath1}");
+            }
+            else
+            {
+                Console.WriteLine($"Directory available: {directoryPath1}");
+            }
+
+            // Define the path for the Excel file
+            string filePath = Path.Combine(directoryPath1, "EPPlusDemo.xlsx");
+
+            // Method to create a new Excel file
+            void CreateExcelFile()
+            {
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    // Add a worksheet to the Excel file
+                    var worksheet = package.Workbook.Worksheets.Add("MySheet");
+
+                    // Add data to specific cells
+                    worksheet.Cells[1, 1].Value = "Name";
+                    worksheet.Cells[1, 2].Value = "Age";
+                    worksheet.Cells[2, 1].Value = "Yash Khokhar";
+                    worksheet.Cells[2, 2].Value = 20;
+                    worksheet.Cells[3, 1].Value = "Maulik Bhatt";
+                    worksheet.Cells[3, 2].Value = 20;
+
+                    // Apply styling to the header row
+                    worksheet.Cells["A1:B1"].Style.Font.Bold = true;
+                    worksheet.Cells["A1:B1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    worksheet.Cells["A1:B1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    worksheet.Cells["A2:B3"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A2:B3"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A2:B3"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    worksheet.Cells["A2:B3"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                    // Save the file to disk
+                    package.Save();
+                    Console.WriteLine("Excel file created successfully.");
+                }
+            }
+
+            // Method to read data from the Excel file
+            void ReadExcelFile()
+            {
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    var worksheet = package.Workbook.Worksheets[0]; // Get the first worksheet
+                    int rowCount = worksheet.Dimension.Rows; // Get number of rows
+
+                    Console.WriteLine("Reading data from the Excel file:");
+                    // Loop through each row and print the values of Name and Age columns
+                    for (int row = 1; row <= rowCount; row++)
+                    {
+                        string name = worksheet.Cells[row, 1].Text;
+                        string age = worksheet.Cells[row, 2].Text;
+                        Console.WriteLine($"Name: {name}, Age: {age}");
+                    }
+                }
+            }
+
+            // Method to update data in the Excel file
+            void UpdateExcelFile()
+            {
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    var worksheet = package.Workbook.Worksheets[0]; // Get the first worksheet
+
+                    // Update the values in existing rows
+                    worksheet.Cells[2, 2].Value = 31; // Update Yash's age
+                    worksheet.Cells[3, 2].Value = 26; // Update Maulik's age
+
+                    // Add a new row with data
+                    worksheet.Cells[4, 1].Value = "Iron Man";
+                    worksheet.Cells[4, 2].Value = 220;
+
+                    // Save the changes to the file
+                    package.Save();
+                    Console.WriteLine("Excel file updated successfully.");
+                }
+            }
+
+            // Execute the methods
+            CreateExcelFile(); // Create the Excel file
+            ReadExcelFile();   // Read and display data from the file
+            UpdateExcelFile(); // Update the file with new data
         }
     }
 }
