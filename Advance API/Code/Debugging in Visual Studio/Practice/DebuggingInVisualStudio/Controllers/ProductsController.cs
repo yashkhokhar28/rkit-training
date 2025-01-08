@@ -52,17 +52,17 @@ namespace DebuggingInVisualStudio.Controllers
         [Route("api/products/{id}")]
         public IHttpActionResult Get(int id)
         {
-            #if DEBUG
+#if DEBUG
             ProductModel productModel = lstProducts.FirstOrDefault(p => p.ProductID == id);
             Debug.WriteLine($"Getting product with ID: {productModel.ProductID}");
             if (productModel == null)
             {
                 return NotFound(); // Return 404 if product is not found
             }
-            #endif
+#endif
             return Ok(productModel); // Return 200 if the product is found
         }
-#endregion
+        #endregion
 
         #region PostProduct
         /// <summary>
