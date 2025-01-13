@@ -167,6 +167,7 @@ namespace CSharpAdvanceApp
 
             // Create and write to a file
             string filePath = Path.Combine(directoryPath1, "FileStreamClassDemo.txt");
+
             FileInfoClassDemo objFileInfoClassDemo = new FileInfoClassDemo();
             objFileInfoClassDemo.RunFileInfoClassDemo(filePath);
 
@@ -306,15 +307,6 @@ namespace CSharpAdvanceApp
                     worksheet.Cells[2, 2].Value = 20;
                     worksheet.Cells[3, 1].Value = "Maulik Bhatt";
                     worksheet.Cells[3, 2].Value = 20;
-
-                    // Apply styling to the header row
-                    worksheet.Cells["A1:B1"].Style.Font.Bold = true;
-                    worksheet.Cells["A1:B1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    worksheet.Cells["A1:B1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-                    worksheet.Cells["A2:B3"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A2:B3"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A2:B3"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells["A2:B3"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
                     // Save the file to disk
                     package.Save();
