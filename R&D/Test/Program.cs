@@ -1,4 +1,4 @@
-﻿using Test;
+﻿namespace Test;
 
 class Program
 {
@@ -6,9 +6,9 @@ class Program
     {
         // MySQL server connection string (replace with your server info)
         string server = "localhost";
-        string userID = "Admin";
-        string password = "gs@123";
-        string csvFilePath = @"C:\Users\yash.k\Downloads\R&D\ASR.csv";
+        var userId = "root";
+        var password = "rootroot";
+        var csvFilePath = @"/Users/yashkhokhar/Documents/rkit-training/R&D/ASR.csv";
 
         // Display available choices for the user to select
         Console.WriteLine("Enter Choice : ");
@@ -26,21 +26,21 @@ class Program
             case 1:
                 Console.WriteLine("Enter Number Of Database  :");
                 int num1 = Convert.ToInt32(Console.ReadLine());
-                CreateDatabase.CreateDatabases(num1, Query.createTableQuery, server, userID, password);
+                CreateDatabase.CreateDatabases(num1, Query.CreateTableQuery, server, userId, password);
                 break;
 
             // Case 2: 
             case 2:
                 Console.WriteLine("Enter Number Of Database  :");
                 int num2 = Convert.ToInt32(Console.ReadLine());
-                DropDatabase.DropDatabases(num2, server, userID, password);
+                DropDatabase.DropDatabases(num2, server, userId, password);
                 break;
 
             // Case 3: 
             case 3:
                 Console.WriteLine("Enter Number Of Database  :");
                 int num3 = Convert.ToInt32(Console.ReadLine());
-                InsertData.InsertDataFromCsv(num3, csvFilePath, server, userID, password);
+                InsertData.InsertDataFromCsv(num3, csvFilePath, server, userId, password);
                 break;
 
             // Default case: If the user enters an invalid choice

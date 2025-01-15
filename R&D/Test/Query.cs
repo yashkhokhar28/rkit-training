@@ -2,7 +2,7 @@
 {
     public static class Query
     {
-        public static string createTableQuery = @"
+        public static readonly string CreateTableQuery = @"
                 CREATE TABLE IF NOT EXISTS orders (
                     `index` int,
                     Order_ID VARCHAR(254),                   -- Maximum size for order IDs
@@ -31,6 +31,6 @@
 
             ";
 
-        public static string dropDatabase = "DROP DATABASE";
+        public static string DropDatabase = "DROP DATABASE";
     }
 }

@@ -4,7 +4,7 @@ namespace Test
 {
     public static class CreateDatabase
     {
-        public static void CreateDatabases(int number, string query, string server, string userID, string password)
+        public static void CreateDatabases(int number, string query, string server, string userId, string password)
         {
             try
             {
@@ -13,7 +13,7 @@ namespace Test
                     string databaseName = $"test_db_{i}";
 
                     // Connection string to connect to the MySQL server (not a specific database)
-                    string connectionString = $"Server={server};User ID={userID};Password={password};";
+                    var connectionString = $"Server={server};User ID={userId};Password={password};";
 
                     // Connect to the MySQL server and create the database if it doesn't exist
                     using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
@@ -29,7 +29,8 @@ namespace Test
                         Console.WriteLine($"Database '{databaseName}' is ready.");
 
                         // Now, connect to the specific database
-                        string dbConnectionString = $"Server={server};Database={databaseName};User ID={userID};Password={password};";
+                        var dbConnectionString =
+                            $"Server={server};Database={databaseName};User ID={userId};Password={password};";
                         using (MySqlConnection objMySqlConnection1 = new MySqlConnection(dbConnectionString))
                         {
                             objMySqlConnection1.Open();

@@ -4,7 +4,7 @@ namespace Test
 {
     public static class DropDatabase
     {
-        public static void DropDatabases(int number, string server, string userID, string password)
+        public static void DropDatabases(int number, string server, string userId, string password)
         {
             try
             {
@@ -13,7 +13,7 @@ namespace Test
                     string databaseName = $"test_db_{i}";
 
                     // Connection string to connect to the MySQL server (not a specific database)
-                    string connectionString = $"Server={server};User ID={userID};Password={password};";
+                    var connectionString = $"Server={server};User ID={userId};Password={password};";
 
                     // Connect to the MySQL server and create the database if it doesn't exist
                     using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
@@ -22,7 +22,7 @@ namespace Test
                         Console.WriteLine($"Connected to MySQL server.");
 
                         // Create database if it doesn't exist
-                        string createDatabaseQuery = Query.dropDatabase + " " + databaseName;
+                        var createDatabaseQuery = Query.DropDatabase + " " + databaseName;
                         MySqlCommand objMySqlCommand = new MySqlCommand(createDatabaseQuery, objMySqlConnection);
 
                         objMySqlCommand.ExecuteNonQuery();
