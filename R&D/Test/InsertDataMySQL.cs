@@ -6,18 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Test
 {
     /// <summary>
     /// This class provides functionality to insert data into MySQL databases from a CSV file.
     /// It handles multiple databases, uses connection pooling, and optimizes the insertion process 
-    /// with batch inserts within transactions.
+    /// with batch inserts within transactions and threading for parallelism.
     /// </summary>
     public class InsertDataMySQL
     {
         /// <summary>
-        /// Inserts data from a CSV file into multiple MySQL databases.
+        /// Inserts data from a CSV file into multiple MySQL databases using threading for parallel execution.
         /// Reinitializes the CSV reader for each database to avoid data exhaustion.
         /// </summary>
         /// <param name="number">The number of databases to insert data into.</param>
@@ -37,49 +38,24 @@ namespace Test
                 CsvConfiguration objCsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HasHeaderRecord = true, // Ensure the CSV has headers
-                    // Reading data line by line, instead of loading the entire file in memory
-                    ReadingExceptionOccurred = (ex) => false
+                    ReadingExceptionOccurred = (ex) => false // Ensure no exception is thrown on invalid rows
                 };
 
-                // Loop through all databases and perform the operation
+                // Create a list of tasks to run concurrently
+                Task[] tasks = new Task[number];
+
+                // Loop through all databases and create a task for each database
                 for (int i = 1; i <= number; i++)
                 {
-                    string dbName = $"test_db_{i}";
-                    var connectionString = $"Server={server};Database={dbName};User ID={userId};Password={password};Pooling=true;Max Pool Size=100;Min Pool Size=10;";
-
-                    using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
+                    int index = i;
+                    tasks[index - 1] = Task.Run(() =>
                     {
-                        objMySqlConnection.Open();
-                        Console.WriteLine($"Connected to MySQL database: {dbName}");
-
-                        // Begin a transaction for batch processing
-                        using (var transaction = objMySqlConnection.BeginTransaction())
-                        {
-                            // Reinitialize the CSV reader for each database to avoid exhausting the records
-                            using (StreamReader objStreamReader = new StreamReader(csvFilePath))
-                            using (CsvReader objCsvReader = new CsvReader(objStreamReader, objCsvConfiguration))
-                            {
-                                // Read the records from the CSV for each database
-                                while (objCsvReader.Read())
-                                {
-                                    var record = objCsvReader.GetRecord<dynamic>();
-                                    try
-                                    {
-                                        InsertRecord(objMySqlConnection, record, transaction);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"Error inserting record into {dbName}: {ex.Message}");
-                                    }
-                                }
-                            }
-
-                            // Commit the transaction to ensure all records are inserted atomically
-                            transaction.Commit();
-                            Console.WriteLine($"Data inserted into {dbName}");
-                        }
-                    }
+                        InsertDataForDatabase(index, csvFilePath, server, userId, password, objCsvConfiguration);
+                    });
                 }
+
+                // Wait for all tasks to complete
+                Task.WhenAll(tasks).Wait();
 
                 Console.WriteLine("Data insertion completed for all databases.");
             }
@@ -91,7 +67,57 @@ namespace Test
             {
                 stopwatch.Stop();  // Stop the timer
                 // Output the elapsed time
-                Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
+                Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
+            }
+        }
+
+        /// <summary>
+        /// Inserts data into a specific database.
+        /// This method is executed in parallel for each database.
+        /// </summary>
+        private static void InsertDataForDatabase(int databaseIndex, string csvFilePath, string server, string userId, string password, CsvConfiguration csvConfiguration)
+        {
+            string dbName = $"test_db_{databaseIndex}";
+            var connectionString = $"Server={server};Database={dbName};User ID={userId};Password={password};Pooling=true;Max Pool Size=100;Min Pool Size=10;";
+
+            try
+            {
+                using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
+                {
+                    objMySqlConnection.Open();
+                    Console.WriteLine($"[Thread ID: {Thread.CurrentThread.ManagedThreadId}] Connected to MySQL database: {dbName}");
+
+                    // Begin a transaction for batch processing
+                    using (var transaction = objMySqlConnection.BeginTransaction())
+                    {
+                        // Reinitialize the CSV reader for each database to avoid exhausting the records
+                        using (StreamReader objStreamReader = new StreamReader(csvFilePath))
+                        using (CsvReader objCsvReader = new CsvReader(objStreamReader, csvConfiguration))
+                        {
+                            // Read the records from the CSV for each database
+                            while (objCsvReader.Read())
+                            {
+                                var record = objCsvReader.GetRecord<dynamic>();
+                                try
+                                {
+                                    InsertRecord(objMySqlConnection, record, transaction);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"[Thread ID: {Thread.CurrentThread.ManagedThreadId}] Error inserting record into {dbName}: {ex.Message}");
+                                }
+                            }
+                        }
+
+                        // Commit the transaction to ensure all records are inserted atomically
+                        transaction.Commit();
+                        Console.WriteLine($"[Thread ID: {Thread.CurrentThread.ManagedThreadId}] Data inserted into {dbName}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Thread ID: {Thread.CurrentThread.ManagedThreadId}] An error occurred while inserting data into {dbName}: {ex.Message}");
             }
         }
 
@@ -99,9 +125,6 @@ namespace Test
         /// Inserts a single record into the database using a MySQL command.
         /// This method is optimized for batch insertion within a transaction.
         /// </summary>
-        /// <param name="connection">The MySQL connection to use for the insert.</param>
-        /// <param name="record">The record to insert into the database.</param>
-        /// <param name="transaction">The transaction to be used for batch insert.</param>
         private static void InsertRecord(MySqlConnection connection, dynamic record, MySqlTransaction transaction)
         {
             string query = @"
@@ -125,8 +148,6 @@ namespace Test
         /// <summary>
         /// Adds parameters to the MySQL command.
         /// </summary>
-        /// <param name="command">The MySQL command object to which parameters are added.</param>
-        /// <param name="record">The record containing the data for the parameters.</param>
         private static void AddParameters(MySqlCommand command, dynamic record)
         {
             command.Parameters.AddWithValue("@index", string.IsNullOrEmpty(record.index) ? DBNull.Value : Convert.ToInt32(record.index));

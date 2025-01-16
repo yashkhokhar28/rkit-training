@@ -6,11 +6,16 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;  // For parallelism
 
 namespace Test
 {
     public static class InsertDataPostgreSQL
     {
+        /// <summary>
+        /// Inserts data from a CSV file into multiple PostgreSQL databases using threading for parallel execution.
+        /// Each database operation is enclosed in a transaction to ensure atomicity.
+        /// </summary>
         public static void InsertDataFromCsvPostgres(int number, string csvFilePath, string server, string username, string password)
         {
             // Start measuring time
@@ -28,45 +33,21 @@ namespace Test
                     ReadingExceptionOccurred = (ex) => false
                 };
 
-                // Loop through all databases and perform the operation
+                // Create a list of tasks to run concurrently
+                Task[] tasks = new Task[number];
+
+                // Loop through all databases and create a task for each database
                 for (int i = 1; i <= number; i++)
                 {
-                    string databaseName = $"test_db_{i}";
-                    string connectionString = string.Format(connectionStringTemplate, server, databaseName, username, password);
-
-                    using (NpgsqlConnection objNpgsqlConnection = new NpgsqlConnection(connectionString))
+                    int index = i;  // Capture loop variable for use in the task
+                    tasks[index - 1] = Task.Run(() =>
                     {
-                        objNpgsqlConnection.Open();
-                        Console.WriteLine($"Connected to PostgreSQL database: {databaseName}");
-
-                        // Begin a transaction for batch processing
-                        using (var transaction = objNpgsqlConnection.BeginTransaction())
-                        {
-                            // Reinitialize the CSV reader for each database to avoid exhausting the records
-                            using (StreamReader objStreamReader = new StreamReader(csvFilePath))
-                            using (CsvReader objCsvReader = new CsvReader(objStreamReader, objCsvConfiguration))
-                            {
-                                // Read the records from the CSV for each database
-                                while (objCsvReader.Read())
-                                {
-                                    var record = objCsvReader.GetRecord<dynamic>();
-                                    try
-                                    {
-                                        InsertRecord(objNpgsqlConnection, record, transaction); // Insert the record into the database
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"Error inserting record into {databaseName}: {ex.Message}");
-                                    }
-                                }
-                            }
-
-                            // Commit the transaction to ensure all records are inserted atomically
-                            transaction.Commit();
-                            Console.WriteLine($"Data inserted into {databaseName}");
-                        }
-                    }
+                        InsertDataForDatabase(index, csvFilePath, server, username, password, objCsvConfiguration);
+                    });
                 }
+
+                // Wait for all tasks to complete
+                Task.WhenAll(tasks).Wait();
 
                 Console.WriteLine("Data insertion completed for all databases.");
             }
@@ -79,6 +60,57 @@ namespace Test
                 stopwatch.Stop();  // Stop the timer
                 // Output the elapsed time
                 Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
+            }
+        }
+
+        /// <summary>
+        /// Inserts data into a specific database.
+        /// This method is executed in parallel for each database.
+        /// A transaction is used to ensure that all records are inserted atomically.
+        /// </summary>
+        private static void InsertDataForDatabase(int databaseIndex, string csvFilePath, string server, string username, string password, CsvConfiguration csvConfiguration)
+        {
+            string dbName = $"test_db_{databaseIndex}";
+            var connectionString = $"Host={server};Database={dbName};Username={username};Password={password};Pooling=true;MaxPoolSize=100;MinPoolSize=10;";
+
+            try
+            {
+                using (NpgsqlConnection objNpgsqlConnection = new NpgsqlConnection(connectionString))
+                {
+                    objNpgsqlConnection.Open();
+                    Console.WriteLine($"Connected to PostgreSQL database: {dbName}");
+
+                    // Begin a transaction for batch processing
+                    using (var transaction = objNpgsqlConnection.BeginTransaction())
+                    {
+                        // Reinitialize the CSV reader for each database to avoid exhausting the records
+                        using (StreamReader objStreamReader = new StreamReader(csvFilePath))
+                        using (CsvReader objCsvReader = new CsvReader(objStreamReader, csvConfiguration))
+                        {
+                            // Read the records from the CSV for each database
+                            while (objCsvReader.Read())
+                            {
+                                var record = objCsvReader.GetRecord<dynamic>();
+                                try
+                                {
+                                    InsertRecord(objNpgsqlConnection, record, transaction); // Insert the record into the database
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"Error inserting record into {dbName}: {ex.Message}");
+                                }
+                            }
+                        }
+
+                        // Commit the transaction to ensure all records are inserted atomically
+                        transaction.Commit();
+                        Console.WriteLine($"Data inserted into {dbName}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while inserting data into {dbName}: {ex.Message}");
             }
         }
 
