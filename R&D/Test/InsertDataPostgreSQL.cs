@@ -3,6 +3,9 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Test
 {
@@ -10,57 +13,80 @@ namespace Test
     {
         public static void InsertDataFromCsvPostgres(int number, string csvFilePath, string server, string username, string password)
         {
+            // Start measuring time
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();  // Start the timer
+
             try
             {
-                string connectionStringTemplate = "Host={0};Database={1};Username={2};Password={3}";
+                string connectionStringTemplate = "Host={0};Database={1};Username={2};Password={3};Pooling=true;MaxPoolSize=10;MinPoolSize=1;";
 
                 // Read CSV data
                 CsvConfiguration objCsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     HasHeaderRecord = true, // Ensure the CSV has headers
+                    ReadingExceptionOccurred = (ex) => false
                 };
 
-                using (StreamReader objStreamReader = new StreamReader(csvFilePath))
-                using (CsvReader objCsvReader = new CsvReader(objStreamReader, objCsvConfiguration))
+                // Loop through all databases and perform the operation
+                for (int i = 1; i <= number; i++)
                 {
-                    IEnumerable<dynamic> records = objCsvReader.GetRecords<dynamic>();
+                    string databaseName = $"test_db_{i}";
+                    string connectionString = string.Format(connectionStringTemplate, server, databaseName, username, password);
 
-                    for (int i = 1; i <= number; i++)
+                    using (NpgsqlConnection objNpgsqlConnection = new NpgsqlConnection(connectionString))
                     {
-                        string databaseName = $"test_db_{i}";
-                        string connectionString = string.Format(connectionStringTemplate, server, databaseName, username, password);
+                        objNpgsqlConnection.Open();
+                        Console.WriteLine($"Connected to PostgreSQL database: {databaseName}");
 
-                        using (NpgsqlConnection objNpgsqlConnection = new NpgsqlConnection(connectionString))
+                        // Begin a transaction for batch processing
+                        using (var transaction = objNpgsqlConnection.BeginTransaction())
                         {
-                            objNpgsqlConnection.Open();
-                            Console.WriteLine($"Connected to PostgreSQL database: {databaseName}");
-
-                            foreach (dynamic record in records)
+                            // Reinitialize the CSV reader for each database to avoid exhausting the records
+                            using (StreamReader objStreamReader = new StreamReader(csvFilePath))
+                            using (CsvReader objCsvReader = new CsvReader(objStreamReader, objCsvConfiguration))
                             {
-                                try
+                                // Read the records from the CSV for each database
+                                while (objCsvReader.Read())
                                 {
-                                    InsertRecord(objNpgsqlConnection, record);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine($"Error inserting record into {databaseName}: {ex.Message}");
+                                    var record = objCsvReader.GetRecord<dynamic>();
+                                    try
+                                    {
+                                        InsertRecord(objNpgsqlConnection, record, transaction); // Insert the record into the database
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"Error inserting record into {databaseName}: {ex.Message}");
+                                    }
                                 }
                             }
 
+                            // Commit the transaction to ensure all records are inserted atomically
+                            transaction.Commit();
                             Console.WriteLine($"Data inserted into {databaseName}");
                         }
                     }
-
-                    Console.WriteLine("Data insertion completed for all databases.");
                 }
+
+                Console.WriteLine("Data insertion completed for all databases.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while processing the CSV: {ex.Message}");
             }
+            finally
+            {
+                stopwatch.Stop();  // Stop the timer
+                // Output the elapsed time
+                Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
+            }
         }
 
-        private static void InsertRecord(NpgsqlConnection connection, dynamic record)
+        /// <summary>
+        /// Inserts a single record into the database using a PostgreSQL command.
+        /// This method is optimized for batch insertion within a transaction.
+        /// </summary>
+        private static void InsertRecord(NpgsqlConnection connection, dynamic record, NpgsqlTransaction transaction)
         {
             string query = @"
                 INSERT INTO orders 
@@ -73,13 +99,16 @@ namespace Test
                  @Ship_Postal_Code, @Ship_Country, @Promotion_IDs, @B2B, @Fulfilled_By);
             ";
 
-            using (NpgsqlCommand objNpgsqlCommand = new NpgsqlCommand(query, connection))
+            using (NpgsqlCommand objNpgsqlCommand = new NpgsqlCommand(query, connection, transaction))
             {
-                AddParameters(objNpgsqlCommand, record);
-                objNpgsqlCommand.ExecuteNonQuery();
+                AddParameters(objNpgsqlCommand, record);  // Add parameters to the command
+                objNpgsqlCommand.ExecuteNonQuery();  // Execute the insert query within the transaction
             }
         }
 
+        /// <summary>
+        /// Adds parameters to the PostgreSQL command.
+        /// </summary>
         private static void AddParameters(NpgsqlCommand command, dynamic record)
         {
             command.Parameters.AddWithValue("@index", string.IsNullOrEmpty(record.index) ? DBNull.Value : Convert.ToInt32(record.index));

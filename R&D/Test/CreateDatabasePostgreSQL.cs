@@ -1,18 +1,32 @@
 ﻿using Npgsql;
 using System;
-using System.Text;
+using System.Diagnostics;
 
 namespace Test
 {
     public class CreateDatabasePostgreSQL
     {
+        /// <summary>
+        /// Creates a specified number of PostgreSQL databases and tables.
+        /// Uses connection pooling for better performance.
+        /// </summary>
+        /// <param name="number">The number of databases to create.</param>
+        /// <param name="createTableQuery">The SQL query to create a table in each database.</param>
+        /// <param name="server">The PostgreSQL server address.</param>
+        /// <param name="username">The PostgreSQL username.</param>
+        /// <param name="password">The PostgreSQL password.</param>
         public static void CreateDatabases(int number, string createTableQuery, string server, string username, string password)
         {
-            string serverConnectionString = $"Host={server};Database=postgres;Username={username};Password={password};";
+            // Connection string with connection pooling enabled
+            string serverConnectionString = $"Host={server};Database=postgres;Username={username};Password={password};Pooling=true;MaxPoolSize=100;MinPoolSize=10;";
+
+            // Start measuring time
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();  // Start the timer
 
             try
             {
-                // Connect to the server to manage databases
+                // Connect to the PostgreSQL server
                 using (var serverConnection = new NpgsqlConnection(serverConnectionString))
                 {
                     serverConnection.Open();
@@ -24,7 +38,7 @@ namespace Test
 
                         try
                         {
-                            // Check if database exists
+                            // Check if the database exists
                             if (!DatabaseExists(serverConnection, databaseName))
                             {
                                 // Create the database if it doesn't exist
@@ -50,6 +64,12 @@ namespace Test
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while connecting to the PostgreSQL server: {ex.Message}");
+            }
+            finally
+            {
+                stopwatch.Stop();  // Stop the timer
+                // Output the elapsed time
+                Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }
 
@@ -94,13 +114,16 @@ namespace Test
         // Create tables in the specified database
         private static void CreateTableInDatabase(string server, string databaseName, string username, string password, string createTableQuery)
         {
+            // Ensure the createTableQuery uses double quotes for identifiers (PostgreSQL standard)
+            string validCreateTableQuery = createTableQuery.Replace("`", "\"");
+
             string dbConnectionString = $"Host={server};Database={databaseName};Username={username};Password={password};";
             try
             {
                 using (var dbConnection = new NpgsqlConnection(dbConnectionString))
                 {
                     dbConnection.Open();
-                    using (var createTableCmd = new NpgsqlCommand(createTableQuery, dbConnection))
+                    using (var createTableCmd = new NpgsqlCommand(validCreateTableQuery, dbConnection))
                     {
                         createTableCmd.ExecuteNonQuery();
                         Console.WriteLine($"Table 'orders' created in '{databaseName}'.");

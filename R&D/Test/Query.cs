@@ -34,7 +34,7 @@
         // PostgreSQL Create Table Query
         public static readonly string CreateTableQueryPostgreSQL = @"
             CREATE TABLE IF NOT EXISTS orders (
-                index SERIAL,                             -- Unique index for each row
+                `index` int,                             -- Unique index for each row
                 Order_ID VARCHAR(254),                   -- Maximum size for order IDs
                 Date VARCHAR(50),                        -- Dates stored as strings for flexibility
                 Status VARCHAR(254),                            -- Status with descriptive names

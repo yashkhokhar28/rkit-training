@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -7,7 +8,12 @@ namespace Test
     {
         public static void DropDatabases(int number, string server, string userId, string password)
         {
-            string connectionString = $"Host={server};Database=postgres;Username={userId};Password={password};";
+            // Connection string with connection pooling enabled
+            string connectionString = $"Host={server};Database=postgres;Username={userId};Password={password};Pooling=true;MaxPoolSize=10;MinPoolSize=1;";
+
+            // Start measuring time
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();  // Start the timer
 
             try
             {
@@ -26,8 +32,8 @@ namespace Test
                             // Check if the database exists
                             if (DatabaseExists(serverConnection, databaseName))
                             {
-                                // Drop the database if it exists
-                                DropDatabase(serverConnection, databaseName);
+                                // Forcefully drop the database if it exists
+                                ForceDropDatabase(serverConnection, databaseName);
                             }
                             else
                             {
@@ -46,6 +52,12 @@ namespace Test
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while connecting to the PostgreSQL server: {ex.Message}");
+            }
+            finally
+            {
+                stopwatch.Stop();  // Stop the timer
+                // Output the elapsed time
+                Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }
 
@@ -69,12 +81,16 @@ namespace Test
             }
         }
 
-        // Drop the specified database
-        private static void DropDatabase(NpgsqlConnection serverConnection, string databaseName)
+        // Forcefully drop the specified database
+        private static void ForceDropDatabase(NpgsqlConnection serverConnection, string databaseName)
         {
             try
             {
-                string dropDbQuery = string.Format(Query.DropDatabasePostgreSQL, databaseName);
+                // First, terminate all active connections to the database
+                TerminateConnections(serverConnection, databaseName);
+
+                // Now, drop the database
+                string dropDbQuery = $"DROP DATABASE IF EXISTS \"{databaseName}\";";
                 using (var dropCmd = new NpgsqlCommand(dropDbQuery, serverConnection))
                 {
                     dropCmd.ExecuteNonQuery();
@@ -84,6 +100,30 @@ namespace Test
             catch (Exception ex)
             {
                 Console.WriteLine($"Error dropping database '{databaseName}': {ex.Message}");
+            }
+        }
+
+        // Terminate all active connections to the specified database
+        private static void TerminateConnections(NpgsqlConnection serverConnection, string databaseName)
+        {
+            try
+            {
+                // Query to find all backend processes using the database
+                string terminateQuery = $@"
+                    SELECT pg_terminate_backend(pid)
+                    FROM pg_stat_activity
+                    WHERE datname = @databaseName AND pid <> pg_backend_pid();";
+
+                using (var terminateCmd = new NpgsqlCommand(terminateQuery, serverConnection))
+                {
+                    terminateCmd.Parameters.AddWithValue("@databaseName", databaseName);
+                    var terminated = terminateCmd.ExecuteNonQuery();
+                    Console.WriteLine($"Terminated {terminated} connection(s) to database '{databaseName}'.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error terminating connections for database '{databaseName}': {ex.Message}");
             }
         }
     }
