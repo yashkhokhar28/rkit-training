@@ -1,32 +1,36 @@
-SELECT COUNT(*) FROM orders;
+explain analyze select fulfilled_by from orders where fulfilled_by = 'યશ';
+explain select fulfilled_by from orders where fulfilled_by = 'યશ';
 
--- Index on Order_ID: This will help when filtering or joining by Order_ID.
+CREATE INDEX idx_order_id ON orders(Order_ID);
 
--- Index on Date: This will speed up queries filtering by Date.
-CREATE INDEX idx_date ON orders (Date);
+CREATE INDEX idx_location ON orders(Ship_Country, Ship_State, Ship_City);
 
--- Composite Index on Status and Amount: Since you're filtering by Status and Amount, this composite index will improve performance for such queries.
-CREATE INDEX idx_status_amount ON orders (Status, Amount);
+CREATE INDEX idx_fulfillment_channel_amount ON orders(Fulfilment, Sales_Channel, Amount);
 
--- Composite Index on Date and Ship_City: This composite index is useful when filtering by both Date and Ship_City.
-CREATE INDEX idx_date_ship_city ON orders (Date, Ship_City);
+CREATE INDEX idx_status_b2b_date ON orders(Status, B2B, Date);
+
+-- used index idx_order_id
+explain ANALYSE SELECT * FROM orders
+WHERE Order_ID = '408-7955685-3083534';
+
+-- used idx_location
+explain SELECT * FROM orders
+WHERE Ship_Country = 'IN'
+AND Ship_State = 'MAHARASHTRA'
+AND Ship_City = 'MUMBAI';
+
+SET enable_seqscan = OFF;
+-- used index idx_location
+explain SELECT * FROM orders
+WHERE Ship_Country = 'IN'
+AND Ship_State = 'MAHARASHTRA'
+AND Ship_City = 'MUMBAI';
+SET enable_seqscan = ON;
 
 
-
-
-CREATE INDEX idx_order_id ON orders (Order_ID);
-CREATE INDEX idx_date ON orders (Date);
-CREATE INDEX idx_ship_city ON orders (ship_city);
-
-set enable_seqscan=false;
-
-explain ANALYSE
-  SELECT count(*) 
-FROM orders
-WHERE Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
-
- 
-ANALYZE;
-SET random_page_cost = 1.0;
-SET effective_cache_size = '0.1 GB';
+-- filtered 100% row with index idx_fulfillment_channel_amount
+explain SELECT * FROM orders
+FORCE INDEX (idx_fulfillment_channel_amount)
+WHERE Fulfilment = 'Standard'
+AND Sales_Channel = 'Online'
+AND Amount > 100;

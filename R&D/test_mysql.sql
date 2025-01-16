@@ -1,73 +1,41 @@
-select count(*) from orders;
+explain analyze select fulfilled_by from orders where fulfilled_by = 'યશ';
+explain select count(*) from orders where fulfilled_by = 'યશ';
 
--- Index on Order_ID: This will improve query performance when searching or joining by the Order_ID.
-CREATE INDEX idx_order_id ON orders (Order_ID);
+CREATE INDEX idx_order_id ON orders(Order_ID);
 
--- Index on Date: This will speed up queries that filter by date, especially if you're querying orders over a specific range of dates.
-CREATE INDEX idx_date ON orders (Date);
+-- index for filtering column that is location based
+CREATE INDEX idx_location ON orders(Ship_Country(100), Ship_State(100), Ship_City(100));
 
--- Composite Index on Status and Amount: If you frequently query orders based on their status and amount, this composite index will improve performance for such queries.
-CREATE INDEX idx_status_amount ON orders (Status(100), Amount);
+-- useful for querying based on fulfillment type and sales channel, especially when filtering by amount
+CREATE INDEX idx_fulfillment_channel_amount ON orders(Fulfilment, Sales_Channel, Amount);
 
--- Composite Index on Date and Ship_City: This composite index is useful if you're filtering by date and shipping location (city) in queries, which is a common use case in e-commerce platforms.
-CREATE INDEX idx_date_ship_city ON orders (Date, Ship_City(100));
-CREATE INDEX idx_ship_city ON orders (Ship_City(100));
--- without create index
-
--- '77152' record
-EXPLAIN
-SELECT count(*) 
-FROM orders
-WHERE Amount > 100
-AND Status = 'Shipped';
-# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
--- '1', 'SIMPLE', 'orders', NULL, 'ALL', NULL, NULL, NULL, NULL, '130655', '3.33', 'Using where'
+-- since status and B2B flag can often be queried together to get a specific status of orders in B2B transactions
+CREATE INDEX idx_status_b2b_date ON orders(Status, B2B, Date);
 
 
--- '3942' record
-EXPLAIN
-SELECT count(*) 
-FROM orders where Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
-# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
--- '1', 'SIMPLE', 'orders', NULL, 'ALL', NULL, NULL, NULL, NULL, '130655', '3.33', 'Using where'
+-- filtered 10% without index
+-- filtered 100% with index idx_order_id
+explain SELECT * FROM orders
+WHERE Order_ID = '408-7955685-3083534';
 
--- with index
+-- filtered 0.10% without index
+-- filtered 100% row with index idx_location
+explain SELECT * FROM orders
+WHERE Ship_Country = 'IN'
+AND Ship_State = 'MAHARASHTRA'
+AND Ship_City = 'MUMBAI';
 
--- '77152' record
-EXPLAIN
-SELECT count(*) 
-FROM orders
-WHERE Amount > 100
-AND Status = 'Shipped';
-# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
--- '1', 'SIMPLE', 'orders', NULL, 'ALL', 'idx_status_amount', NULL, NULL, NULL, '130655', '50.00', 'Using where'
+-- filtered 1% using force index 
+explain SELECT * FROM orders
+FORCE INDEX (idx_order_id)
+WHERE Ship_Country = 'IN'
+AND Ship_State = 'MAHARASHTRA'
+AND Ship_City = 'MUMBAI';
 
+-- filtered 100% row with index idx_fulfillment_channel_amount
+explain SELECT * FROM orders
+FORCE INDEX (idx_fulfillment_channel_amount)
+WHERE Fulfilment = 'Standard'
+AND Sales_Channel = 'Online'
+AND Amount > 100;
 
--- '3942' record
-EXPLAIN
-SELECT count(*) 
-FROM orders where Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
-# id, select_type, table, partitions, type, possible_keys, key, key_len, ref, rows, filtered, Extra
--- '1', 'SIMPLE', 'orders', NULL, 'ALL', 'idx_date,idx_date_ship_city', NULL, NULL, NULL, '130655', '5.00', 'Using where'
-
-
-
-SELECT count(*) 
-FROM orders
-force index (idx_date_ship_city)
-WHERE Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
-  
-SELECT count(*) 
-FROM orders
-force index (idx_ship_city)
-WHERE Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
-  
-SELECT count(*) 
-FROM orders
-force index (idx_date)
-WHERE Ship_City = 'MUMBAI'
-  AND Date >= '04-30-22';
