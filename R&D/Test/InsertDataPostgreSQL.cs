@@ -16,7 +16,7 @@ namespace Test
         /// Inserts data from a CSV file into multiple PostgreSQL databases using threading for parallel execution.
         /// Each database operation is enclosed in a transaction to ensure atomicity.
         /// </summary>
-        public static void InsertDataFromCsvPostgres(int number, string csvFilePath, string server, string username, string password)
+        public static void InsertDataFromCsvPostgres(int from, int to, string csvFilePath, string server, string username, string password)
         {
             // Start measuring time
             Stopwatch stopwatch = new Stopwatch();
@@ -34,13 +34,13 @@ namespace Test
                 };
 
                 // Create a list of tasks to run concurrently
-                Task[] tasks = new Task[number];
+                Task[] tasks = new Task[to - from + 1];
 
-                // Loop through all databases and create a task for each database
-                for (int i = 1; i <= number; i++)
+                // Loop through all databases in the specified range [from, to] and create a task for each database
+                for (int i = from; i <= to; i++)
                 {
                     int index = i;  // Capture loop variable for use in the task
-                    tasks[index - 1] = Task.Run(() =>
+                    tasks[index - from] = Task.Run(() =>
                     {
                         InsertDataForDatabase(index, csvFilePath, server, username, password, objCsvConfiguration);
                     });
@@ -58,7 +58,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }

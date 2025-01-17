@@ -6,7 +6,7 @@ namespace Test
 {
     public static class DropDatabasePostgreSQL
     {
-        public static void DropDatabases(int number, string server, string userId, string password)
+        public static void DropDatabases(int from, int to, string server, string userId, string password)
         {
             // Connection string with connection pooling enabled
             string connectionString = $"Host={server};Database=postgres;Username={userId};Password={password};Pooling=true;MaxPoolSize=10;MinPoolSize=1;";
@@ -23,7 +23,8 @@ namespace Test
                     serverConnection.Open();
                     Console.WriteLine("Connected to PostgreSQL server.");
 
-                    for (int i = 1; i <= number; i++)
+                    // Loop through the range of database indices [from, to]
+                    for (int i = from; i <= to; i++)
                     {
                         string databaseName = $"test_db_{i}";
 
@@ -56,7 +57,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }

@@ -18,7 +18,7 @@ namespace Test
             string postgresPassword = "Miracle@123";
 
             // Path to CSV file for data insertion
-            var csvFilePath = @"C:\Users\yash.k\Downloads\R&D\ASR.csv";
+            var csvFilePath = @"F:\Yash Khokhar\R&D\Dataset\ASR.csv";
 
             Console.WriteLine("=== Welcome to the Database Management System ===");
 
@@ -138,28 +138,40 @@ namespace Test
 
         static void HandleCreateDatabasesMySQL(string server, string userId, string password)
         {
-            Console.WriteLine("[MySQL] Enter the number of databases to create: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[MySQL] Creating {numberOfDatabases} databases...");
-            CreateDatabaseMySQL.CreateDatabases(numberOfDatabases, Query.CreateTableQueryMySQL, server, userId, password);
+            Console.WriteLine("[MySQL] Enter the starting index of databases to create: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MySQL] Enter the ending index of databases to create: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MySQL] Creating databases from {from} to {to}...");
+            CreateDatabaseMySQL.CreateDatabases(from, to, Query.CreateTableQueryMySQL, server, userId, password);
             Console.WriteLine("[MySQL] Databases created successfully.");
         }
 
         static void HandleDropDatabasesMySQL(string server, string userId, string password)
         {
-            Console.WriteLine("[MySQL] Enter the number of databases to drop: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[MySQL] Dropping {numberOfDatabases} databases...");
-            DropDatabaseMySQL.DropDatabases(numberOfDatabases, server, userId, password);
+            Console.WriteLine("[MySQL] Enter the starting index of databases to drop: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MySQL] Enter the ending index of databases to drop: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MySQL] Dropping databases from {from} to {to}...");
+            DropDatabaseMySQL.DropDatabases(from, to, server, userId, password);
             Console.WriteLine("[MySQL] Databases dropped successfully.");
         }
 
         static void HandleInsertDataMySQL(string csvFilePath, string server, string userId, string password)
         {
-            Console.WriteLine("[MySQL] Enter the number of databases to insert data into: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[MySQL] Inserting data into {numberOfDatabases} databases...");
-            InsertDataMySQL.InsertDataFromCsv(numberOfDatabases, csvFilePath, server, userId, password);
+            Console.WriteLine("[MySQL] Enter the starting index of databases to insert data into: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MySQL] Enter the ending index of databases to insert data into: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MySQL] Inserting data into databases from {from} to {to}...");
+            InsertDataMySQL.InsertDataFromCsv(from, to, csvFilePath, server, userId, password);
             Console.WriteLine("[MySQL] Data inserted successfully.");
         }
 
@@ -167,28 +179,40 @@ namespace Test
 
         static void HandleCreateDatabasesPostgreSQL(string server, string userId, string password)
         {
-            Console.WriteLine("[PostgreSQL] Enter the number of databases to create: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[PostgreSQL] Creating {numberOfDatabases} databases...");
-            CreateDatabasePostgreSQL.CreateDatabases(numberOfDatabases, Query.CreateTableQueryPostgreSQL, server, userId, password);
+            Console.WriteLine("[PostgreSQL] Enter the starting index of databases to create: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[PostgreSQL] Enter the ending index of databases to create: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[PostgreSQL] Creating databases from {from} to {to}...");
+            CreateDatabasePostgreSQL.CreateDatabases(from, to, Query.CreateTableQueryPostgreSQL, server, userId, password);
             Console.WriteLine("[PostgreSQL] Databases created successfully.");
         }
 
         static void HandleDropDatabasesPostgreSQL(string server, string userId, string password)
         {
-            Console.WriteLine("[PostgreSQL] Enter the number of databases to drop: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[PostgreSQL] Dropping {numberOfDatabases} databases...");
-            DropDatabasePostgreSQL.DropDatabases(numberOfDatabases, server, userId, password);
+            Console.WriteLine("[PostgreSQL] Enter the starting index of databases to drop: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[PostgreSQL] Enter the ending index of databases to drop: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[PostgreSQL] Dropping databases from {from} to {to}...");
+            DropDatabasePostgreSQL.DropDatabases(from, to, server, userId, password);
             Console.WriteLine("[PostgreSQL] Databases dropped successfully.");
         }
 
         static void HandleInsertDataPostgreSQL(string csvFilePath, string server, string userId, string password)
         {
-            Console.WriteLine("[PostgreSQL] Enter the number of databases to insert data into: ");
-            int numberOfDatabases = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"[PostgreSQL] Inserting data into {numberOfDatabases} databases...");
-            InsertDataPostgreSQL.InsertDataFromCsvPostgres(numberOfDatabases, csvFilePath, server, userId, password);
+            Console.WriteLine("[PostgreSQL] Enter the starting index of databases to insert data into: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[PostgreSQL] Enter the ending index of databases to insert data into: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[PostgreSQL] Inserting data into databases from {from} to {to}...");
+            InsertDataPostgreSQL.InsertDataFromCsvPostgres(from, to, csvFilePath, server, userId, password);
             Console.WriteLine("[PostgreSQL] Data inserted successfully.");
         }
     }

@@ -26,7 +26,7 @@ namespace Test
         /// <param name="server">The MySQL server address.</param>
         /// <param name="userId">The MySQL user ID.</param>
         /// <param name="password">The MySQL password.</param>
-        public static void InsertDataFromCsv(int number, string csvFilePath, string server, string userId, string password)
+        public static void InsertDataFromCsv(int from, int to, string csvFilePath, string server, string userId, string password)
         {
             // Start measuring time
             Stopwatch stopwatch = new Stopwatch();
@@ -42,13 +42,13 @@ namespace Test
                 };
 
                 // Create a list of tasks to run concurrently
-                Task[] tasks = new Task[number];
+                Task[] tasks = new Task[to - from + 1];
 
-                // Loop through all databases and create a task for each database
-                for (int i = 1; i <= number; i++)
+                // Loop through all databases in the specified range [from, to] and create a task for each database
+                for (int i = from; i <= to; i++)
                 {
                     int index = i;
-                    tasks[index - 1] = Task.Run(() =>
+                    tasks[index - from] = Task.Run(() =>
                     {
                         InsertDataForDatabase(index, csvFilePath, server, userId, password, objCsvConfiguration);
                     });
@@ -66,7 +66,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }

@@ -15,7 +15,7 @@ namespace Test
         /// <param name="server">The PostgreSQL server address.</param>
         /// <param name="username">The PostgreSQL username.</param>
         /// <param name="password">The PostgreSQL password.</param>
-        public static void CreateDatabases(int number, string createTableQuery, string server, string username, string password)
+        public static void CreateDatabases(int from, int to, string createTableQuery, string server, string username, string password)
         {
             // Connection string with connection pooling enabled
             string serverConnectionString = $"Host={server};Database=postgres;Username={username};Password={password};Pooling=true;MaxPoolSize=100;MinPoolSize=10;";
@@ -32,7 +32,8 @@ namespace Test
                     serverConnection.Open();
                     Console.WriteLine("Connected to PostgreSQL server.");
 
-                    for (int i = 1; i <= number; i++)
+                    // Loop through the range of database indices [from, to]
+                    for (int i = from; i <= to; i++)
                     {
                         string databaseName = $"test_db_{i}";
 
@@ -68,7 +69,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }

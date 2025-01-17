@@ -21,7 +21,7 @@ namespace Test
         /// <param name="server">The MySQL server address.</param>
         /// <param name="userId">The MySQL user ID.</param>
         /// <param name="password">The MySQL password.</param>
-        public static void CreateDatabases(int number, string query, string server, string userId, string password)
+        public static void CreateDatabases(int from, int to, string query, string server, string userId, string password)
         {
             // Connection string with pooling enabled
             string serverConnectionString = $"Server={server};User ID={userId};Password={password};Pooling=true;Max Pool Size=100;Min Pool Size=10;";
@@ -38,8 +38,8 @@ namespace Test
                     serverConnection.Open();
                     Console.WriteLine($"[Server Connection] Opened.");
 
-                    // Loop through each database to be created
-                    for (int i = 1; i <= number; i++)
+                    // Loop through each database in the range [from, to]
+                    for (int i = from; i <= to; i++)
                     {
                         string databaseName = $"test_db_{i}";
 
@@ -77,7 +77,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }

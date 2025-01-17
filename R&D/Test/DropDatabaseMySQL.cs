@@ -18,7 +18,7 @@ namespace Test
         /// <param name="server">The MySQL server address.</param>
         /// <param name="userId">The MySQL user ID.</param>
         /// <param name="password">The MySQL password.</param>
-        public static void DropDatabases(int number, string server, string userId, string password)
+        public static void DropDatabases(int from, int to, string server, string userId, string password)
         {
             // Connection string with connection pooling enabled
             string connectionString = $"Server={server};User ID={userId};Password={password};Pooling=true;Max Pool Size=100;Min Pool Size=10;";
@@ -35,8 +35,8 @@ namespace Test
                     serverConnection.Open();
                     Console.WriteLine("Connected to MySQL server.");
 
-                    // Loop through the number of databases to drop
-                    for (int i = 1; i <= number; i++)
+                    // Loop through the range of database indices [from, to]
+                    for (int i = from; i <= to; i++)
                     {
                         string databaseName = $"test_db_{i}";
 
@@ -69,7 +69,7 @@ namespace Test
             finally
             {
                 stopwatch.Stop();  // Stop the timer
-                // Output the elapsed time
+                                   // Output the elapsed time
                 Console.WriteLine($"Total time taken : {stopwatch.Elapsed.TotalSeconds} seconds");
             }
         }
