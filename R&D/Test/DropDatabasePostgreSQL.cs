@@ -109,6 +109,7 @@ namespace Test
         {
             try
             {
+
                 // Query to find all backend processes using the database
                 string terminateQuery = $@"
                     SELECT pg_terminate_backend(pid)

@@ -134,3 +134,9 @@ F:\Yash Khokhar\R&D\Test\obj\Debug\net7.0\ref\Test.dll
 F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
 F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\Npgsql.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\System.Data.SqlClient.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\runtimes\win-arm64\native\sni.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\runtimes\win-x64\native\sni.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Data.SqlClient.dll
+F:\Yash Khokhar\R&D\Test\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Data.SqlClient.dll

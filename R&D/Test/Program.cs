@@ -17,6 +17,9 @@ namespace Test
             string postgresUserId = "srvuser";
             string postgresPassword = "Miracle@123";
 
+            // MS SQL server connection information
+            string msSqlServer = "SRVTRAINING\\SQLEXPRESS";
+
             // Path to CSV file for data insertion
             var csvFilePath = @"F:\Yash Khokhar\R&D\Dataset\ASR.csv";
 
@@ -44,11 +47,10 @@ namespace Test
                     Console.WriteLine($"Processing choice {choice}...");
                     Thread operationThread = new Thread(() =>
                     {
-                        ProcessChoice(choice, mysqlServer, mysqlUserId, mysqlPassword, postgresServer, postgresUserId, postgresPassword, csvFilePath);
+                        ProcessChoice(choice, mysqlServer, mysqlUserId, mysqlPassword, postgresServer, postgresUserId, postgresPassword, msSqlServer, csvFilePath);
                     });
 
                     // Start the thread and wait for it to complete
-                    // Assign a name based on the operation
                     operationThread.Name = $"OperationThread-{choice}";
                     operationThread.Start();
                     operationThread.Join();
@@ -60,7 +62,6 @@ namespace Test
                     Console.WriteLine($"An error occurred while processing your request: {ex.Message}");
                 }
 
-                // Print a separator for better readability
                 Console.WriteLine("\n========================================");
             }
         }
@@ -77,6 +78,9 @@ namespace Test
             Console.WriteLine("4. Create Databases (PostgreSQL)");
             Console.WriteLine("5. Drop Databases (PostgreSQL)");
             Console.WriteLine("6. Insert Data (PostgreSQL)");
+            Console.WriteLine("7. Create Databases (MS SQL)");
+            Console.WriteLine("8. Drop Databases (MS SQL)");
+            Console.WriteLine("9. Insert Data (MS SQL)");
             Console.WriteLine("0. Exit");
         }
 
@@ -106,6 +110,7 @@ namespace Test
             string postgresServer,
             string postgresUserId,
             string postgresPassword,
+            string msSqlServer,
             string csvFilePath)
         {
             switch (choice)
@@ -127,6 +132,15 @@ namespace Test
                     break;
                 case 6:
                     HandleInsertDataPostgreSQL(csvFilePath, postgresServer, postgresUserId, postgresPassword);
+                    break;
+                case 7:
+                    HandleCreateDatabasesMSSQL(msSqlServer);
+                    break;
+                case 8:
+                    HandleDropDatabasesMSSQL(msSqlServer);
+                    break;
+                case 9:
+                    HandleInsertDataMSSQL(csvFilePath, msSqlServer);
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
@@ -214,6 +228,47 @@ namespace Test
             Console.WriteLine($"[PostgreSQL] Inserting data into databases from {from} to {to}...");
             InsertDataPostgreSQL.InsertDataFromCsvPostgres(from, to, csvFilePath, server, userId, password);
             Console.WriteLine("[PostgreSQL] Data inserted successfully.");
+        }
+
+        // === MS SQL Operations ===
+
+        static void HandleCreateDatabasesMSSQL(string server)
+        {
+            Console.WriteLine("[MS SQL] Enter the starting index of databases to create: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MS SQL] Enter the ending index of databases to create: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MS SQL] Creating databases from {from} to {to}...");
+            CreateDatabaseMSSQL.CreateDatabases(from, to, Query.CreateTableQueryMSSQL, server);
+            Console.WriteLine("[MS SQL] Databases created successfully.");
+        }
+
+        static void HandleDropDatabasesMSSQL(string server)
+        {
+            Console.WriteLine("[MS SQL] Enter the starting index of databases to drop: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MS SQL] Enter the ending index of databases to drop: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MS SQL] Dropping databases from {from} to {to}...");
+            DropDatabaseMSSQL.DropDatabases(from, to, server);
+            Console.WriteLine("[MS SQL] Databases dropped successfully.");
+        }
+
+        static void HandleInsertDataMSSQL(string csvFilePath, string server)
+        {
+            Console.WriteLine("[MS SQL] Enter the starting index of databases to insert data into: ");
+            int from = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MS SQL] Enter the ending index of databases to insert data into: ");
+            int to = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MS SQL] Inserting data into databases from {from} to {to}...");
+            InsertDataMSSQL.InsertDataFromCsv(from, to, csvFilePath, server);
+            Console.WriteLine("[MS SQL] Data inserted successfully.");
         }
     }
 }
