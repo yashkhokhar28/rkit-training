@@ -9,13 +9,13 @@ namespace Test
         {
             // MySQL server connection information
             string mysqlServer = "localhost";
-            string mysqlUserId = "Admin";
-            string mysqlPassword = "gs@123";
+            string mysqlUserId = "root";
+            string mysqlPassword = "rootroot";
 
             // PostgreSQL server connection information
             string postgresServer = "localhost";
-            string postgresUserId = "srvuser";
-            string postgresPassword = "Miracle@123";
+            string postgresUserId = "postgres";
+            string postgresPassword = "root";
 
             // MS SQL server connection information
             string msSqlServer = "SRVTRAINING\\SQLEXPRESS";
