@@ -18,7 +18,7 @@ namespace CSharpAdvanceApp
         public void RunDataSerializationDemo()
         {
             // Creating a sample ProductModel object
-            var product = new ProductModel
+            ProductModel objProductModel = new ProductModel
             {
                 ProductID = 11,
                 ProductName = "Product 11",
@@ -30,7 +30,7 @@ namespace CSharpAdvanceApp
 
             // JSON Serialization and Deserialization
             Console.WriteLine("=== JSON Serialization ===");
-            string productJson = SerializationHelper.ConvertObjectToJson(product);
+            string productJson = SerializationHelper.ConvertObjectToJson(objProductModel);
             Console.WriteLine(productJson); // Output the JSON string
 
             // Deserialize the JSON string back to ProductModel object
@@ -40,7 +40,7 @@ namespace CSharpAdvanceApp
 
             // XML Serialization and Deserialization
             Console.WriteLine("\n=== XML Serialization ===");
-            string productXml = SerializationHelper.ConvertObjectToXml(product);
+            string productXml = SerializationHelper.ConvertObjectToXml(objProductModel);
             Console.WriteLine(productXml); // Output the XML string
 
             // Deserialize the XML string back to ProductModel object
@@ -84,6 +84,9 @@ namespace CSharpAdvanceApp
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DeSerializationHelper
     {
         /// <summary>

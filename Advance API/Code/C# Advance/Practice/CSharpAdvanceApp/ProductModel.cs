@@ -58,5 +58,12 @@ namespace CSharpAdvanceApp
         /// The modified date.
         /// </value>
         public DateTime ModifiedDate { get; set; }
+
+        // Override ToString to display the object's data
+        public override string ToString()
+        {
+            return $"ProductID: {ProductID}, ProductName: {ProductName}, ProductDescription: {ProductDescription}, " +
+                   $"ProductCode: {ProductCode}, CreatedDate: {CreatedDate}, ModifiedDate: {ModifiedDate}";
+        }
     }
 }
