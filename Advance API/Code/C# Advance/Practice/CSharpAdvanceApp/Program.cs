@@ -21,6 +21,7 @@ public class Program
         Console.WriteLine("7. Lambda Expression Demo");
         Console.WriteLine("8. Extension Methods Demo");
         Console.WriteLine("9. Linq Demo");
+        Console.WriteLine("10. Cryptography Demo");
 
         // Get the user's choice
         int choice = Convert.ToInt32(Console.ReadLine());
@@ -80,6 +81,12 @@ public class Program
             case 9:
                 LinqDemo objLinqDemo = new LinqDemo();
                 objLinqDemo.RunLinqDemo();
+                break;
+
+            // Case 10:
+            case 10:
+               CryptographyDemo objCryptographyDemo = new CryptographyDemo();
+                objCryptographyDemo.RunCryptographyDemo();
                 break;
 
             // Default case: If the user enters an invalid choice
