@@ -85,37 +85,84 @@ namespace CSharpAdvanceApp
         /// </summary>
         public void RunFilteringMethods()
         {
-            // Where() - Filters students with age < 23
-            List<StudentModel> youngStudents = lstStudent.Where(s => s.Age < 23).ToList();
-            Console.WriteLine("Students younger than 23:");
-            foreach (StudentModel student in youngStudents)
+            // Where() - Filters students with age < 23 (Method Syntax)
+            List<StudentModel> youngStudentsMethod = lstStudent.Where(s => s.Age < 23).ToList();
+            Console.WriteLine("Students younger than 23 (Method Syntax):");
+            foreach (StudentModel student in youngStudentsMethod)
             {
                 Console.WriteLine($"{student.Name} ({student.Age})");
             }
 
-            // First() - Retrieves the first student with age < 23
-            StudentModel firstYoungStudent = lstStudent.First(s => s.Age < 23);
-            Console.WriteLine($"\nFirst student younger than 23: {firstYoungStudent.Name}");
+            // Where() - Filters students with age < 23 (Query Syntax)
+            var youngStudentsQuery = from student in lstStudent
+                                     where student.Age < 23
+                                     select student;
+            Console.WriteLine("\nStudents younger than 23 (Query Syntax):");
+            foreach (var student in youngStudentsQuery)
+            {
+                Console.WriteLine($"{student.Name} ({student.Age})");
+            }
 
-            // FirstOrDefault() - Retrieves the first student with age > 25 (no match)
-            StudentModel firstOldStudent = lstStudent.FirstOrDefault(s => s.Age > 25);
-            Console.WriteLine($"\nFirst student older than 25: {firstOldStudent?.Name ?? "No match"}");
+            // First() - Retrieves the first student with age < 23 (Method Syntax)
+            StudentModel firstYoungStudentMethod = lstStudent.First(s => s.Age < 23);
+            Console.WriteLine($"\nFirst student younger than 23 (Method Syntax): {firstYoungStudentMethod.Name}");
 
-            // Single() - Retrieves the student with ID 2
-            StudentModel singleStudent = lstStudent.Single(s => s.Id == 2);
-            Console.WriteLine($"\nStudent with ID 2: {singleStudent.Name}");
+            // First() - Retrieves the first student with age < 23 (Query Syntax)
+            var firstYoungStudentQuery = (from student in lstStudent
+                                          where student.Age < 23
+                                          select student).First();
+            Console.WriteLine($"\nFirst student younger than 23 (Query Syntax): {firstYoungStudentQuery.Name}");
 
-            // SingleOrDefault() - Retrieves a student with a name "Michael" (no match)
-            StudentModel singleOrDefaultStudent = lstStudent.SingleOrDefault(s => s.Name == "Michael");
-            Console.WriteLine($"\nStudent named Michael: {singleOrDefaultStudent?.Name ?? "No match"}");
 
-            // Last() - Retrieves the last student with age < 23
-            StudentModel lastYoungStudent = lstStudent.Last(s => s.Age < 23);
-            Console.WriteLine($"\nLast student younger than 23: {lastYoungStudent.Name}");
+            // FirstOrDefault() - Retrieves the first student with age > 25 (no match) (Method Syntax)
+            StudentModel firstOldStudentMethod = lstStudent.FirstOrDefault(s => s.Age > 25);
+            Console.WriteLine($"\nFirst student older than 25 (Method Syntax): {firstOldStudentMethod?.Name ?? "No match"}");
 
-            // LastOrDefault() - Retrieves the last student with age > 25 (no match)
-            StudentModel lastOlderStudent = lstStudent.LastOrDefault(s => s.Age > 25);
-            Console.WriteLine($"\nLast student older than 25: {lastOlderStudent?.Name ?? "No match"}");
+            // FirstOrDefault() - Retrieves the first student with age > 25 (no match) (Query Syntax)
+            StudentModel firstOldStudentQuery = (from student in lstStudent
+                                        where student.Age > 25
+                                        select student).FirstOrDefault();
+            Console.WriteLine($"\nFirst student older than 25 (Query Syntax): {firstOldStudentQuery?.Name ?? "No match"}");
+
+            // Single() - Retrieves the student with ID 2 (Method Syntax)
+            StudentModel singleStudentMethod = lstStudent.Single(s => s.Id == 2);
+            Console.WriteLine($"\nStudent with ID 2 (Method Syntax): {singleStudentMethod.Name}");
+
+            // Single() - Retrieves the student with ID 2 (Query Syntax)
+            StudentModel singleStudentQuery = (from student in lstStudent
+                                      where student.Id == 2
+                                      select student).Single();
+            Console.WriteLine($"\nStudent with ID 2 (Query Syntax): {singleStudentQuery.Name}");
+
+            // SingleOrDefault() - Retrieves a student with a name "Michael" (no match) (Method Syntax)
+            StudentModel singleOrDefaultStudentMethod = lstStudent.SingleOrDefault(s => s.Name == "Michael");
+            Console.WriteLine($"\nStudent named Michael (Method Syntax): {singleOrDefaultStudentMethod?.Name ?? "No match"}");
+
+            // SingleOrDefault() - Retrieves a student with a name "Michael" (no match) (Query Syntax)
+            StudentModel singleOrDefaultStudentQuery = (from student in lstStudent
+                                               where student.Name == "Michael"
+                                               select student).SingleOrDefault();
+            Console.WriteLine($"\nStudent named Michael (Query Syntax): {singleOrDefaultStudentQuery?.Name ?? "No match"}");
+
+            // Last() - Retrieves the last student with age < 23 (Method Syntax)
+            StudentModel lastYoungStudentMethod = lstStudent.Last(s => s.Age < 23);
+            Console.WriteLine($"\nLast student younger than 23 (Method Syntax): {lastYoungStudentMethod.Name}");
+
+            // Last() - Retrieves the last student with age < 23 (Query Syntax)
+            StudentModel lastYoungStudentQuery = (from student in lstStudent
+                                         where student.Age < 23
+                                         select student).Last();
+            Console.WriteLine($"\nLast student younger than 23 (Query Syntax): {lastYoungStudentQuery.Name}");
+
+            // LastOrDefault() - Retrieves the last student with age > 25 (no match) (Method Syntax)
+            StudentModel lastOlderStudentMethod = lstStudent.LastOrDefault(s => s.Age > 25);
+            Console.WriteLine($"\nLast student older than 25 (Method Syntax): {lastOlderStudentMethod?.Name ?? "No match"}");
+
+            // LastOrDefault() - Retrieves the last student with age > 25 (no match) (Query Syntax)
+            StudentModel lastOlderStudentQuery = (from student in lstStudent
+                                         where student.Age > 25
+                                         select student).LastOrDefault();
+            Console.WriteLine($"\nLast student older than 25 (Query Syntax): {lastOlderStudentQuery?.Name ?? "No match"}");
         }
     }
 

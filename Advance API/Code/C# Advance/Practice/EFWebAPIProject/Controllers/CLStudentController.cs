@@ -52,8 +52,14 @@ namespace EFWebAPIProject.Controllers
         /// </summary>
         [HttpPost]
         [Route("Add")]
-        public Response AddStudent(DTOSTU01 objDTOSTU01)
+        public IHttpActionResult AddStudent(DTOSTU01 objDTOSTU01)
         {
+            // Validate the model before proceeding
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);  // Return validation errors if the model is invalid
+            }
+
             _objBLStudent.Type = EntryType.A;
             _objBLStudent.PreSave(objDTOSTU01);
             _objResponse = _objBLStudent.Validation();
@@ -63,7 +69,7 @@ namespace EFWebAPIProject.Controllers
                 _objResponse = _objBLStudent.Save();
             }
 
-            return _objResponse;
+            return Ok(_objResponse); // Return success or error response
         }
 
         /// <summary>
@@ -71,8 +77,14 @@ namespace EFWebAPIProject.Controllers
         /// </summary>
         [HttpPut]
         [Route("Update")]
-        public Response UpdateStudent(DTOSTU01 objDTOSTU01)
+        public IHttpActionResult UpdateStudent(DTOSTU01 objDTOSTU01)
         {
+            // Validate the model before proceeding
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);  // Return validation errors if the model is invalid
+            }
+
             _objBLStudent.Type = EntryType.E;
             _objBLStudent.PreSave(objDTOSTU01);
             _objResponse = _objBLStudent.Validation();
@@ -82,7 +94,7 @@ namespace EFWebAPIProject.Controllers
                 _objResponse = _objBLStudent.Save();
             }
 
-            return _objResponse;
+            return Ok(_objResponse); // Return success or error response
         }
 
         /// <summary>

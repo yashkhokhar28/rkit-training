@@ -65,10 +65,15 @@ namespace CRUDDemo.BL
         public List<EMP01> GetAll()
         {
             List<EMP01> lstEmployees = new List<EMP01>();
+
+            // Define the query separately
+            string query = "SELECT P01F01, P01F02, P01F03, P01F04, P01F05, P01F06 FROM EMP01";
+
+            // Open connection and execute query
             using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
             {
                 objMySqlConnection.Open();
-                using (MySqlCommand objMySqlCommand = new MySqlCommand("SELECT P01F01,P01F02,P01F03,P01F04,P01F05,P01F06 FROM EMP01", objMySqlConnection))
+                using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
                 {
                     using (MySqlDataReader objMySqlDataReader = objMySqlCommand.ExecuteReader())
                     {
@@ -87,6 +92,7 @@ namespace CRUDDemo.BL
                     }
                 }
             }
+
             return lstEmployees;
         }
         #endregion
@@ -101,12 +107,16 @@ namespace CRUDDemo.BL
         {
             EMP01 objEMP01 = null;
 
+            // Define the query separately
+            string query = string.Format("SELECT P01F01, P01F02, P01F03, P01F04, P01F05, P01F06 FROM EMP01 WHERE P01F01 = {0}", id);
+
             using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
             {
                 objMySqlConnection.Open();
 
-                using (MySqlCommand objMySqlCommand = new MySqlCommand("SELECT P01F01,P01F02,P01F03,P01F04,P01F05,P01F06 FROM EMP01 WHERE P01F01 = @Id", objMySqlConnection))
+                using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
                 {
+                    // Add the parameter
                     objMySqlCommand.Parameters.AddWithValue("@Id", id);
 
                     using (MySqlDataReader objMySqlDataReader = objMySqlCommand.ExecuteReader())
@@ -126,6 +136,7 @@ namespace CRUDDemo.BL
                     }
                 }
             }
+
             return objEMP01;
         }
         #endregion
@@ -198,30 +209,24 @@ namespace CRUDDemo.BL
 
                     if (Type == EnmEntryType.A) // Insert
                     {
-                        string insertQuery = "INSERT INTO EMP01 (P01F02, P01F03, P01F04, P01F05, P01F06) " +
-                                             "VALUES (@P01F02, @P01F03, @P01F04, @P01F05, @P01F06)";
+                        // Using string.Format for query formatting (not recommended in practice)
+                        string insertQuery = string.Format("INSERT INTO EMP01 (P01F02, P01F03, P01F04, P01F05, P01F06) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",
+                            objEMP01.P01F02, objEMP01.P01F03, objEMP01.P01F04, objEMP01.P01F05, objEMP01.P01F06);
+
                         using (MySqlCommand objMySqlCommand = new MySqlCommand(insertQuery, objMySqlConnection))
                         {
-                            objMySqlCommand.Parameters.AddWithValue("@P01F02", objEMP01.P01F02);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F03", objEMP01.P01F03);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F04", objEMP01.P01F04);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F05", objEMP01.P01F05);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F06", objEMP01.P01F06);
                             objMySqlCommand.ExecuteNonQuery();
                         }
                         objResponse.Message = "Data Added Successfully!";
                     }
                     else if (Type == EnmEntryType.E) // Update
                     {
-                        string updateQuery = "UPDATE EMP01 SET P01F02 = @P01F02, P01F03 = @P01F03, " +
-                                             "P01F04 = @P01F04, P01F06 = @P01F06 WHERE P01F01 = @P01F01";
+                        // Using string.Format for query formatting (not recommended in practice)
+                        string updateQuery = string.Format("UPDATE EMP01 SET P01F02 = '{0}', P01F03 = '{1}', P01F04 = '{2}', P01F06 = '{3}' WHERE P01F01 = '{4}'",
+                            objEMP01.P01F02, objEMP01.P01F03, objEMP01.P01F04, objEMP01.P01F06, objEMP01.P01F01);
+
                         using (MySqlCommand objMySqlCommand = new MySqlCommand(updateQuery, objMySqlConnection))
                         {
-                            objMySqlCommand.Parameters.AddWithValue("@P01F01", objEMP01.P01F01);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F02", objEMP01.P01F02);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F03", objEMP01.P01F03);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F04", objEMP01.P01F04);
-                            objMySqlCommand.Parameters.AddWithValue("@P01F06", objEMP01.P01F06);
                             objMySqlCommand.ExecuteNonQuery();
                         }
                         objResponse.Message = "Data Updated Successfully!";
@@ -278,14 +283,20 @@ namespace CRUDDemo.BL
             {
                 return count;
             }
+
             using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
             {
                 objMySqlConnection.Open();
-                using (MySqlCommand objMySqlCommand = new MySqlCommand($"DELETE FROM EMP01 WHERE P01F01 = {id}", objMySqlConnection))
+
+                // Using string.Format for query formatting (not recommended for SQL queries)
+                string deleteQuery = string.Format("DELETE FROM EMP01 WHERE P01F01 = {0}", id);
+
+                using (MySqlCommand objMySqlCommand = new MySqlCommand(deleteQuery, objMySqlConnection))
                 {
                     count = objMySqlCommand.ExecuteNonQuery();
                 }
             }
+
             return count;
         }
         #endregion

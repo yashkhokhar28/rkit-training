@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFWebAPIProject.Models.DTO
 {
@@ -18,6 +16,7 @@ namespace EFWebAPIProject.Models.DTO
         /// It will be serialized as "U01101" in the JSON format.
         /// </summary>
         [JsonProperty("U01101")]
+        [Range(1, int.MaxValue, ErrorMessage = "Student ID must be a positive number.")]
         public int U01F01 { get; set; }
 
         /// <summary>
@@ -26,6 +25,9 @@ namespace EFWebAPIProject.Models.DTO
         /// It will be serialized as "U01102" in the JSON format.
         /// </summary>
         [JsonProperty("U01102")]
+        [Required(ErrorMessage = "Student name is required.")]
+        [StringLength(100, ErrorMessage = "Student name cannot exceed 100 characters.")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Student name must only contain letters and spaces.")]
         public string U01F02 { get; set; }
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace EFWebAPIProject.Models.DTO
         /// It will be serialized as "U01103" in the JSON format.
         /// </summary>
         [JsonProperty("U01103")]
+        [Range(1, 150, ErrorMessage = "Age must be between 1 and 150.")]
         public int U01F03 { get; set; }
     }
 }

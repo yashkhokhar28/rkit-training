@@ -44,7 +44,7 @@ namespace CRUDDemo.Controllers
         /// <returns>A standardized <see cref="Response"/> object containing the employee data.</returns>
         [HttpGet]
         [Route("GetAllEmployee")]
-        public Response GetAllEmployee()
+        public IHttpActionResult GetAllEmployee()
         {
             int result = objBLEmployee.GetAll().Count;
             if (result > 0)
@@ -53,13 +53,13 @@ namespace CRUDDemo.Controllers
                 objResponse.Message = "Ok";
                 List<EMP01> lstEmployees = objBLEmployee.GetAll();
                 objResponse.Data = objBLConverter.ToDataTable(lstEmployees);
-                return objResponse;
+                return Ok(objResponse);
             }
             else
             {
                 objResponse.IsError = true;
                 objResponse.Message = "Error Occurred";
-                return objResponse;
+                return Ok(objResponse);
             }
         }
 
@@ -70,20 +70,20 @@ namespace CRUDDemo.Controllers
         /// <returns>A standardized <see cref="Response"/> object indicating the result of the deletion.</returns>
         [HttpDelete]
         [Route("DeleteEmployee/{id:int}")]
-        public Response DeleteEmployee(int id)
+        public IHttpActionResult DeleteEmployee(int id)
         {
             int result = objBLEmployee.Delete(id);
             if (result != 0)
             {
                 objResponse.IsError = false;
                 objResponse.Message = "Data Deleted Successfully";
-                return objResponse;
+                return Ok(objResponse);
             }
             else
             {
                 objResponse.IsError = true;
                 objResponse.Message = "Error Occurred";
-                return objResponse;
+                return Ok(objResponse);
             }
         }
 
@@ -94,7 +94,7 @@ namespace CRUDDemo.Controllers
         /// <returns>A standardized <see cref="Response"/> object indicating the result of the addition.</returns>
         [HttpPost]
         [Route("AddEmployee")]
-        public Response AddEmployee([FromBody] DTOEMP01 objDTOEMP01)
+        public IHttpActionResult AddEmployee([FromBody] DTOEMP01 objDTOEMP01)
         {
             objBLEmployee.Type = Models.ENUM.EnmEntryType.A;
             objBLEmployee.PreSave(objDTOEMP01);
@@ -103,14 +103,14 @@ namespace CRUDDemo.Controllers
             {
                 objResponse.IsError = true;
                 objResponse.Message = "Error Occurred";
-                return objResponse;
+                return Ok(objResponse);
             }
             else
             {
                 objBLEmployee.Save();
                 objResponse.IsError = false;
                 objResponse.Message = "Data Added Successfully";
-                return objResponse;
+                return Ok(objResponse);
             }
         }
 
@@ -122,7 +122,7 @@ namespace CRUDDemo.Controllers
         /// <returns>A standardized <see cref="Response"/> object indicating the result of the update.</returns>
         [HttpPut]
         [Route("UpdateEmployee")]
-        public Response UpdateEmployee(int id, [FromBody] DTOEMP01 objDTOEMP01)
+        public IHttpActionResult UpdateEmployee(int id, [FromBody] DTOEMP01 objDTOEMP01)
         {
             objBLEmployee.Type = Models.ENUM.EnmEntryType.E;
             objBLEmployee.PreSave(objDTOEMP01);
@@ -131,14 +131,14 @@ namespace CRUDDemo.Controllers
             {
                 objResponse.IsError = true;
                 objResponse.Message = "Error Occurred";
-                return objResponse;
+                return Ok(objResponse);
             }
             else
             {
                 objBLEmployee.Save();
                 objResponse.IsError = false;
                 objResponse.Message = "Data Updated Successfully";
-                return objResponse;
+                return Ok(objResponse);
             }
         }
     }
