@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockPortfolioAPI.Models.DTO
 {
+    /// <summary>
+    /// model for register
+    /// </summary>
     public class DTOUSR01
     {
         /// <summary>

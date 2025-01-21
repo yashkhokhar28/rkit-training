@@ -3,14 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockPortfolioAPI.Models.DTO
 {
+    /// <summary>
+    /// model for login
+    /// </summary>
     public class DTOUSR02
     {
         /// <summary>
         /// The unique email address of the user.
         /// </summary>
-        [Required(ErrorMessage = "Email address is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email address format.")]
-        public string R01F03 { get; set; }
+        [Required(ErrorMessage = "Username is required.")]
+        public string R01F02 { get; set; }
 
         /// <summary>
         /// The hashed password for the user.

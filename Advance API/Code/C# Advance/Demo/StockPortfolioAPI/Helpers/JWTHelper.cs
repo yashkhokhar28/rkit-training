@@ -1,6 +1,8 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -13,13 +15,14 @@ namespace StockPortfolioAPI.Helpers
     {
         private static string SecretKey = "795a6fdc7536b8ba885d3140066d7a2fb85d836b4c66b641f3b0480dbe08961d";
 
-        public static object GenerateJWTToken(string username, string role, int expirationHours = 1)
+        public static object GenerateJWTToken(string username, int userID, string role, int expirationHours = 1)
         {
             // Define the claims for the token
             Claim[] arrClaims = new[]
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.NameIdentifier, userID.ToString()),
                 new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddHours(expirationHours).ToString())
             };
 
@@ -65,15 +68,47 @@ namespace StockPortfolioAPI.Helpers
                 // Validate the token and extract the claims
                 ClaimsPrincipal objClaimsPrincipal = objJwtSecurityTokenHandler.ValidateToken(token, objTokenValidationParameters, out var validatedToken);
 
-                // If token is valid, return the claims
-                payload = objClaimsPrincipal.Identity.Name;
-                return true;
+                // Extract claims from the validated token
+                var usernameClaim = objClaimsPrincipal.FindFirst(ClaimTypes.Name);
+                var roleClaim = objClaimsPrincipal.FindFirst(ClaimTypes.Role);
+
+                if (usernameClaim != null && roleClaim != null)
+                {
+                    // Return the username and role as a combined payload
+                    payload = $"{{\"username\": \"{usernameClaim.Value}\", \"role\": \"{roleClaim.Value}\"}}";
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
                 // If the token is invalid (signature mismatch, expired, etc.), return false
                 return false;
             }
+        }
+
+        public static int GetUserIdFromToken(string token)
+        {
+            JwtSecurityTokenHandler objJwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            var jsonToken = objJwtSecurityTokenHandler.ReadToken(token) as JwtSecurityToken;
+
+            if (jsonToken == null)
+            {
+                throw new UnauthorizedAccessException("Invalid JWT token.");
+            }
+
+            // Get the userId claim from the token
+            var userIdClaim = jsonToken?.Claims.FirstOrDefault(c => c.Type == "nameid");
+
+            if (userIdClaim != null)
+            {
+                return int.Parse(userIdClaim.Value);  // Return the UserId as an integer
+            }
+
+            throw new UnauthorizedAccessException("User ID not found in the token.");
         }
     }
 }

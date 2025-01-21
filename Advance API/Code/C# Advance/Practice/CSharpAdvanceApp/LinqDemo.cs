@@ -375,7 +375,7 @@ namespace CSharpAdvanceApp
     };
 
         /// <summary>
-        /// This method demonstrates the use of LINQ quantifier methods such as Any(), All(), Count(), LongCount(), Sum(), Average(), Min(), Max(), SequenceEqual(), and Contains() on a list of students.
+        /// RunQuantifierMethods Demo
         /// </summary>
         public void RunQuantifierMethods()
         {
@@ -493,7 +493,7 @@ namespace CSharpAdvanceApp
     }
 
     /// <summary>
-    /// This class demonstrates the use of LINQ conversion methods such as ToList(), ToArray(), ToDictionary(), Cast<T>(), and OfType<T>().
+    /// This class demonstrates the use of LINQ conversion methods such as ToList(), ToArray(), ToDictionary(), and OfType<T>().
     /// </summary>
     public class ConversionMethods
     {
@@ -507,7 +507,7 @@ namespace CSharpAdvanceApp
     };
 
         /// <summary>
-        /// This method demonstrates the use of LINQ conversion methods such as ToList(), ToArray(), ToDictionary(), Cast<T>(), and OfType<T>().
+        /// This method demonstrates the use of LINQ conversion methods such as ToList(), ToArray(), ToDictionary() and OfType<T>().
         /// </summary>
         public void RunConversionMethods()
         {
@@ -532,12 +532,6 @@ namespace CSharpAdvanceApp
                 Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value.Name} (Age: {kvp.Value.Age}, Grade: {kvp.Value.Grade})");
             }
 
-            // Cast<T>() - Explicitly cast elements of an object collection to a specific type
-            List<Object> objectCollection = new List<object> { 1, 2, 3, 4, 5 };
-            List<int> intCollection = objectCollection.Cast<int>().ToList();
-            Console.WriteLine("\nCasting object collection to int collection:");
-            intCollection.ForEach(i => Console.WriteLine(i));
-
             // OfType<T>() - Filter elements of a specific type
             List<Object> mixedCollection = new List<object> { 1, "Hello", 2, "World", 3.5, true };
             List<string> stringCollection = mixedCollection.OfType<string>().ToList();
@@ -552,7 +546,7 @@ namespace CSharpAdvanceApp
     public class GroupingMethods
     {
         /// <summary>
-        /// This method demonstrates the use of LINQ grouping methods such as GroupBy(), GroupJoin(), and ToLookup().
+        /// This method demonstrates the use of LINQ grouping methods such as GroupBy(), GroupJoin()
         /// </summary>
         public void RunGroupingMethods()
         {
@@ -603,23 +597,11 @@ namespace CSharpAdvanceApp
                 Console.WriteLine($"Student: {result.StudentName}");
                 Console.WriteLine($" Courses: {string.Join(", ", result.Courses)}");
             }
-
-            // ToLookup() - Convert the sequence to a Lookup based on a key
-            ILookup<int, StudentModel> studentLookup = lstStudents.ToLookup(s => s.Age);
-            Console.WriteLine("\nStudents grouped by Age (using ToLookup):");
-            foreach (IGrouping<int, StudentModel> group in studentLookup)
-            {
-                Console.WriteLine($"Age: {group.Key}");
-                foreach (StudentModel student in group)
-                {
-                    Console.WriteLine($" {student.Name} (Grade: {student.Grade})");
-                }
-            }
         }
     }
 
     /// <summary>
-    /// This class demonstrates the use of LINQ join methods such as Join() and Zip().
+    /// This class demonstrates the use of LINQ join methods such as Join()
     /// </summary>
     public class JoinMethods
     {
@@ -664,24 +646,11 @@ namespace CSharpAdvanceApp
             {
                 Console.WriteLine($"Student: {result.StudentName}, Course: {result.CourseName}");
             }
-
-            // Zip() - Combine students and their scores
-            var zipResult = lstStudents.Zip(scores, (student, score) => new
-            {
-                StudentName = student.Name,
-                Score = score
-            });
-
-            Console.WriteLine("\nZip result (Students and their Scores):");
-            foreach (var result in zipResult)
-            {
-                Console.WriteLine($"Student: {result.StudentName}, Score: {result.Score}");
-            }
         }
     }
 
     /// <summary>
-    /// This class demonstrates the use of miscellaneous LINQ methods such as AsEnumerable(), ToString(), and DefaultIfEmpty().
+    /// This class demonstrates the use of miscellaneous LINQ methods such as AsEnumerable(), ToString()
     /// </summary>
     public class MiscellaneousMethods
     {
@@ -713,14 +682,6 @@ namespace CSharpAdvanceApp
             foreach (string name in studentNames)
             {
                 Console.WriteLine($"  {name}");
-            }
-
-            // DefaultIfEmpty(): Return a default value if sequence is empty
-            IEnumerable<StudentModel> defaultIfEmptyResult = emptyList.DefaultIfEmpty(new StudentModel { Id = 0, Name = "Default", Age = 0 });
-            Console.WriteLine("\nDefaultIfEmpty result for an empty list:");
-            foreach (StudentModel student in defaultIfEmptyResult)
-            {
-                Console.WriteLine($"  {student.Name} (Age: {student.Age})");
             }
         }
     }

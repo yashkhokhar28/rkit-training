@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace StockPortfolioAPI.Controllers
 {
+
     public class CLUserController : ApiController
     {
         public BLUser objBLUser;
@@ -22,6 +23,7 @@ namespace StockPortfolioAPI.Controllers
             objBLUser = new BLUser();
             objResponse = new Response();
         }
+
         [HttpPost]
         [Route("api/user/register")]
         public IHttpActionResult Register([FromBody] DTOUSR01 objDTOUSR01)
@@ -46,6 +48,20 @@ namespace StockPortfolioAPI.Controllers
                 objResponse.Message = "Data Added Successfully";
                 return Ok(objResponse);
             }
+        }
+
+        [HttpPost]
+        [Route("api/user/login")]
+        public IHttpActionResult Login([FromBody] DTOUSR02 objDTOUSR02)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Response objResponse = objBLUser.Login(objDTOUSR02);
+            return Ok(objResponse);
+
         }
     }
 }

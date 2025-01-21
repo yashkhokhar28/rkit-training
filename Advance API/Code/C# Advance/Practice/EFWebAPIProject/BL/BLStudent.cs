@@ -9,8 +9,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Web;
 using EFWebAPIProject.Extension;
-using System.Web.Http;
-
 namespace EFWebAPIProject.BL
 {
     /// <summary>

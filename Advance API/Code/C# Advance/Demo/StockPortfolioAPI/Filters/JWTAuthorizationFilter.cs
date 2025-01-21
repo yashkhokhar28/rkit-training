@@ -1,12 +1,11 @@
-﻿using StockPortfolioAPI.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using StockPortfolioAPI.Helpers;
+using StockPortfolioAPI.Models.ENUM;
 
 namespace StockPortfolioAPI.Filters
 {
@@ -14,9 +13,10 @@ namespace StockPortfolioAPI.Filters
     {
         private readonly string[] _allowedRoles;
 
-        public JWTAuthorizationFilter(params string[] roles)
+        // Modify the constructor to accept enums directly
+        public JWTAuthorizationFilter(params EnmRoles[] roles)
         {
-            _allowedRoles = roles;
+            _allowedRoles = roles.Select(r => r.ToString()).ToArray(); // Convert enum to string
         }
 
         public override void OnAuthorization(HttpActionContext actionContext)
@@ -63,11 +63,9 @@ namespace StockPortfolioAPI.Filters
                     return;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log the exception details (use a logging framework like NLog, Serilog, or log4net for better error handling)
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "An error occurred while validating the token.");
-                // Optionally log the error: Log.Error(ex, "Token validation failed.");
             }
         }
     }

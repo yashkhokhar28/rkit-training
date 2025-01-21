@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using StockPortfolioAPI.Models;
 using StockPortfolioAPI.Models.DTO;
 using StockPortfolioAPI.Models.ENUM;
@@ -7,6 +6,7 @@ using StockPortfolioAPI.Models.POCO;
 using StockPortfolioAPI.Extension;
 using StockPortfolioAPI.Security;
 using System;
+using StockPortfolioAPI.Helpers;
 
 namespace StockPortfolioAPI.BL
 {
@@ -22,11 +22,14 @@ namespace StockPortfolioAPI.BL
 
         public int id;
 
+        public BLConverter objBLConverter;
+
         #endregion
 
         public BLUser()
         {
             objResponse = new Response();
+            objBLConverter = new BLConverter();
         }
 
 
@@ -36,7 +39,7 @@ namespace StockPortfolioAPI.BL
             // Hash the password
             string hashedPassword = HashHelper.ComputeSHA256Hash(objUSR01.R01F04);
             // Define the query separately
-            string query = string.Format("INSERT INTO USR01 (R01F02, R01F03, R01F04) VALUES ('{0}', '{1}', '{2}')", objUSR01.R01F02, objUSR01.R01F03, hashedPassword);
+            string query = string.Format("INSERT INTO USR01 (R01F02, R01F03, R01F04, R01F06, R01F07) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", objUSR01.R01F02, objUSR01.R01F03, hashedPassword, objUSR01.R01F06.ToString("yyyy-MM-dd HH:mm:ss"), objUSR01.R01F07.ToString("yyyy-MM-dd HH:mm:ss"));
             try
             {
                 using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
@@ -46,7 +49,6 @@ namespace StockPortfolioAPI.BL
                     {
                         using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
                         {
-                            Console.WriteLine(objUSR01);
                             using (MySqlDataReader objMySqlDataReader = objMySqlCommand.ExecuteReader())
                             {
                                 result = objMySqlCommand.ExecuteNonQuery();
@@ -66,13 +68,6 @@ namespace StockPortfolioAPI.BL
         public void PreSave(DTOUSR01 objDTOUSR01)
         {
             objUSR01 = objDTOUSR01.Convert<USR01>();
-
-            // Determine EmployeeStatus based on Age
-            // Set the user role (if not set already)
-            if (string.IsNullOrEmpty(objUSR01.R01F05))
-            {
-                objUSR01.R01F05 = EnmRoles.User.ToString(); // Assign default role
-            }
 
             // Set ModifiedAt for all operations
             objUSR01.R01F07 = DateTime.Now;
@@ -103,6 +98,87 @@ namespace StockPortfolioAPI.BL
             {
                 objResponse.IsError = true;
                 objResponse.Message = "Enter Correct Id";
+            }
+            return objResponse;
+        }
+
+        public string GetRole(string username)
+        {
+            string role;
+            // Define the query separately
+            string query = string.Format("SELECT R01F05 FROM USR01 WHERE R01F02 = {0}", username);
+
+            // Open connection and execute query
+            using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
+            {
+                objMySqlConnection.Open();
+                using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
+                {
+                    using (MySqlDataReader objMySqlDataReader = objMySqlCommand.ExecuteReader())
+                    {
+                        role = objMySqlDataReader.GetString(0);
+                    }
+                }
+            }
+            return role;
+        }
+
+        public Response Login(DTOUSR02 objDTOUSR02)
+        {
+            string query = string.Format("SELECT R01F01,R01F02,R01F04,R01F05 FROM USR01 WHERE R01F02 = '{0}'", objDTOUSR02.R01F02);
+            // Fetch user from DB
+            using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
+            {
+                try
+                {
+                    objMySqlConnection.Open();
+
+                    using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
+                    {
+                        using (MySqlDataReader objMySqlDataReader = objMySqlCommand.ExecuteReader())
+                        {
+                            if (objMySqlDataReader.Read())
+                            {
+                                string storedPasswordHash = objMySqlDataReader["R01F04"].ToString();
+                                string username = objMySqlDataReader["R01F02"].ToString();
+                                string role = objMySqlDataReader["R01F05"].ToString();
+                                int userID = Convert.ToInt32(objMySqlDataReader["R01F01"]);
+                                // Verify the entered password with the stored password hash
+                                if (HashHelper.VerifyPassword(objDTOUSR02.R01F04, storedPasswordHash))
+                                {
+                                    // Generate JWT token
+                                    DateTime expirationDate = DateTime.UtcNow.AddHours(1);
+                                    object objToken = JWTHelper.GenerateJWTToken(username, userID, role, 1);
+
+                                    var objLoginData = new
+                                    {
+                                        Token = objToken,
+                                        UserID = userID,
+                                        Username = username,
+                                        Role = role
+                                    };
+                                    // Return the token and user information
+                                    objResponse.IsError = false;
+                                    objResponse.Message = "Login successful.";
+                                    objResponse.Data = objBLConverter.ObjectToDataTable(objLoginData);
+                                    return objResponse;
+                                }
+                                else
+                                {
+                                    objResponse.IsError = true;
+                                    objResponse.Message = "Invalid username or password.";
+                                    return objResponse;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    objResponse.IsError = true;
+                    objResponse.Message = $"An error occurred: {ex.Message}";
+                }
             }
             return objResponse;
         }

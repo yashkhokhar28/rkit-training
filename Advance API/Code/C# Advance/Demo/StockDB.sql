@@ -1,11 +1,10 @@
 CREATE DATABASE StockDB;
 USE StockDB;
 DROP DATABASE StockDB;
--- Create Users Table
-ALTER TABLE USR01 
-MODIFY COLUMN R01F05 VARCHAR(255) NULL;
-
 SELECT * FROM USR01;
+SELECT * FROM STK01;
+SELECT * FROM PRT01;
+-- Create Users Table
 CREATE TABLE USR01 (
     R01F01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'UserId: Unique identifier for each user',
     R01F02 VARCHAR(100) NOT NULL COMMENT 'Username: The name chosen by the user for login',

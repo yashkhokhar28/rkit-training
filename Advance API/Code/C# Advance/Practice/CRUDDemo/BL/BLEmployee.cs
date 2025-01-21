@@ -108,7 +108,7 @@ namespace CRUDDemo.BL
             EMP01 objEMP01 = null;
 
             // Define the query separately
-            string query = string.Format("SELECT P01F01, P01F02, P01F03, P01F04, P01F05, P01F06 FROM EMP01 WHERE P01F01 = {0}", id);
+            string query = string.Format(@"SELECT P01F01, P01F02, P01F03, P01F04, P01F05, P01F06 FROM EMP01 WHERE P01F01 = {0}", id);
 
             using (MySqlConnection objMySqlConnection = new MySqlConnection(connectionString))
             {
