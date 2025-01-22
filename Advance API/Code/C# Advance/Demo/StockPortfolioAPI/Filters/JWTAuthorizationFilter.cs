@@ -9,16 +9,26 @@ using StockPortfolioAPI.Models.ENUM;
 
 namespace StockPortfolioAPI.Filters
 {
+    /// <summary>
+    /// Authorization filter for validating JWT tokens and roles.
+    /// </summary>
     public class JWTAuthorizationFilter : AuthorizationFilterAttribute
     {
         private readonly string[] _allowedRoles;
 
-        // Modify the constructor to accept enums directly
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JWTAuthorizationFilter"/> class with the specified roles.
+        /// </summary>
+        /// <param name="roles">An array of roles that are allowed to access the resource.</param>
         public JWTAuthorizationFilter(params EnmRoles[] roles)
         {
             _allowedRoles = roles.Select(r => r.ToString()).ToArray(); // Convert enum to string
         }
 
+        /// <summary>
+        /// Called when a request is being authorized.
+        /// </summary>
+        /// <param name="actionContext">The action context.</param>
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             // Check if the Authorization header is present

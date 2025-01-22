@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Web;
 
 namespace StockPortfolioAPI.BL
 {
+    /// <summary>
+    /// Provides methods to convert objects and lists of objects to DataTables.
+    /// </summary>
     public class BLConverter
     {
         /// <summary>

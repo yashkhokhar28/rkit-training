@@ -14,6 +14,7 @@ namespace StockPortfolioAPI.Models.DTO
         /// Unique identifier for each user.
         /// </summary>
         [JsonProperty("R01101")]
+        [Range(1, int.MaxValue, ErrorMessage = "ID must be Positive.")]
         public int R01F01 { get; set; }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -9,12 +8,20 @@ using System.Text;
 namespace StockPortfolioAPI.Helpers
 {
     /// <summary>
-    /// 
+    /// Provides methods to generate, validate, and extract information from JWT tokens.
     /// </summary>
     public class JWTHelper
     {
         private static string SecretKey = "795a6fdc7536b8ba885d3140066d7a2fb85d836b4c66b641f3b0480dbe08961d";
 
+        /// <summary>
+        /// Generates a JWT token for a given username, userID, and role.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="userID">The ID of the user.</param>
+        /// <param name="role">The role of the user.</param>
+        /// <param name="expirationHours">The number of hours the token is valid for.</param>
+        /// <returns>An object containing the generated JWT token.</returns>
         public static object GenerateJWTToken(string username, int userID, string role, int expirationHours = 1)
         {
             // Define the claims for the token
@@ -46,6 +53,12 @@ namespace StockPortfolioAPI.Helpers
             return new { Token = objJwtSecurityTokenHandler.WriteToken(objSecurityToken) };
         }
 
+        /// <summary>
+        /// Validates a JWT token and extracts the payload.
+        /// </summary>
+        /// <param name="token">The JWT token to validate.</param>
+        /// <param name="payload">The extracted payload from the token if valid.</param>
+        /// <returns>A boolean indicating whether the token is valid.</returns>
         public static bool ValidateJWTToken(string token, out string payload)
         {
             payload = null;
@@ -90,6 +103,11 @@ namespace StockPortfolioAPI.Helpers
             }
         }
 
+        /// <summary>
+        /// Extracts the user ID from a JWT token.
+        /// </summary>
+        /// <param name="token">The JWT token to extract the user ID from.</param>
+        /// <returns>The user ID extracted from the token.</returns>
         public static int GetUserIdFromToken(string token)
         {
             JwtSecurityTokenHandler objJwtSecurityTokenHandler = new JwtSecurityTokenHandler();

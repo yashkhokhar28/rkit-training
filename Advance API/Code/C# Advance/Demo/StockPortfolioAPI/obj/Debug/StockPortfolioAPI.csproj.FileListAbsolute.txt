@@ -122,3 +122,12 @@ F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\Microsoft
 F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\obj\Debug\StockPortfolioAPI.csproj.CopyComplete
 F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\obj\Debug\StockPortfolioAPI.dll
 F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\obj\Debug\StockPortfolioAPI.pdb
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.Common.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.Interfaces.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.OrmLite.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.OrmLite.MySql.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.Text.dll
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.Common.xml
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.OrmLite.xml
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.OrmLite.MySql.xml
+F:\Yash Khokhar\Advance API\Code\C# Advance\Demo\StockPortfolioAPI\bin\ServiceStack.Text.xml

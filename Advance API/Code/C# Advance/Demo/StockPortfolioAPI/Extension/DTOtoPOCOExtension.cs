@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 
 namespace StockPortfolioAPI.Extension
 {
+    /// <summary>
+    /// Provides an extension method to convert a DTO (Data Transfer Object) to a POCO (Plain Old CLR Object).
+    /// </summary>
     public static class DTOtoPOCOExtension
     {
+        /// <summary>
+        /// Converts a DTO to a POCO by copying matching property values.
+        /// </summary>
+        /// <typeparam name="POCO">The type of the POCO object.</typeparam>
+        /// <param name="dto">The DTO object to convert.</param>
+        /// <returns>A new POCO object with values copied from the DTO.</returns>
         public static POCO Convert<POCO>(this object dto)
         {
             // Get the type of the POCO (Plain Old CLR Object)
@@ -35,6 +43,7 @@ namespace StockPortfolioAPI.Extension
                     pocoProperty.SetValue(pocoInstance, value);
                 }
             }
+
             // Return the newly created POCO object with the copied values from the DTO
             return pocoInstance;
         }
