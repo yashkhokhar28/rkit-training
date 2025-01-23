@@ -210,7 +210,7 @@ namespace StockPortfolioAPI.Controllers
         /// <returns>The current user's stock transactions or an error message.</returns>
         [HttpGet]
         [Route("api/user/transactions")]
-        [JWTAuthorizationFilter(EnmRoles.Admin)]
+        [JWTAuthorizationFilter(EnmRoles.Admin, EnmRoles.User)]
         public IHttpActionResult GetUserStockTransactions()
         {
             string token = GetTokenFromRequest();

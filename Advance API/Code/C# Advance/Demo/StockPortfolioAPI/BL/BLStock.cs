@@ -94,8 +94,8 @@ namespace StockPortfolioAPI.BL
                 }
                 else if (Type == EnmEntryType.E) // Update
                 {
-                    parameters.Add("K01F01", objSTK01.K01F01); // ID for WHERE clause
-                    query = DynamicQueryHelper.GenerateUpdateQuery("STK01", parameters, "K01F01");
+                    var whereConditions = new Dictionary<string, object> { { "K01F01", objSTK01.K01F01 } }; // ID for WHERE clause
+                    query = DynamicQueryHelper.GenerateUpdateQuery("STK01", parameters, whereConditions);
                 }
 
                 using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
@@ -114,6 +114,55 @@ namespace StockPortfolioAPI.BL
                         {
                             objResponse.IsError = false;
                             objResponse.Message = Type == EnmEntryType.A ? "Record inserted successfully." : "Record updated successfully.";
+                        }
+                        else
+                        {
+                            objResponse.IsError = true;
+                            objResponse.Message = "No rows affected.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                objResponse.IsError = true;
+                objResponse.Message = $"An error occurred: {ex.Message}";
+            }
+
+            return objResponse;
+        }
+
+        /// <summary>
+        /// Deletes a stock from the database.
+        /// </summary>
+        /// <param name="id">The ID of the stock to delete.</param>
+        /// <returns>A response object indicating success or failure of the operation.</returns>
+        public Response Delete(int id)
+        {
+            int result;
+            string query = "";
+            var whereConditions = new Dictionary<string, object> { { "K01F01", id } };
+
+            try
+            {
+                query = DynamicQueryHelper.GenerateDeleteQuery("STK01", whereConditions);
+
+                using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
+                {
+                    objMySqlConnection.Open();
+                    using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
+                    {
+                        foreach (var param in whereConditions)
+                        {
+                            objMySqlCommand.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
+                        result = objMySqlCommand.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            objResponse.IsError = false;
+                            objResponse.Message = "Record deleted successfully.";
                         }
                         else
                         {

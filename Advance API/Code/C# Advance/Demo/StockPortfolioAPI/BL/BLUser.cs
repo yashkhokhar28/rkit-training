@@ -121,20 +121,35 @@ namespace StockPortfolioAPI.BL
         /// <returns>A response object indicating success or failure of the operation.</returns>
         public Response Delete(int id)
         {
+            string query = "";
+            var whereConditions = new Dictionary<string, object> { { "R01F01", id } };
+
             try
             {
-                using (IDbConnection objIDbConnection = OrmLiteHelper.OpenConnection())
+                query = DynamicQueryHelper.GenerateDeleteQuery("USR01", whereConditions);
+
+                using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
                 {
-                    int rowsAffected = objIDbConnection.Delete<USR01>(x => x.R01F01 == id);
-                    if (rowsAffected > 0)
+                    objMySqlConnection.Open();
+                    using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
                     {
-                        objResponse.IsError = false;
-                        objResponse.Message = "User deleted successfully.";
-                    }
-                    else
-                    {
-                        objResponse.IsError = true;
-                        objResponse.Message = "User not found.";
+                        foreach (var param in whereConditions)
+                        {
+                            objMySqlCommand.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
+                        int rowsAffected = objMySqlCommand.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            objResponse.IsError = false;
+                            objResponse.Message = "User deleted successfully.";
+                        }
+                        else
+                        {
+                            objResponse.IsError = true;
+                            objResponse.Message = "User not found.";
+                        }
                     }
                 }
             }
@@ -143,6 +158,7 @@ namespace StockPortfolioAPI.BL
                 objResponse.IsError = true;
                 objResponse.Message = $"An error occurred: {ex.Message}";
             }
+
             return objResponse;
         }
 
@@ -171,8 +187,8 @@ namespace StockPortfolioAPI.BL
                 }
                 else if (Type == EnmEntryType.E) // Update
                 {
-                    parameters.Add("R01F01", objUSR01.R01F01); // ID for WHERE clause
-                    query = DynamicQueryHelper.GenerateUpdateQuery("USR01", parameters, "R01F01");
+                    var whereConditions = new Dictionary<string, object> { { "R01F01", objUSR01.R01F01 } }; // ID for WHERE clause
+                    query = DynamicQueryHelper.GenerateUpdateQuery("USR01", parameters, whereConditions);
                 }
 
                 using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))

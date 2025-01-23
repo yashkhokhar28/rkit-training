@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using StockPortfolioAPI.Models.ENUM;
 using System;
 using System.ComponentModel.DataAnnotations;
 

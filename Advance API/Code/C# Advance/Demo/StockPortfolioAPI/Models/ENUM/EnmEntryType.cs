@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StockPortfolioAPI.Models.ENUM
+﻿namespace StockPortfolioAPI.Models.ENUM
 {
     /// <summary>
     /// Represents the type of entry operation in the stock portfolio system.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StockPortfolioAPI.Models.ENUM
+﻿namespace StockPortfolioAPI.Models.ENUM
 {
     /// <summary>
     /// Represents the roles available in the stock portfolio system.

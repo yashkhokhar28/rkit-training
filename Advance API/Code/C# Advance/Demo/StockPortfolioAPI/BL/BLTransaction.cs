@@ -107,6 +107,54 @@ namespace StockPortfolioAPI.BL
         }
 
         /// <summary>
+        /// Deletes a transaction from the database.
+        /// </summary>
+        /// <param name="id">The ID of the transaction to delete.</param>
+        /// <returns>A response object indicating success or failure of the operation.</returns>
+        public Response Delete(int id)
+        {
+            string query = "";
+            var whereConditions = new Dictionary<string, object> { { "N01F01", id } };
+
+            try
+            {
+                query = DynamicQueryHelper.GenerateDeleteQuery("TRN01", whereConditions);
+
+                using (MySqlConnection objMySqlConnection = new MySqlConnection(BLConnection.ConnectionString))
+                {
+                    objMySqlConnection.Open();
+                    using (MySqlCommand objMySqlCommand = new MySqlCommand(query, objMySqlConnection))
+                    {
+                        foreach (var param in whereConditions)
+                        {
+                            objMySqlCommand.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
+                        int rowsAffected = objMySqlCommand.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            objResponse.IsError = false;
+                            objResponse.Message = "Transaction deleted successfully.";
+                        }
+                        else
+                        {
+                            objResponse.IsError = true;
+                            objResponse.Message = "No rows affected.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                objResponse.IsError = true;
+                objResponse.Message = $"An error occurred: {ex.Message}";
+            }
+
+            return objResponse;
+        }
+
+        /// <summary>
         /// Prepares transaction details (Validate and set price).
         /// </summary>
         /// <param name="objDTOTRN01">The transaction data transfer object.</param>
@@ -223,12 +271,12 @@ namespace StockPortfolioAPI.BL
             // If it's a Buy transaction, increase the portfolio's total value
             if (objTRN01.N01F06 == "Buy")
             {
-                updateQuery = "UPDATE PRT01 SET T01F04 = T01F04 + @TransactionValue WHERE T01F01 = @PortfolioId";
+                updateQuery = "UPDATE PRT01 SET T01F04 = T01F04 + @TransactionValue WHERE T01F02 = @PortfolioId";
             }
             // If it's a Sell transaction, decrease the portfolio's total value
             else if (objTRN01.N01F06 == "Sell")
             {
-                updateQuery = "UPDATE PRT01 SET T01F04 = T01F04 - @TransactionValue WHERE T01F01 = @PortfolioId";
+                updateQuery = "UPDATE PRT01 SET T01F04 = T01F04 - @TransactionValue WHERE T01F02 = @PortfolioId";
             }
 
             try
@@ -282,11 +330,18 @@ namespace StockPortfolioAPI.BL
                     connection.Open();
 
                     // Check if the stock already exists in the portfolio
-                    string checkQuery = DynamicQueryHelper.GenerateSelectQuery("PTS01", "S01F02 = @UserID AND S01F03 = @StockId");
+                    var whereConditions = new Dictionary<string, object>
+                    {
+                        { "S01F02", objTRN01.N01F02 }, // UserID
+                        { "S01F03", objTRN01.N01F03 } // StockId
+                    };
+                    string checkQuery = DynamicQueryHelper.GenerateSelectQuery("PTS01", whereConditions);
                     using (MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection))
                     {
-                        checkCommand.Parameters.AddWithValue("@UserID", objTRN01.N01F02);
-                        checkCommand.Parameters.AddWithValue("@StockId", objTRN01.N01F03);
+                        foreach (var param in whereConditions)
+                        {
+                            checkCommand.Parameters.AddWithValue(param.Key, param.Value);
+                        }
 
                         object result = checkCommand.ExecuteScalar();
                         bool stockExists = result != null && Convert.ToInt32(result) > 0;
@@ -301,7 +356,6 @@ namespace StockPortfolioAPI.BL
         S01F07 = S01F04 * S01F06, -- Total valuation (Quantity * Current Value)
         S01F09 = @ModifiedAt -- Update timestamp
     WHERE S01F02 = @UserID AND S01F03 = @StockId";
-
 
                             using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
                             {

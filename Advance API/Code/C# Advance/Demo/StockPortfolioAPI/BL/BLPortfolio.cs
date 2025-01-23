@@ -75,8 +75,8 @@ namespace StockPortfolioAPI.BL
             }
             else if (Type == EnmEntryType.E) // Update
             {
-                parameters.Add("T01F01", objPRT01.T01F01); // ID for WHERE clause
-                query = DynamicQueryHelper.GenerateUpdateQuery("PRT01", parameters, "T01F01");
+                var whereConditions = new Dictionary<string, object> { { "T01F01", objPRT01.T01F01 } }; // ID for WHERE clause
+                query = DynamicQueryHelper.GenerateUpdateQuery("PRT01", parameters, whereConditions);
             }
 
             try
@@ -98,6 +98,55 @@ namespace StockPortfolioAPI.BL
                         {
                             objResponse.IsError = false;
                             objResponse.Message = Type == EnmEntryType.A ? "Portfolio saved successfully." : "Portfolio updated successfully.";
+                        }
+                        else
+                        {
+                            objResponse.IsError = true;
+                            objResponse.Message = "No rows affected.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                objResponse.IsError = true;
+                objResponse.Message = $"An error occurred: {ex.Message}";
+            }
+
+            return objResponse;
+        }
+
+        /// <summary>
+        /// Deletes a portfolio from the database.
+        /// </summary>
+        /// <param name="id">The ID of the portfolio to delete.</param>
+        /// <returns>A response object indicating success or failure of the operation.</returns>
+        public Response Delete(int id)
+        {
+            string query = "";
+            var whereConditions = new Dictionary<string, object> { { "T01F01", id } };
+
+            try
+            {
+                query = DynamicQueryHelper.GenerateDeleteQuery("PRT01", whereConditions);
+
+                using (MySqlConnection connection = new MySqlConnection(BLConnection.ConnectionString))
+                {
+                    connection.Open();
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        foreach (var param in whereConditions)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            objResponse.IsError = false;
+                            objResponse.Message = "Portfolio deleted successfully.";
                         }
                         else
                         {
@@ -174,7 +223,8 @@ namespace StockPortfolioAPI.BL
             try
             {
                 // Generate the dynamic SELECT query to get the portfolio by user ID
-                string query = DynamicQueryHelper.GenerateSelectQuery("PRT01", $"T01F02 = {userID}");
+                var whereConditions = new Dictionary<string, object> { { "T01F02", userID } };
+                string query = DynamicQueryHelper.GenerateSelectQuery("PRT01", whereConditions);
 
                 using (MySqlConnection connection = new MySqlConnection(BLConnection.ConnectionString))
                 {
@@ -182,6 +232,11 @@ namespace StockPortfolioAPI.BL
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
+                        foreach (var param in whereConditions)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.HasRows)

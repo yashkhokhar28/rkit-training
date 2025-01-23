@@ -22,39 +22,45 @@ namespace StockPortfolioAPI.Helpers
         }
 
         /// <summary>
-        /// Generates an UPDATE SQL query for the specified table and columns.
+        /// Generates an UPDATE SQL query for the specified table and columns with dynamic WHERE conditions.
         /// </summary>
         /// <param name="tableName">The name of the table.</param>
         /// <param name="columns">A dictionary containing column names and their corresponding values.</param>
-        /// <param name="idColumn">The name of the column used to identify the row to update.</param>
+        /// <param name="whereConditions">A dictionary containing column names and their corresponding values for the WHERE clause.</param>
         /// <returns>A string representing the generated UPDATE SQL query.</returns>
-        public static string GenerateUpdateQuery(string tableName, Dictionary<string, object> columns, string idColumn)
+        public static string GenerateUpdateQuery(string tableName, Dictionary<string, object> columns, Dictionary<string, object> whereConditions)
         {
             string setClause = string.Join(", ", columns.Keys.Select(k => $"{k} = @{k}"));
-            return $"UPDATE {tableName} SET {setClause} WHERE {idColumn} = @{idColumn}";
+            string whereClause = string.Join(" AND ", whereConditions.Keys.Select(k => $"{k} = @{k}"));
+            return $"UPDATE {tableName} SET {setClause} WHERE {whereClause}";
         }
 
         /// <summary>
-        /// Generates a SELECT SQL query for the specified table with an optional WHERE clause.
+        /// Generates a SELECT SQL query for the specified table with dynamic WHERE conditions.
         /// </summary>
         /// <param name="tableName">The name of the table.</param>
-        /// <param name="whereClause">The optional WHERE clause to filter the results.</param>
+        /// <param name="whereConditions">A dictionary containing column names and their corresponding values for the WHERE clause.</param>
         /// <returns>A string representing the generated SELECT SQL query.</returns>
-        public static string GenerateSelectQuery(string tableName, string whereClause = "")
+        public static string GenerateSelectQuery(string tableName, Dictionary<string, object> whereConditions = null)
         {
-            return string.IsNullOrEmpty(whereClause)
-                ? $"SELECT * FROM {tableName}"
-                : $"SELECT * FROM {tableName} WHERE {whereClause}";
+            if (whereConditions == null || !whereConditions.Any())
+            {
+                return $"SELECT * FROM {tableName}";
+            }
+
+            string whereClause = string.Join(" AND ", whereConditions.Keys.Select(k => $"{k} = @{k}"));
+            return $"SELECT * FROM {tableName} WHERE {whereClause}";
         }
 
         /// <summary>
-        /// Generates a DELETE SQL query for the specified table with a WHERE clause.
+        /// Generates a DELETE SQL query for the specified table with dynamic WHERE conditions.
         /// </summary>
         /// <param name="tableName">The name of the table.</param>
-        /// <param name="whereClause">The WHERE clause to identify the rows to delete.</param>
+        /// <param name="whereConditions">A dictionary containing column names and their corresponding values for the WHERE clause.</param>
         /// <returns>A string representing the generated DELETE SQL query.</returns>
-        public static string GenerateDeleteQuery(string tableName, string whereClause)
+        public static string GenerateDeleteQuery(string tableName, Dictionary<string, object> whereConditions)
         {
+            string whereClause = string.Join(" AND ", whereConditions.Keys.Select(k => $"{k} = @{k}"));
             return $"DELETE FROM {tableName} WHERE {whereClause}";
         }
 
@@ -62,15 +68,20 @@ namespace StockPortfolioAPI.Helpers
         /// Constructs a dictionary of parameters for SQL queries.
         /// </summary>
         /// <param name="columns">A dictionary containing column names and their corresponding values.</param>
-        /// <param name="id">An optional ID value to be included in the parameters.</param>
+        /// <param name="whereConditions">A dictionary containing column names and their corresponding values for the WHERE clause.</param>
         /// <returns>A dictionary of parameters for the SQL query.</returns>
-        public static Dictionary<string, object> GetParameters(Dictionary<string, object> columns, int? id = null)
+        public static Dictionary<string, object> GetParameters(Dictionary<string, object> columns, Dictionary<string, object> whereConditions = null)
         {
             var parameters = new Dictionary<string, object>(columns);
-            if (id.HasValue)
+
+            if (whereConditions != null)
             {
-                parameters.Add($"@{columns.Keys.First()}", id.Value);
+                foreach (var condition in whereConditions)
+                {
+                    parameters.Add($"@{condition.Key}", condition.Value);
+                }
             }
+
             return parameters;
         }
     }
