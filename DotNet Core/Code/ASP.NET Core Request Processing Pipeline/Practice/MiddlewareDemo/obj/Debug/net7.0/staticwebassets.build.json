@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "R/6VuBVQ9ncSDjZII3Hm42fyim7WdFRFWkVZHiE+KFs=",
+  "Source": "MiddlewareDemo",
+  "BasePath": "_content/MiddlewareDemo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MiddlewareDemo\\wwwroot",
+      "Source": "MiddlewareDemo",
+      "ContentRoot": "F:\\Yash Khokhar\\DotNet Core\\Code\\ASP.NET Core Request Processing Pipeline\\Practice\\MiddlewareDemo\\wwwroot\\",
+      "BasePath": "_content/MiddlewareDemo",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "F:\\Yash Khokhar\\DotNet Core\\Code\\ASP.NET Core Request Processing Pipeline\\Practice\\MiddlewareDemo\\wwwroot\\sample.txt",
+      "SourceId": "MiddlewareDemo",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Yash Khokhar\\DotNet Core\\Code\\ASP.NET Core Request Processing Pipeline\\Practice\\MiddlewareDemo\\wwwroot\\",
+      "BasePath": "_content/MiddlewareDemo",
+      "RelativePath": "sample.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sample.txt"
+    }
+  ]
+}
