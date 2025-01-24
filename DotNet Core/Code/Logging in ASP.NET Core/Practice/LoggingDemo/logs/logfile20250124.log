@@ -1,0 +1,218 @@
+2025-01-24 15:56:51.817 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 15:56:51.884 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 15:56:51.891 +05:30 [INF] Hosting environment: Development
+2025-01-24 15:56:51.896 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 15:56:52.823 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger - -
+2025-01-24 15:56:52.959 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger - - - 301 0 - 145.0056ms
+2025-01-24 15:56:52.970 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 15:56:53.494 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 523.9262ms
+2025-01-24 15:56:53.495 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui.css - -
+2025-01-24 15:56:53.539 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-01-24 15:56:53.545 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui.css - - - 200 143943 text/css 49.3925ms
+2025-01-24 15:56:53.618 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui-bundle.js - -
+2025-01-24 15:56:53.626 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 15:56:53.624 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 15:56:53.672 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 45.6131ms
+2025-01-24 15:56:53.699 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-01-24 15:56:53.619 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui-standalone-preset.js - -
+2025-01-24 15:56:53.727 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 109.4114ms
+2025-01-24 15:56:53.759 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-01-24 15:56:53.777 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 158.5979ms
+2025-01-24 15:56:53.828 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 204.3044ms
+2025-01-24 15:56:54.134 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 15:56:54.194 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/favicon-32x32.png - -
+2025-01-24 15:56:54.202 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-01-24 15:56:54.221 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/favicon-32x32.png - - - 200 628 image/png 27.4238ms
+2025-01-24 15:56:54.307 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 172.7414ms
+2025-01-24 15:56:58.699 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 15:56:58.716 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 15:56:58.758 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 15:58:57.984 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 15:59:27.876 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 15:59:28.027 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 149246.9425ms
+2025-01-24 15:59:28.149 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 15:59:28.283 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 149582.1125ms
+2025-01-24 16:01:30.774 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:01:30.850 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:01:30.853 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:01:30.856 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:01:31.641 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:01:32.166 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 530.8800ms
+2025-01-24 16:01:32.290 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:01:32.301 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:01:32.308 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 19.2053ms
+2025-01-24 16:01:32.425 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 121.3338ms
+2025-01-24 16:01:32.833 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:01:33.051 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 217.6801ms
+2025-01-24 16:01:51.517 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:01:51.551 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:01:51.618 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:02:04.868 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:02:09.156 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:02:09.226 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 17532.8043ms
+2025-01-24 16:02:09.240 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:02:09.243 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 17725.4868ms
+2025-01-24 16:02:26.849 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/error - -
+2025-01-24 16:02:26.853 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:02:26.859 +05:30 [INF] Route matched with {action = "LogError", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogError() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:02:39.680 +05:30 [ERR] LoggingController: Error log message.
+2025-01-24 16:02:47.721 +05:30 [INF] SampleService: Performing a task.
+2025-01-24 16:02:56.271 +05:30 [ERR] Exception in SampleService.
+System.Exception: An error occurred in SampleService.
+   at LoggingDemo.Services.SampleService.PerformTask() in F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo\Services\SampleService.cs:line 30
+2025-01-24 16:03:07.891 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-01-24 16:03:08.055 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo) in 41188.5403ms
+2025-01-24 16:03:08.111 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:03:08.115 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/error - - - 500 - text/plain;+charset=utf-8 41265.1340ms
+2025-01-24 16:04:01.067 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:04:01.281 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:04:01.523 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:04:01.582 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:04:05.361 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:04:06.534 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 1177.8683ms
+2025-01-24 16:04:06.664 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:04:06.693 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 33.3411ms
+2025-01-24 16:04:07.008 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:04:07.598 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 589.6287ms
+2025-01-24 16:04:07.866 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:04:08.258 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 392.0039ms
+2025-01-24 16:04:49.754 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:04:49.972 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:04:50.072 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:04:50.423 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:04:50.666 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:04:50.680 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 258.3891ms
+2025-01-24 16:04:50.690 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:04:50.693 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 939.1355ms
+2025-01-24 16:04:59.698 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/error - -
+2025-01-24 16:04:59.704 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:04:59.717 +05:30 [INF] Route matched with {action = "LogError", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogError() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:04:59.743 +05:30 [ERR] LoggingController: Error log message.
+2025-01-24 16:04:59.746 +05:30 [INF] SampleService: Performing a task.
+2025-01-24 16:04:59.754 +05:30 [ERR] Exception in SampleService.
+System.Exception: An error occurred in SampleService.
+   at LoggingDemo.Services.SampleService.PerformTask() in F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo\Services\SampleService.cs:line 30
+2025-01-24 16:04:59.783 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-01-24 16:04:59.791 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo) in 51.4023ms
+2025-01-24 16:04:59.811 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:04:59.816 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/error - - - 500 - text/plain;+charset=utf-8 117.8899ms
+2025-01-24 16:13:19.748 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:13:20.314 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:13:20.360 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:13:20.374 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:13:29.376 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:13:30.972 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 1601.5958ms
+2025-01-24 16:13:31.359 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:13:31.372 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:13:31.389 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 15.7342ms
+2025-01-24 16:13:32.958 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 1600.0630ms
+2025-01-24 16:13:33.918 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:13:35.455 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 1536.9054ms
+2025-01-24 16:14:47.846 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:14:47.858 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:14:47.886 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:14:47.894 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:14:47.905 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:14:47.914 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 18.1706ms
+2025-01-24 16:14:47.921 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:14:47.924 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 78.0729ms
+2025-01-24 16:15:52.456 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:15:52.507 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:15:52.514 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:15:52.514 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:15:53.386 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:15:53.822 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 446.4475ms
+2025-01-24 16:15:53.913 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:15:53.917 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:15:53.920 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 3.2150ms
+2025-01-24 16:15:53.943 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 29.5989ms
+2025-01-24 16:15:54.043 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:15:54.197 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 154.2162ms
+2025-01-24 16:16:15.029 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:16:15.050 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 21.2314ms
+2025-01-24 16:16:15.084 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:16:15.085 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 0.6909ms
+2025-01-24 16:16:15.086 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:16:15.116 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 30.6788ms
+2025-01-24 16:16:15.559 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:16:15.561 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 2.0333ms
+2025-01-24 16:16:18.922 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:16:18.931 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:16:18.974 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:16:18.978 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:16:18.989 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:16:18.999 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 17.2783ms
+2025-01-24 16:16:19.002 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:16:19.002 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 79.9000ms
+2025-01-24 16:16:32.889 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:16:33.041 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 150.1217ms
+2025-01-24 16:16:33.328 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:16:33.331 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 1.9941ms
+2025-01-24 16:16:33.355 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:16:33.386 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 31.1806ms
+2025-01-24 16:16:33.616 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:16:33.619 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 3.0902ms
+2025-01-24 16:16:39.675 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/error - -
+2025-01-24 16:16:39.677 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:16:39.681 +05:30 [INF] Route matched with {action = "LogError", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogError() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:16:39.683 +05:30 [ERR] LoggingController: Error log message.
+2025-01-24 16:16:39.684 +05:30 [INF] SampleService: Performing a task.
+2025-01-24 16:16:39.685 +05:30 [ERR] Exception in SampleService.
+System.Exception: An error occurred in SampleService.
+   at LoggingDemo.Services.SampleService.PerformTask() in F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo\Services\SampleService.cs:line 30
+2025-01-24 16:16:39.721 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-01-24 16:16:39.722 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo) in 40.2135ms
+2025-01-24 16:16:39.722 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:16:39.722 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/error - - - 500 - text/plain;+charset=utf-8 46.9739ms
+2025-01-24 16:18:10.412 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:18:10.726 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:18:10.728 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:18:10.728 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:18:11.400 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:18:12.400 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 1011.2524ms
+2025-01-24 16:18:12.625 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:18:12.625 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:18:12.630 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 5.1267ms
+2025-01-24 16:18:12.778 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 153.8431ms
+2025-01-24 16:18:13.303 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:18:13.495 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 191.8952ms
+2025-01-24 16:18:24.494 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:18:24.532 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:18:24.594 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:18:33.722 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:18:38.143 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:18:38.150 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 13550.2269ms
+2025-01-24 16:18:38.151 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:18:38.152 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 13657.2321ms
+2025-01-24 16:18:53.523 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/error - -
+2025-01-24 16:18:53.525 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:18:53.529 +05:30 [INF] Route matched with {action = "LogError", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogError() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:19:16.177 +05:30 [ERR] LoggingController: Error log message.
+2025-01-24 16:19:22.455 +05:30 [INF] SampleService: Performing a task.
+2025-01-24 16:19:32.684 +05:30 [ERR] Exception in SampleService.
+System.Exception: An error occurred in SampleService.
+   at LoggingDemo.Services.SampleService.PerformTask() in F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo\Services\SampleService.cs:line 30
+2025-01-24 16:19:37.142 +05:30 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-01-24 16:19:37.197 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo) in 43666.9031ms
+2025-01-24 16:19:37.197 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogError (LoggingDemo)'
+2025-01-24 16:19:37.197 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/error - - - 500 - text/plain;+charset=utf-8 43673.5762ms
+2025-01-24 16:24:32.734 +05:30 [INF] Now listening on: http://localhost:5032
+2025-01-24 16:24:33.635 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-24 16:24:33.851 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/index.html - -
+2025-01-24 16:24:34.109 +05:30 [INF] Hosting environment: Development
+2025-01-24 16:24:34.534 +05:30 [INF] Content root path: F:\Yash Khokhar\DotNet Core\Code\Logging in ASP.NET Core\Practice\LoggingDemo
+2025-01-24 16:24:35.590 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/index.html - - - 200 - text/html;charset=utf-8 1749.8158ms
+2025-01-24 16:24:35.881 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - -
+2025-01-24 16:24:36.042 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/_vs/browserLink - -
+2025-01-24 16:24:36.573 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_framework/aspnetcore-browser-refresh.js - - - 200 11992 application/javascript;+charset=utf-8 692.3833ms
+2025-01-24 16:24:36.732 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 690.0199ms
+2025-01-24 16:24:36.952 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - -
+2025-01-24 16:24:37.752 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 798.4898ms
+2025-01-24 16:24:42.151 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5032/api/Logging/info - -
+2025-01-24 16:24:42.248 +05:30 [INF] Executing endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:24:42.538 +05:30 [INF] Route matched with {action = "LogInfo", controller = "Logging"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult LogInfo() on controller LoggingDemo.Controllers.LoggingController (LoggingDemo).
+2025-01-24 16:24:42.826 +05:30 [INF] LoggingController: Info log message.
+2025-01-24 16:24:43.039 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-01-24 16:24:43.057 +05:30 [INF] Executed action LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo) in 229.1208ms
+2025-01-24 16:24:43.066 +05:30 [INF] Executed endpoint 'LoggingDemo.Controllers.LoggingController.LogInfo (LoggingDemo)'
+2025-01-24 16:24:43.156 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5032/api/Logging/info - - - 200 - text/plain;+charset=utf-8 1005.4000ms

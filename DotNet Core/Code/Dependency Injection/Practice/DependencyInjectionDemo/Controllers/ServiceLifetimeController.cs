@@ -1,5 +1,4 @@
 ﻿using DependencyInjectionDemo.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DependencyInjectionDemo.Controllers
