@@ -4,6 +4,16 @@ using MiddlewareDemo.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Startup class integration
+//var startup = new MiddlewareDemo.Startup();
+//startup.ConfigureServices(builder.Services);
+
+//var app = builder.Build();
+//startup.Configure(app, app.Environment);
+
+//app.Run();
+
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -59,12 +69,12 @@ var app = builder.Build();
 // Inline middleware is a quick, one-off middleware definition using lambda expressions.
 // It logs request and response information directly within the pipeline.
 
-// app.Use(async (context, next) =>
-// {
-//     Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
-//     await next();
-//     Console.WriteLine($"Response: {context.Response.StatusCode}");
-// });
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
+    await next();
+    Console.WriteLine($"Response: {context.Response.StatusCode}");
+});
 
 // Calling middleware using Chaining Middleware
 // In this case, we have two chained middleware components. Each one logs before and after the next middleware runs.
@@ -94,7 +104,7 @@ var app = builder.Build();
 // Use Static Files Middleware 
 // If your application serves static content (e.g., images, CSS, JavaScript files), use this middleware.
 
-// app.UseStaticFiles();
+app.UseStaticFiles();
 
 // Use routing and map the controllers (this part is essential for routing)
 app.UseRouting();    // Enables routing to controllers or endpoints
