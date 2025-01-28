@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\publish</_PublishTargetUrl>
+    <History>True|2025-01-28T10:57:43.6426612Z;True|2025-01-28T16:25:08.6164759+05:30;True|2025-01-28T16:23:19.2306405+05:30;True|2025-01-28T16:22:28.6671403+05:30;True|2025-01-28T16:20:23.0922024+05:30;True|2025-01-28T16:17:25.5677414+05:30;True|2025-01-28T16:16:48.1839825+05:30;True|2025-01-28T16:05:21.4952481+05:30;True|2025-01-28T16:05:00.4789123+05:30;True|2025-01-28T15:57:16.9418998+05:30;True|2025-01-28T15:55:48.8797137+05:30;True|2025-01-28T15:55:03.1530137+05:30;True|2025-01-28T15:54:32.4065679+05:30;False|2025-01-28T15:53:49.8569430+05:30;False|2025-01-28T15:53:15.6614510+05:30;True|2025-01-28T15:50:18.9107157+05:30;True|2025-01-28T15:49:32.4209776+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -1,5 +1,4 @@
 F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\bin\Debug\net7.0\appsettings.Development.json
-F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\bin\Debug\net7.0\appsettings.json
 F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\bin\Debug\net7.0\FundamentalDemo.staticwebassets.runtime.json
 F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\bin\Debug\net7.0\FundamentalDemo.exe
 F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\bin\Debug\net7.0\FundamentalDemo.deps.json

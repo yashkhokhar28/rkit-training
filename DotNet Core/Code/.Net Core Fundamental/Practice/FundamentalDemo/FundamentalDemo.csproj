@@ -6,4 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!--<ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>-->
+	<!--<ItemGroup>
+		<Content Update="appsettings.*.json" CopyToPublishDirectory="Never" />
+		<Content Update="appsettings.$(MSBuildThisFileName).json" CopyToPublishDirectory="PreserveNewest" />
+	</ItemGroup>-->
+	<!--<ItemGroup>
+		<Content Remove="appsettings.*.json" />
+	</ItemGroup>-->
+
+	<!--<ItemGroup>
+		<None Remove="appsettings.*.json" />
+	</ItemGroup>-->
+
+
+
 </Project>

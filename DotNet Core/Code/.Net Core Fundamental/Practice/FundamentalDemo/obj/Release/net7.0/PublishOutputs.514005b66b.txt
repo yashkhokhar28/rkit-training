@@ -1,0 +1,5 @@
+F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\obj\Release\net7.0\PubTmp\Out\FundamentalDemo.exe
+F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\obj\Release\net7.0\PubTmp\Out\FundamentalDemo.dll
+F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\obj\Release\net7.0\PubTmp\Out\FundamentalDemo.deps.json
+F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\obj\Release\net7.0\PubTmp\Out\FundamentalDemo.runtimeconfig.json
+F:\Yash Khokhar\DotNet Core\Code\.Net Core Fundamental\Practice\FundamentalDemo\obj\Release\net7.0\PubTmp\Out\FundamentalDemo.pdb
