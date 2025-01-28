@@ -1,9 +1,11 @@
 ﻿using ContactBookAPI.BL;
+using ContactBookAPI.Filters;
 using ContactBookAPI.Models;
 using ContactBookAPI.Models.DTO;
 using ContactBookAPI.Models.ENUM;
 using ContactBookAPI.Models.POCO;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace ContactBookAPI.Controllers
 {
@@ -12,83 +14,83 @@ namespace ContactBookAPI.Controllers
     public class CLContactsController : ControllerBase
     {
         public BLContactBook objBLContactBook;
+        private readonly Response _objResponse;
+        private readonly BLConverter _objBLConverter;
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public Response objResponse;
-
-        public BLConverter objBLConverter;
-
-        public CLContactsController()
+        public CLContactsController(
+            Response objResponse,
+            BLConverter objBLConverter)
         {
             objBLContactBook = new BLContactBook();
-            objResponse = new Response();
-            objBLConverter = new BLConverter();
+            _objResponse = objResponse;
+            _objBLConverter = objBLConverter;
         }
 
         [HttpGet]
         [Route("GetAllContacts")]
         public IActionResult Get()
         {
+            _logger.Info("CLContactsController: Get method called");
             List<CNT01> lstContacts = objBLContactBook.GetAllContacts();
             if (lstContacts.Count > 0)
             {
-                objResponse.IsError = false;
-                objResponse.Message = "Ok";
-                objResponse.Data = objBLConverter.ToDataTable(lstContacts);
+                _objResponse.IsError = false;
+                _objResponse.Message = "Ok";
+                _objResponse.Data = _objBLConverter.ToDataTable(lstContacts);
             }
             else
             {
-                objResponse.IsError = true;
-                objResponse.Message = "Not Found";
-                objResponse.Data = null;
+                _objResponse.IsError = true;
+                _objResponse.Message = "Not Found";
+                _objResponse.Data = null;
             }
-            return Ok(objResponse);
+            return Ok(_objResponse);
         }
 
         [HttpGet]
-        [Route("GetContactsByID")]
+        [Route("GetContactsByID/{ID}")]
+        [ServiceFilter(typeof(CustomValidationFilter))]
         public IActionResult GetByID(int ID)
         {
             CNT01 objCNT01 = objBLContactBook.GetUserByID(ID);
             if (objCNT01 != null)
             {
-                objResponse.IsError = false;
-                objResponse.Message = "Ok";
-                objResponse.Data = objBLConverter.ObjectToDataTable(objCNT01);
+                _objResponse.IsError = false;
+                _objResponse.Message = "Ok";
+                _objResponse.Data = _objBLConverter.ObjectToDataTable(objCNT01);
             }
             else
             {
-                objResponse.IsError = true;
-                objResponse.Message = "Not Found";
-                objResponse.Data = null;
+                _objResponse.IsError = true;
+                _objResponse.Message = "Not Found";
+                _objResponse.Data = null;
             }
-            return Ok(objResponse);
+            return Ok(_objResponse);
         }
 
         [HttpDelete]
-        [Route("DeleteContactsByID")]
+        [Route("DeleteContactsByID/{ID}")]
+        [ServiceFilter(typeof(CustomValidationFilter))]
         public IActionResult Delete(int ID)
         {
             int result = objBLContactBook.Delete(ID);
             if (result > 0)
             {
-                objResponse.IsError = false;
-                objResponse.Message = "Data Deleted Successfully";
+                _objResponse.IsError = false;
+                _objResponse.Message = "Data Deleted Successfully";
             }
             else
             {
-                objResponse.IsError = true;
-                objResponse.Message = "Error Occure in Delete";
+                _objResponse.IsError = true;
+                _objResponse.Message = "Error Occurred in Delete";
             }
-            return Ok(objResponse);
+            return Ok(_objResponse);
         }
 
-        /// <summary>
-        /// Updates the current user's information.
-        /// </summary>
-        /// <param name="objDTOUSR01">The user data transfer object with updated information.</param>
-        /// <returns>The response indicating success or failure.</returns>
         [HttpPut]
         [Route("UpdateContacts")]
+        [ServiceFilter(typeof(CustomValidationFilter))]
         public IActionResult UpdateContacts([FromBody] DTOCNT01 objDTOCNT01)
         {
             objBLContactBook.Type = EnmEntryType.E;
@@ -100,18 +102,13 @@ namespace ContactBookAPI.Controllers
                 return Ok(objResponse.Message);
             }
 
-            objResponse = objBLContactBook.Save();  // Update user using BL
+            objResponse = objBLContactBook.Save();
             return Ok(objResponse);
         }
 
-
-        /// <summary>
-        /// Updates the current user's information.
-        /// </summary>
-        /// <param name="objDTOUSR01">The user data transfer object with updated information.</param>
-        /// <returns>The response indicating success or failure.</returns>
         [HttpPost]
         [Route("InsertContacts")]
+        [ServiceFilter(typeof(CustomValidationFilter))]
         public IActionResult InsertContacts([FromBody] DTOCNT01 objDTOCNT01)
         {
             objBLContactBook.Type = EnmEntryType.A;
@@ -122,7 +119,7 @@ namespace ContactBookAPI.Controllers
             {
                 return Ok(objResponse.Message);
             }
-            objResponse = objBLContactBook.Save();  // Update user using BL
+            objResponse = objBLContactBook.Save();
             return Ok(objResponse);
         }
     }

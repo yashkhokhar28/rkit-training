@@ -219,9 +219,9 @@ namespace ContactBookAPI.BL
                 else if (Type == EnmEntryType.E) // Update
                 {
                     whereConditions = new Dictionary<string, object>
-            {
-                { "T01F01", objCNT01.T01F01 } // ID for WHERE clause
-            };
+                    {
+                        { "T01F01", objCNT01.T01F01 } // ID for WHERE clause
+                    };
                     query = DynamicQueryHelper.GenerateUpdateQuery("CNT01", parameters, whereConditions);
                 }
 
