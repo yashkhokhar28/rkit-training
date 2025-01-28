@@ -9,15 +9,38 @@ using NLog;
 
 namespace ContactBookAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing contacts in the Contact Book API.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CLContactsController : ControllerBase
     {
+        /// <summary>
+        /// Business logic object for contact book operations.
+        /// </summary>
         public BLContactBook objBLContactBook;
+
+        /// <summary>
+        /// Response object to hold the result data.
+        /// </summary>
         private readonly Response _objResponse;
+
+        /// <summary>
+        /// Converter object for data transformation.
+        /// </summary>
         private readonly BLConverter _objBLConverter;
+
+        /// <summary>
+        /// Logger for logging information, warnings, and errors.
+        /// </summary>
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CLContactsController"/> class.
+        /// </summary>
+        /// <param name="objResponse">The response object.</param>
+        /// <param name="objBLConverter">The converter object.</param>
         public CLContactsController(
             Response objResponse,
             BLConverter objBLConverter)
@@ -27,6 +50,10 @@ namespace ContactBookAPI.Controllers
             _objBLConverter = objBLConverter;
         }
 
+        /// <summary>
+        /// Retrieves all contacts from the database.
+        /// </summary>
+        /// <returns>A response object containing the list of contacts.</returns>
         [HttpGet]
         [Route("GetAllContacts")]
         public IActionResult Get()
@@ -48,6 +75,11 @@ namespace ContactBookAPI.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Retrieves a contact by ID from the database.
+        /// </summary>
+        /// <param name="ID">The contact ID.</param>
+        /// <returns>A response object containing the contact details.</returns>
         [HttpGet]
         [Route("GetContactsByID/{ID}")]
         [ServiceFilter(typeof(CustomValidationFilter))]
@@ -69,6 +101,11 @@ namespace ContactBookAPI.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Deletes a contact by ID from the database.
+        /// </summary>
+        /// <param name="ID">The contact ID.</param>
+        /// <returns>A response object with the result of the delete operation.</returns>
         [HttpDelete]
         [Route("DeleteContactsByID/{ID}")]
         [ServiceFilter(typeof(CustomValidationFilter))]
@@ -88,6 +125,11 @@ namespace ContactBookAPI.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Updates the contact details in the database.
+        /// </summary>
+        /// <param name="objDTOCNT01">The contact DTO object.</param>
+        /// <returns>A response object with the result of the update operation.</returns>
         [HttpPut]
         [Route("UpdateContacts")]
         [ServiceFilter(typeof(CustomValidationFilter))]
@@ -106,6 +148,11 @@ namespace ContactBookAPI.Controllers
             return Ok(objResponse);
         }
 
+        /// <summary>
+        /// Inserts a new contact into the database.
+        /// </summary>
+        /// <param name="objDTOCNT01">The contact DTO object.</param>
+        /// <returns>A response object with the result of the insert operation.</returns>
         [HttpPost]
         [Route("InsertContacts")]
         [ServiceFilter(typeof(CustomValidationFilter))]

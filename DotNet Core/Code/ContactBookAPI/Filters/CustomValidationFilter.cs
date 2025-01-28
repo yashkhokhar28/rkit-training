@@ -3,8 +3,15 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ContactBookAPI.Filters
 {
+    /// <summary>
+    /// Custom validation filter to validate route parameters and model state.
+    /// </summary>
     public class CustomValidationFilter : IActionFilter
     {
+        /// <summary>
+        /// Called before the action executes. Validates the route parameter "ID" and the model state.
+        /// </summary>
+        /// <param name="context">The action executing context.</param>
         public void OnActionExecuting(ActionExecutingContext context)
         {
             // Check if the route parameter "ID" exists in the ActionArguments
@@ -15,6 +22,7 @@ namespace ContactBookAPI.Filters
                 // Validate that ID is a positive integer
                 if (id is int idValue && idValue <= 0)
                 {
+                    // Return a bad request response if the ID is not valid
                     context.Result = new BadRequestObjectResult("ID must be greater than 0.");
                     return;
                 }
@@ -23,11 +31,16 @@ namespace ContactBookAPI.Filters
             // Optionally, validate the model state for body-based parameters (POST/PUT requests)
             if (!context.ModelState.IsValid)
             {
+                // Return a bad request response if the model state is not valid
                 context.Result = new BadRequestObjectResult(context.ModelState);
                 return;
             }
         }
 
+        /// <summary>
+        /// Called after the action executes. This method is optional and can be used to add logic after the action executes.
+        /// </summary>
+        /// <param name="context">The action executed context.</param>
         public void OnActionExecuted(ActionExecutedContext context)
         {
             // Logic after the action executes (optional)

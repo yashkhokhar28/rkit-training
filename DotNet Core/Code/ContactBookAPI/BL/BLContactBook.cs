@@ -34,8 +34,14 @@ namespace ContactBookAPI.BL
         /// </summary>
         public int id;
 
+        /// <summary>
+        /// Converter object for data transformation
+        /// </summary>
         public BLConverter objBLConverter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BLContactBook"/> class.
+        /// </summary>
         public BLContactBook()
         {
             _connectionString = BLConnection.ConnectionString;
@@ -44,8 +50,9 @@ namespace ContactBookAPI.BL
         }
 
         /// <summary>
-        /// Retrieves all contacts from the database
+        /// Retrieves all contacts from the database.
         /// </summary>
+        /// <returns>A list of contact objects.</returns>
         public List<CNT01> GetAllContacts()
         {
             string query = DynamicQueryHelper.GenerateSelectQuery("CNT01");
@@ -94,10 +101,10 @@ namespace ContactBookAPI.BL
         }
 
         /// <summary>
-        /// Retrieves a user by their ID.
+        /// Retrieves a contact by ID from the database.
         /// </summary>
-        /// <param name="id">The user ID.</param>
-        /// <returns>A response object containing the user data or an error message.</returns>
+        /// <param name="id">The contact ID.</param>
+        /// <returns>The contact object if found, otherwise null.</returns>
         public CNT01 GetUserByID(int id)
         {
             // Create the query with the where condition
@@ -155,10 +162,10 @@ namespace ContactBookAPI.BL
         }
 
         /// <summary>
-        /// Deletes a user by their ID.
+        /// Deletes a contact by ID from the database.
         /// </summary>
-        /// <param name="id">The user ID.</param>
-        /// <returns>A response object indicating success or failure of the operation.</returns>
+        /// <param name="id">The contact ID.</param>
+        /// <returns>The number of rows affected.</returns>
         public int Delete(int id)
         {
             string query = "";
@@ -191,9 +198,9 @@ namespace ContactBookAPI.BL
         }
 
         /// <summary>
-        /// Saves a contact (insert or update).
+        /// Saves the contact data to the database.
         /// </summary>
-        /// <returns>A response object indicating success or failure of the operation.</returns>
+        /// <returns>The response object with the result of the save operation.</returns>
         public Response Save()
         {
             int result = 0;
@@ -263,9 +270,9 @@ namespace ContactBookAPI.BL
         }
 
         /// <summary>
-        /// Prepares the contact data for saving (insert or update).
+        /// Prepares the contact data for saving.
         /// </summary>
-        /// <param name="objDTOCNT01">The contact data transfer object.</param>
+        /// <param name="objDTOCNT01">The contact DTO object.</param>
         public void PreSave(DTOCNT01 objDTOCNT01)
         {
             objCNT01 = objDTOCNT01.Convert<CNT01>();
@@ -293,8 +300,7 @@ namespace ContactBookAPI.BL
         /// <summary>
         /// Validates the contact data before saving.
         /// </summary>
-        /// <param name="contactID">The contact ID for validation.</param>
-        /// <returns>A response object indicating success or failure of the validation.</returns>
+        /// <returns>The response object with the result of the validation.</returns>
         public Response Validation()
         {
             if (Type == EnmEntryType.E && id <= 0)
