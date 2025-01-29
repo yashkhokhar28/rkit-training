@@ -12,9 +12,6 @@ try
 
     // Add services to the container.
     builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-    builder.Services.AddTransient<BLContactBook>();
-    builder.Services.AddTransient<Response>();
-    builder.Services.AddTransient<BLConverter>();
     builder.Services.AddTransient<CustomValidationFilter>();
 
     // Add CORS Policy

@@ -5,8 +5,15 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Configure Serilog as a logging provider
+// Add Custom Logger Provider
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders(); // Remove default logging providers
+    logging.AddProvider(new CustomLoggerProvider()); // Add Custom Logger
+});
+
+//Add services to the container.
+ //Configure Serilog as a logging provider
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()  // Output logs to the console
     .WriteTo.File("logs/logfile.log", rollingInterval: RollingInterval.Day)  // Output logs to a file with daily rolling interval
@@ -18,8 +25,6 @@ builder.Host.UseSerilog();  // Set Serilog as the logging provider for the appli
 builder.Services.AddLogging(logging =>
 {
     logging.AddConsole();    // Console logging provider
-    logging.AddDebug();      // Debug logging provider
-    logging.AddProvider(new CustomLoggerProvider()); // Custom logging provider
 });
 
 builder.Services.AddControllers();  // Add controller services to the container

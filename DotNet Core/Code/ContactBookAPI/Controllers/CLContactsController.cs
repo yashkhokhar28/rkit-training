@@ -24,12 +24,12 @@ namespace ContactBookAPI.Controllers
         /// <summary>
         /// Response object to hold the result data.
         /// </summary>
-        private readonly Response _objResponse;
+        public Response objResponse;
 
         /// <summary>
         /// Converter object for data transformation.
         /// </summary>
-        private readonly BLConverter _objBLConverter;
+        public BLConverter objBLConverter;
 
         /// <summary>
         /// Logger for logging information, warnings, and errors.
@@ -41,13 +41,11 @@ namespace ContactBookAPI.Controllers
         /// </summary>
         /// <param name="objResponse">The response object.</param>
         /// <param name="objBLConverter">The converter object.</param>
-        public CLContactsController(
-            Response objResponse,
-            BLConverter objBLConverter)
+        public CLContactsController()
         {
             objBLContactBook = new BLContactBook();
-            _objResponse = objResponse;
-            _objBLConverter = objBLConverter;
+            objBLConverter = new BLConverter();
+            objResponse = new Response();
         }
 
         /// <summary>
@@ -62,17 +60,17 @@ namespace ContactBookAPI.Controllers
             List<CNT01> lstContacts = objBLContactBook.GetAllContacts();
             if (lstContacts.Count > 0)
             {
-                _objResponse.IsError = false;
-                _objResponse.Message = "Ok";
-                _objResponse.Data = _objBLConverter.ToDataTable(lstContacts);
+                objResponse.IsError = false;
+                objResponse.Message = "Ok";
+                objResponse.Data = objBLConverter.ToDataTable(lstContacts);
             }
             else
             {
-                _objResponse.IsError = true;
-                _objResponse.Message = "Not Found";
-                _objResponse.Data = null;
+                objResponse.IsError = true;
+                objResponse.Message = "Not Found";
+                objResponse.Data = null;
             }
-            return Ok(_objResponse);
+            return Ok(objResponse);
         }
 
         /// <summary>
@@ -88,17 +86,17 @@ namespace ContactBookAPI.Controllers
             CNT01 objCNT01 = objBLContactBook.GetUserByID(ID);
             if (objCNT01 != null)
             {
-                _objResponse.IsError = false;
-                _objResponse.Message = "Ok";
-                _objResponse.Data = _objBLConverter.ObjectToDataTable(objCNT01);
+                objResponse.IsError = false;
+                objResponse.Message = "Ok";
+                objResponse.Data = objBLConverter.ObjectToDataTable(objCNT01);
             }
             else
             {
-                _objResponse.IsError = true;
-                _objResponse.Message = "Not Found";
-                _objResponse.Data = null;
+                objResponse.IsError = true;
+                objResponse.Message = "Not Found";
+                objResponse.Data = null;
             }
-            return Ok(_objResponse);
+            return Ok(objResponse);
         }
 
         /// <summary>
@@ -114,15 +112,15 @@ namespace ContactBookAPI.Controllers
             int result = objBLContactBook.Delete(ID);
             if (result > 0)
             {
-                _objResponse.IsError = false;
-                _objResponse.Message = "Data Deleted Successfully";
+                objResponse.IsError = false;
+                objResponse.Message = "Data Deleted Successfully";
             }
             else
             {
-                _objResponse.IsError = true;
-                _objResponse.Message = "Error Occurred in Delete";
+                objResponse.IsError = true;
+                objResponse.Message = "Error Occurred in Delete";
             }
-            return Ok(_objResponse);
+            return Ok(objResponse);
         }
 
         /// <summary>

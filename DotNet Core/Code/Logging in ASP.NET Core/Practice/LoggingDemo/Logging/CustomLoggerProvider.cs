@@ -55,8 +55,11 @@
         /// <param name="formatter">The function to create a log message from the state and exception.</param>
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
+            if (!IsEnabled(logLevel))
+                return;
+
             var logMessage = formatter(state, exception);
-            Console.WriteLine($"[CustomLogger] {logLevel}: {logMessage}");
+            Console.WriteLine($"[CustomLogger] {logLevel}: {logMessage}"); // Ensure it logs to console
         }
     }
 }

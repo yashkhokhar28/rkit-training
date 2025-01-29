@@ -9,7 +9,7 @@ builder.Services.AddScoped<OrderService>();
 
 // Register PaymentService (PayPal or Stripe can be selected based on the need)
 // Default is PayPalPaymentService
-builder.Services.AddTransient<IPaymentService, PayPalPaymentService>();  // Use PayPal by default
+builder.Services.AddTransient<IPaymentService, PayPalPaymentService>(); 
 // builder.Services.AddScoped<IPaymentService, StripePaymentService>(); 
 
 // Register other services with appropriate lifetimes
