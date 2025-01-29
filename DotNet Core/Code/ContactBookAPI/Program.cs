@@ -11,13 +11,20 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    // Register the configuration to read connection strings
     builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
     builder.Services.AddTransient<BLContactBook>();
     builder.Services.AddTransient<Response>();
     builder.Services.AddTransient<BLConverter>();
     builder.Services.AddTransient<CustomValidationFilter>();
-;
+
+    // Add CORS Policy
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAll",
+            policy => policy.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+    });
 
     builder.Services.AddControllers(options =>
     {
@@ -40,12 +47,13 @@ try
         app.UseDeveloperExceptionPage();
     }
 
-    app.UseAuthorization();
+    // Enable CORS globally
+    app.UseCors("AllowAll");
 
+    app.UseAuthorization();
     app.MapControllers();
 
     app.Run();
-
 }
 catch (Exception exception)
 {
@@ -56,5 +64,3 @@ finally
 {
     NLog.LogManager.Shutdown();
 }
-
-

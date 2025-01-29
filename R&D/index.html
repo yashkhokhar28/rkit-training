@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h2,
+        h4 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        const API_BASE_URL = "http://localhost:5102/api/CLContacts"; // Update with your API URL
+
+        // Fetch all contacts
+        async function fetchAllContacts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/GetAllContacts`);
+                const data = await response.json();
+                console.log(data.data);
+                displayContacts(data.data);
+            } catch (error) {
+                console.error("Error fetching contacts:", error);
+            }
+        }
+
+        // Fetch contact by ID
+        async function fetchContactByID() {
+            const contactID = document.getElementById("contactID").value;
+            if (!contactID) {
+                alert("Please enter a contact ID.");
+                return;
+            }
+            try {
+                const response = await fetch(`${API_BASE_URL}/GetContactsByID/${contactID}`);
+                const data = await response.json();
+                displayContacts([data.Data]); // Display single contact
+            } catch (error) {
+                console.error("Error fetching contact:", error);
+            }
+        }
+
+        // Insert a new contact
+        async function insertContact() {
+            const firstName = document.getElementById("contactFirstName").value;
+            const lastName = document.getElementById("contactLastName").value;
+            const email = document.getElementById("contactEmail").value;
+            const phone = document.getElementById("contactPhone").value;
+            const address = document.getElementById("contactAddress").value;
+
+            if (!firstName || !lastName || !email || !phone || !address) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            const newContact = {
+                T01102: firstName,
+                T01103: lastName,
+                T01104: email,
+                T01105: phone,
+                T01106: address
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/InsertContacts`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newContact)
+                });
+
+                const data = await response.json();
+                alert(data.Message);
+                fetchAllContacts(); // Refresh the contact list
+            } catch (error) {
+                console.error("Error inserting contact:", error);
+            }
+        }
+
+        // Update contact
+        async function updateContact() {
+            const contactID = document.getElementById("updateContactID").value;
+            const firstName = document.getElementById("updateContactFirstName").value;
+            const lastName = document.getElementById("updateContactLastName").value;
+            const email = document.getElementById("updateContactEmail").value;
+            const phone = document.getElementById("updateContactPhone").value;
+            const address = document.getElementById("updateContactAddress").value;
+
+            if (!contactID || !firstName || !lastName || !email || !phone || !address) {
+                alert("Please enter all details.");
+                return;
+            }
+
+            const updatedContact = {
+                CNT01F01: contactID,
+                CNT01F02: firstName,
+                CNT01F03: lastName,
+                CNT01F04: email,
+                CNT01F05: phone,
+                CNT01F06: address
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/UpdateContacts`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedContact)
+                });
+                const data = await response.json();
+                alert(data.Message);
+                fetchAllContacts();
+            } catch (error) {
+                console.error("Error updating contact:", error);
+            }
+        }
+
+        // Delete contact
+        async function deleteContact() {
+            const contactID = document.getElementById("deleteContactID").value;
+            if (!contactID) {
+                alert("Please enter a contact ID.");
+                return;
+            }
+            try {
+                const response = await fetch(`${API_BASE_URL}/DeleteContactsByID/${contactID}`, { method: "DELETE" });
+                const data = await response.json();
+                alert(data.Message);
+                fetchAllContacts();
+            } catch (error) {
+                console.error("Error deleting contact:", error);
+            }
+        }
+
+        // Display contacts in a table
+        function displayContacts(contacts) {
+            console.log(contacts[0]);
+            const tableBody = document.getElementById("contactsTableBody");
+            tableBody.innerHTML = "";
+            if (!contacts || contacts.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='6'>No contacts found.</td></tr>";
+                return;
+            }
+            contacts.forEach(contact => {
+                let row = `<tr>
+                    <td>${contact.t01F01 || "-"}</td>
+                    <td>${contact.t01F02 || "-"}</td>
+                    <td>${contact.t01F03 || "-"}</td>
+                    <td>${contact.t01F04 || "-"}</td>
+                    <td>${contact.t01F05 || "-"}</td>
+                    <td>${contact.t01F06 || "-"}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+    </script>
+</head>
+
+<body class="container mt-4">
+
+    <h2>Contact Book API</h2>
+
+    <button class="btn btn-primary mb-3" onclick="fetchAllContacts()">Fetch All Contacts</button>
+
+    <h4>Fetch Contact by ID</h4>
+    <input type="number" id="contactID" class="form-control w-25 d-inline" placeholder="Enter ID">
+    <button class="btn btn-info" onclick="fetchContactByID()">Fetch</button>
+
+    <h4>Insert New Contact</h4>
+    <input type="text" id="contactFirstName" class="form-control" placeholder="Enter First Name">
+    <input type="text" id="contactLastName" class="form-control" placeholder="Enter Last Name">
+    <input type="email" id="contactEmail" class="form-control" placeholder="Enter Email">
+    <input type="text" id="contactPhone" class="form-control" placeholder="Enter Phone">
+    <input type="text" id="contactAddress" class="form-control" placeholder="Enter Address">
+    <button class="btn btn-success mt-2" onclick="insertContact()">Insert</button>
+
+    <h4>Contacts List</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody id="contactsTableBody">
+            <tr>
+                <td colspan="6">No contacts yet.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
