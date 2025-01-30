@@ -102,7 +102,8 @@ export class Questions {
     if (!ProgressBar || !ProgressBarContainer) return;
 
     const Progress =
-      (Questions.CurrentQuestionIndex / Questions.QuestionList.length) * 100;
+      ((Questions.CurrentQuestionIndex + 1) / Questions.QuestionList.length) *
+      100;
     ProgressBar.style.width = `${Progress}%`;
     ProgressBarContainer.setAttribute("aria-valuenow", Progress);
     ProgressBarContainer.setAttribute("aria-valuemin", 0);
@@ -189,23 +190,32 @@ export class Questions {
    * Parameters: None.
    * Returns: None.
    */
+
   static SubmitQuiz = () => {
+    debugger;
     Questions.SaveUserAnswer();
     let Score = Questions.CalculateResult();
+
+    console.log(Score);
 
     let cookieData = Cookies.GetCookie({
       UserNameKey: "username",
       PasswordKey: "password",
     });
 
+    console.log(cookieData);
+
     let { username, password } = cookieData || {};
+
+    console.log(username);
 
     fetch(
       `https://673596e65995834c8a934a4d.mockapi.io/score?username=${username}`
     )
       .then((response) => response.json())
       .then((data) => {
-        if (data.length > 0) {
+        console.log(data);
+        if (data != "Not found") {
           let existingRecord = data[0];
           let updatedData = {
             username: existingRecord.username,
