@@ -1,4 +1,5 @@
 -- Creating a View for Active Students
+DROP VIEW vws_ActiveStudents;
 CREATE VIEW vws_ActiveStudents AS
 SELECT 
 	StudentID,
