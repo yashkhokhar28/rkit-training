@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net7.0": {
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -50,34 +50,36 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
+    "net7.0": [
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
-    "/Users/yashkhokhar/.nuget/packages/": {}
+    "C:\\Users\\yash.k\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
+      "projectUniqueName": "F:\\Yash Khokhar\\Basic API\\Code\\Basics Of C#\\Practice\\CSharpBasicsApp\\CSharpBasicsApp.csproj",
       "projectName": "CSharpBasicsApp",
-      "projectPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/CSharpBasicsApp.csproj",
-      "packagesPath": "/Users/yashkhokhar/.nuget/packages/",
-      "outputPath": "/Users/yashkhokhar/Documents/rkit-training/Basic API/Code/Basics Of C#/Practice/CSharpBasicsApp/obj/",
+      "projectPath": "F:\\Yash Khokhar\\Basic API\\Code\\Basics Of C#\\Practice\\CSharpBasicsApp\\CSharpBasicsApp.csproj",
+      "packagesPath": "C:\\Users\\yash.k\\.nuget\\packages\\",
+      "outputPath": "F:\\Yash Khokhar\\Basic API\\Code\\Basics Of C#\\Practice\\CSharpBasicsApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/yashkhokhar/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -88,8 +90,8 @@
       }
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "dependencies": {
           "Newtonsoft.Json": {
             "target": "Package",
@@ -112,7 +114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/yashkhokhar/.dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

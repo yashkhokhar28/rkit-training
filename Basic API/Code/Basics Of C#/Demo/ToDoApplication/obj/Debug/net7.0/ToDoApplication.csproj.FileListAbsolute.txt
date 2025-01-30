@@ -1,0 +1,15 @@
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\bin\Debug\net7.0\ToDoApplication.exe
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\bin\Debug\net7.0\ToDoApplication.deps.json
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\bin\Debug\net7.0\ToDoApplication.runtimeconfig.json
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\bin\Debug\net7.0\ToDoApplication.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\bin\Debug\net7.0\ToDoApplication.pdb
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.csproj.AssemblyReference.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.GeneratedMSBuildEditorConfig.editorconfig
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.AssemblyInfoInputs.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.AssemblyInfo.cs
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.csproj.CoreCompileInputs.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\refint\ToDoApplication.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.pdb
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ToDoApplication.genruntimeconfig.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Demo\ToDoApplication\obj\Debug\net7.0\ref\ToDoApplication.dll

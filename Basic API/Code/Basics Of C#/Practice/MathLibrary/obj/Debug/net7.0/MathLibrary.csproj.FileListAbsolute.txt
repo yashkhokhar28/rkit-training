@@ -1,0 +1,12 @@
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\bin\Debug\net7.0\MathLibrary.deps.json
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\bin\Debug\net7.0\MathLibrary.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\bin\Debug\net7.0\MathLibrary.pdb
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.csproj.AssemblyReference.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.GeneratedMSBuildEditorConfig.editorconfig
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.AssemblyInfoInputs.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.AssemblyInfo.cs
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.csproj.CoreCompileInputs.cache
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\refint\MathLibrary.dll
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\MathLibrary.pdb
+F:\Yash Khokhar\Basic API\Code\Basics Of C#\Practice\MathLibrary\obj\Debug\net7.0\ref\MathLibrary.dll
