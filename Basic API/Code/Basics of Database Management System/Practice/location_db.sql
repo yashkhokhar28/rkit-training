@@ -71,6 +71,7 @@ INSERT INTO Country (CountryName, CountryCode) VALUES ('Brazil', 'BR');
 INSERT INTO Country (CountryName, CountryCode) VALUES ('South Africa', 'ZA');
 INSERT INTO Country (CountryName, CountryCode) VALUES ('United Kingdom', 'UK');
 
+select * from country;
 
 -- Insert sample data into State table
 INSERT INTO State (CountryID, StateName, StateCode) VALUES (1, 'Gujarat', 'GJ');
@@ -127,3 +128,5 @@ VALUES (6, 10, NULL, 'Grace', 'Martinez', 'Female', '2000-09-12', 9.0, '606 Ches
 INSERT INTO Student (CountryID, StateID, CityID, FirstName, LastName, Gender, BirthDate, GPA, Address, PhoneNumber)
 VALUES (1, 2, 2, 'Hank', 'White', 'Other', '2001-06-09', 7.9, '707 Willow St, Mumbai', '9876543219');
  
+ 
+ select * from country;

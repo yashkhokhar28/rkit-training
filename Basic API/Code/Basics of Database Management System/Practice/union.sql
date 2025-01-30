@@ -30,7 +30,7 @@ FROM
 	Student
 UNION
 SELECT 
-	PhoneNumber AS ContactInfo
+	GPA AS GPA
 FROM 
 	Student;
     

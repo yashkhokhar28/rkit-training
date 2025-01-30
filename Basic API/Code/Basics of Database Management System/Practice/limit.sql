@@ -42,11 +42,10 @@ SELECT
     Gender,
     BirthDate,
     GPA,
-    Address,
     PhoneNumber
 FROM 
 	Student
-LIMIT 10 OFFSET 20;
+LIMIT 5 OFFSET 5;
 
 -- Top N Results: Limiting results to get the top N records.
 SELECT 

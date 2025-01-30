@@ -3,11 +3,14 @@ CREATE VIEW vws_ActiveStudents AS
 SELECT 
 	StudentID,
 	FirstName,
-    LastName
+    LastName,
+    IsFullTime
 FROM 
 	Student
 WHERE 
-	Status = 'Active';
+	IsFullTime = 1;
+    
+select * from vws_ActiveStudents;
     
 -- Joining a View with Another Table
 SELECT 
@@ -21,24 +24,10 @@ JOIN
 JOIN 
 	Courses C ON E.CourseID = C.CourseID;
     
--- Creating a View with Joins
-CREATE VIEW vws_StudentCourses AS
-SELECT 
-	S.StudentID,
-    S.FirstName,
-    S.LastName,
-    C.CourseName
-FROM 
-	Student S
-JOIN 
-	Enrollment E ON S.StudentID = E.StudentID
-JOIN 
-	Courses C ON E.CourseID = C.CourseID;
-    
 -- Updatable Views
 UPDATE 
 	vws_ActiveStudents
 SET 
-	Status = 'Inactive'
+	IsFullTime = 0
 WHERE 
-	StudentID = 123;
+	StudentID = 1;

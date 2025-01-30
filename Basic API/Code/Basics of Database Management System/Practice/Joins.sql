@@ -51,7 +51,7 @@ FROM
 LEFT JOIN 
 	City ON Student.CityID = City.CityID
 LEFT JOIN 
-	State ON Student.StateID = State.StateID;
+	State ON Student.StateID = State.StateID
 UNION
 SELECT 
 	City.CityName,
