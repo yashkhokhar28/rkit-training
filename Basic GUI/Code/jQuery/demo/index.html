@@ -128,14 +128,17 @@
             <div class="form-floating mb-3 text-black">
                 <input type="text" id="name" class="form-control" name="name" placeholder="Your Name">
                 <label for="name">Name:</label>
+                <span class="text-danger" id="name-error"></span>
             </div>
             <div class="form-floating mb-3 text-black">
                 <input type="email" id="email" class="form-control" name="email" placeholder="Your Email">
                 <label for="email">Email:</label>
+                <span class="text-danger" id="email-error"></span>
             </div>
             <div class="form-floating mb-3 text-black">
                 <input type="number" id="phone" class="form-control" name="phone" placeholder="Your Phone Number">
                 <label for="phone">Phone Number:</label>
+                <span class="text-danger" id="phone-error"></span>
             </div>
 
             <label for="user-type">I am:</label>
@@ -143,15 +146,18 @@
                 <input class="form-check-input" value="BusinessPartner" type="radio" name="user-type"
                     id="businessPartner">
                 <label class="form-check-label" for="businessPartner">Business Partner</label>
+                <span class="text-danger" id="user-type-error"></span>
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" value="PotentialClient" type="radio" name="user-type"
                     id="potentialClient">
                 <label class="form-check-label" for="potentialClient">Potential Client</label>
+                <span class="text-danger" id="user-type-error"></span>
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" value="Student" type="radio" name="user-type" id="student">
                 <label class="form-check-label" for="student">Student</label>
+                <span class="text-danger" id="user-type-error"></span>
             </div>
 
             <div class="form-floating mb-3">
@@ -163,17 +169,20 @@
                     <option value="Flutter Developer">Flutter Developer</option>
                 </select>
                 <label for="floatingSelect">Work Type</label>
+                <span class="text-danger" id="work-type-error"></span>
             </div>
 
             <div class="mb-3">
                 <label for="formFile" class="form-label">Attachments</label>
                 <input class="form-control" type="file" id="formFile" name="file">
+                <span class="text-danger" id="file-error"></span>
             </div>
 
             <div class="mb-3">
                 <label for="message" class="form-label">Message:</label>
                 <textarea class="form-control" id="message" name="message" rows="3"
                     placeholder="Your message"></textarea>
+                <span class="text-danger" id="message-error"></span>
             </div>
 
             <div class="form-check mb-3">
