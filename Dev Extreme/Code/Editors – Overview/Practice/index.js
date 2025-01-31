@@ -1,6 +1,6 @@
 $(function () {
   $("#checkboxContainer").dxCheckBox({
-    value: false, // Default unchecked
+    value: false,
     text: "Accept Terms & Conditions",
     onValueChanged: function (e) {
       console.log("Checked:", e.value);

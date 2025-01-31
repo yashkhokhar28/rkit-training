@@ -1,69 +1,47 @@
-$(function () {
-  // Initialize Button
-  $("#buttonContainer").dxButton({
-    text: "Submit",
-    type: "success",
-    icon: "check",
-    disabled: false,
-    stylingMode: "contained",
-    width: 200,
-    height: 50,
-    hint: "Click to submit the form",
-    elementAttr: { "data-test": "submit-btn" },
-    useSubmitBehavior: true,
-    onClick: function () {
-      showPopUp(); // Call the popup function when button is clicked
-    },
-  });
-
-  // Initialize DataGrid
-  $("#gridContainer").dxDataGrid({
-    dataSource: [
-      { Name: "John", Age: 30 },
-      { Name: "Jane", Age: 25 },
-    ],
-    columns: ["Name", "Age"],
-  });
-
-  // Initialize DateBox
-  $("#dateBox").dxDateBox({
-    type: "date",
-    value: new Date(),
-    min: new Date(2020, 1, 1),
-    max: new Date(2025, 11, 31), // Month is zero-based (11 = December)
-  });
-
-  // Initialize Popup (hidden by default)
-  $("#popup").dxPopup({
-    visible: false, // Initially hidden
-    title: "Welcome",
-    contentTemplate: function () {
-      return $("<div>").text("This is a popup!");
-    },
-  });
-
-  // Get DataGrid Instance and Refresh
-  var gridInstance = $("#gridContainer").dxDataGrid("instance");
-  console.log(gridInstance);
-  if (gridInstance) {
-    gridInstance.refresh();
-  }
-
-  // Get and Set DateBox Value
-  var currentValue = $("#dateBox").dxDateBox("option", "value");
-  console.log("Current Date:", currentValue);
-
-  $("#dateBox").dxDateBox("option", "value", new Date(2022, 11, 25));
-
-  // Dispose the DataGrid
-  // $("#gridContainer").dxDataGrid("dispose");
+// Call Methods
+$("#popup").dxPopup({
+  visible: false,
+  closeOnOutsideClick: true,
+  contentTemplate: () => {
+    const content = $("<div />");
+    content.append(
+      $("<img />").attr(
+        "src",
+        "https://cdn.imago-images.com/Images/header/hello-we-are-imago_03-2023.jpg"
+      )
+    );
+    return content;
+  },
 });
 
-// Function to Show Popup
-const showPopUp = () => {
-  var popupInstance = $("#popup").dxPopup("instance");
-  console.log(popupInstance);
-  if (popupInstance) {
+var popupInstance = $("#popup").dxPopup("instance");
+
+// Create and Configure a Widget
+$("#buttonContainer").dxButton({
+  text: "button",
+  type: "success",
+  stylingMode: "outlined",
+  icon: "favorites",
+});
+
+// Get a Widget Instance (can only get if widget is initialized)
+var isClicked = false;
+var buttonInstance = $("#buttonContainer").dxButton("instance");
+// console.log("Button Instance " + buttonInstance);
+buttonInstance.option({
+  onClick: () => {
+    isClicked = !isClicked;
+    buttonInstance.option({
+      text: isClicked ? "Clicked!" : "Click Me",
+      type: isClicked ? "success" : "default",
+      icon: isClicked ? "favorites" : "add",
+    });
     popupInstance.show();
-  }
-};
+  },
+});
+
+// Get and Set Options
+var buttonIcon = buttonInstance.option("icon");
+console.log("Button Instance " + buttonInstance);
+console.log(buttonIcon);
+buttonInstance.option("icon", buttonIcon == "favorites" ? "add" : "favorites");
