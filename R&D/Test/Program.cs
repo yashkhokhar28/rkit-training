@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // MySQL server connection information
             string mysqlServer = "localhost";
-            string mysqlUserId = "root";
-            string mysqlPassword = "rootroot";
+            string mysqlUserId = "Admin";
+            string mysqlPassword = "gs@123";
 
             // PostgreSQL server connection information
             string postgresServer = "localhost";
@@ -25,7 +25,6 @@ namespace Test
 
             Console.WriteLine("=== Welcome to the Database Management System ===");
 
-            // Main program loop for user input
             while (true)
             {
                 // Display the menu options
@@ -34,26 +33,18 @@ namespace Test
                 // Get and validate the user's choice
                 int choice = GetUserChoice();
 
-                // Exit the program if the user chooses 0
                 if (choice == 0)
                 {
                     Console.WriteLine("Exiting the program. Goodbye!");
                     break;
                 }
 
-                // Process the user's choice with threading
                 try
                 {
                     Console.WriteLine($"Processing choice {choice}...");
-                    Thread operationThread = new Thread(() =>
-                    {
-                        ProcessChoice(choice, mysqlServer, mysqlUserId, mysqlPassword, postgresServer, postgresUserId, postgresPassword, msSqlServer, csvFilePath);
-                    });
 
-                    // Start the thread and wait for it to complete
-                    operationThread.Name = $"OperationThread-{choice}";
-                    operationThread.Start();
-                    operationThread.Join();
+                    // Ensure all operations are properly awaited
+                    await ProcessChoiceAsync(choice, mysqlServer, mysqlUserId, mysqlPassword, postgresServer, postgresUserId, postgresPassword, msSqlServer, csvFilePath);
 
                     Console.WriteLine($"Choice {choice} processed successfully.");
                 }
@@ -102,7 +93,7 @@ namespace Test
         /// <summary>
         /// Processes the user's choice and calls the corresponding method.
         /// </summary>
-        static void ProcessChoice(
+        static async Task ProcessChoiceAsync(
             int choice,
             string mysqlServer,
             string mysqlUserId,
@@ -116,31 +107,31 @@ namespace Test
             switch (choice)
             {
                 case 1:
-                    HandleCreateDatabasesMySQL(mysqlServer, mysqlUserId, mysqlPassword);
+                    await HandleCreateDatabasesMySQL(mysqlServer, mysqlUserId, mysqlPassword);
                     break;
                 case 2:
-                    HandleDropDatabasesMySQL(mysqlServer, mysqlUserId, mysqlPassword);
+                    await Task.Run(() => HandleDropDatabasesMySQL(mysqlServer, mysqlUserId, mysqlPassword));
                     break;
                 case 3:
-                    HandleInsertDataMySQL(csvFilePath, mysqlServer, mysqlUserId, mysqlPassword);
+                    await Task.Run(() => HandleInsertDataMySQL(csvFilePath, mysqlServer, mysqlUserId, mysqlPassword));
                     break;
                 case 4:
-                    HandleCreateDatabasesPostgreSQL(postgresServer, postgresUserId, postgresPassword);
+                    await Task.Run(() => HandleCreateDatabasesPostgreSQL(postgresServer, postgresUserId, postgresPassword));
                     break;
                 case 5:
-                    HandleDropDatabasesPostgreSQL(postgresServer, postgresUserId, postgresPassword);
+                    await Task.Run(() => HandleDropDatabasesPostgreSQL(postgresServer, postgresUserId, postgresPassword));
                     break;
                 case 6:
-                    HandleInsertDataPostgreSQL(csvFilePath, postgresServer, postgresUserId, postgresPassword);
+                    await Task.Run(() => HandleInsertDataPostgreSQL(csvFilePath, postgresServer, postgresUserId, postgresPassword));
                     break;
                 case 7:
-                    HandleCreateDatabasesMSSQL(msSqlServer);
+                    await Task.Run(() => HandleCreateDatabasesMSSQL(msSqlServer));
                     break;
                 case 8:
-                    HandleDropDatabasesMSSQL(msSqlServer);
+                    await Task.Run(() => HandleDropDatabasesMSSQL(msSqlServer));
                     break;
                 case 9:
-                    HandleInsertDataMSSQL(csvFilePath, msSqlServer);
+                    await Task.Run(() => HandleInsertDataMSSQL(csvFilePath, msSqlServer));
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
@@ -149,8 +140,7 @@ namespace Test
         }
 
         // === MySQL Operations ===
-
-        static void HandleCreateDatabasesMySQL(string server, string userId, string password)
+        static async Task HandleCreateDatabasesMySQL(string server, string userId, string password)
         {
             Console.WriteLine("[MySQL] Enter the starting index of databases to create: ");
             int from = Convert.ToInt32(Console.ReadLine());
@@ -158,10 +148,17 @@ namespace Test
             Console.WriteLine("[MySQL] Enter the ending index of databases to create: ");
             int to = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine($"[MySQL] Creating databases from {from} to {to}...");
-            CreateDatabaseMySQL.CreateDatabases(from, to, Query.CreateTableQueryMySQL, server, userId, password);
-            Console.WriteLine("[MySQL] Databases created successfully.");
+            Console.WriteLine("[MySQL] Enter the starting index of tables to create: ");
+            int fromTable = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MySQL] Enter the ending index of tables to create: ");
+            int toTable = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MySQL] Creating databases from {from} to {to}, with tables from {fromTable} to {toTable}...");
+            await CreateDatabaseMySQL.CreateDatabasesAsync(from, to, fromTable, toTable, Query.CreateTableQueryMySQL, server, userId, password);
+            Console.WriteLine("[MySQL] Databases and tables created successfully.");
         }
+
 
         static void HandleDropDatabasesMySQL(string server, string userId, string password)
         {
@@ -184,10 +181,18 @@ namespace Test
             Console.WriteLine("[MySQL] Enter the ending index of databases to insert data into: ");
             int to = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine($"[MySQL] Inserting data into databases from {from} to {to}...");
-            InsertDataMySQL.InsertDataFromCsv(from, to, csvFilePath, server, userId, password);
+            Console.WriteLine("[MySQL] Enter the starting index of tables to insert data into: ");
+            int fromTable = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("[MySQL] Enter the ending index of tables to insert data into: ");
+            int toTable = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"[MySQL] Inserting data into databases from {from} to {to}, across tables {fromTable} to {toTable}...");
+            InsertDataMySQL.InsertDataFromCsv(from, to, csvFilePath, server, userId, password, fromTable, toTable);
             Console.WriteLine("[MySQL] Data inserted successfully.");
         }
+
+
 
         // === PostgreSQL Operations ===
 

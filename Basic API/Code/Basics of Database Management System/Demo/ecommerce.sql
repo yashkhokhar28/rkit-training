@@ -1,75 +1,77 @@
 -- Create User Table as usr01
+CREATE DATABASE ecommercedb;
+use ecommercedb;
 CREATE TABLE usr01 (
-    r01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: UserID',
-    r01f02 VARCHAR(50) NOT NULL COMMENT 'Original Column: FirstName',
-    r01f03 VARCHAR(50) NOT NULL COMMENT 'Original Column: LastName',
-    r01f04 VARCHAR(100) UNIQUE NOT NULL COMMENT 'Original Column: Email',
-    r01f05 VARCHAR(100) NOT NULL COMMENT 'Original Column: Password',
-    r01f06 VARCHAR(15) COMMENT 'Original Column: PhoneNumber',
-    r01f07 TEXT COMMENT 'Original Column: Address',
-    r01f08 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: CreatedAt',
-    r01f09 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: UpdatedAt'
-) COMMENT = 'Original Table: User';
+    r01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: r01f01',
+    r01f02 VARCHAR(50) NOT NULL COMMENT 'Column: FirstName',
+    r01f03 VARCHAR(50) NOT NULL COMMENT 'Column: LastName',
+    r01f04 VARCHAR(100) UNIQUE NOT NULL COMMENT 'Column: Email',
+    r01f05 VARCHAR(100) NOT NULL COMMENT 'Column: Password',
+    r01f06 VARCHAR(15) COMMENT 'Column: PhoneNumber',
+    r01f07 TEXT COMMENT 'Column: Address',
+    r01f08 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: CreatedAt',
+    r01f09 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: UpdatedAt'
+) COMMENT = 'Table: User';
 
 -- Create Category Table as cat01
 CREATE TABLE cat01 (
-    t01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: CategoryID',
-    t01f02 VARCHAR(50) UNIQUE NOT NULL COMMENT 'Original Column: CategoryName',
-    t01f03 TEXT COMMENT 'Original Column: Description',
-    t01f04 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: CreatedAt',
-    t01f05 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: UpdatedAt'
-) COMMENT = 'Original Table: Category';
+    t01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: CategoryID',
+    t01f02 VARCHAR(50) UNIQUE NOT NULL COMMENT 'Column: CategoryName',
+    t01f03 TEXT COMMENT 'Column: Description',
+    t01f04 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: CreatedAt',
+    t01f05 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: UpdatedAt'
+) COMMENT = 'Table: Category';
 
 -- Create Product Table as pro01
 CREATE TABLE pro01 (
-    o01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: ProductID',
-    o01f02 INT COMMENT 'Original Column: CategoryID',
-    o01f03 VARCHAR(100) UNIQUE NOT NULL COMMENT 'Original Column: ProductName',
-    o01f04 TEXT COMMENT 'Original Column: ProductDescription',
-    o01f05 DECIMAL(10, 2) NOT NULL COMMENT 'Original Column: Price',
-    o01f06 INT DEFAULT 0 COMMENT 'Original Column: StockQuantity',
-    o01f07 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: CreatedAt',
-    o01f08 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: UpdatedAt'
-) COMMENT = 'Original Table: Product';
+    o01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: ProductID',
+    o01f02 INT COMMENT 'Column: CategoryID',
+    o01f03 VARCHAR(100) UNIQUE NOT NULL COMMENT 'Column: o01f03',
+    o01f04 TEXT COMMENT 'Column: ProductDescription',
+    o01f05 DECIMAL(10, 2) NOT NULL COMMENT 'Column: Price',
+    o01f06 INT DEFAULT 0 COMMENT 'Column: StockQuantity',
+    o01f07 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: CreatedAt',
+    o01f08 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: UpdatedAt'
+) COMMENT = 'Table: Product';
 
 -- Create Cart Table as car01
 CREATE TABLE car01 (
-    r01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: CartID',
-    r01f02 INT COMMENT 'Original Column: UserID',
-    r01f03 INT COMMENT 'Original Column: ProductID',
-    r01f04 INT DEFAULT 1 COMMENT 'Original Column: Quantity',
-    r01f05 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: AddedAt'
-) COMMENT = 'Original Table: Cart';
+    r01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: CartID',
+    r01f02 INT COMMENT 'Column: r01f01',
+    r01f03 INT COMMENT 'Column: ProductID',
+    r01f04 INT DEFAULT 1 COMMENT 'Column: Quantity',
+    r01f05 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: AddedAt'
+) COMMENT = 'Table: Cart';
 
 -- Create Address Table as add01
 CREATE TABLE add01 (
-    d01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: AddressID',
-    d01f02 INT COMMENT 'Original Column: UserID',
-    d01f03 VARCHAR(255) COMMENT 'Original Column: Street',
-    d01f04 VARCHAR(100) COMMENT 'Original Column: City',
-    d01f05 VARCHAR(100) COMMENT 'Original Column: State',
-    d01f06 VARCHAR(20) COMMENT 'Original Column: ZipCode',
-    d01f07 VARCHAR(50) COMMENT 'Original Column: Country'
-) COMMENT = 'Original Table: Address';
+    d01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: AddressID',
+    d01f02 INT COMMENT 'Column: r01f01',
+    d01f03 VARCHAR(255) COMMENT 'Column: Street',
+    d01f04 VARCHAR(100) COMMENT 'Column: City',
+    d01f05 VARCHAR(100) COMMENT 'Column: State',
+    d01f06 VARCHAR(20) COMMENT 'Column: ZipCode',
+    d01f07 VARCHAR(50) COMMENT 'Column: Country'
+) COMMENT = 'Table: Address';
 
 -- Create Order Table as ord01
 CREATE TABLE ord01 (
-    d01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: OrderID',
-    d01f02 INT COMMENT 'Original Column: UserID',
-    d01f03 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Original Column: OrderDate',
-    d01f04 DECIMAL(10, 2) NOT NULL COMMENT 'Original Column: TotalAmount',
-    d01f05 ENUM('P', 'S', 'D', 'C') DEFAULT 'P' COMMENT 'Original Column: OrderStatus',
-    d01f06 INT COMMENT 'Original Column: ShippingAddressID'
-) COMMENT = 'Original Table: Order';
+    d01f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: d01f01',
+    d01f02 INT COMMENT 'Column: r01f01',
+    d01f03 TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Column: OrderDate',
+    d01f04 DECIMAL(10, 2) NOT NULL COMMENT 'Column: TotalAmount',
+    d01f05 ENUM('P', 'S', 'D', 'C') DEFAULT 'P' COMMENT 'Column: OrderStatus',
+    d01f06 INT COMMENT 'Column: ShippingAddressID'
+) COMMENT = 'Table: Order';
 
 -- Create OrderDetails Table as ord02
 CREATE TABLE ord02 (
-    d02f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Original Column: OrderDetailID',
-    d02f02 INT COMMENT 'Original Column: OrderID',
-    d02f03 INT COMMENT 'Original Column: ProductID',
-    d02f04 INT COMMENT 'Original Column: Quantity',
-    d02f05 DECIMAL(10, 2) COMMENT 'Original Column: Price'
-) COMMENT = 'Original Table: OrderDetails';
+    d02f01 INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Column: OrderDetailID',
+    d02f02 INT COMMENT 'Column: d01f01',
+    d02f03 INT COMMENT 'Column: ProductID',
+    d02f04 INT COMMENT 'Column: Quantity',
+    d02f05 DECIMAL(10, 2) COMMENT 'Column: Price'
+) COMMENT = 'Table: OrderDetails';
 
 USE ecommerce_db;
 
@@ -139,7 +141,7 @@ VALUES
 -- Data Sorting (ORDER BY)
 -- Sort products by price (o01f05 = Price)
 SELECT 
-	ProductName
+	o01f03
 FROM
 	pro01
 ORDER BY 
@@ -147,7 +149,7 @@ ORDER BY
 
 -- Sort users by last name and first name (r01f03 = LastName, r01f02 = FirstName)
 SELECT 
-	ProductName 
+	o01f03 
 FROM 
 	usr01 
 ORDER BY 
@@ -157,14 +159,14 @@ ORDER BY
 -- Null Value & Keyword
 -- Fetch users without a phone number (r01f06 = PhoneNumber)
 SELECT 
-	ProductName 
+	o01f03 
 FROM 
 	usr01 
 WHERE r01f06 IS NULL;
 
 -- Fetch products where stock quantity is null (o01f06 = StockQuantity)
 SELECT 
-	ProductName 
+	o01f03 
 FROM 
 	pro01 
 WHERE o01f06 IS NULL;
@@ -199,7 +201,7 @@ GRANT SELECT ON usr01 TO 'role_name';
 REVOKE SELECT ON pro01 FROM 'role_name';
 
 -- TCL Example (Transaction Control Language)
--- Insert an order (d01f02 = UserID, d01f04 = TotalAmount)
+-- Insert an order (d01f02 = r01f01, d01f04 = TotalAmount)
 START TRANSACTION;
 INSERT INTO ord01 (d01f02, d01f04) VALUES (1, 1000.00);
 
@@ -211,14 +213,14 @@ ROLLBACK;
 -- DQL Example (Data Query Language)
 -- Fetch products with stock quantity greater than zero (o01f06 = StockQuantity)
 SELECT 
-	ProductName
+	o01f03
 FROM 
 	pro01 
 WHERE o01f06 > 0;
 
--- Fetch orders for a specific user (d01f02 = UserID)
+-- Fetch orders for a specific user (d01f02 = r01f01)
 SELECT 
-	OrderID 
+	d01f01 
 FROM 
 	ord01 
 WHERE d01f02 = 1;
@@ -226,20 +228,20 @@ WHERE d01f02 = 1;
 -- Limit Example
 -- Fetch the 5 cheapest products (o01f05 = Price)
 SELECT 
-	ProductName 
+	o01f03 
 FROM 
 	pro01 
 ORDER BY o01f05 LIMIT 5;
 
 -- Fetch the first 10 users
 SELECT 
-	UserID 
+	r01f01 
 FROM usr01 LIMIT 10;
 
 -- Aggregate Functions
 -- Count total products
 SELECT 
-	COUNT(ProductName) AS TotalProducts 
+	COUNT(o01f03) AS TotalProducts 
 FROM 
 	pro01;
 
@@ -252,7 +254,7 @@ FROM
 -- Sub-Queries
 -- Fetch users who placed orders with a total amount greater than 500 (d01f04 = TotalAmount)
 SELECT 
-	UserID 
+	r01f01 
 FROM 
 	usr01 
 WHERE 
@@ -266,7 +268,7 @@ WHERE
 
 -- Fetch products belonging to categories with 10 or more products (o01f02 = CategoryID)
 SELECT 
-	ProductName 
+	o01f03 
 FROM 
 	pro01 
 WHERE 
@@ -282,7 +284,7 @@ WHERE
 );
 
 -- Joins
--- Fetch order details: order ID, product ID, and quantity (t01f02 = OrderID, t01f03 = ProductID, t01f04 = Quantity)
+-- Fetch order details: order ID, product ID, and quantity (t01f02 = d01f01, t01f03 = ProductID, t01f04 = Quantity)
 SELECT 
 	o.d01f01,
     od.t01f03,
@@ -306,7 +308,7 @@ LEFT JOIN
 ON u.r01f01 = o.d01f02;
 
 -- Unions
--- Fetch a union of product names (o01f03 = ProductName) and user first names (r01f02 = FirstName)
+-- Fetch a union of product names (o01f03 = o01f03) and user first names (r01f02 = FirstName)
 SELECT 
 	o01f03 AS Name 
 FROM 
@@ -317,7 +319,7 @@ SELECT
 FROM 
 	usr01;
 
--- Fetch a union of product IDs (o01f01 = ProductID) and order IDs (d01f01 = OrderID)
+-- Fetch a union of product IDs (o01f01 = ProductID) and order IDs (d01f01 = d01f01)
 SELECT 
 	o01f01 
 FROM 

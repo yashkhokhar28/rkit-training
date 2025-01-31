@@ -21,7 +21,7 @@ SELECT
 	CityName AS Name
 FROM 
 	City;
-    
+
 -- Union for Different Data Types
 -- Combine students’ FirstName and their PhoneNumber in a single list.
 SELECT 
