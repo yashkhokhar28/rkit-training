@@ -10,8 +10,9 @@ FROM
 	Student
 WHERE 
 	IsFullTime = 1;
-    
+SELECT * FROM student;
 select * from vws_ActiveStudents;
+DELETE FROM vws_ActiveStudents WHERE StudentID = 2;
     
 -- Joining a View with Another Table
 SELECT 

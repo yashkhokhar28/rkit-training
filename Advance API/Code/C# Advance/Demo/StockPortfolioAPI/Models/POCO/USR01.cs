@@ -35,6 +35,7 @@ namespace StockPortfolioAPI.Models.POCO
         /// <summary>
         /// Timestamp when the user was created.
         /// </summary>
+        
         public DateTime R01F06 { get; set; }
 
         /// <summary>
