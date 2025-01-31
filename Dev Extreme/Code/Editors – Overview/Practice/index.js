@@ -14,8 +14,8 @@ $(function () {
     activeStateEnabled: true,
     rtlEnabled: true,
     visible: true,
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 22,
     accessKey: "C",
     tabIndex: 0,
   });
