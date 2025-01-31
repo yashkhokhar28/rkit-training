@@ -1,6 +1,4 @@
-﻿using APIVersioningInWebAPI.Custom;
-using Swashbuckle.Application;
-using System.Runtime.InteropServices;
+﻿using Swashbuckle.Application;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EFWebAPIProject.Models.ENUM
+﻿namespace EFWebAPIProject.Models.ENUM
 {
     /// <summary>
     /// The EntryType enum defines the types of entries that can be used within the application.

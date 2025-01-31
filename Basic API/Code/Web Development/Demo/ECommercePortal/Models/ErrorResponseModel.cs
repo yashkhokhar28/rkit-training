@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ECommercePortal.Models
+﻿namespace ECommercePortal.Models
 {
     /// <summary>
     /// Represents the structure of the error response sent to the client.

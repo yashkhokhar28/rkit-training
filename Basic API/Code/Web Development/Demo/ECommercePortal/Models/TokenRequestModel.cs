@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ECommercePortal.Models
+﻿namespace ECommercePortal.Models
 {
     /// <summary>
     /// Model representing the request containing a JWT token.

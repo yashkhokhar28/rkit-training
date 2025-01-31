@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using ECommercePortal.Helpers; // Import CacheHelper namespace
+using ECommercePortal.Helpers;
 
 namespace ECommercePortal.Controllers
 {

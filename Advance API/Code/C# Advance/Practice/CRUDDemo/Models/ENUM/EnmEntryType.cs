@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRUDDemo.Models.ENUM
+﻿namespace CRUDDemo.Models.ENUM
 {
     /// <summary>
     /// Enumeration to represent the type of entry operation.

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSharpAdvanceApp
+﻿namespace CSharpAdvanceApp
 {
     /// <summary>
     /// Demonstrates the usage of generic classes, methods, and interfaces.

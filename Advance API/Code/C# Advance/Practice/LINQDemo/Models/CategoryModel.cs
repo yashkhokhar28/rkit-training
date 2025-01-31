@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LINQDemo.Models
+﻿namespace LINQDemo.Models
 {
     /// <summary>
     /// Represents a category of products in the system.

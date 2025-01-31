@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSharpAdvanceApp
+﻿namespace CSharpAdvanceApp
 {
     /// <summary>
     /// Demonstrates advanced C# concepts like abstraction, inheritance, polymorphism, partial and sealed classes.

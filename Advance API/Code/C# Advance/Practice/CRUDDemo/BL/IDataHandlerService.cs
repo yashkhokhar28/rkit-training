@@ -1,8 +1,6 @@
 ﻿using CRUDDemo.Models;
-using CRUDDemo.Models.DTO;
 using CRUDDemo.Models.ENUM;
 using CRUDDemo.Models.POCO;
-using System;
 
 namespace CRUDDemo.BL
 {

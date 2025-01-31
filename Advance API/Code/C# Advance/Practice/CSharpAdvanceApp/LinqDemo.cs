@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace CSharpAdvanceApp
+﻿namespace CSharpAdvanceApp
 {
     /// <summary>
     /// This class demonstrates various LINQ operations including filtering, projection, set operations, sorting, quantifiers, partitioning, conversion, grouping, joining, and miscellaneous methods.

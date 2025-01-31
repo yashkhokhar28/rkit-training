@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Web;
 using System.Web.Http.Filters;
 using ECommercePortal.Models;
 using System.Net.Http;

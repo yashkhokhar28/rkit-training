@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ExceptionHandlingFilterInWebAPI.Filters
+﻿namespace ExceptionHandlingFilterInWebAPI.Filters
 {
     /// <summary>
     /// Represents the structure of the error response sent to the client.

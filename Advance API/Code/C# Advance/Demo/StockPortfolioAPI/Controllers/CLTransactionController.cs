@@ -54,8 +54,6 @@ namespace StockPortfolioAPI.Controllers
 
             // Update transaction in the transaction table
             objResponse = objBLTransaction.Save();
-            objResponse = objBLTransaction.UpdatePortfolioAfterTransaction();
-            objResponse = objBLTransaction.UpdatePortfolioIndividually();
             if (objResponse.IsError)
             {
                 return Ok(objResponse.Message);  // Return error if transaction failed

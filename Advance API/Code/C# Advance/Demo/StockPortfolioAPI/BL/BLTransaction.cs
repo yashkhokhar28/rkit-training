@@ -102,7 +102,8 @@ namespace StockPortfolioAPI.BL
                 objResponse.IsError = true;
                 objResponse.Message = $"An error occurred: {ex.Message}";
             }
-
+            UpdatePortfolioAfterTransaction();
+            UpdatePortfolioIndividually();
             return objResponse;
         }
 

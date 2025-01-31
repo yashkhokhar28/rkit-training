@@ -1,9 +1,5 @@
 ﻿using EFWebAPIProject.Models;
 using EFWebAPIProject.Models.ENUM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace EFWebAPIProject.BL
 {

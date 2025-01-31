@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace JWTInWebAPI.Models
+﻿namespace JWTInWebAPI.Models
 {
     /// <summary>
     /// Model representing the request containing a JWT token.

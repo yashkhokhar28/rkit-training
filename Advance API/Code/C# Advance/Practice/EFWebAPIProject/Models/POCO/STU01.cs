@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EFWebAPIProject.Models.POCO
+﻿namespace EFWebAPIProject.Models.POCO
 {
     /// <summary>
     /// The STU01 class represents a student with basic properties such as ID, name, and age.
