@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Box</title>
+    <!-- ... -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/21.1.11/css/dx.dark.css">
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/21.1.11/js/dx.all.js"></script>
+</head>
+
+<body class="dx-viewport">
+    <div id="checkboxContainer"></div>
+    <br>
+    <div id="buttonContainer"></div>
+</body>
+<script>
+    $(document).ready(function () {
+        console.log("Document is ready");
+
+        if ($("#checkboxContainer").length === 0) {
+            console.error("Element #checkboxContainer not found!");
+            return;
+        }
+
+        // all options
+        var checkBoxInstance = $("#checkboxContainer")
+            .dxCheckBox({
+                value: false,
+                text: "Accept Terms & Conditions",
+                disabled: false,
+                readOnly: false,
+                hint: "This is a check box",
+                elementAttr: { id: "chkbx" },
+                focusStateEnabled: true,
+                validationError: { message: "Check the check box" },
+                hoverStateEnabled: false,
+                activeStateEnabled: true,
+                rtlEnabled: true,
+                visible: true,
+                accessKey: "C",
+                tabIndex: 0,
+                contentReady: function (e) {
+                    console.log("dxCheckBox content is ready");
+                },
+                // Event handler for initializing
+                initialized: function (e) {
+                    console.log("dxCheckBox has been initialized");
+                },
+                // Event handler for disposing
+                disposing: function (e) {
+                    console.log("dxCheckBox is being disposed");
+                },
+            })
+            .dxCheckBox("instance");
+
+        // print instance of checkbox
+        console.log(checkBoxInstance);
+
+        if ($("#buttonContainer").length === 0) {
+            console.error("Element #buttonContainer not found!");
+            return;
+        }
+
+        var isClicked = false;
+        // button
+        var buttonInstance = $("#buttonContainer")
+            .dxButton({
+                text: "click to reset",
+                stylingMode: "contained",
+                type: "success",
+                onClick: () => {
+                    isClicked = !isClicked;
+                    // reset the value
+                    checkBoxInstance.reset();
+                    // log full element
+                    console.log(checkBoxInstance.element());
+                    checkBoxInstance.option("text", "Changed Text");
+                    if (!isClicked) {
+                        // resets the text option
+                        checkBoxInstance.resetOption("text");
+                    }
+                },
+            })
+            .dxButton("instance");
+
+        // logs current device
+        console.log("Current Device:", DevExpress.devices.current().deviceType);
+
+        // start updating
+        checkBoxInstance.beginUpdate();
+
+        // end updating
+        checkBoxInstance.endUpdate();
+
+        // print when value gets change
+        checkBoxInstance.on("valueChanged", (e) => {
+            console.log("Checked:", e.value);
+
+            let message = e.value ? "Checkbox is checked" : "Checkbox is unchecked";
+            let type = e.value ? "success" : "error";
+
+            DevExpress.ui.notify(message, type, 2000);
+        });
+
+        // all options methods
+        console.log("All Option : " + checkBoxInstance.option());
+        console.log("Access Key : " + checkBoxInstance.option("accessKey"));
+        checkBoxInstance.option("rtlEnabled", false);
+        checkBoxInstance.option({
+            width: 200,
+            height: 22,
+        });
+
+        // Registers a handler to be executed when a user presses a specific key.
+        checkBoxInstance.registerKeyHandler("space", (e) => {
+            console.log("Space Pressed : " + e);
+        });
+
+        checkBoxInstance.on("optionChanged", () => {
+            console.log("Option Changed");
+        });
+    });
+
+</script>
+
+</html>
