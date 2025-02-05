@@ -20,28 +20,12 @@
 } from "../Events.js";
 
 import {
-  beginUpdate,
-  blur,
-  close,
   content,
-  defaultOptions,
-  dispose,
   element,
-  endUpdate,
   field,
-  focus,
-  getButton,
-  getDataSource,
-  getInstance,
-  instance,
-  off,
-  on,
   open,
   option,
   registerKeyHandler,
-  repaint,
-  reset,
-  resetOption,
 } from "../Methods.js";
 
 $(document).ready(() => {
@@ -233,17 +217,12 @@ $(document).ready(() => {
   // ** Methods **
   // ==========================
 
-  beginUpdate(DateBoxInstance);
-  console.log("Content:", content(DateBoxInstance));
-  console.log("Element:", element(DateBoxInstance));
-  console.log("Field:", field(DateBoxInstance));
-  console.log("Clear Button:", getButton(DateBoxInstance, "clear"));
+  console.log(content(DateBoxInstance));
+  console.log(element(DateBoxInstance));
+  console.log(field(DateBoxInstance));
   option(DateBoxInstance, "placeholder", "Pick a date");
-  repaint(DateBoxInstance);
   open(DateBoxInstance);
   registerKeyHandler(DateBoxInstance, "enter", () =>
     alert("Enter key pressed!")
   );
-  // close(DateBoxInstance);
-  endUpdate(DateBoxInstance);
 });

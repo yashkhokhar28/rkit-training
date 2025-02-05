@@ -21,27 +21,14 @@ import {
 
 import {
   beginUpdate,
-  blur,
-  close,
   content,
-  defaultOptions,
-  dispose,
   element,
   endUpdate,
   field,
-  focus,
-  getButton,
-  getDataSource,
-  getInstance,
-  instance,
-  off,
-  on,
   open,
   option,
   registerKeyHandler,
   repaint,
-  reset,
-  resetOption,
 } from "../Methods.js";
 
 $(document).ready(() => {

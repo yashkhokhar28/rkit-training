@@ -34,9 +34,6 @@ const getButton = (widgetInstance, name) => widgetInstance.getButton(name);
 // Returns the data source object of the widget
 const getDataSource = (widgetInstance) => widgetInstance.getDataSource();
 
-// Returns the instance of a widget for a given element
-const getInstance = (element) => DevExpress.ui.dxWidget.getInstance(element);
-
 // Returns the instance of the widget itself
 const instance = (widgetInstance) => widgetInstance.instance();
 
@@ -88,7 +85,6 @@ export {
   focus,
   getButton,
   getDataSource,
-  getInstance,
   instance,
   off,
   on,
