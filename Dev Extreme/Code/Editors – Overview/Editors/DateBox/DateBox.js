@@ -31,21 +31,45 @@ import {
 $(document).ready(() => {
   console.log("Document is Ready");
 
-  // Time picker with "rollers"
+  // ==========================
+  // ** Initialize Time Picker **
+  // ==========================
+
   $("#Time").dxDateBox({
+    // Specifies the type of input (time)
     type: "time",
+
+    // Picker type set to "rollers" for time selection
     pickerType: "rollers",
+
+    // Placeholder text displayed in the input field
     placeholder: "Select Time",
+
+    // Displays a "Clear" button to reset the input field
     showClearButton: true,
   });
 
-  // Date picker with a calendar
+  // ==========================
+  // ** Initialize Date Picker **
+  // ==========================
+
   $("#Date").dxDateBox({
+    // Specifies the type of input (date)
     type: "date",
+
+    // Picker type set to "calendar" for date selection
     pickerType: "calendar",
+
+    // Placeholder text displayed in the input field
     placeholder: "Select Date",
+
+    // Displays a "Clear" button to reset the input field
     showClearButton: true,
   });
+
+  // ==========================
+  // ** Initialize DateTime Picker **
+  // ==========================
 
   var DateBoxInstance = $("#DateTime")
     .dxDateBox({
@@ -53,7 +77,7 @@ $(document).ready(() => {
       // ** Properties **
       // ==========================
 
-      // Specifies the type of input (date, time, or datetime)
+      // Specifies the type of input (datetime)
       type: "datetime",
 
       // Allows users to enter custom text instead of selecting a date
@@ -100,7 +124,7 @@ $(document).ready(() => {
       dateSerializationFormat: "yyyy-MM-ddTHH:mm:ssZ",
 
       // Prevents deferred rendering of the calendar
-      deferRendering: false,
+      deferRendering: true,
 
       // Enables or disables the DateBox
       disabled: false,
@@ -157,9 +181,6 @@ $(document).ready(() => {
       // Used in form submission
       name: "userBirthday",
 
-      // Enables spellchecking in input
-      spellcheck: false,
-
       // Sets tab index for keyboard navigation
       tabIndex: 2,
 
@@ -192,23 +213,62 @@ $(document).ready(() => {
         DevExpress.ui.notify(message, type, 2000);
       },
 
+      // ==========================
+      // ** Event Handlers **
+      // ==========================
+
+      // Fires when the value changes
       onChange: changeHandler,
+
+      // Fires when the dropdown is closed
       onClosed: closedHandler,
+
+      // Fires when text is copied from the input field
       onCopy: copyHandler,
+
+      // Fires when text is cut from the input field
       onCut: cutHandler,
+
+      // Fires when the widget content is ready
       onContentReady: contentReadyHandler,
+
+      // Fires when the widget is disposed of
       onDisposing: disposeHandler,
+
+      // Fires when the user presses the Enter key
       onEnterKey: enterKeyHandler,
+
+      // Fires when the input field gains focus
       onFocusIn: focusInHandler,
+
+      // Fires when the input field loses focus
       onFocusOut: focusOutHandler,
+
+      // Fires when the widget is initialized
       onInitialized: initializedHandler,
+
+      // Fires when the user types into the input field
       onInput: inputHandler,
+
+      // Fires when a key is pressed down
       onKeyDown: keyDownHandler,
+
+      // Fires when a key is pressed
       onKeyPress: keyPressHandler,
+
+      // Fires when a key is released
       onKeyUp: keyUpHandler,
+
+      // Fires when the dropdown is opened
       onOpened: openedHandler,
+
+      // Fires when an option is changed
       onOptionChanged: optionChangedHandler,
+
+      // Fires when the value is changed by the user
       onValueChanged: valueChangedHandler,
+
+      // Fires when text is pasted into the input field
       onPaste: pasteHandler,
     })
     .dxDateBox("instance");
@@ -217,12 +277,23 @@ $(document).ready(() => {
   // ** Methods **
   // ==========================
 
+  // Retrieve and log the dropdown content
   console.log(content(DateBoxInstance));
+
+  // Retrieve and log the root element of the widget
   console.log(element(DateBoxInstance));
+
+  // Retrieve and log the input field element inside the widget
   console.log(field(DateBoxInstance));
+
+  // Modify the placeholder text dynamically
   option(DateBoxInstance, "placeholder", "Pick a date");
+
+  // Open the dropdown programmatically
   open(DateBoxInstance);
-  registerKeyHandler(DateBoxInstance, "enter", () =>
-    alert("Enter key pressed!")
-  );
+
+  // Register a custom key handler for the "Enter" key
+  registerKeyHandler(DateBoxInstance, "enter", () => {
+    alert("Enter key pressed!");
+  });
 });

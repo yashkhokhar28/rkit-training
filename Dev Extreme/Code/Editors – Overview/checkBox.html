@@ -39,12 +39,11 @@
                 hint: "This is a check box",
                 elementAttr: { id: "chkbx" },
                 focusStateEnabled: true,
-                validationError: { message: "Check the check box" },
-                hoverStateEnabled: false,
+                hoverStateEnabled: true,
                 activeStateEnabled: true,
                 rtlEnabled: true,
                 visible: true,
-                accessKey: "C",
+                accessKey: "D",
                 tabIndex: 0,
                 contentReady: function (e) {
                     console.log("dxCheckBox content is ready");
@@ -93,12 +92,6 @@
         // logs current device
         console.log("Current Device:", DevExpress.devices.current().deviceType);
 
-        // start updating
-        checkBoxInstance.beginUpdate();
-
-        // end updating
-        checkBoxInstance.endUpdate();
-
         // print when value gets change
         checkBoxInstance.on("valueChanged", (e) => {
             console.log("Checked:", e.value);
@@ -123,8 +116,8 @@
             console.log("Space Pressed : " + e);
         });
 
-        checkBoxInstance.on("optionChanged", () => {
-            console.log("Option Changed");
+        checkBoxInstance.on("optionChanged", (e) => {
+            console.log("Option Changed", e);
         });
     });
 

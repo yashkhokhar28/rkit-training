@@ -20,15 +20,12 @@ import {
 } from "../Events.js";
 
 import {
-  beginUpdate,
   content,
   element,
-  endUpdate,
   field,
   open,
   option,
   registerKeyHandler,
-  repaint,
 } from "../Methods.js";
 
 $(document).ready(() => {
@@ -136,23 +133,58 @@ $(document).ready(() => {
       // ** Event Handlers **
       // ==========================
 
+      // Fires when the value changes
       onChange: changeHandler,
+
+      // Fires when the dropdown closes
       onClosed: closedHandler,
+
+      // Fires when text is copied from the input field
       onCopy: copyHandler,
+
+      // Fires when text is cut from the input field
       onCut: cutHandler,
+
+      // Fires when the dropdown content is ready
       onContentReady: contentReadyHandler,
+
+      // Fires when the widget is disposed of
       onDisposing: disposeHandler,
+
+      // Fires when the user presses the Enter key
       onEnterKey: enterKeyHandler,
+
+      // Fires when the input field gains focus
       onFocusIn: focusInHandler,
+
+      // Fires when the input field loses focus
       onFocusOut: focusOutHandler,
+
+      // Fires when the widget is initialized
       onInitialized: initializedHandler,
+
+      // Fires when the user types into the input field
       onInput: inputHandler,
+
+      // Fires when a key is pressed down
       onKeyDown: keyDownHandler,
+
+      // Fires when a key is pressed
       onKeyPress: keyPressHandler,
+
+      // Fires when a key is released
       onKeyUp: keyUpHandler,
+
+      // Fires when the dropdown opens
       onOpened: openedHandler,
+
+      // Fires when an option is changed
       onOptionChanged: optionChangedHandler,
+
+      // Fires when the selected value changes
       onValueChanged: valueChangedHandler,
+
+      // Fires when text is pasted into the input field
       onPaste: pasteHandler,
     })
     .dxDropDownBox("instance");
@@ -161,16 +193,29 @@ $(document).ready(() => {
   // ** Methods **
   // ==========================
 
-  beginUpdate(DropDownInstance);
+  // ==========================
+  // ** Methods **
+  // ==========================
+
+  // Retrieve and log the dropdown content
   console.log("Content:", content(DropDownInstance));
+
+  // Retrieve and log the root element of the widget
   console.log("Element:", element(DropDownInstance));
+
+  // Retrieve and log the input field element inside the widget
   console.log("Field:", field(DropDownInstance));
+
+  // Modify the placeholder text dynamically
   option(DropDownInstance, "placeholder", "Select an item");
-  repaint(DropDownInstance);
+
+  // Open the dropdown programmatically
   open(DropDownInstance);
+
+  // Register a custom key handler for the "Enter" key
   registerKeyHandler(DropDownInstance, "enter", () =>
     alert("Enter key pressed!")
   );
+
   // close(DropDownInstance);
-  endUpdate(DropDownInstance);
 });

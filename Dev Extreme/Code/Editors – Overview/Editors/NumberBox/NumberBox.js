@@ -28,13 +28,16 @@ import {
 $(document).ready(() => {
   console.log("Document is Ready!!");
 
-  // Initialize dxNumberBox widget with various configuration options
+  // ==========================
+  // ** Initialize dxNumberBox Widget **
+  // ==========================
+
   var NumberBoxInstance = $("#NumberBox")
     .dxNumberBox({
       // Shortcut key for focusing on the widget (Alt+N)
       accessKey: "N",
 
-      // Enables the active state when the widget is focused
+      // Enables the active state when the widget is focused or clicked
       activeStateEnabled: true,
 
       // The widget is not disabled
@@ -51,14 +54,14 @@ $(document).ready(() => {
       // Enables focus state when the widget is focused
       focusStateEnabled: true,
 
+      // Enables hover effect when the widget is hovered
+      hoverStateEnabled: true,
+
       // Specifies the input type (fixed point for decimal numbers)
       type: "fixedPoint",
 
-      // Hint text to be shown on hover
+      // Tooltip hint text when hovering over the widget
       hint: "this is number box",
-
-      // Enables hover state when the widget is hovered over
-      hoverStateEnabled: true,
 
       inputAttr: {
         // Disables autocomplete on the input field
@@ -110,45 +113,81 @@ $(document).ready(() => {
       // Visibility of the widget
       visible: true,
 
-      // Set default Value
+      // Set default value
       value: "1",
 
-      // Event handlers
+      // ==========================
+      // ** Event Handlers **
+      // ==========================
+
+      // Fires when the value changes
       onChange: changeHandler,
+
+      // Fires when text is copied from the input field
       onCopy: copyHandler,
+
+      // Fires when text is cut from the input field
       onCut: cutHandler,
+
+      // Fires when the widget content is ready
       onContentReady: contentReadyHandler,
+
+      // Fires when the widget is disposed of
       onDisposing: disposeHandler,
+
+      // Fires when the user presses the Enter key
       onEnterKey: enterKeyHandler,
+
+      // Fires when the input field gains focus
       onFocusIn: focusInHandler,
+
+      // Fires when the input field loses focus
       onFocusOut: focusOutHandler,
+
+      // Fires when the widget is initialized
       onInitialized: initializedHandler,
+
+      // Fires when the user types into the input field
       onInput: inputHandler,
+
+      // Fires when a key is pressed down
       onKeyDown: keyDownHandler,
+
+      // Fires when a key is pressed
       onKeyPress: keyPressHandler,
+
+      // Fires when a key is released
       onKeyUp: keyUpHandler,
+
+      // Fires when an option is changed
       onOptionChanged: optionChangedHandler,
+
+      // Fires when the value is changed by the user
       onValueChanged: valueChangedHandler,
+
+      // Fires when text is pasted into the input field
       onPaste: pasteHandler,
     })
     .dxNumberBox("instance");
 
+  // ==========================
+  // ** Methods **
+  // ==========================
+
   // Access the root HTML element of the NumberBox widget
   element(NumberBoxInstance);
-
-  // Focus on the NumberBox widget
-  focus(NumberBoxInstance);
-
-  var button = getButton(NumberBoxInstance, "spinUp");
-  console.log(button); // Log the spinUp button object
 
   // Access the instance of the widget
   instance(NumberBoxInstance);
 
+  // Retrieve and log the spin-up button inside the widget
+  var button = getButton(NumberBoxInstance, "spinUp");
+  console.log(button);
+
   // Get and log the "accessKey" option of the NumberBox widget
   console.log(option(NumberBoxInstance, "accessKey"));
 
-  // Register a custom key handler for the "enter" key
+  // Register a custom key handler for the "Enter" key
   registerKeyHandler(NumberBoxInstance, "enter", () => {
     alert("Enter key pressed!");
   });
