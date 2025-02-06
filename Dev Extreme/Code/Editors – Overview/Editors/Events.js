@@ -2,10 +2,10 @@
 const changeHandler = (e) => console.log("Changed", e);
 
 // Fires when the dropdown is closed
-const closedHandler = (e) => console.log("Drop down closed", e);
+const closedHandler = (e) => console.log(e.component.NAME + " closed");
 
 // Fires when the widget content is fully loaded and ready
-const contentReadyHandler = (e) => console.log("Content is ready", e);
+const contentReadyHandler = (e) => console.log("Content is ready");
 
 // Fires when the user copies text from the input field
 const copyHandler = () => alert("Copied");
@@ -20,16 +20,17 @@ const disposeHandler = (e) => alert("Disposing", e);
 const enterKeyHandler = () => alert("Value will be selected");
 
 // Fires when the widget gains focus
-const focusInHandler = (e) => console.log("Focused in", e);
+const focusInHandler = (e) => console.log("Focused in", e.event.type);
 
 // Fires when the widget loses focus
-const focusOutHandler = (e) => console.log("Focused out", e);
+const focusOutHandler = (e) => console.log("Focused out", e.event.type);
 
 // Fires when the widget is initialized
-const initializedHandler = (e) => console.log("Initialized", e);
+const initializedHandler = (e) => console.log("Initialized");
 
 // Fires when the user types in the input field
-const inputHandler = (e) => console.log("Input received", e);
+const inputHandler = (e) =>
+  console.log("Input received", e.event.currentTarget.value);
 
 // Fires when a key is pressed down inside the widget input
 const keyDownHandler = (e) =>
@@ -43,7 +44,7 @@ const keyPressHandler = (e) =>
   console.log("Key press", e.event.key, e.event.keyCode);
 
 // Fires when the dropdown is opened
-const openedHandler = (e) => console.log("Drop down opened", e);
+const openedHandler = (e) => console.log(e.component.NAME + " opened");
 
 // Fires when a widget option is changed dynamically
 const optionChangedHandler = (e) =>

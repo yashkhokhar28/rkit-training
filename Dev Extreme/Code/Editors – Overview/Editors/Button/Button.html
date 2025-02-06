@@ -11,20 +11,21 @@
 
     <!-- DevExtreme library -->
     <script type="text/javascript" src="../Scripts/dx.all.js"></script>
-
+    <style>
+        .button-div {
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body class="dx-viewport">
-    <div id="SelectBox"></div>
-    <br>
-    <div id="SearchBox"></div>
-    <br>
-    <div id="SearchBoxAPI"></div>
-    <script type="module" src="./SelectBox.js"></script>
-    <!-- Marvel Data Source -->
-    <script type="text/javascript" src="./marvel-names.js"></script>
+    <div id="normalButton"></div>
+    <div id="successButton"></div>
+    <div id="defaultButton"></div>
+    <div id="dangerButton"></div>
 
 
+    <script type="module" src="./Button.js"></script>
 </body>
 
 </html>

@@ -224,4 +224,23 @@ $(document).ready(() => {
   );
 
   // close(SelectBoxInstance);
+
+  $("#SearchBox").dxSelectBox({
+    dataSource: marvelCharacters,
+    displayExpr: "Name",
+    inputAttr: { "aria-label": "MarvelNames" },
+    valueExpr: "ID",
+    searchEnabled: true,
+    showClearButton: true,
+  });
+
+  $("#SearchBoxAPI").dxSelectBox({
+    dataSource: "https://jsonplaceholder.typicode.com/users",
+    displayExpr: "name",
+    inputAttr: { "aria-label": "name" },
+    valueExpr: "id",
+    searchEnabled: true,
+    showClearButton: true,
+    deferRendering: false,
+  });
 });
