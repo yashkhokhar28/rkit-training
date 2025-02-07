@@ -72,7 +72,7 @@ $(document).ready(() => {
       // The widget is not read-only
       readOnly: false,
 
-      spellcheck: true,
+      spellCheck: true,
 
       // Disables the right-to-left layout
       rtlEnabled: false,

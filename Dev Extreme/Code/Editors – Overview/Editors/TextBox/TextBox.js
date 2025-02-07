@@ -210,7 +210,7 @@ $(document).ready(() => {
           name: "password",
           location: "after",
           options: {
-            icon: "eyeopen",
+            icon: "favorites",
             stylingMode: "text",
             onClick() {
               passwordEditor.option(
