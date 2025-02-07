@@ -1,0 +1,107 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|c:\\yash khokhar\\rkit-training\\dev extreme\\code\\editors \u2013 overview\\editors\\fileuploader\\fileuploader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|solutionrelative:fileuploader\\fileuploader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|c:\\yash khokhar\\rkit-training\\dev extreme\\code\\editors \u2013 overview\\editors\\fileuploader\\fileuploader.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|solutionrelative:fileuploader\\fileuploader.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|c:\\yash khokhar\\rkit-training\\dev extreme\\code\\editors \u2013 overview\\editors\\datebox\\datebox.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|solutionrelative:datebox\\datebox.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\datebox\\datebox.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{53BFE1B1-1FBC-4C3D-A3A7-F5E7181220DE}|Editors.csproj|solutionrelative:datebox\\datebox.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DateBox.js",
+              "DocumentMoniker": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\DateBox\\DateBox.js",
+              "RelativeDocumentMoniker": "DateBox\\DateBox.js",
+              "ToolTip": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\DateBox\\DateBox.js",
+              "RelativeToolTip": "DateBox\\DateBox.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-02-07T11:05:23.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DateBox.html",
+              "DocumentMoniker": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\DateBox\\DateBox.html",
+              "RelativeDocumentMoniker": "DateBox\\DateBox.html",
+              "ToolTip": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\DateBox\\DateBox.html",
+              "RelativeToolTip": "DateBox\\DateBox.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwBAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-07T11:05:24.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\index.html",
+              "RelativeDocumentMoniker": "index.html",
+              "ToolTip": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\index.html",
+              "RelativeToolTip": "index.html",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADcAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-07T11:05:24.462Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FileUploader.html",
+              "DocumentMoniker": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\FileUploader\\FileUploader.html",
+              "RelativeDocumentMoniker": "FileUploader\\FileUploader.html",
+              "ToolTip": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\FileUploader\\FileUploader.html",
+              "RelativeToolTip": "FileUploader\\FileUploader.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-02-07T11:17:54.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FileUploader.js",
+              "DocumentMoniker": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\FileUploader\\FileUploader.js",
+              "RelativeDocumentMoniker": "FileUploader\\FileUploader.js",
+              "ToolTip": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Editors \u2013 Overview\\Editors\\FileUploader\\FileUploader.js",
+              "RelativeToolTip": "FileUploader\\FileUploader.js",
+              "ViewState": "AgIAALEAAAAAAAAAAADwv70AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-02-07T11:17:55.224Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
