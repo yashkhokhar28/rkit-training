@@ -26,7 +26,7 @@ const focusInHandler = (e) => console.log("Focused in", e.event.type);
 const focusOutHandler = (e) => console.log("Focused out", e.event.type);
 
 // Fires when the widget is initialized
-const initializedHandler = (e) => console.log("Initialized");
+const initializedHandler = (e) => console.log("Initialized", e.component.NAME);
 
 // Fires when the user types in the input field
 const inputHandler = (e) =>
