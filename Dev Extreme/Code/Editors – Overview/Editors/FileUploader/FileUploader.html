@@ -1,132 +1,133 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>File Uploader - Accept Values</title>
     <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
 
     <!-- DevExtreme theme -->
-    <link rel="stylesheet" href="../Content/dx.dark.css">
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
 
     <!-- DevExtreme library -->
     <script type="text/javascript" src="../Scripts/dx.all.js"></script>
 
     <!-- Bootstrap for table styling (optional) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
 
     <style>
-        /* Styling for the drag & drop effect */
-        #fileuploader {
-            width: 400px;
-            padding: 20px;
-            border: 2px dashed #007bff;
-            text-align: center;
-            font-size: 16px;
-            margin: 50px auto;
-            cursor: pointer;
-        }
+      /* Styling for the drag & drop effect */
+      #fileuploader {
+        width: 400px;
+        padding: 20px;
+        border: 2px dashed #007bff;
+        text-align: center;
+        font-size: 16px;
+        margin: 50px auto;
+        cursor: pointer;
+      }
     </style>
-</head>
+  </head>
 
-<body class="dx-viewport text-white bg-dark">
+  <body class="dx-viewport text-white bg-dark">
     <div class="container mt-4">
-        <h2 class="text-center">File Uploader</h2>
+      <h2 class="text-center">File Uploader</h2>
 
-        <!-- File Uploader -->
-        <div id="FileUploader"></div>
+      <!-- File Uploader -->
+      <div id="FileUploader"></div>
 
-        <div id="cancleButton"></div>
-        <div id="uploadButton"></div>
+      <div id="cancleButton"></div>
+      <div id="uploadButton"></div>
 
-        <div id="fileuploader"></div>
+      <div id="fileuploader"></div>
 
-        <h3 class="mt-4">Accept Values & Descriptions</h3>
+      <h3 class="mt-4">Accept Values & Descriptions</h3>
 
-        <!-- Accept Values Table -->
-        <table class="table table-bordered table-hover table-dark mt-3">
-            <thead>
-                <tr>
-                    <th>Accept Value</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- General Categories -->
-                <tr>
-                    <td>*</td>
-                    <td>Accept all file types</td>
-                </tr>
-                <tr>
-                    <td>image/*</td>
-                    <td>Accept all image formats (JPG, PNG, GIF, BMP, etc.)</td>
-                </tr>
-                <tr>
-                    <td>video/*</td>
-                    <td>Accept all video formats (MP4, AVI, MKV, etc.)</td>
-                </tr>
-                <tr>
-                    <td>audio/*</td>
-                    <td>Accept all audio formats (MP3, WAV, OGG, etc.)</td>
-                </tr>
-                <tr>
-                    <td>application/*</td>
-                    <td>Accept all application files (PDF, ZIP, etc.)</td>
-                </tr>
-                <tr>
-                    <td>text/*</td>
-                    <td>Accept all text-based files (TXT, CSV, JSON, etc.)</td>
-                </tr>
+      <!-- Accept Values Table -->
+      <table class="table table-bordered table-hover table-dark mt-3">
+        <thead>
+          <tr>
+            <th>Accept Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- General Categories -->
+          <tr>
+            <td>*</td>
+            <td>Accept all file types</td>
+          </tr>
+          <tr>
+            <td>image/*</td>
+            <td>Accept all image formats (JPG, PNG, GIF, BMP, etc.)</td>
+          </tr>
+          <tr>
+            <td>video/*</td>
+            <td>Accept all video formats (MP4, AVI, MKV, etc.)</td>
+          </tr>
+          <tr>
+            <td>audio/*</td>
+            <td>Accept all audio formats (MP3, WAV, OGG, etc.)</td>
+          </tr>
+          <tr>
+            <td>application/*</td>
+            <td>Accept all application files (PDF, ZIP, etc.)</td>
+          </tr>
+          <tr>
+            <td>text/*</td>
+            <td>Accept all text-based files (TXT, CSV, JSON, etc.)</td>
+          </tr>
 
-                <!-- Specific File Extensions -->
-                <tr class="table-primary">
-                    <td colspan="2"><strong>Specific File Extensions</strong></td>
-                </tr>
-                <tr>
-                    <td>.jpg, .jpeg, .png, .gif, .bmp, .svg, .webp</td>
-                    <td>Specific image file formats</td>
-                </tr>
-                <tr>
-                    <td>.mp4, .avi, .mkv, .mov, .wmv</td>
-                    <td>Specific video file formats</td>
-                </tr>
-                <tr>
-                    <td>.mp3, .wav, .ogg, .flac, .aac</td>
-                    <td>Specific audio file formats</td>
-                </tr>
-                <tr>
-                    <td>.pdf</td>
-                    <td>Only PDF files</td>
-                </tr>
-                <tr>
-                    <td>.doc, .docx</td>
-                    <td>Microsoft Word files</td>
-                </tr>
-                <tr>
-                    <td>.xls, .xlsx</td>
-                    <td>Microsoft Excel files</td>
-                </tr>
-                <tr>
-                    <td>.ppt, .pptx</td>
-                    <td>Microsoft PowerPoint files</td>
-                </tr>
-                <tr>
-                    <td>.txt, .csv, .json, .xml, .yaml</td>
-                    <td>Text-based files</td>
-                </tr>
-                <tr>
-                    <td>.zip, .rar, .7z, .tar.gz</td>
-                    <td>Compressed archive files</td>
-                </tr>
-                <tr>
-                    <td>.exe, .msi</td>
-                    <td>Executable files</td>
-                </tr>
-            </tbody>
-        </table>
+          <!-- Specific File Extensions -->
+          <tr class="table-primary">
+            <td colspan="2"><strong>Specific File Extensions</strong></td>
+          </tr>
+          <tr>
+            <td>.jpg, .jpeg, .png, .gif, .bmp, .svg, .webp</td>
+            <td>Specific image file formats</td>
+          </tr>
+          <tr>
+            <td>.mp4, .avi, .mkv, .mov, .wmv</td>
+            <td>Specific video file formats</td>
+          </tr>
+          <tr>
+            <td>.mp3, .wav, .ogg, .flac, .aac</td>
+            <td>Specific audio file formats</td>
+          </tr>
+          <tr>
+            <td>.pdf</td>
+            <td>Only PDF files</td>
+          </tr>
+          <tr>
+            <td>.doc, .docx</td>
+            <td>Microsoft Word files</td>
+          </tr>
+          <tr>
+            <td>.xls, .xlsx</td>
+            <td>Microsoft Excel files</td>
+          </tr>
+          <tr>
+            <td>.ppt, .pptx</td>
+            <td>Microsoft PowerPoint files</td>
+          </tr>
+          <tr>
+            <td>.txt, .csv, .json, .xml, .yaml</td>
+            <td>Text-based files</td>
+          </tr>
+          <tr>
+            <td>.zip, .rar, .7z, .tar.gz</td>
+            <td>Compressed archive files</td>
+          </tr>
+          <tr>
+            <td>.exe, .msi</td>
+            <td>Executable files</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <script type="module" src="./FileUploader.js"></script>
-</body>
-
+  </body>
 </html>

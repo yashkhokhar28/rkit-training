@@ -1,164 +1,164 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editors - Overview</title>
 
     <!-- Google Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
     <!-- jQuery -->
     <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
 
     <!-- DevExtreme Dark Theme -->
-    <link rel="stylesheet" href="../Content/dx.dark.css">
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
 
     <!-- DevExtreme Library -->
     <script type="text/javascript" src="../Scripts/dx.all.js"></script>
 
     <!-- Custom Dark Theme CSS -->
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            /* Dark Background */
-            color: #ffffff;
-            /* Light Text */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+      /* Global Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #121212;
+        /* Dark Background */
+        color: #ffffff;
+        /* Light Text */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            padding: 20px;
-            text-align: center;
-        }
+      /* Container */
+      .container {
+        max-width: 1200px;
+        width: 90%;
+        padding: 20px;
+        text-align: center;
+      }
 
-        /* Page Title */
-        .title {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #e0e0e0;
-            font-weight: bold;
-        }
+      /* Page Title */
+      .title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #e0e0e0;
+        font-weight: bold;
+      }
 
-        /* Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
+      /* Grid Layout */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+      }
 
-        /* Card Styling */
-        .card {
-            background: #1e1e1e;
-            /* Dark Card Background */
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            border: 1px solid #333;
-        }
+      /* Card Styling */
+      .card {
+        background: #1e1e1e;
+        /* Dark Card Background */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          background 0.3s ease;
+        border: 1px solid #333;
+      }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
-            background-color: #007bff;
-            color: #fff;
-        }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
+        background-color: #007bff;
+        color: #fff;
+      }
 
-        /* Icon Styling */
-        .card .icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: #00bcd4;
-            /* Neon Cyan */
-            transition: color 0.3s ease;
-        }
+      /* Icon Styling */
+      .card .icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+        color: #00bcd4;
+        /* Neon Cyan */
+        transition: color 0.3s ease;
+      }
 
-        .card:hover .icon {
-            color: #fff;
-        }
+      .card:hover .icon {
+        color: #fff;
+      }
 
-        /* Link Styling */
-        .card a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 20px;
-            font-weight: 600;
-            display: block;
-        }
+      /* Link Styling */
+      .card a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 20px;
+        font-weight: 600;
+        display: block;
+      }
 
-        /* Hover Glow Effect */
-        .card:hover a {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
+      /* Hover Glow Effect */
+      .card:hover a {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
-        <h2 class="title">Editors - Overview</h2>
-        <div class="grid">
-            <div class="card">
-                <span class="material-icons icon">check_box</span>
-                <a href="../CheckBox.html">Check Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">event</span>
-                <a href="./DateBox/DateBox.html">Date Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">arrow_drop_down_circle</span>
-                <a href="./DropDownBox/DropDownBox.html">Drop Down Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">calculate</span>
-                <a href="./NumberBox/NumberBox.html">Number Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">list</span>
-                <a href="./SelectBox/SelectBox.html">Select Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">text_fields</span>
-                <a href="./TextArea/TextArea.html">Text Area</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">title</span>
-                <a href="./TextBox/TextBox.html">Text Box</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">touch_app</span>
-                <a href="./Button/Button.html">Button</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">cloud_upload</span>
-                <a href="./FileUploader/FileUploader.html">File Uploader</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">verified_user</span>
-                <a href="./Validation/Validation.html">Validation</a>
-            </div>
-            <div class="card">
-                <span class="material-icons icon">radio_button_checked</span>
-                <a href="./RadioGroup/RadioGroup.html">Radio Group</a>
-            </div>
+      <h2 class="title">Editors - Overview</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="material-icons icon">check_box</span>
+          <a href="../CheckBox.html">Check Box</a>
         </div>
+        <div class="card">
+          <span class="material-icons icon">event</span>
+          <a href="./DateBox/DateBox.html">Date Box</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">arrow_drop_down_circle</span>
+          <a href="./DropDownBox/DropDownBox.html">Drop Down Box</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">calculate</span>
+          <a href="./NumberBox/NumberBox.html">Number Box</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">list</span>
+          <a href="./SelectBox/SelectBox.html">Select Box</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">text_fields</span>
+          <a href="./TextArea/TextArea.html">Text Area</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">title</span>
+          <a href="./TextBox/TextBox.html">Text Box</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">touch_app</span>
+          <a href="./Button/Button.html">Button</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">cloud_upload</span>
+          <a href="./FileUploader/FileUploader.html">File Uploader</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">verified_user</span>
+          <a href="./Validation/Validation.html">Validation</a>
+        </div>
+        <div class="card">
+          <span class="material-icons icon">radio_button_checked</span>
+          <a href="./RadioGroup/RadioGroup.html">Radio Group</a>
+        </div>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>

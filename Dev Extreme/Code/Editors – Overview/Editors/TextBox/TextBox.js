@@ -17,13 +17,7 @@ import {
   pasteHandler,
 } from "../Events.js";
 
-import {
-  element,
-  getButton,
-  option,
-  registerKeyHandler,
-  instance,
-} from "../Methods.js";
+import { element, registerKeyHandler, instance } from "../Methods.js";
 
 $(document).ready(() => {
   console.log("Document is Ready!!");
