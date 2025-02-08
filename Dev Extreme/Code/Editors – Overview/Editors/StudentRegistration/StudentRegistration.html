@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Student Registration</title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <!-- Popup for displaying submitted data -->
+    <div id="pop-up">
+      <div id="popup-content"></div>
+    </div>
+
+    <!-- Personal Details -->
+    <div class="dx-fieldset">
+      <div class="dx-fieldset-header">Personal Details</div>
+      <div class="dx-field">
+        <div class="dx-field-label">First Name</div>
+        <div class="dx-field-value"><div id="firstname"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Last Name</div>
+        <div class="dx-field-value"><div id="lastname"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Gender</div>
+        <div class="dx-field-value"><div id="gender"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Date of Birth</div>
+        <div class="dx-field-value"><div id="dob"></div></div>
+      </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="dx-fieldset">
+      <div class="dx-fieldset-header">Contact Information</div>
+      <div class="dx-field">
+        <div class="dx-field-label">Email</div>
+        <div class="dx-field-value"><div id="email"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Phone</div>
+        <div class="dx-field-value"><div id="phone"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Address</div>
+        <div class="dx-field-value"><div id="address"></div></div>
+      </div>
+    </div>
+
+    <!-- Job Information -->
+    <div class="dx-fieldset">
+      <div class="dx-fieldset-header">Job Information</div>
+      <div class="dx-field">
+        <div class="dx-field-label">Job Role</div>
+        <div class="dx-field-value"><div id="jobrole"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Preferred Contact Method</div>
+        <div class="dx-field-value"><div id="contact-method"></div></div>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="dx-fieldset">
+      <div class="dx-fieldset-header">Security</div>
+      <div class="dx-field">
+        <div class="dx-field-label">Password</div>
+        <div class="dx-field-value"><div id="password"></div></div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Confirm Password</div>
+        <div class="dx-field-value"><div id="confirm-password"></div></div>
+      </div>
+    </div>
+
+    <!-- Attachments -->
+    <div class="dx-fieldset">
+      <div class="dx-fieldset-header">Attachments</div>
+      <div class="dx-field">
+        <div class="dx-field-label">Upload Profile Picture</div>
+        <div class="dx-field-value"><div id="fileuploader"></div></div>
+      </div>
+    </div>
+
+    <!-- Terms and Conditions -->
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-value">
+          <div id="terms"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-value"><div id="submit-button"></div></div>
+      </div>
+    </div>
+
+    <script type="module" src="./StudentRegistration.js"></script>
+  </body>
+</html>

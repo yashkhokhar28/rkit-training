@@ -1,0 +1,22 @@
+[
+  { "id": 1, "name": "Software Developer" },
+  { "id": 2, "name": "UI/UX Designer" },
+  { "id": 3, "name": "Project Manager" },
+  { "id": 4, "name": "QA Tester" },
+  { "id": 5, "name": "DevOps Engineer" },
+  { "id": 6, "name": "System Administrator" },
+  { "id": 7, "name": "Business Analyst" },
+  { "id": 8, "name": "Data Scientist" },
+  { "id": 9, "name": "Cybersecurity Specialist" },
+  { "id": 10, "name": "Product Manager" },
+  { "id": 11, "name": "Cloud Engineer" },
+  { "id": 12, "name": "Database Administrator" },
+  { "id": 13, "name": "Network Engineer" },
+  { "id": 14, "name": "Embedded Systems Engineer" },
+  { "id": 15, "name": "Blockchain Developer" },
+  { "id": 16, "name": "AI/ML Engineer" },
+  { "id": 17, "name": "Frontend Developer" },
+  { "id": 18, "name": "Backend Developer" },
+  { "id": 19, "name": "Technical Writer" },
+  { "id": 20, "name": "IT Support Specialist" }
+]
