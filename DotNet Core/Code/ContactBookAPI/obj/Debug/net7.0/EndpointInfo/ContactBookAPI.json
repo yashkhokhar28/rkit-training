@@ -1,0 +1,187 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ContactBookAPI",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/CLContacts/GetAllContacts": {
+      "get": {
+        "tags": [
+          "CLContacts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/CLContacts/GetContactsByID/{ID}": {
+      "get": {
+        "tags": [
+          "CLContacts"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/CLContacts/DeleteContactsByID/{ID}": {
+      "delete": {
+        "tags": [
+          "CLContacts"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/CLContacts/UpdateContacts": {
+      "put": {
+        "tags": [
+          "CLContacts"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/CLContacts/InsertContacts": {
+      "post": {
+        "tags": [
+          "CLContacts"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOCNT01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DTOCNT01": {
+        "required": [
+          "T01101",
+          "T01102",
+          "T01103",
+          "T01104",
+          "T01105",
+          "T01106"
+        ],
+        "type": "object",
+        "properties": {
+          "T01101": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "T01102": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "T01103": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "T01104": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "T01105": {
+            "minLength": 1,
+            "type": "string",
+            "format": "tel"
+          },
+          "T01106": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+[
+  {
+    "ContainingType": "ContactBookAPI.Controllers.CLContactsController",
+    "Method": "Delete",
+    "RelativePath": "api/CLContacts/DeleteContactsByID/{ID}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContactBookAPI.Controllers.CLContactsController",
+    "Method": "Get",
+    "RelativePath": "api/CLContacts/GetAllContacts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContactBookAPI.Controllers.CLContactsController",
+    "Method": "GetByID",
+    "RelativePath": "api/CLContacts/GetContactsByID/{ID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContactBookAPI.Controllers.CLContactsController",
+    "Method": "InsertContacts",
+    "RelativePath": "api/CLContacts/InsertContacts",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTOCNT01",
+        "Type": "ContactBookAPI.Models.DTO.DTOCNT01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ContactBookAPI.Controllers.CLContactsController",
+    "Method": "UpdateContacts",
+    "RelativePath": "api/CLContacts/UpdateContacts",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTOCNT01",
+        "Type": "ContactBookAPI.Models.DTO.DTOCNT01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

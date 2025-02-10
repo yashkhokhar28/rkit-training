@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Yash Khokhar\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj": {}
+    "C:\\Yash Khokhar\\rkit-training\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj": {}
   },
   "projects": {
-    "F:\\Yash Khokhar\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj": {
+    "C:\\Yash Khokhar\\rkit-training\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Yash Khokhar\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj",
+        "projectUniqueName": "C:\\Yash Khokhar\\rkit-training\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj",
         "projectName": "ContactBookAPI",
-        "projectPath": "F:\\Yash Khokhar\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj",
-        "packagesPath": "C:\\Users\\yash.k\\.nuget\\packages\\",
-        "outputPath": "F:\\Yash Khokhar\\DotNet Core\\Code\\ContactBookAPI\\obj\\",
+        "projectPath": "C:\\Yash Khokhar\\rkit-training\\DotNet Core\\Code\\ContactBookAPI\\ContactBookAPI.csproj",
+        "packagesPath": "C:\\Users\\Yash.k\\.nuget\\packages\\",
+        "outputPath": "C:\\Yash Khokhar\\rkit-training\\DotNet Core\\Code\\ContactBookAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net7.0": {
@@ -88,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
