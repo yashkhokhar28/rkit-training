@@ -286,7 +286,8 @@ $(document).ready(() => {
       labelText: "Drag & Drop Profile Picture",
       accept: "image/*",
       allowCanceling: true,
-      uploadUrl: "https://file.io",
+      uploadUrl:
+        "https://js.devexpress.com/Demos/WidgetsGalleryDataService/api/ChunkUpload",
       onInitialized: initializedHandler,
     })
     .dxValidator({
