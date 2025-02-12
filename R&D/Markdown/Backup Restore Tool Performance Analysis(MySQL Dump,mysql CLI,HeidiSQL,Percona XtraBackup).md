@@ -9,6 +9,17 @@
 
 ---
 
+### **System Configuration**
+
+- **Operating System:** Ubuntu 20.04.6 LTS
+- **Kernel:** Linux 5.4.0-205-generic
+- **Architecture:** x86_64
+- **Virtualization:** Microsoft (Hyper-V)
+- **CPU:** Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+- **Cores:** 1 (Single-core, no hyper-threading)
+- **CPU MHz:** 2003.516
+- **Hypervisor Vendor:** Microsoft
+
 ## **2. Performance Tests & Results**
 
 ### **MySQL Workbench**
