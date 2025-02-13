@@ -7,7 +7,6 @@ $(document).ready(async () => {
       let data = await $.getJSON(
         "https://67a70408510789ef0dfcbb1f.mockapi.io/api/users/"
       );
-      localStorage.setItem("Users", JSON.stringify(data)); // Store data
       return data;
     } catch (error) {
       console.error("Can't fetch data:", error);

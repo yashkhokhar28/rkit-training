@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DevExtreme Grid</title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <div id="gridContainer"></div>
+    <script>
+      $(() => {
+        const store = new DevExpress.data.CustomStore({
+          key: "id",
+          load() {
+            return $.ajax({
+              url: "https://dummyjson.com/products",
+              dataType: "json",
+            })
+              .then((result) => {
+                return {
+                  data: result.products,
+                  totalCount: result.total,
+                };
+              })
+              .fail(() => {
+                throw new Error("Data Loading Error");
+              });
+          },
+        });
+
+        $("#gridContainer")
+          .dxDataGrid({
+            dataSource: store,
+            showBorders: true,
+            paging: {
+              enabled: true,
+              pageSize: 10,
+              pageIndex: 1,
+            },
+            pager: {
+              displayMode: "compact",
+              visible: true,
+              showPageSizeSelector: true,
+              allowedPageSizes: [10, 20, "all"],
+              showNavigationButtons: true,
+              showInfo: true,
+              label: "Navigation",
+              infoText: "",
+            },
+            columns: [
+              { dataField: "id", dataType: "number", caption: "ID" },
+              { dataField: "title", dataType: "string", caption: "Title" },
+              {
+                dataField: "description",
+                dataType: "string",
+                caption: "Description",
+              },
+              {
+                dataField: "category",
+                dataType: "string",
+                caption: "Category",
+              },
+              {
+                dataField: "price",
+                dataType: "number",
+                format: "currency",
+                caption: "Price",
+              },
+              {
+                dataField: "discountPercentage",
+                dataType: "number",
+                format: "percent",
+                caption: "Discount %",
+              },
+              { dataField: "rating", dataType: "number", caption: "Rating" },
+              { dataField: "stock", dataType: "number", caption: "Stock" },
+              { dataField: "brand", dataType: "string", caption: "Brand" },
+              { dataField: "sku", dataType: "string", caption: "SKU" },
+              { dataField: "weight", dataType: "number", caption: "Weight" },
+              {
+                dataField: "availabilityStatus",
+                dataType: "string",
+                caption: "Availability",
+              },
+              {
+                dataField: "returnPolicy",
+                dataType: "string",
+                caption: "Return Policy",
+              },
+              {
+                dataField: "minimumOrderQuantity",
+                dataType: "number",
+                caption: "Min Order Qty",
+              },
+            ],
+          })
+          .dxDataGrid("instance");
+      });
+    </script>
+  </body>
+</html>

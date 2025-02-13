@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DevExtreme Grid</title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <div id="gridContainer"></div>
+    <script>
+      $(() => {
+        const store = new DevExpress.data.CustomStore({
+          key: "id",
+          load() {
+            return $.ajax({
+              url: "https://jsonplaceholder.typicode.com/photos",
+              dataType: "json",
+            })
+              .then((result) => {
+                return { data: result };
+              })
+              .fail(() => {
+                throw new Error("Data Loading Error");
+              });
+          },
+        });
+
+        $("#gridContainer")
+          .dxDataGrid({
+            dataSource: store,
+            showBorders: true,
+            customizeColumns(columns) {
+              columns[0].width = 70;
+              columns[1].width = 70;
+            },
+            scrolling: {
+              mode: "infinite",
+              scrollByThumb: true,
+              scrollByContent: true,
+              rowRenderingMode: "virtual",
+              columnRenderingMode: "standard",
+            },
+            onContentReady(e) {
+              e.component.option("loadPanel.enabled", false);
+            },
+            columns: [
+              { dataField: "albumId", dataType: "number", caption: "ID" },
+              { dataField: "id", dataType: "number", caption: "ID1" },
+              {
+                dataField: "title",
+                dataType: "string",
+                caption: "Title",
+              },
+              {
+                dataField: "url",
+                dataType: "string",
+                caption: "URL",
+              },
+              {
+                dataField: "thumbnailUrl",
+                dataType: "string",
+                caption: "Thumbnail URL",
+              },
+            ],
+          })
+          .dxDataGrid("instance");
+      });
+    </script>
+  </body>
+</html>

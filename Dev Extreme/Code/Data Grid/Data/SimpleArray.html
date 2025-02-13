@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+    <script type="text/javascript" src="../data.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <div id="gridContainer"></div>
+    <script>
+      $(() => {
+        console.log("Document is Reayd!!");
+
+        $("#gridContainer").dxDataGrid({
+          dataSource: marvelCharacters,
+          keyExpr: "ID",
+          columns: [
+            "Name",
+            "Real_Name",
+            "Affiliation",
+            "First_Appearance",
+            "Abilities",
+            "Status",
+          ],
+          showBorders: true,
+        });
+      });
+    </script>
+  </body>
+</html>

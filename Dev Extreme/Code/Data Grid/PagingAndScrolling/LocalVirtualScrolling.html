@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DevExtreme Grid</title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <div id="gridContainer"></div>
+    <script>
+      $(() => {
+        const store = new DevExpress.data.CustomStore({
+          key: "id",
+          load() {
+            return $.ajax({
+              url: "../data.json",
+              dataType: "json",
+            })
+              .then((result) => {
+                return { data: result };
+              })
+              .fail(() => {
+                throw new Error("Data Loading Error");
+              });
+          },
+        });
+
+        $("#gridContainer").dxDataGrid({
+          dataSource: store,
+          showBorders: true,
+          customizeColumns(columns) {
+            columns[0].width = 70;
+          },
+          scrolling: {
+            mode: "virtual",
+          },
+          columns: [
+            { dataField: "id", dataType: "number", caption: "ID" },
+            {
+              dataField: "first_name",
+              dataType: "string",
+              caption: "First Name",
+            },
+            {
+              dataField: "last_name",
+              dataType: "string",
+              caption: "Last Name",
+            },
+            { dataField: "email", dataType: "string", caption: "Email" },
+            { dataField: "gender", dataType: "string", caption: "Gender" },
+            {
+              dataField: "ip_address",
+              dataType: "string",
+              caption: "IP Address",
+            },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>

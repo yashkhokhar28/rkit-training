@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DevExtreme Grid</title>
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="../Content/dx.dark.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  </head>
+
+  <body class="dx-viewport">
+    <div id="gridContainer"></div>
+    <script>
+      $(() => {
+        const store = new DevExpress.data.CustomStore({
+          key: "order_id",
+          load() {
+            return $.ajax({
+              url: "./ecommerce.json",
+              dataType: "json",
+            })
+              .then((result) => {
+                return { data: result };
+              })
+              .fail(() => {
+                throw new Error("Data Loading Error");
+              });
+          },
+        });
+
+        $("#gridContainer")
+          .dxDataGrid({
+            dataSource: store,
+            showBorders: true,
+            columnWidth: 100,
+            scrolling: {
+              columnRenderingMode: "virtual", // Renders only visible columns
+            },
+            paging: {
+              enabled: true,
+              pageSize: 10,
+            },
+            onContentReady(e) {
+              e.component.option("loadPanel.enabled", false);
+            },
+            columns: [
+              {
+                dataField: "order_id",
+                caption: "Order ID",
+                dataType: "number",
+              },
+              {
+                dataField: "customer_id",
+                caption: "Customer ID",
+                dataType: "number",
+              },
+              {
+                dataField: "product_name",
+                caption: "Product Name",
+                dataType: "string",
+              },
+              {
+                dataField: "quantity",
+                caption: "Quantity",
+                dataType: "number",
+              },
+              {
+                dataField: "price",
+                caption: "Price",
+                dataType: "number",
+                format: "currency",
+              },
+              {
+                dataField: "total_price",
+                caption: "Total Price",
+                dataType: "number",
+                format: "currency",
+              },
+              {
+                dataField: "order_date",
+                caption: "Order Date",
+                dataType: "date",
+              },
+              {
+                dataField: "shipping_address",
+                caption: "Shipping Address",
+                dataType: "string",
+                visible: false,
+              },
+              { dataField: "city", caption: "City", dataType: "string" },
+              { dataField: "country", caption: "Country", dataType: "string" },
+              {
+                dataField: "payment_method",
+                caption: "Payment Method",
+                dataType: "string",
+              },
+              {
+                dataField: "shipping_method",
+                caption: "Shipping Method",
+                dataType: "string",
+              },
+              {
+                dataField: "shipping_cost",
+                caption: "Shipping Cost",
+                dataType: "number",
+                format: "currency",
+              },
+              {
+                dataField: "tax_amount",
+                caption: "Tax Amount",
+                dataType: "number",
+                format: "currency",
+              },
+              {
+                dataField: "grand_total",
+                caption: "Grand Total",
+                dataType: "number",
+                format: "currency",
+              },
+              { dataField: "status", caption: "Status", dataType: "string" },
+              {
+                dataField: "tracking_number",
+                caption: "Tracking Number",
+                dataType: "string",
+              },
+              {
+                dataField: "estimated_delivery_date",
+                caption: "Delivery Date",
+                dataType: "date",
+              },
+              {
+                dataField: "review_rating",
+                caption: "Rating",
+                dataType: "number",
+              },
+              {
+                dataField: "return_requested",
+                caption: "Return Requested",
+                dataType: "boolean",
+              },
+              {
+                dataField: "return_reason",
+                caption: "Return Reason",
+                dataType: "string",
+                visible: false,
+              },
+            ],
+          })
+          .dxDataGrid("instance");
+      });
+    </script>
+  </body>
+</html>
