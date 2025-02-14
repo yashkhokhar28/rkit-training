@@ -19,12 +19,14 @@ $(() => {
       showBorders: true,
       refreshMode: "full",
       editing: {
-        mode: "row",
+        mode: "cell",
         allowAdding: true,
         allowDeleting: true,
         allowUpdating: true,
         confirmDelete: true,
         useIcons: true,
+        selectTextOnEditStart: true,
+        startEditAction: "click",
       },
       scrolling: {
         mode: "virtual",
