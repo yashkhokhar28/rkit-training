@@ -120,14 +120,31 @@ $(document).ready(() => {
       console.log("Real-time data updates received", changes);
     },
 
-    loadMode: "processed", // Fixed property name
+    loadMode: "raw", // Fixed property name
     errorHandler: (error) => {
       alert(error.message);
     },
   });
 
+  $("#button").dxButton({
+    text: "click",
+    onClick: () => {
+      customStore
+        .load({
+          filter: ["name", "=", "Keyur"],
+          // skip: 4,
+          // take: 1,
+        })
+        .done((d) => {
+          displayData(d);
+        });
+    },
+  });
+
   // Load initial data
-  customStore.load();
+  customStore.load({ filter: ["name", "=", "Keyur"] }).done((d) => {
+    displayData(d);
+  });
 
   // Function to display data dynamically in the table
   function displayData(data) {

@@ -119,12 +119,12 @@ $(document).ready(() => {
 
   // Get and set page size
   console.log("Current Page Size:", dataSource.pageSize());
-  dataSource.pageSize(15);
+  dataSource.pageSize(3);
   dataSource.load();
 
   // Enable or disable pagination
   console.log("Is Pagination Enabled:", dataSource.paginate());
-  dataSource.paginate(false);
+  dataSource.paginate(true);
   dataSource.load();
 
   // Enable or disable total count requirement
