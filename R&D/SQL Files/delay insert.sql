@@ -1,7 +1,7 @@
 DELIMITER $$
 
-CREATE PROCEDURE InsertOrdersLoop(
-    IN p_Limit INT,   -- Number of records to insert (should be a multiple of 10 for each cycle)
+CREATE PROCEDURE InsertOrdersWithTransaction(
+    IN p_Limit INT,   -- Number of records to insert
     IN p_Order_ID VARCHAR(254),
     IN p_Date VARCHAR(50),
     IN p_Status BLOB,
@@ -28,59 +28,66 @@ CREATE PROCEDURE InsertOrdersLoop(
 BEGIN
     DECLARE counter INT DEFAULT 0;
     DECLARE next_index INT;
-    DECLARE cycle_counter INT;
+    DECLARE commit_counter INT DEFAULT 0;
 
-    -- Calculate how many cycles are needed for the given limit (each cycle inserts 10 records)
-    SET cycle_counter = CEIL(p_Limit / 10);
+    -- Start the transaction
+    START TRANSACTION;
 
-    -- Loop through each cycle (for every 10 records)
-    WHILE cycle_counter > 0 DO
-        SET counter = 0;
+    WHILE counter < p_Limit DO
+        -- Get next available index
+        SELECT COALESCE(MAX(`index`), 0) + 1 INTO next_index FROM orders_1;
 
-        -- Loop to insert 10 records
-        WHILE counter < 10 AND counter < p_Limit DO
-            -- Get next available index
-            SELECT COALESCE(MAX(`index`), 0) + 1 INTO next_index FROM orders_1;
+        -- Insert a single record
+        INSERT INTO orders_1 (
+            `index`, Order_ID, Date, Status, Fulfilment, Sales_Channel, Ship_Service_Level,
+            Style, SKU, Category, Size, ASIN, Courier_Status, Qty, Currency, Amount,
+            Ship_City, Ship_State, Ship_Postal_Code, Ship_Country, Promotion_IDs, B2B, Fulfilled_By
+        ) VALUES (
+            next_index,
+            CONCAT(p_Order_ID, '-', counter + 1), -- Unique Order_ID
+            p_Date, p_Status, p_Fulfilment, p_Sales_Channel, p_Ship_Service_Level, 
+            p_Style, p_SKU, p_Category, p_Size, p_ASIN, p_Courier_Status, p_Qty, 
+            p_Currency, p_Amount, p_Ship_City, p_Ship_State, p_Ship_Postal_Code, 
+            p_Ship_Country, p_Promotion_IDs, p_B2B, p_Fulfilled_By
+        );
 
-            -- Insert record with the new index value
-            INSERT INTO orders_1 (
-                `index`, Order_ID, Date, Status, Fulfilment, Sales_Channel, Ship_Service_Level,
-                Style, SKU, Category, Size, ASIN, Courier_Status, Qty, Currency, Amount,
-                Ship_City, Ship_State, Ship_Postal_Code, Ship_Country, Promotion_IDs, B2B, Fulfilled_By
-            ) VALUES (
-                next_index,
-                CONCAT(p_Order_ID, '-', counter + 1), -- Append counter to make unique Order_ID
-                p_Date, p_Status, p_Fulfilment, p_Sales_Channel, p_Ship_Service_Level, 
-                p_Style, p_SKU, p_Category, p_Size, p_ASIN, p_Courier_Status, p_Qty, 
-                p_Currency, p_Amount, p_Ship_City, p_Ship_State, p_Ship_Postal_Code, 
-                p_Ship_Country, p_Promotion_IDs, p_B2B, p_Fulfilled_By
-            );
+        -- Increment counters
+        SET counter = counter + 1;
+        SET commit_counter = commit_counter + 1;
 
-            -- Increase counter for the current cycle
-            SET counter = counter + 1;
-        END WHILE;
+        -- Sleep for 2 seconds
+        DO SLEEP(2);
 
-        -- Wait for 0.1 seconds (10 records per second)
-        DO SLEEP(1);
-
-        -- Decrease cycle counter
-        SET cycle_counter = cycle_counter - 1;
+        -- Commit every 25 inserts
+        IF commit_counter = 25 THEN
+            COMMIT;
+            START TRANSACTION;
+            SET commit_counter = 0;
+        END IF;
     END WHILE;
 
+    -- Commit any remaining records
+    COMMIT;
 END $$
 
 DELIMITER ;
 
--- To test the procedure
-CALL InsertOrdersLoop(
-    2500, -- Number of rows to insert (in multiples of 10)
+CALL InsertOrdersWithTransaction(
+    100,  -- Number of rows to insert
     'ORD12345', '2025-02-17', 'Shipped', 'Amazon', 'Online', 'Standard',
     'Casual', 'SKU001', 'Clothing', 'L', 'B00012345', 'In Transit', 2, 'USD', 49.99,
     'New York', 'NY', '10001', 'USA', 'PROMO2025', 'Yes', 'Amazon Warehouse'
 );
 
--- Drop the procedure after use
-DROP PROCEDURE InsertOrdersLoop;
 
--- Check the number of records in the table
-SELECT COUNT(*) FROM orders_1; -- Check how many records were inserted
+SELECT COUNT(*) FROM orders_1; 
+-- before test
+-- '128975'
+-- after 25 row insert
+-- '129000'
+-- inserted during on going backup
+-- '129100'
+-- after taking backup
+-- '129025'
+
+DROP PROCEDURE InsertOrdersWithTransaction;
