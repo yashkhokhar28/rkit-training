@@ -126,23 +126,8 @@ $(document).ready(() => {
     },
   });
 
-  $("#button").dxButton({
-    text: "click",
-    onClick: () => {
-      customStore
-        .load({
-          filter: ["name", "=", "Keyur"],
-          // skip: 4,
-          // take: 1,
-        })
-        .done((d) => {
-          displayData(d);
-        });
-    },
-  });
-
   // Load initial data
-  customStore.load({ filter: ["name", "=", "Keyur"] }).done((d) => {
+  customStore.load().done((d) => {
     displayData(d);
   });
 
