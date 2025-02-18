@@ -1,0 +1,23 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "Building..."
+    - dotnet build
+
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - dotnet test
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - echo "Deploying..."
