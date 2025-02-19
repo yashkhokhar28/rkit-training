@@ -54,4 +54,4 @@ console.log(buttonIcon);
 buttonInstance.option("icon", buttonIcon == "favorites" ? "add" : "favorites");
 
 // Destroy a Widget
-buttonInstance.dxButton("dispose");
+// buttonInstance.dxButton("dispose");

@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
 
     <!-- DevExtreme theme -->
-    <link rel="stylesheet" href="../Content/dx.dark.css" />
+    <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
 
     <!-- DevExtreme library -->
     <script type="text/javascript" src="../Scripts/dx.all.js"></script>
@@ -45,14 +45,16 @@
               pageIndex: 1,
             },
             pager: {
-              displayMode: "compact",
+              displayMode: "adaptive",
               visible: true,
               showPageSizeSelector: true,
               allowedPageSizes: [10, 20, "all"],
-              showNavigationButtons: true,
               showInfo: true,
               label: "Navigation",
-              infoText: "",
+              infoText: "Page {0} of {1} ({2} items)",
+              // {0} - shows the current page number.
+              // {1} - shows the total page count.
+              // {2} - shows the total row count.
             },
             columns: [
               { dataField: "id", dataType: "number", caption: "ID" },
