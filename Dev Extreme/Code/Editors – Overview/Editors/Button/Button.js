@@ -1,3 +1,4 @@
+// Import event handler functions from Events.js
 import {
   contentReadyHandler,
   disposeHandler,
@@ -5,106 +6,149 @@ import {
   optionChangedHandler,
 } from "../Events.js";
 
+// Import utility methods from Methods.js
 import { element, option, registerKeyHandler, instance } from "../Methods.js";
 
+// Document ready event handler using jQuery
 $(document).ready(() => {
+  // Log confirmation when document is fully loaded
   console.log("Document is Ready!!");
 
+  // Initialize normal button widget with detailed configuration
   var normalButton = $("#normalButton")
     .dxButton({
+      // Set button styling mode
       stylingMode: "contained",
+
+      // Button display text
       text: "filled",
+
+      // Button type/style
       type: "normal",
+
+      // Click event handler showing a warning notification
       onClick: () => {
         DevExpress.ui.notify("this is normal button", "warning", 2000);
       },
-      // Shortcut key for focusing on the widget (Alt+B)
+
+      // Shortcut key for focusing (Alt+B)
       accessKey: "B",
 
-      // Enables the active state when the widget is focused or clicked
+      // Enable active state styling when focused/clicked
       activeStateEnabled: true,
 
+      // Custom attributes for the button element
       elementAttr: {
-        // Custom ID for the widget's root element
+        // Custom element ID
         id: "button-id",
 
-        // Custom class for the widget's root element
+        // Custom CSS class
         class: "button-class",
       },
 
-      // Enables focus state when the widget is focused
+      // Enable focus state styling
       focusStateEnabled: true,
 
-      // Enables hover effect when the widget is hovered
+      // Enable hover state styling
       hoverStateEnabled: true,
 
-      // Tooltip hint text when hovering over the widget
+      // Tooltip text on hover
       hint: "This is button",
 
+      // Button icon
       icon: "favorites",
 
-      // Disables the right-to-left layout
+      // Disable right-to-left layout
       rtlEnabled: false,
 
       // ==========================
-      // ** Event Handlers **
+      // Event Handlers Section
       // ==========================
 
-      // Fires when the widget content is ready
+      // Handle content ready event
       onContentReady: contentReadyHandler,
 
-      // Fires when the widget is disposed of
+      // Handle widget disposal
       onDisposing: disposeHandler,
 
-      // Fires when the widget is initialized
+      // Handle widget initialization
       onInitialized: initializedHandler,
 
-      // Fires when an option is changed
+      // Handle option changes
       onOptionChanged: optionChangedHandler,
     })
+    // Get the widget instance
     .dxButton("instance");
+
   // ==========================
-  // ** Methods **
+  // Widget Methods Section
   // ==========================
 
-  // Get and log the "accessKey" option of the TextArea widget (not NumberBox)
+  // Retrieve and log the accessKey option value
   console.log(option(normalButton, "accessKey"));
 
-  // Register a custom key handler for the "Enter" key
+  // Register custom Enter key handler for the button
   registerKeyHandler(normalButton, "enter", () => {
     alert("Enter key pressed!");
   });
 
+  // Initialize success button widget
   var successButton = $("#successButton")
     .dxButton({
+      // Set outlined styling mode
       stylingMode: "outlined",
+
+      // Button text
       text: "Outlined",
+
+      // Success button type
       type: "success",
+
+      // Click handler showing success notification
       onClick: () => {
         DevExpress.ui.notify("this is success button", "success", 2000);
       },
     })
+    // Get the widget instance
     .dxButton("instance");
 
+  // Initialize default button widget
   var defaultButton = $("#defaultButton")
     .dxButton({
+      // Set contained styling mode
       stylingMode: "contained",
+
+      // Button text
       text: "filled",
+
+      // Default button type
       type: "default",
+
+      // Click handler showing info notification
       onClick: () => {
         DevExpress.ui.notify("this is default button", "info", 2000);
       },
     })
+    // Get the widget instance
     .dxButton("instance");
 
+  // Initialize danger button widget
   var dangerButton = $("#dangerButton")
     .dxButton({
+      // Set outlined styling mode
       stylingMode: "outlined",
+
+      // Button text
       text: "outlined",
+
+      // Danger button type
       type: "danger",
+
+      // Click handler showing error notification
       onClick: () => {
         DevExpress.ui.notify("this is danger button", "error", 2000);
       },
     })
+    // Get the widget instance
     .dxButton("instance");
 });

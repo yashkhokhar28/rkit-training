@@ -17,143 +17,155 @@ import {
   pasteHandler,
 } from "../Events.js";
 
+// Import utility methods from Methods.js
 import { element, option, registerKeyHandler, instance } from "../Methods.js";
 
+// Document ready event handler using jQuery
 $(document).ready(() => {
+  // Log confirmation when document is fully loaded
   console.log("Document is Ready!!");
 
+  // Initialize TextArea widget with detailed configuration
   var TextAreaInstance = $("#TextArea")
     .dxTextArea({
-      // Shortcut key for focusing on the widget (Alt+T)
+      // Shortcut key for focusing (Alt+T)
       accessKey: "T",
 
-      // Enables the active state when the widget is focused or clicked
+      // Enable active state styling when focused/clicked
       activeStateEnabled: true,
 
+      // Enable automatic resizing based on content
       autoResizeEnabled: true,
 
-      // The widget is not disabled
+      // Set widget enabled state
       disabled: false,
 
+      // Custom attributes for the textarea element
       elementAttr: {
-        // Custom ID for the widget's root element
+        // Custom element ID
         id: "text-area-id",
 
-        // Custom class for the widget's root element
+        // Custom CSS class
         class: "text-area-class",
       },
 
-      // Enables focus state when the widget is focused
+      // Enable focus state styling
       focusStateEnabled: true,
 
-      // Enables hover effect when the widget is hovered
+      // Enable hover state styling
       hoverStateEnabled: true,
 
-      // Tooltip hint text when hovering over the widget
+      // Tooltip text on hover
       hint: "This is a text area",
 
+      // Maximum height in pixels
       maxHeight: 500,
 
+      // Maximum character length
       maxLength: 1000000,
 
+      // Minimum height in pixels
       minHeight: 100,
 
+      // Attributes for the underlying input element
       inputAttr: {
-        // Disables autocomplete on the input field
+        // Disable browser autocomplete
         autocomplete: "off",
       },
 
-      // Marks the widget as valid initially
+      // Initial validation state
       isValid: true,
 
-      // Placeholder text for the input field
+      // Placeholder text when empty
       placeholder: "Enter Text Here....",
 
-      // The widget is not read-only
+      // Allow text editing
       readOnly: false,
 
+      // Enable browser spell checking
       spellCheck: true,
 
-      // Disables the right-to-left layout
+      // Disable right-to-left layout
       rtlEnabled: false,
 
-      // Styling mode for the widget
+      // Set visual styling mode
       stylingMode: "underlined",
 
-      // Validation status of the widget
+      // Initial validation status
       validationStatus: "valid",
 
-      // Visibility of the widget
+      // Control widget visibility
       visible: true,
 
       // ==========================
-      // ** Event Handlers **
+      // Event Handlers Section
       // ==========================
 
-      // Fires when the value changes
+      // Handle value change events
       onChange: changeHandler,
 
-      // Fires when text is copied from the input field
+      // Handle copy operations
       onCopy: copyHandler,
 
-      // Fires when text is cut from the input field
+      // Handle cut operations
       onCut: cutHandler,
 
-      // Fires when the widget content is ready
+      // Handle content ready state
       onContentReady: contentReadyHandler,
 
-      // Fires when the widget is disposed of
+      // Handle widget disposal
       onDisposing: disposeHandler,
 
-      // Fires when the user presses the Enter key
+      // Handle Enter key press
       onEnterKey: enterKeyHandler,
 
-      // Fires when the input field gains focus
+      // Handle focus gained
       onFocusIn: focusInHandler,
 
-      // Fires when the input field loses focus
+      // Handle focus lost
       onFocusOut: focusOutHandler,
 
-      // Fires when the widget is initialized
+      // Handle widget initialization
       onInitialized: initializedHandler,
 
-      // Fires when the user types into the input field
+      // Handle user input
       onInput: inputHandler,
 
-      // Fires when a key is pressed down
+      // Handle key down events
       onKeyDown: keyDownHandler,
 
-      // Fires when a key is pressed
+      // Handle key press events
       onKeyPress: keyPressHandler,
 
-      // Fires when a key is released
+      // Handle key up events
       onKeyUp: keyUpHandler,
 
-      // Fires when an option is changed
+      // Handle option changes
       onOptionChanged: optionChangedHandler,
 
-      // Fires when the value is changed by the user
+      // Handle value changes by user
       onValueChanged: valueChangedHandler,
 
-      // Fires when text is pasted into the input field
+      // Handle paste operations
       onPaste: pasteHandler,
     })
+    // Get the widget instance
     .dxTextArea("instance");
 
   // ==========================
-  // ** Methods **
+  // Widget Methods Section
   // ==========================
 
-  // Access the root HTML element of the TextArea widget (not NumberBox)
+  // Get the root HTML element of the TextArea
   element(TextAreaInstance);
 
-  // Access the instance of the widget
+  // Get the widget instance (redundant but included for completeness)
   instance(TextAreaInstance);
 
-  // Get and log the "accessKey" option of the TextArea widget (not NumberBox)
+  // Retrieve and log the accessKey option value
   console.log(option(TextAreaInstance, "accessKey"));
 
-  // Register a custom key handler for the "Enter" key
+  // Register custom Enter key handler
   registerKeyHandler(TextAreaInstance, "enter", () => {
     alert("Enter key pressed!");
   });
