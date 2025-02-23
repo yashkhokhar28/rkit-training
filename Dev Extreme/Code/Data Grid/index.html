@@ -1,167 +1,149 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DataGrid Features</title>
 
-    <!-- Google Icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataGrid Features</title>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+  <!-- Google Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
-    <!-- DevExtreme Dark Theme -->
-    <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
+  <!-- jQuery -->
+  <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
 
-    <!-- DevExtreme Library -->
-    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  <!-- DevExtreme Dark Theme -->
+  <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
 
-    <style>
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #121212;
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        overflow: hidden;
-      }
+  <!-- DevExtreme Library -->
+  <script type="text/javascript" src="../Scripts/dx.all.js"></script>
 
-      .scrollable-container {
-        overflow-y: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      overflow: hidden;
+    }
 
-      .container {
-        max-width: 1200px;
-        width: 90%;
-        text-align: center;
-        padding: 20px;
-      }
+    .scrollable-container {
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-      .title {
-        font-size: 28px;
-        margin-bottom: 20px;
-        color: #e0e0e0;
-        font-weight: bold;
-      }
+    .container {
+      max-width: 1200px;
+      width: 90%;
+      text-align: center;
+      padding: 20px;
+    }
 
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-      }
+    .title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #e0e0e0;
+      font-weight: bold;
+    }
 
-      .card {
-        background: #1e1e1e;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #333;
-      }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
 
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
-        background-color: #007bff;
-        color: #fff;
-      }
+    .card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #333;
+    }
 
-      .card .icon {
-        font-size: 40px;
-        margin-bottom: 10px;
-        color: #00bcd4;
-        transition: color 0.3s ease;
-      }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
+      background-color: #007bff;
+      color: #fff;
+    }
 
-      .card:hover .icon {
-        color: #fff;
-      }
+    .card .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #00bcd4;
+      transition: color 0.3s ease;
+    }
 
-      .card a {
-        text-decoration: none;
-        color: inherit;
-        font-size: 20px;
-        font-weight: 600;
-        display: block;
-      }
-    </style>
-  </head>
-  <body class="scrollable-container">
-    <div class="container">
-      <h2 class="title">DataGrid Features</h2>
-      <div class="grid">
-        <div class="card">
-          <span class="material-icons icon">view_list</span
-          ><a href="./Data/index.html">Data</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">sync</span
-          ><a href="./PagingAndScrolling.html">Paging and Scrolling</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">edit</span
-          ><a href="./Editing.html">Editing</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">group</span
-          ><a href="./Grouping.html">Grouping</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">filter_list</span
-          ><a href="./Filtering.html">Filtering</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">sort</span
-          ><a href="./Sorting.html">Sorting</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">check_box</span
-          ><a href="./Selection.html">Selection</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">view_column</span
-          ><a href="./Columns.html">Columns</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">save</span
-          ><a href="./StatePersistence.html">State Persistence</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">format_paint</span
-          ><a href="./Appearance.html">Appearance</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">view_module</span
-          ><a href="./Template.html">Template</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">calculate</span
-          ><a href="./DataSummaries.html">Data Summaries</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">layers</span
-          ><a href="./MasterDetail.html">Master-Detail</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">upload</span
-          ><a href="./Export.html">Export</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">devices</span
-          ><a href="./Adaptability.html">Adaptability</a>
-        </div>
+    .card:hover .icon {
+      color: #fff;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 20px;
+      font-weight: 600;
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="scrollable-container">
+  <div class="container">
+    <h2 class="title">DataGrid Features</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="material-icons icon">view_list</span><a href="./Data/index.html">Data</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">sync</span><a href="./PagingAndScrolling/index.html">Paging and Scrolling</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">edit</span><a href="./Editing/index.html  ">Editing</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">group</span><a href="./Grouping/index.html">Grouping</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">filter_list</span><a href="./Filtering/index.html">Filtering</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">sort</span><a href="./Sorting/index.html">Sorting</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">check_box</span><a href="./Selection/index.html">Selection</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">view_column</span><a href="./Columns/index.html">Columns</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">save</span><a href="./StatePersistence/index.html">State Persistence</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">view_module</span><a href="./Template/index.html">Template</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">calculate</span><a href="./DataSummaries/index.html">Data Summaries</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">layers</span><a href="">Master-Detail</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">upload</span><a href="">Export</a>
+      </div>
+      <div class="card">
+        <span class="material-icons icon">devices</span><a href="">Adaptability</a>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

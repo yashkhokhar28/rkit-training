@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevExtreme Topics</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.iconscout.com/icon/free/png-256/free-devexpress-283216.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row m-3">
+            <!-- Card 1: Basics of DevExtreme -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxXHu1rmEA4aZ-deroJeCT_r4mneeIRcj3Q&s"
+                        class="card-img-top" alt="DevExtreme Logo" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Basics of DevExtreme</h5>
+                        <p class="card-text">Introduction to DevExtreme components and their usage in modern web
+                            applications.</p>
+                        <a href="./Code/Basics of DevExtreme/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Basics%20of%20Devextreme.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Editors – Overview -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://img.setka.io/clients/D3SuW9_Vtk6NhYeFXfduUy55A4Dromkt/post_images/working-with-rich-text-editors-in-2023_-industry-overview-and-challenges-2023101718551676.png"
+                        class="card-img-top" alt="Editors" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Editors - Overview</h5>
+                        <p class="card-text">Explore DevExtreme form editors like TextBox, DateBox, and more.</p>
+                        <a href="./Code/Editors – Overview/Editors/index.html"
+                            class="btn btn-outline-primary">Practice</a>
+                        <a href="./Code/Editors – Overview/Editors/StudentRegistration/StudentRegistration.html"
+                            class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Editors%20–%20Overview.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Data Layer -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzk7VCaCQ6pJ9eYy3bxaOKI-gwzUzFXKRdxA&s"
+                        class="card-img-top" alt="Data Layer" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Data Layer</h5>
+                        <p class="card-text">Learn about data binding, stores, and the DevExtreme data layer.</p>
+                        <a href="./Code/DataLayer/index.html" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Data%20Layer.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-3">
+            <!-- Card 4: DataGrid -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2sRStCQ5gPZVcbJU6Oo47y8AYsBh7QVyc_A&s"
+                        class="card-img-top" alt="DataGrid" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">DataGrid</h5>
+                        <p class="card-text">Master the DevExtreme DataGrid for handling tabular data.</p>
+                        <a href="./Code/Data Grid/index.html" class="btn btn-outline-primary">Practice</a>
+                        <a href="#" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success"
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/DataGrid.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Navigation -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjyHq55A1mlf9hcqE7mlWTv88LglZtxGIt8A&s"
+                        class="card-img-top" alt="Navigation" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Navigation</h5>
+                        <p class="card-text">Understand navigation components like menu, tabs, and drawer.</p>
+                        <a href="#" class="btn btn-outline-primary">Practice</a>
+                        <a href="#" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success" onclick="ShowDocumentation('Navigation.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Dialogues & Notification -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTknOXPPdaggamRI_xU88VbYeRLWSYjIZGf_A&s"
+                        class="card-img-top" alt="Dialogues & Notification" loading="lazy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Dialogues & Notification</h5>
+                        <p class="card-text">Explore alert popups, toast messages, and notifications in DevExtreme.</p>
+                        <a href="#" class="btn btn-outline-primary">Practice</a>
+                        <a href="#" class="btn btn-outline-primary">Demo</a>
+                        <button class="btn btn-outline-success" onclick="ShowDocumentation('Dialogues.md')">
+                            View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.0/marked.min.js"></script>
+    <script>
+        const ShowDocumentation = (filePath) => {
+            console.log(filePath);
+            localStorage.setItem("markdownFilePath", filePath);
+            window.location.href = "./documentation.html";
+        };
+    </script>
+</body>
+
+</html>
