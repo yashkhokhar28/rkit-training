@@ -103,23 +103,28 @@ $(() => {
         .exportDataGrid({
           columnWidths: [50, 40, 40, 40, 40, 40, 40, 40],
           jsPDFDocument: doc,
+          keepColumnWidths: true,
           component: e.component,
           indent: 5,
-          customizeCell: (e) => {
-            if (
-              e.gridCell.rowType === "data" &&
-              e.gridCell.column.dataField === "image"
-            ) {
-              doc.addImage(
-                e.gridCell.value,
-                "WEBP"
-                // e.rect.x,
-                // e.rect.y,
-                // e.rect.w,
-                // e.rect.h
-              );
-              e.cancel = true;
+          customizeCell: function (options) {
+            const { gridCell, pdfCell } = options;
+            if (gridCell.rowType === "data") {
+              pdfCell.styles = {
+                font: "times",
+                fontSize: 14,
+              };
             }
+          },
+          loadPanel: {
+            enabled: true,
+            height: 70,
+            indicatorSrc: "op",
+            shading: true,
+            shadingColor: "",
+            showIndicator: true,
+            showPane: true,
+            text: "boooom",
+            width: 400,
           },
         })
         .then(() => {
