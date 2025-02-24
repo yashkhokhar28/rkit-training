@@ -9,7 +9,8 @@ $(() => {
           if (Array.isArray(result.recipes)) {
             const filteredRecipes = result.recipes.filter(
               (recipe) =>
-                !recipe.name.toString().toLowerCase().includes("chicken")
+                !recipe.name.toString().toLowerCase().includes("chicken") &&
+                !recipe.name.toString().toLowerCase().includes("beef")
             );
             console.log(filteredRecipes);
             return filteredRecipes;
