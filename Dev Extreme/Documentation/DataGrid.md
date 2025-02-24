@@ -123,3 +123,134 @@
   - **Event**: `onSelectionChanged` – Triggered when multiple selections change.
 
 ---
+
+### **4.8 Columns**
+
+#### **4.8.1 Column Customization**
+
+- **Properties:**
+  - `columnAutoWidth: true` (Adjusts column widths automatically)
+  - `columnResizingMode: "nextColumn"` (Resizes columns proportionally)
+- **Methods:**
+  - `columnOption("Name", "visible", false);` (Hides a column dynamically)
+- **Events:**
+  - `onOptionChanged` (Triggered when column options change)
+
+#### **4.8.2 Columns based on a Data Source**
+
+- **Properties:**
+  - `dataSource: marvelCharacters` (Binds data source dynamically)
+- **Methods:**
+  - `refresh()` (Reloads the grid data)
+- **Events:**
+  - `onContentReady` (Fires when the grid content is fully loaded)
+
+#### **4.8.3 Multi-Row Headers**
+
+- **Properties:**
+  - `columns: [{ caption: "Names", columns: [...] }]` (Defines grouped headers)
+- **Events:**
+  - `onCellPrepared` (Can modify header cell appearance dynamically)
+
+#### **4.8.4 Column Resizing**
+
+- **Properties:**
+  - `allowColumnResizing: true`
+  - `columnMinWidth: 10`
+- **Methods:**
+  - `columnOption("Affiliation", "width", 150);` (Changes width dynamically)
+
+#### **4.8.5 Command Column Customization**
+
+- **Properties:**
+  - `type: "buttons"` (Adds action buttons)
+- **Methods:**
+  - `columnOption("Buttons", "visible", false);`
+- **Events:**
+  - `onCellClick` (Handles button clicks)
+
+---
+
+### **4.9 State Persistence**
+
+- **Properties:**
+  - `stateStoring: { enabled: true, type: "localStorage", storageKey: "gridState" }`
+- **Methods:**
+  - `state(null);` (Clears saved state)
+- **Events:**
+  - `onOptionChanged` (Handles changes in state persistence)
+
+---
+
+### **4.10 Appearance**
+
+#### **4.10.1 Appearance**
+
+- **Properties:**
+  - `showBorders: true`
+- **Events:**
+  - `onRowPrepared` (Applies custom row styling)
+
+---
+
+### **4.11 Template**
+
+#### **4.11.1 Column Template**
+
+- **Properties:**
+  - `columns: [{ dataField: "Abilities", cellTemplate: function (container, options) { $(container).text("⭐ " + options.value); } }]`
+- **Events:**
+  - `onCellPrepared` (Allows cell customization)
+
+#### **4.11.2 Row Template**
+
+- **Properties:**
+  - `rowTemplate: function (rowElement, rowData) { rowElement.css("background-color", "lightgray"); }`
+- **Events:**
+  - `onRowPrepared` (Custom row rendering)
+
+#### **4.11.3 Cell Customization**
+
+- **Properties:**
+  - `customizeText` (Formats displayed text)
+- **Events:**
+  - `onCellClick` (Handles click events on cells)
+
+#### **4.11.4 Toolbar Customization**
+
+- **Properties:**
+  - `toolbar: [{ location: "after", widget: "dxButton", options: { text: "Export", onClick: function () { alert("Export Clicked"); } } }]`
+- **Events:**
+  - `onToolbarPreparing` (Modifies toolbar dynamically)
+
+---
+
+### **4.12 Data Summaries**
+
+#### **4.12.1 Grid Summaries**
+
+- **Properties:**
+  - `summary: { totalItems: [{ column: "First_Appearance", summaryType: "count" }] }`
+
+#### **4.12.2 Group Summaries**
+
+- **Properties:**
+  - `summary: { groupItems: [{ column: "Affiliation", summaryType: "count" }] }`
+
+#### **4.12.3 Custom Summaries**
+
+- **Properties:**
+  - `summary: { totalItems: [{ column: "First_Appearance", summaryType: "custom", customizeText: function (data) { return "Total: " + data.value; } }] }`
+
+---
+
+### **4.13 Master-Detail**
+
+#### **4.13.1 Master-Detail View**
+
+- **Properties:**
+  - `masterDetail: { enabled: true, template: function (container, options) { $("<div>").text("Details: " + options.data.Name).appendTo(container); } }`
+- **Events:**
+  - `onRowExpanding` (Handles row expansion)
+
+---

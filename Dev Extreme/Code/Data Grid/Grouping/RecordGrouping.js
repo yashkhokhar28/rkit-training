@@ -8,10 +8,10 @@ $(() => {
       },
       allowColumnReordering: true,
       grouping: {
-        // allowCollapsing: true,
+        allowCollapsing: true,
         autoExpandAll: true,
-        // contextMenuEnabled: true,
-        // expandMode: "buttonClick",
+        contextMenuEnabled: true,
+        expandMode: "buttonClick",
       },
       searchPanel: {
         visible: true,

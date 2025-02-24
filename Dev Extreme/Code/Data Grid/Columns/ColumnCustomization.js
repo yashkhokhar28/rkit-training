@@ -23,6 +23,10 @@ $(() => {
 
       // Display borders around the entire grid
       showBorders: true,
+      headerFilter: {
+        visible: true,
+        allowSearch: true,
+      },
 
       // Specify the unique key field for each data row
       keyExpr: "ID",
@@ -63,7 +67,7 @@ $(() => {
       // Set a minimum width (in pixels) for columns
       columnMinWidth: 10,
 
-      // Define column resizing behavior relative to the next column
+      // Define column resizing behavior relative to the next column / widget
       columnResizingMode: "nextColumn",
 
       // Filter row configuration for inline data filtering
@@ -175,6 +179,7 @@ $(() => {
 
           // Header filter configuration for the column
           headerFilter: {
+            visible: true,
             // Enable searching within the header filter
             allowSearch: true,
 
@@ -182,6 +187,7 @@ $(() => {
             searchMode: "startswith",
           },
 
+          // Specifies the order in which columns are hidden when the UI component adapts to the screen or container size. Ignored if allowColumnResizing is true and columnResizingMode is "widget".
           // Set a hiding priority (lower value means this column hides first when space is limited)
           hidingPriority: 0,
         },

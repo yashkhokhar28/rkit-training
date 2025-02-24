@@ -26,9 +26,6 @@ $(() => {
         enabled: true,
         pageSize: 10,
       },
-      groupPanel: {
-        visible: true,
-      },
     })
     .dxDataGrid("instance");
 });
