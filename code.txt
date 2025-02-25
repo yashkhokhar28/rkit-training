@@ -1,0 +1,287 @@
+window.jsPDF = window.jspdf.jsPDF;
+
+$(document).ready(() => {
+  // Custom Store for Data Fetching
+  const store = new DevExpress.data.CustomStore({
+    load() {
+      return $.ajax({
+        url: "https://dummyjson.com/recipes?limit=100",
+        dataType: "json",
+      })
+        .then((result) => {
+          if (Array.isArray(result.recipes)) {
+            // Filter out recipes containing "chicken" or "beef"
+            return result.recipes.filter(
+              (recipe) =>
+                !recipe.name.toLowerCase().includes("chicken") &&
+                !recipe.name.toLowerCase().includes("beef")
+            );
+          }
+          console.error("Unexpected response structure:", result);
+          return [];
+        })
+        .catch((error) => {
+          console.error("Data Loading Error:", error);
+          return [];
+        });
+    },
+  });
+
+  // Utility Function to Convert Image URL to Base64
+  function getBase64Image(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous"; // Fix CORS issue
+      img.src = url;
+
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = this.width;
+        canvas.height = this.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+        const dataURL = canvas.toDataURL("image/jpeg"); // Convert to base64
+        resolve(dataURL);
+      };
+
+      img.onerror = () => reject("Image load error: " + url);
+    });
+  }
+
+  // Data Grid Configuration
+  $("#gridContainer").dxDataGrid({
+    dataSource: store,
+    showBorders: true,
+    scrolling: { mode: "virtual" },
+    selection: {
+      mode: "multiple",
+      showCheckBoxesMode: "always",
+    },
+
+    // Column Definitions
+    columns: [
+      {
+        dataField: "image",
+        caption: "Product Image",
+        cellTemplate(container, options) {
+          if (options.value) {
+            $("<div>")
+              .append(
+                $("<img>", {
+                  src: options.data.image,
+                  alt: "Product Image",
+                  style: "width:70px; height:70px; border-radius:5px;",
+                })
+              )
+              .appendTo(container);
+          } else {
+            container.text("No Image");
+          }
+        },
+      },
+      { dataField: "name", caption: "Title" },
+      { dataField: "cuisine", caption: "Cuisine" },
+      { dataField: "caloriesPerServing", caption: "Calories" },
+      { dataField: "cookTimeMinutes", caption: "Cook Time (Min)" },
+      { dataField: "prepTimeMinutes", caption: "Prep Time (Min)" },
+      { dataField: "rating", caption: "Rating" },
+      { dataField: "mealType", caption: "Meal Type" },
+    ],
+
+    // Export Configuration
+    export: {
+      enabled: true,
+      allowExportSelectedData: true,
+    },
+
+    // PDF Export Handler
+    onExporting(e) {
+      // "p" → Page Orientation
+      // "p" → Portrait mode (default)
+      // "l" → Landscape mode
+      // "mm" → Unit of Measurement
+      // "mm" → Millimeters
+      // Other options:
+      // "pt" → Points
+      // "cm" → Centimeters
+      // "in" → Inches
+      // "a4" → Paper Size
+      // "a4" → Standard A4 size (210mm × 297mm)
+      // Other options:
+      // "letter" (8.5in × 11in)
+      // "legal" (8.5in × 14in)
+      // "a3", "a5", etc.
+      const doc = new jsPDF({
+        orientation: "p", // "p" = Portrait, "l" = Landscape
+        unit: "mm", // "mm" = Millimeters, can be "pt", "cm", "in"
+        format: "a4", // Paper size: "a4", "letter", "legal", "a3", "a5", custom sizes
+        compress: false, // Enable compression (reduces PDF size)
+        putOnlyUsedFonts: true, // Only include used fonts (reduces size)
+        precision: 16, // Precision for measurements
+        userUnit: 1.0, // Scale factor for measurements
+      });
+
+      // Document Metadata
+      doc.setProperties({
+        title: "Recipe List",
+        subject: "List of recipes with details",
+        author: "Yash Khokhar",
+        keywords: "recipes, food, cooking",
+        creator: "MyWebApp",
+      });
+
+      // Background Setup
+      // This sets the fill color for the upcoming shape (rectangle).
+      // The parameters (255, 255, 255) represent RGB color values:
+      // 255, 255, 255 = White
+      // 0, 0, 0 = Black
+      // 255, 0, 0 = Red
+      // 0, 255, 0 = Green
+      // 0, 0, 255 = Blue
+      // This fill color applies to any filled shapes that follow.
+      doc.setFillColor(255, 255, 255); // White background
+
+      // This creates a filled rectangle covering the entire page.
+      // rect(x, y, width, height, style)
+      // 0, 0 → Top-left corner (X, Y)
+      // doc.internal.pageSize.width → Width of the page
+      // doc.internal.pageSize.height → Height of the page
+      // "F" → Fills the rectangle with the set color (from setFillColor)
+      doc.rect(
+        0,
+        0,
+        doc.internal.pageSize.width,
+        doc.internal.pageSize.height,
+        "F"
+      );
+
+      // Constants for Layout
+      const marginLeft = 10;
+      const startY = 20;
+
+      // Title Styling
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text("Recipe List", 105, 15, null, null, "center");
+
+      // Define Column Headers
+      const columns = [
+        "Image",
+        "Title",
+        "Cuisine",
+        "Calories",
+        "Cook Time",
+        "Prep Time",
+        "Rating",
+        "Meal Type",
+      ];
+      const columnWidths = [30, 40, 35, 20, 25, 25, 20, 30];
+
+      // Prepare Table Data
+      let rows = [];
+      e.component
+        .getDataSource()
+        .load()
+        .done((data) => {
+          data.forEach((recipe) => {
+            console.log(recipe);
+            const imgData = recipe.image;
+            const imgSize = 10;
+            const imgCell = {
+              content: imgData,
+              image: true,
+              width: imgSize,
+            };
+
+            rows.push([
+              imgCell,
+              recipe.name,
+              recipe.cuisine,
+              recipe.caloriesPerServing,
+              recipe.cookTimeMinutes,
+              recipe.prepTimeMinutes,
+              recipe.rating,
+              recipe.mealType,
+            ]);
+          });
+
+          // Positioning & Layout Options
+          // startY Sets the starting Y position of the table.
+          // margin Defines margins for the table (e.g., {top: 10, right: 10, bottom: 10, left: 10}).
+          // pageBreak Determines how the table behaves when it reaches the end of a page ('auto', 'avoid', 'always').
+          // showHead Controls header display ('everyPage', 'firstPage', 'never').
+          // showFoot Controls footer display ('everyPage', 'lastPage', 'never').
+          // tableWidth Defines table width ('auto', 'wrap', or a fixed number).
+
+          // Column & Cell Options
+          // head Defines table headers (must be a nested array).
+          // body Defines table data (rows).
+          // columnStyles Sets styles per column (width, text alignment, etc.).
+          // rowPageBreak Defines row behavior when breaking across pages ('auto', 'avoid').
+          // theme Predefined themes: 'striped', 'grid', 'plain'.
+          // columns Allows defining columns with keys (alternative to head).
+
+          // Styling Options
+          // styles Defines global cell styles (font, alignment, text color, background, padding).
+          // headStyles Styles for header row only.
+          // bodyStyles Styles for body rows only.
+          // alternateRowStyles Alternates row styles for readability.
+          // footStyles Styles for footer row only.
+
+          // Customizing Cells (didDrawCell, willDrawCell)
+          // didDrawCell Executes after a cell is drawn (useful for images, borders, etc.).
+          // willDrawCell Executes before a cell is drawn (modify content dynamically).
+
+          // Adding Custom Headers & Footers (didDrawPage)
+          // didDrawPage Executes when a new page is created (used for headers, footers, page numbers, etc.).
+
+          // Page Break Handling
+          // pageBreak Defines how rows behave when breaking ('auto', 'avoid', 'always').
+          // rowPageBreak Controls row behavior across pages.
+
+          // Adding Borders to Specific Cells
+          // drawCell Allows custom border styles for each cell.
+
+          // Draw Table
+          doc.autoTable({
+            startY: startY + 10,
+            head: [columns],
+            body: rows,
+            styles: {
+              fontSize: 10,
+              halign: "center",
+              valign: "middle",
+            },
+            columnStyles: {
+              0: { cellWidth: columnWidths[0] },
+              1: { cellWidth: columnWidths[1] },
+              2: { cellWidth: columnWidths[2] },
+              3: { cellWidth: columnWidths[3] },
+              4: { cellWidth: columnWidths[4] },
+              5: { cellWidth: columnWidths[5] },
+              6: { cellWidth: columnWidths[6] },
+              7: { cellWidth: columnWidths[7] },
+            },
+            didDrawCell: function (data) {
+              if (data.section === "body" && data.column.index === 0) {
+                const img = data.row.raw[0].content;
+                if (img) {
+                  doc.addImage(
+                    img,
+                    "JPEG",
+                    data.cell.x + 2,
+                    data.cell.y + 2,
+                    15,
+                    15
+                  );
+                }
+              }
+            },
+          });
+        })
+        .then(() => {
+          doc.save("Recipe.pdf");
+        });
+    },
+  });
+});
