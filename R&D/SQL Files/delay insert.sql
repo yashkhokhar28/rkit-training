@@ -55,11 +55,11 @@ BEGIN
         SET counter = counter + 1;
         SET commit_counter = commit_counter + 1;
 
-        -- Sleep for 2 seconds
-        DO SLEEP(2);
+        -- Sleep for 1 second
+        DO SLEEP(1);
 
-        -- Commit every 25 inserts
-        IF commit_counter = 25 THEN
+        -- Commit every 10 inserts
+        IF commit_counter = 10 THEN
             COMMIT;
             START TRANSACTION;
             SET commit_counter = 0;
@@ -72,6 +72,7 @@ END $$
 
 DELIMITER ;
 
+
 CALL InsertOrdersWithTransaction(
     100,  -- Number of rows to insert
     'ORD12345', '2025-02-17', 'Shipped', 'Amazon', 'Online', 'Standard',
@@ -80,14 +81,18 @@ CALL InsertOrdersWithTransaction(
 );
 
 
+
+
 SELECT COUNT(*) FROM orders_1; 
--- before test
--- '128975'
--- after 25 row insert
--- '129000'
--- inserted during on going backup
--- '129100'
--- after taking backup
--- '129025'
 
 DROP PROCEDURE InsertOrdersWithTransaction;
+
+-- Add primary key constraint to the `index` column
+ALTER TABLE test_db_1.orders_86
+ADD PRIMARY KEY (`index`);
+
+-- Create an index on the `index` column (if not already indexed)
+CREATE INDEX idx_index ON test_db_1.orders_86(`index`);
+
+-- Verify the distinct count of the `index` column
+SELECT COUNT(DISTINCT `index`) FROM test_db_1.orders_86;

@@ -156,21 +156,77 @@ myloader 0.11.3, built against MySQL 8.0.27
 Run the following command to back up your database:
 
 ```bash
-mydumper --host=localhost --user=<username> --password=<password> \
---outputdir=./backup --rows=100000 --compress --build-empty-files \
---threads=4 --compress-protocol --trx-tables \
---regex '^(<Db_name>\.)' -L mydumper-logs.txt
+mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compress --triggers --events  --routines --complete-insert --tz-utc --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
 ```
 
-### **Parameter Explanation**
+### **MyDumper Options**
 
-- `--outputdir=./backup` → Backup directory
-- `--rows=100000` → Splits tables into chunks of 100,000 rows for parallel processing
-- `--compress` → Compresses backup files
-- `--threads=4` → Uses 4 parallel threads (adjust based on CPU cores)
-- `--regex '^(<Db_name>\.)'` → Filters by database name
-- `-L mydumper-logs.txt` → Logs output to `mydumper-logs.txt`
-- `--trx-tables` → Optimizes for transactional tables
+- `-B, --database` Database to dump
+- `-T, --tables-list` Comma delimited table list to dump (does not exclude regex option)
+- `-O, --omit-from-file` File containing a list of database.table entries to skip, one per line (skips before applying regex option)
+- `-o, --outputdir` Directory to output files to
+- `-s, --statement-size` Attempted size of INSERT statement in bytes, default 1000000
+- `-r, --rows` Try to split tables into chunks of this many rows. This option turns off --chunk-filesize
+- `-F, --chunk-filesize` Split tables into chunks of this output file size. This value is in MB
+- `--max-rows` Limit the amount of rows per block after the table is estimated, default 1000000
+- `-c, --compress` Compress output files
+- `-e, --build-empty-files` Build dump files even if no data available from table
+- `-x, --regex` Regular expression for 'db.table' matching
+- `-i, --ignore-engines` Comma delimited list of storage engines to ignore
+- `-N, --insert-ignore` Dump rows with INSERT IGNORE
+- `-m, --no-schemas` Do not dump table schemas with the data
+- `-M, --table-checksums` Dump table checksums with the data
+- `-d, --no-data` Do not dump table data
+- `--order-by-primary` Sort the data by Primary Key or Unique key if no primary key exists
+- `-G, --triggers` Dump triggers
+- `-E, --events` Dump events
+- `-R, --routines` Dump stored procedures and functions
+- `-W, --no-views` Do not dump VIEWs
+- `-k, --no-locks` Do not execute the temporary shared read lock. WARNING: This will cause inconsistent backups
+- `--no-backup-locks` Do not use Percona backup locks
+- `--less-locking` Minimize locking time on InnoDB tables.
+- `--long-query-retries` Retry checking for long queries, default 0 (do not retry)
+- `--long-query-retry-interval` Time to wait before retrying the long query check in seconds, default 60
+- `-l, --long-query-guard` Set long query timer in seconds, default 60
+- `-K, --kill-long-queries` Kill long running queries (instead of aborting)
+- `-D, --daemon` Enable daemon mode
+- `-X, --snapshot-count` Number of snapshots, default 2
+- `-I, --snapshot-interval` Interval between each dump snapshot (in minutes), requires --daemon, default 60
+- `-L, --logfile` Log file name to use, by default stdout is used
+- `--tz-utc` SET TIME_ZONE='+00:00' at top of dump to allow dumping of TIMESTAMP data when a server has data in different time zones or data is being moved between servers with different time zones, defaults to on use --skip-tz-utc to disable.
+- `--skip-tz-utc`
+- `--use-savepoints` Use savepoints to reduce metadata locking issues, needs SUPER privilege
+- `--success-on-1146` Not increment error count and Warning instead of Critical in case of table doesn't exist
+- `--lock-all-tables` Use LOCK TABLE for all, instead of FTWRL
+- `-U, --updated-since` Use Update_time to dump only tables updated in the last U days
+- `--trx-consistency-only` Transactional consistency only
+- `--complete-insert` Use complete INSERT statements that include column names
+- `--set-names` Sets the names, use it at your own risk, default binary
+- `-z, --tidb-snapshot` Snapshot to use for TiDB
+- `--sync-wait` WSREP_SYNC_WAIT value to set at SESSION level
+- `--where` Dump only selected records.
+- `-h, --host` The host to connect to
+- `-u, --user` Username with the necessary privileges
+- `-p, --password` User password
+- `-a, --ask-password` Prompt For User password
+- `-P, --port` TCP/IP port to connect to
+- `-S, --socket` UNIX domain socket file to use for connection
+- `-t, --threads` Number of threads to use, default 4
+- `-C, --compress-protocol` Use compression on the MySQL connection
+- `-V, --version` Show the program version and exit
+- `-v, --verbose` Verbosity of output, 0 = silent, 1 = errors, 2 = warnings, 3 = info, default 2
+- `--defaults-file` Use a specific defaults file
+- `--ssl` Connect using SSL
+- `--ssl-mode` Desired security state of the connection to the server: DISABLED, PREFERRED, REQUIRED, VERIFY_CA, VERIFY_IDENTITY
+- `--key` The path name to the key file
+- `--cert` The path name to the certificate file
+- `--ca` The path name to the certificate authority file
+- `--capath` The path name to a directory that contains trusted SSL CA certificates in PEM format
+- `--cipher` A list of permissible ciphers to use for SSL encryption
+- `--tls-version` Which protocols the server permits for encrypted connections
+- `--config` Configuration file
+- `--stream` It will stream over STDOUT once the files have been written
+- `--no-delete` It will not delete the files after the stream has been completed
 
 ---
 
@@ -179,18 +235,46 @@ mydumper --host=localhost --user=<username> --password=<password> \
 Run the following command to restore your database:
 
 ```bash
-myloader --host=localhost --user=<username> --password=<password> \
---directory=./backup --queries-per-transaction=500 --threads=4 \
---compress-protocol --verbose=3 --overwrite-tables 2>myloader-logs.txt
+myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1 --innodb-optimize-keys --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3txt
 ```
 
-### **Parameter Explanation**
+### **MyLoader Options**
 
-- `--directory=./backup` → Backup directory
-- `--queries-per-transaction=500` → Executes 500 queries per transaction
-- `--threads=4` → Uses 4 parallel threads
-- `--overwrite-tables` → Drops existing tables before restoring
-- `2>myloader-logs.txt` → Redirects errors to `myloader-logs.txt`
+- `-d, --directory` Directory of the dump to import
+- `-q, --queries-per-transaction` Number of queries per transaction, default 1000
+- `-o, --overwrite-tables` Drop tables if they already exist
+- `-B, --database` An alternative database to restore into
+- `-s, --source-db` Database to restore
+- `-e, --enable-binlog` Enable binary logging of the restore data
+- `--innodb-optimize-keys` Creates the table without the indexes and it adds them at the end
+- `--set-names` Sets the names, use it at your own risk, default binary
+- `-L, --logfile` Log file name to use, by default stdout is used
+- `--purge-mode` This specify the truncate mode which can be: NONE, DROP, TRUNCATE and DELETE
+- `--disable-redo-log` Disables the REDO_LOG and enables it after, doesn't check initial status
+- `-r, --rows` Split the INSERT statement into this many rows.
+- `--max-threads-per-table` Maximum number of threads per table to use, default 4
+- `-h, --host` The host to connect to
+- `-u, --user` Username with the necessary privileges
+- `-p, --password` User password
+- `-a, --ask-password` Prompt For User password
+- `-P, --port` TCP/IP port to connect to
+- `-S, --socket` UNIX domain socket file to use for connection
+- `-t, --threads` Number of threads to use, default 4
+- `-C, --compress-protocol` Use compression on the MySQL connection
+- `-V, --version` Show the program version and exit
+- `-v, --verbose` Verbosity of output, 0 = silent, 1 = errors, 2 = warnings, 3 = info, default 2
+- `--defaults-file` Use a specific defaults file
+- `--ssl` Connect using SSL
+- `--ssl-mode` Desired security state of the connection to the server: DISABLED, PREFERRED, REQUIRED, VERIFY_CA, VERIFY_IDENTITY
+- `--key` The path name to the key file
+- `--cert` The path name to the certificate file
+- `--ca` The path name to the certificate authority file
+- `--capath` The path name to a directory that contains trusted SSL CA certificates in PEM format
+- `--cipher` A list of permissible ciphers to use for SSL encryption
+- `--tls-version` Which protocols the server permits for encrypted connections
+- `--config` Configuration file
+- `--stream` It will stream over STDOUT once the files have been written
+- `--no-delete` It will not delete the files after the stream has been completed
 
 ---
 
@@ -210,97 +294,6 @@ myloader --host=localhost --user=<username> --password=<password> \
 
 - **Use `-L mydumper-logs.txt`** for detailed logging in MyDumper.
 - **Redirect `stderr` output** to logs in MyLoader (`2>myloader-logs.txt`).
-
-# **Commonly Used MyDumper & MyLoader Options**
-
-### **MyDumper - Backup Command Options**
-
-#### **Connection Options**
-
-- `-h, --host` → MySQL server hostname
-- `-u, --user` → MySQL username
-- `-p, --password` → MySQL password
-- `-a, --ask-password` → Prompt for user password
-- `-P, --port` → TCP/IP port (default: `3306`)
-
-#### **Database & Output Options**
-
-- `-B, --database` → Comma-separated list of databases to dump
-- `-o, --outputdir` → Directory for backup files
-
-#### **Data Splitting & Optimization**
-
-- `-r, --rows` → Split tables into chunks (format: `MIN:START_AT:MAX`, `MAX=0` for no limit)
-- `-F, --chunk-filesize` → Split data files into pieces (in MB)
-- `-c, --compress` → Compress output files (`GZIP` or `ZSTD`, default: `GZIP`)
-
-#### **Schema & Data Dump Options**
-
-- `-m, --no-schemas` → Dump only data, skip table schemas
-- `-d, --no-data` → Dump only schemas, skip table data
-- `-x, --regex` → Filter databases/tables using regex
-- `-G, --triggers` → Include triggers in the backup
-- `-E, --events` → Include events in the backup
-- `-R, --routines` → Include stored procedures & functions
-
-#### **Logging & Execution Control**
-
-- `-L, --logfile` → Log output file (default: stdout)
-- `--tz-utc` → Maintain `TIMESTAMP` consistency (`--skip-tz-utc` to disable)
-- `--use-savepoints` → Reduce metadata locking issues (`SUPER` privilege required)
-- `-U, --updated-since` → Dump only tables updated in the last `U` days
-
-#### **Multi-Threading & Performance**
-
-- `-t, --threads` → Number of threads (`0` uses all CPUs, default: `4`)
-- `-C, --compress-protocol` → Use compression on MySQL connection
-
-#### **Miscellaneous**
-
-- `-V, --version` → Show program version
-- `-v, --verbose` → Set verbosity level (`0 = silent`, `1 = errors`, `2 = warnings (default)`, `3 = info`)
-
----
-
-### **MyLoader - Restore Command Options**
-
-#### **Connection Options**
-
-- `-h, --host` → MySQL server hostname
-- `-u, --user` → MySQL username
-- `-p, --password` → MySQL password
-- `-a, --ask-password` → Prompt for user password
-- `-P, --port` → TCP/IP port (default: `3306`)
-
-#### **Restore Options**
-
-- `--directory` → Backup directory
-- `-s, --source-db` → Database to restore
-- `-B, --database` → Restore into a different database
-- `-o, --overwrite-tables` → Drop existing tables before restoring
-- `-T, --tables-list` → Comma-separated table list for restore (e.g., `test.t1,test.t2`)
-
-#### **Data & Schema Control**
-
-- `-x, --regex` → Filter databases/tables using regex
-- `--no-data` → Do not import table data
-- `--no-schema` → Do not import table schemas & triggers
-- `--skip-triggers` → Exclude triggers from restore
-- `--skip-indexes` → Exclude secondary indexes on InnoDB tables
-
-#### **Performance Optimization**
-
-- `-r, --rows` → Split `INSERT` statements into chunks
-- `-q, --queries-per-transaction` → Queries per transaction (default: `1000`)
-- `-t, --threads` → Number of threads (`0` uses all CPUs, default: `4`)
-
-#### **Logging & Debugging**
-
-- `--show-warnings` → Display warnings during `INSERT IGNORE`
-- `-V, --version` → Show program version
-- `-v, --verbose` → Set verbosity level (`0 = silent`, `1 = errors`, `2 = warnings (default)`, `3 = info`)
-
----
 
 ### **Backup & Restore Performance Summary with MyDumper/MyLoader**
 
@@ -343,19 +336,53 @@ myloader --host=localhost --user=<username> --password=<password> \
 | 8           | ✅ Compressed   | 10:57            | 11:00          | **3 min**       | 600 MB          | 11:02             | 11:31           | **29 min**       |
 | 8           | ❌ Uncompressed | 12:05            | 12:06          | **1 min**       | **6.9 GB**      | 12:14             | 12:42           | **28 min**       |
 
-### **Key Observations:**
+These three files were generated by **mydumper**, a high-performance MySQL backup tool, when exporting the **`orders_32`** table from the **`test_db_1`** database. Let's break them down:
 
-- **Backup Speed:**
-  - **Uncompressed backup (1 min) is significantly faster** than compressed (3-4 min).
-  - Compression adds overhead but reduces storage usage.
-- **Backup Size:**
-  - **Uncompressed (6.9 GB) is ~11.5x larger** than compressed (600 MB).
-- **Restore Speed:**
-  - Uncompressed restore (28 min) is slightly faster than compressed restore (29-30 min).
-  - Decompression overhead is minimal compared to MySQL’s write operations.
+---
 
-### **Conclusion:**
+### 1. `test_db_1.orders_32.00000.sql.gz`
 
-- **Use Compression** if storage is a concern (saves ~90% space with minimal impact on restore time).
-- **Skip Compression** if backup speed is critical and storage is not an issue.
-- **More Threads Improve Backup Speed** but have little impact on restore time due to MySQL’s write constraints.
+- **Purpose:** Contains the actual data (rows) of the **`orders_32`** table in compressed (`.gz`) format.
+- **Why it exists?**
+  - MyDumper splits large tables into multiple files for parallel processing.
+  - Since this file has `.00000.sql.gz`, it means this is the **first (or only) chunk** of the table's data.
+  - If the table was large, there might be additional files like `orders_32.00001.sql.gz`, `orders_32.00002.sql.gz`, etc.
+
+---
+
+### 2. `test_db_1.orders_32-metadata`
+
+- **Purpose:** Stores metadata information about the **`orders_32`** table, including:
+  - Table structure checksum
+  - Binlog position (for point-in-time recovery)
+  - GTID (if enabled)
+  - Row count and timestamp of the dump
+- **Why it exists?**
+  - Helps with consistent restores, ensuring data integrity.
+  - If replication or binlog-based recovery is needed, this metadata helps restore the exact state.
+
+---
+
+### 3. `test_db_1.orders_32-schema.sql.gz`
+
+- **Purpose:** Contains the **schema definition** (DDL) of the **`orders_32`** table, including:
+  - `CREATE TABLE orders_32 (...)`
+  - `INDEX` definitions
+  - Constraints and foreign keys (if any)
+- **Why it exists?**
+  - Ensures the table structure is recreated before importing data.
+  - Separating schema and data allows **parallel restores** (schema first, then data).
+
+---
+
+## Why MyDumper Creates These 3 Files?
+
+MyDumper follows a **structured, parallel backup approach**, splitting the dump into:
+
+1. **Schema file** (`.schema.sql.gz`) → Defines the table structure.
+2. **Data file(s)** (`.00000.sql.gz`, `.00001.sql.gz`, etc.) → Stores actual rows.
+3. **Metadata file** (`-metadata`) → Ensures consistency and recovery details.
+
+This approach makes **restores faster and more reliable**, especially for large databases.
+
+---
