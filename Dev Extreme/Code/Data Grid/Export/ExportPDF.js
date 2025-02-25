@@ -1,177 +1,231 @@
 window.jsPDF = window.jspdf.jsPDF;
-$(() => {
+
+$(document).ready(() => {
+  // Custom Store with image caching
   const store = new DevExpress.data.CustomStore({
-    load() {
-      return $.ajax({
-        url: "https://dummyjson.com/recipes?limit=100",
-        dataType: "json",
-      })
-        .then((result) => {
-          if (Array.isArray(result.recipes)) {
-            return result.recipes.filter(
-              (recipe) =>
-                !recipe.name.toLowerCase().includes("chicken") &&
-                !recipe.name.toLowerCase().includes("beef")
-            );
-          } else {
-            console.error("Unexpected response structure:", result);
-            return [];
-          }
-        })
-        .catch((error) => {
-          console.error("Data Loading Error:", error);
-          return [];
+    async load() {
+      try {
+        const response = await $.ajax({
+          url: "https://dummyjson.com/recipes?limit=100",
+          dataType: "json",
         });
+
+        if (!Array.isArray(response.recipes)) {
+          console.error("Unexpected response structure:", response);
+          return [];
+        }
+
+        const recipes = response.recipes.filter(
+          (recipe) =>
+            !recipe.name.toLowerCase().includes("chicken") &&
+            !recipe.name.toLowerCase().includes("beef")
+        );
+
+        // Pre-cache images (limited to first 50 recipes)
+        for (const recipe of recipes.slice(0, 50)) {
+          if (recipe.image) {
+            try {
+              recipe.imageBase64 = await getBase64Image(recipe.image);
+            } catch (error) {
+              console.warn(`Failed to load image for ${recipe.name}:`, error);
+              recipe.imageBase64 = null;
+            }
+          }
+        }
+
+        return recipes.slice(0, 50);
+      } catch (error) {
+        console.error("Data Loading Error:", error);
+        return [];
+      }
     },
   });
 
-  $("#gridContainer").dxDataGrid({
-    dataSource: store,
-    showBorders: true,
-    scrolling: {
-      mode: "virtual",
-    },
-    selection: {
-      mode: "multiple",
-      showCheckBoxesMode: "always",
-    },
-    columns: [
-      {
-        dataField: "image",
-        caption: "Product Image",
-        cellTemplate(container, options) {
-          if (options.value) {
-            $("<div>")
-              .append(
-                $("<img>", {
-                  src: options.data.image,
-                  alt: "Product Image",
-                  style: "width:70px; height:70px; border-radius:5px;",
-                })
-              )
-              .appendTo(container);
-          } else {
-            container.text("No Image");
-          }
-        },
+  // Utility Function to Convert Image URL to Base64
+  async function getBase64Image(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = url;
+
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = 50;
+        canvas.height = 50;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0, 50, 50);
+        resolve(canvas.toDataURL("image/jpeg"));
+      };
+
+      img.onerror = () => reject("Image load error: " + url);
+    });
+  }
+
+  // Data Grid Configuration
+  const grid = $("#gridContainer")
+    .dxDataGrid({
+      dataSource: store,
+      showBorders: true,
+      scrolling: { mode: "virtual" },
+      selection: {
+        mode: "multiple",
+        showCheckBoxesMode: "always",
       },
-      { dataField: "name", caption: "Title" },
-      { dataField: "cuisine", caption: "Cuisine" },
-      { dataField: "caloriesPerServing", caption: "Calories" },
-      { dataField: "cookTimeMinutes", caption: "Cook Time (Min)" },
-      { dataField: "prepTimeMinutes", caption: "Prep Time (Min)" },
-      { dataField: "rating", caption: "Rating" },
-      { dataField: "mealType", caption: "Meal Type" },
-    ],
-    export: {
-      enabled: true,
-      allowExportSelectedData: true,
-    },
-    onExporting(e) {
-      // "p" → Page Orientation
+      columns: [
+        {
+          dataField: "image",
+          caption: "Product Image",
+          width: 80,
+          cellTemplate(container, options) {
+            if (options.data.image) {
+              $("<div>")
+                .append(
+                  $("<img>", {
+                    src: options.data.image,
+                    alt: "Product Image",
+                    style: "width:70px; height:70px; border-radius:5px;",
+                  })
+                )
+                .appendTo(container);
+            } else {
+              container.text("No Image");
+            }
+          },
+        },
+        { dataField: "name", caption: "Title", width: 150 },
+        { dataField: "cuisine", caption: "Cuisine", width: 100 },
+        { dataField: "caloriesPerServing", caption: "Calories", width: 80 },
+        {
+          dataField: "cookTimeMinutes",
+          caption: "Cook Time (Min)",
+          width: 100,
+        },
+        {
+          dataField: "prepTimeMinutes",
+          caption: "Prep Time (Min)",
+          width: 100,
+        },
+        { dataField: "rating", caption: "Rating", width: 80 },
+        { dataField: "mealType", caption: "Meal Type", width: 120 },
+      ],
+      export: {
+        enabled: true,
+        allowExportSelectedData: true,
+      },
+      onExporting: async function (e) {
+        const loading = $("#gridContainer")
+          .dxLoadPanel({
+            message: "Generating PDF...",
+            visible: true,
+          })
+          .dxLoadPanel("instance");
 
-      // "p" → Portrait mode (default)
-      // "l" → Landscape mode
-      // "mm" → Unit of Measurement
+        const doc = new jsPDF({
+          orientation: "p",
+          unit: "mm",
+          format: "a4",
+          compress: true,
+          putOnlyUsedFonts: true,
+        });
 
-      // "mm" → Millimeters
+        // Document Metadata
+        doc.setProperties({
+          title: "Recipe List",
+          subject: "List of recipes with details",
+          author: "Yash Khokhar",
+          keywords: "recipes, food, cooking",
+          creator: "MyWebApp",
+        });
 
-      // Other options:
-      // "pt" → Points
-      // "cm" → Centimeters
-      // "in" → Inches
-      // "a4" → Paper Size
+        // Layout Constants
+        const pageWidth = doc.internal.pageSize.width;
+        const pageHeight = doc.internal.pageSize.height;
+        const margin = 10;
+        const startY = 20;
+        const maxRowsPerPage = 10;
 
-      // "a4" → Standard A4 size (210mm × 297mm)
+        // Background
+        doc.setFillColor(255, 255, 255);
+        doc.rect(0, 0, pageWidth, pageHeight, "F");
 
-      // Other options:
-      // "letter" (8.5in × 11in)
-      // "legal" (8.5in × 14in)
-      // "a3", "a5", etc.
+        // Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("Recipe List", pageWidth / 2, 15, { align: "center" });
 
-      const doc = new jsPDF({
-        orientation: "p", // "p" = Portrait, "l" = Landscape
-        unit: "mm", // "mm" = Millimeters, can be "pt", "cm", "in"
-        format: "a4", // Paper size: "a4", "letter", "legal", "a3", "a5", custom sizes
-        compress: false, // Enable compression (reduces PDF size)
-        putOnlyUsedFonts: true, // Only include used fonts (reduces size)
-        precision: 16, // Precision for measurements
-        userUnit: 1.0, // Scale factor for measurements
-      });
+        // Table Configuration
+        const columns = [
+          "Image",
+          "Title",
+          "Cuisine",
+          "Calories",
+          "Cook Time",
+          "Prep Time",
+          "Rating",
+          "Meal Type",
+        ];
+        const columnWidths = [20, 40, 30, 20, 20, 20, 15, 30];
 
-      doc.setProperties({
-        title: "Recipe List",
-        subject: "List of recipes with details",
-        author: "Yash Khokhar",
-        keywords: "recipes, food, cooking",
-        creator: "MyWebApp",
-      });
+        // Get and process data
+        const data = await e.component.getDataSource().load();
+        const selectedRows = e.component.getSelectedRowsData();
+        const exportData =
+          e.component.option("export.allowExportSelectedData") &&
+          selectedRows.length > 0
+            ? selectedRows
+            : data;
 
-      doc.setFillColor(255, 255, 255); // white
-      doc.rect(
-        0,
-        0,
-        doc.internal.pageSize.width,
-        doc.internal.pageSize.height,
-        "F"
-      );
+        // Prepare table rows - Empty string for image column text
+        const rows = exportData.map((recipe) => [
+          "", // Empty string to prevent Base64 text
+          recipe.name || "",
+          recipe.cuisine || "",
+          recipe.caloriesPerServing || "",
+          recipe.cookTimeMinutes || "",
+          recipe.prepTimeMinutes || "",
+          recipe.rating || "",
+          recipe.mealType || "",
+        ]);
 
-      const marginLeft = 10;
-      const startY = 20;
+        // Split rows into pages
+        const pageRows = [];
+        for (let i = 0; i < rows.length; i += maxRowsPerPage) {
+          pageRows.push(rows.slice(i, i + maxRowsPerPage));
+        }
 
-      // Title Styling
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(18);
-      doc.text("Recipe List", 105, 15, null, null, "center");
+        // Generate table for each page
+        pageRows.forEach((pageData, pageIndex) => {
+          if (pageIndex > 0) {
+            doc.addPage();
+            doc.setFillColor(255, 255, 255);
+            doc.rect(0, 0, pageWidth, pageHeight, "F");
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Recipe List (Continued)", pageWidth / 2, 15, {
+              align: "center",
+            });
+          }
 
-      // Define Column Headers
-      const columns = [
-        "Image",
-        "Title",
-        "Cuisine",
-        "Calories",
-        "Cook Time",
-        "Prep Time",
-        "Rating",
-        "Meal Type",
-      ];
-      const columnWidths = [30, 40, 35, 20, 25, 25, 20, 30];
-
-      let rows = [];
-
-      e.component
-        .getDataSource()
-        .load()
-        .done((data) => {
-          data.forEach((recipe, index) => {
-            let imgData = recipe.image;
-            let imgSize = 10;
-            let imgCell = { content: imgData, image: true, width: imgSize };
-
-            rows.push([
-              imgCell,
-              recipe.name,
-              recipe.cuisine,
-              recipe.caloriesPerServing,
-              recipe.cookTimeMinutes,
-              recipe.prepTimeMinutes,
-              recipe.rating,
-              recipe.mealType,
-            ]);
-          });
-
-          // Draw Table
           doc.autoTable({
-            startY: startY + 10,
+            startY: startY,
             head: [columns],
-            body: rows,
+            body: pageData,
+            theme: "grid",
+            margin: { left: margin, right: margin },
             styles: {
-              fontSize: 10,
+              fontSize: 8,
+              cellPadding: 2,
               halign: "center",
               valign: "middle",
+              overflow: "linebreak",
+            },
+            headStyles: {
+              fillColor: [200, 200, 200],
+              textColor: [0, 0, 0],
+              fontSize: 9,
             },
             columnStyles: {
-              0: { cellWidth: columnWidths[0] },
+              0: { cellWidth: columnWidths[0], halign: "center" },
               1: { cellWidth: columnWidths[1] },
               2: { cellWidth: columnWidths[2] },
               3: { cellWidth: columnWidths[3] },
@@ -182,23 +236,37 @@ $(() => {
             },
             didDrawCell: function (data) {
               if (data.section === "body" && data.column.index === 0) {
-                let img = data.row.raw[0].content;
-                if (img) {
+                const rowIndex = data.row.index;
+                const recipe =
+                  exportData[rowIndex + pageIndex * maxRowsPerPage];
+                if (recipe && recipe.imageBase64) {
                   doc.addImage(
-                    img,
+                    recipe.imageBase64,
                     "JPEG",
-                    data.cell.x + 2,
-                    data.cell.y + 2,
-                    15,
-                    15
+                    data.cell.x + 1,
+                    data.cell.y + 1,
+                    18,
+                    18
                   );
                 }
               }
             },
+            didDrawPage: function (data) {
+              doc.setFontSize(8);
+              doc.text(
+                `Page ${pageIndex + 1} of ${pageRows.length}`,
+                pageWidth - margin,
+                pageHeight - 5,
+                { align: "right" }
+              );
+            },
           });
-
-          doc.save("Recipe.pdf");
         });
-    },
-  });
+
+        // Save and cleanup
+        doc.save("Recipe.pdf");
+        loading.hide();
+      },
+    })
+    .dxDataGrid("instance");
 });
