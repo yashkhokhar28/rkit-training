@@ -31,15 +31,5 @@
         /// Address
         /// </summary>
         public string T01F06 { get; set; }
-
-        /// <summary>
-        /// Created Date
-        /// </summary>
-        public DateTime T01F07 { get; set; }
-
-        /// <summary>
-        /// Modified Date
-        /// </summary>
-        public DateTime T01F08 { get; set; }
     }
 }

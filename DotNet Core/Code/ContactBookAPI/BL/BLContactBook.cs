@@ -78,9 +78,7 @@ namespace ContactBookAPI.BL
                                         T01F03 = objMySqlDataReader.GetString("T01F03"),
                                         T01F04 = objMySqlDataReader.GetString("T01F04"),
                                         T01F05 = objMySqlDataReader.GetString("T01F05"),
-                                        T01F06 = objMySqlDataReader.GetString("T01F06"),
-                                        T01F07 = objMySqlDataReader.GetDateTime("T01F07"),
-                                        T01F08 = objMySqlDataReader.GetDateTime("T01F08")
+                                        T01F06 = objMySqlDataReader.GetString("T01F06")
                                     });
                                 }
                             }
@@ -140,9 +138,7 @@ namespace ContactBookAPI.BL
                                     T01F03 = objMySqlDataReader.GetString("T01F03"),
                                     T01F04 = objMySqlDataReader.GetString("T01F04"),
                                     T01F05 = objMySqlDataReader.GetString("T01F05"),
-                                    T01F06 = objMySqlDataReader.GetString("T01F06"),
-                                    T01F07 = objMySqlDataReader.GetDateTime("T01F07"),
-                                    T01F08 = objMySqlDataReader.GetDateTime("T01F08")
+                                    T01F06 = objMySqlDataReader.GetString("T01F06")
                                 };
                             }
                             else
@@ -216,11 +212,9 @@ namespace ContactBookAPI.BL
                 parameters.Add("T01F04", objCNT01.T01F04); // Email Address
                 parameters.Add("T01F05", objCNT01.T01F05); // Phone Number
                 parameters.Add("T01F06", objCNT01.T01F06); // Address
-                parameters.Add("T01F08", objCNT01.T01F08.ToString("yyyy-MM-dd HH:mm:ss")); // ModifiedAt
 
                 if (Type == EnmEntryType.A) // Insert
                 {
-                    parameters.Add("T01F07", objCNT01.T01F07.ToString("yyyy-MM-dd HH:mm:ss")); // CreatedAt
                     query = DynamicQueryHelper.GenerateInsertQuery("CNT01", parameters);
                 }
                 else if (Type == EnmEntryType.E) // Update
@@ -276,12 +270,6 @@ namespace ContactBookAPI.BL
         public void PreSave(DTOCNT01 objDTOCNT01)
         {
             objCNT01 = objDTOCNT01.Convert<CNT01>();
-
-            // Set CreatedAt only for Insert operations
-            if (Type == EnmEntryType.A)
-            {
-                objCNT01.T01F07 = DateTime.Now;
-            }
 
             // Set the ID for Update operations
             if (Type == EnmEntryType.E)

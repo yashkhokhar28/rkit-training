@@ -27,14 +27,6 @@ namespace ContactBookAPI.Filters
                     return;
                 }
             }
-
-            // Optionally, validate the model state for body-based parameters (POST/PUT requests)
-            if (!context.ModelState.IsValid)
-            {
-                // Return a bad request response if the model state is not valid
-                context.Result = new BadRequestObjectResult(context.ModelState);
-                return;
-            }
         }
 
         /// <summary>
@@ -43,7 +35,7 @@ namespace ContactBookAPI.Filters
         /// <param name="context">The action executed context.</param>
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            // Logic after the action executes (optional)
+            // Logic after the action executes
         }
     }
 }

@@ -1,8 +1,6 @@
 using ContactBookAPI.BL;
 using ContactBookAPI.Filters;
-using ContactBookAPI.Models;
 using NLog.Web;
-using System;
 
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
@@ -17,11 +15,12 @@ try
     // Add CORS Policy
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll",
-            policy => policy.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader());
+        options.AddPolicy("SpecificOrigin", policy =>
+            policy.WithOrigins("http://127.0.0.1:5500") // Allow only this specific origin
+                  .AllowAnyMethod()
+                  .AllowAnyHeader());
     });
+
 
     builder.Services.AddControllers(options =>
     {
@@ -45,7 +44,7 @@ try
     }
 
     // Enable CORS globally
-    app.UseCors("AllowAll");
+    app.UseCors("SpecificOrigin"); // Use the correct policy name
 
     app.UseAuthorization();
     app.MapControllers();
