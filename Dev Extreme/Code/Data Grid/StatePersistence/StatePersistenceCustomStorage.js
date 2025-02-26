@@ -1,12 +1,42 @@
 $(() => {
+  const storageKey = "customKey"; // Define storage key
+
   const dataGrid = $("#gridContainer")
     .dxDataGrid({
       dataSource: marvelCharacters,
       showBorders: true,
       keyExpr: "ID",
+      filterPanel: {
+        filterEnabled: true,
+        visible: true,
+      },
+
       stateStoring: {
-        enabled: false,
-        type: "localStore",
+        enabled: true,
+        type: "custom",
+        storageKey: storageKey,
+        customLoad() {
+          return new Promise((resolve) => {
+            const savedState = localStorage.getItem(storageKey);
+            resolve(savedState ? JSON.parse(savedState) : null);
+          });
+        },
+        customSave(state) {
+          console.log("Saving state before modification:", state);
+
+          if (state) {
+            state.customProperty = "Custom Value";
+            state.pageSize = 50;
+            state.columns.forEach((column) => {
+              if (column.dataField === "Status") {
+                column.sortOrder = "desc";
+              }
+            });
+          }
+
+          console.log("Saving state after modification:", state);
+          localStorage.setItem(storageKey, JSON.stringify(state));
+        },
       },
       columns: [
         {
@@ -53,32 +83,8 @@ $(() => {
           dataType: "string",
           columnMinWidth: 70,
           alignment: "center",
-          //   visible: false,
         },
       ],
     })
     .dxDataGrid("instance");
-
-  $("#save").dxButton({
-    text: "Save State",
-    onClick: function () {
-      const state = dataGrid.state();
-      localStorage.setItem("dataGridState", JSON.stringify(state));
-    },
-  });
-
-  $("#hide").dxButton({
-    text: "Hide Column",
-    onClick: function () {
-      dataGrid.columnOption(6, "visible", false);
-    },
-  });
-
-  $("#load").dxButton({
-    text: "Load State",
-    onClick: function () {
-      const state = JSON.parse(localStorage.getItem("dataGridState"));
-      dataGrid.state(state);
-    },
-  });
 });

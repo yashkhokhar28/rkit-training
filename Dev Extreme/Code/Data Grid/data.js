@@ -11,7 +11,7 @@ const marvelCharacters = [
       "Flight",
       "Energy Blasts",
     ],
-    Status: "Active",
+    Status: "<h1>Active</h1>",
     ImageSrc: "images/marvel/ironman.png",
   },
   {

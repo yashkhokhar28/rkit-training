@@ -56,27 +56,33 @@ $(() => {
       {
         dataField: "orderId",
         caption: "Order ID",
+        hidingPriority: 0,
       },
       {
         dataField: "customer",
         caption: "Customer Name",
+        hidingPriority: 2,
       },
       {
         dataField: "orderStatus",
         caption: "Status",
+        hidingPriority: 4,
       },
       {
         dataField: "totalAmount",
         caption: "Total Amount",
+        hidingPriority: 1,
       },
       {
         dataField: "discount",
         caption: "Discount",
+        hidingPriority: 3,
       },
       {
         dataField: "deliveryDate",
         caption: "Delivery Date",
         dataType: "date",
+        hidingPriority: 5,
       },
     ],
   });

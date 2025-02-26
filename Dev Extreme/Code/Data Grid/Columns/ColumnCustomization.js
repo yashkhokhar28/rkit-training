@@ -145,7 +145,7 @@ $(() => {
           // Header filter configuration for the column
           headerFilter: {
             // Enable searching within the header filter
-            allowSearch: true,
+            allowSearch: false,
 
             // Set the search mode to "startswith" for matching beginnings of strings
             searchMode: "startswith",
@@ -158,6 +158,15 @@ $(() => {
 
           // Header caption for the column
           caption: "First Appearance",
+
+          calculateCellValue: function (rowData) {
+            let message =
+              rowData.First_Appearance > 1980
+                ? "Greater than 1980"
+                : rowData.First_Appearance;
+            console.log(message);
+            return message;
+          },
 
           // Data type for the column
           dataType: "number",
@@ -268,7 +277,7 @@ $(() => {
           allowSorting: false,
 
           // Encode HTML to ensure safe content display
-          encodeHtml: true,
+          encodeHtml: false,
         },
 
         {

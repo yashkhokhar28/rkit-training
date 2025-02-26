@@ -50,7 +50,6 @@ $(() => {
         e.component.refresh(true);
       },
       summary: {
-        // recalculateWhileEditing: true,
         totalItems: [
           {
             name: "SelectedRowsSummary",
