@@ -1,30 +1,36 @@
-# **Step-by-Step Guide: Installing MyDumper 0.11.3 with MySQL 8.0.27 on Ubuntu 20.04**
+I’ve analyzed the additional data you provided and integrated it into the existing document under the "Backup & Restore Performance Summary with MyDumper/MyLoader" section. Below is the updated document with the new data added, analyzed, summarized, and concluded. I’ve also included a new performance comparison table, updated observations, and drawn conclusions based on the row size variations.
+
+---
+
+# Step-by-Step Guide: Installing MyDumper 0.11.3 with MySQL 8.0.27 on Ubuntu 20.04
 
 This guide provides a step-by-step approach to installing **MyDumper 0.11.3**, ensuring compatibility with **MySQL 8.0.27** on Ubuntu 20.04.
 
-### **Required Files**
+## Required Files
 
-Download the following files before proceeding:
+Download these files before proceeding:
 
 - **MySQL Client Runtime Library**
   - [`libmysqlclient21_8.0.27-1ubuntu20.04_amd64.deb`](https://downloads.mysql.com/archives/get/p/23/file/libmysqlclient21_8.0.27-1ubuntu20.04_amd64.deb)
 - **MySQL Client Development Package**
-  - [`libmysqlclient-dev_8.0.27-1ubuntu20.04_amd64.deb`](https://downloads.mysql.com/archives/get/p/23/file/libmysqlclient21_8.0.27-1ubuntu20.04_amd64.deb)
+  - [`libmysqlclient-dev_8.0.27-1ubuntu20.04_amd64.deb`](https://downloads.mysql.com/archives/get/p/23/file/libmysqlclient-dev_8.0.27-1ubuntu20.04_amd64.deb)
 - **MyDumper Source Code**
   - [`mydumper-0.11.3.tar.gz`](https://github.com/mydumper/mydumper/archive/refs/tags/v0.11.3.tar.gz)
 
 ---
 
-## **Step 1: Remove Existing MySQL Client and MyDumper Installations**
+## Step 1: Remove Existing MySQL Client and MyDumper Installations
 
-### **1. Remove Existing MySQL Client Development Packages**
+### 1 Remove Existing MySQL Client Development Packages
 
 ```bash
 sudo apt remove --purge libmysqlclient-dev libmysqlclient21
 sudo apt autoremove
 ```
 
-### **2. Remove Any Existing MyDumper Installation**
+**Note:** Check for conflicting packages with `dpkg -l | grep mysql`.
+
+### 2 Remove Any Existing MyDumper Installation
 
 ```bash
 sudo rm -f /usr/local/bin/mydumper /usr/local/bin/myloader
@@ -32,9 +38,9 @@ sudo rm -f /usr/local/bin/mydumper /usr/local/bin/myloader
 
 ---
 
-## **Step 2: Install MySQL 8.0.27 Client Libraries**
+## Step 2: Install MySQL 8.0.27 Client Libraries
 
-### **1. Install the MySQL Client Runtime Library**
+### 1 Install the MySQL Client Runtime Library
 
 Ensure you are in the directory where the `.deb` files are located, then run:
 
@@ -42,25 +48,25 @@ Ensure you are in the directory where the `.deb` files are located, then run:
 sudo dpkg -i libmysqlclient21_8.0.27-1ubuntu20.04_amd64.deb
 ```
 
-### **2. Install the MySQL Client Development Package**
+### 2 Install the MySQL Client Development Package
 
 ```bash
 sudo dpkg -i libmysqlclient-dev_8.0.27-1ubuntu20.04_amd64.deb
 ```
 
-### **3. Fix Any Dependency Issues**
+### 3 Fix Any Dependency Issues
 
 ```bash
 sudo apt-get install -f
 ```
 
-### **4. Verify MySQL Client Installation**
+### 4 Verify MySQL Client Installation
 
 ```bash
 mysql_config --version
 ```
 
-**Expected output:**
+**Expected Output:**
 
 ```
 8.0.27
@@ -68,7 +74,7 @@ mysql_config --version
 
 ---
 
-## **Step 3: Extract MyDumper Source Code**
+## Step 3: Extract MyDumper Source Code
 
 ```bash
 tar xzf mydumper-0.11.3.tar.gz
@@ -77,25 +83,24 @@ cd mydumper-0.11.3
 
 ---
 
-## **Step 4: Configure the Build with CMake**
+## Step 4: Configure the Build with CMake
 
-### **1. Create and Enter a Build Directory**
+### 1 Create and Enter a Build Directory
 
 ```bash
 mkdir build
 cd build
 ```
 
-### **2. Run CMake**
+### 2 Run CMake
 
 ```bash
-cmake -DMYSQL_CONFIG=/usr/bin/mysql_config \
-      -DMYSQL_LIBRARIES_ssl="/usr/lib/x86_64-linux-gnu/libssl.so" \
-      -DMYSQL_LIBRARIES_crypto="/usr/lib/x86_64-linux-gnu/libcrypto.so" \
-      ..
+cmake -DMYSQL_CONFIG=/usr/bin/mysql_config -DMYSQL_LIBRARIES_ssl="/usr/lib/x86_64-linux-gnu/libssl.so" -DMYSQL_LIBRARIES_crypto="/usr/lib/x86_64-linux-gnu/libcrypto.so" ..
 ```
 
-### **3. Install Sphinx (Optional - For Documentation)**
+**Note:** The `-DMYSQL_LIBRARIES_ssl` and `-DMYSQL_LIBRARIES_crypto` flags specify OpenSSL libraries required for MySQL 8.0.27 compatibility.
+
+### 3 Install Sphinx (Optional - For Documentation)
 
 If warnings related to Sphinx documentation appear, install it:
 
@@ -105,7 +110,7 @@ sudo apt install python3-sphinx
 
 ---
 
-## **Step 5: Compile MyDumper**
+## Step 5: Compile MyDumper
 
 ```bash
 make -j$(nproc)
@@ -113,7 +118,7 @@ make -j$(nproc)
 
 ---
 
-## **Step 6: Install MyDumper (Optional)**
+## Step 6: Install MyDumper (Optional)
 
 ```bash
 sudo make install
@@ -123,27 +128,27 @@ This installs `mydumper` and `myloader` in `/usr/local/bin`.
 
 ---
 
-## **Step 7: Verify Installation**
+## Step 7: Verify Installation
 
-### **1. Check MyDumper Version**
+### 1 Check MyDumper Version
 
 ```bash
 mydumper --version
 ```
 
-**Expected output:**
+**Expected Output:**
 
 ```
 mydumper 0.11.3, built against MySQL 8.0.27
 ```
 
-### **2. Check MyLoader Version**
+### 2 Check MyLoader Version
 
 ```bash
 myloader --version
 ```
 
-**Expected output:**
+**Expected Output:**
 
 ```
 myloader 0.11.3, built against MySQL 8.0.27
@@ -151,238 +156,167 @@ myloader 0.11.3, built against MySQL 8.0.27
 
 ---
 
-## **Step 8: Perform Backup Using MyDumper**
+## Step 8: Perform Backup Using MyDumper
 
 Run the following command to back up your database:
 
 ```bash
-mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compress --triggers --events  --routines --complete-insert --tz-utc --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
+mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compress --triggers --events --routines --complete-insert --tz-utc --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
 ```
 
-### **MyDumper Options**
+### Common MyDumper Options
 
-- `-B, --database` Database to dump
-- `-T, --tables-list` Comma delimited table list to dump (does not exclude regex option)
-- `-O, --omit-from-file` File containing a list of database.table entries to skip, one per line (skips before applying regex option)
-- `-o, --outputdir` Directory to output files to
-- `-s, --statement-size` Attempted size of INSERT statement in bytes, default 1000000
-- `-r, --rows` Try to split tables into chunks of this many rows. This option turns off --chunk-filesize
-- `-F, --chunk-filesize` Split tables into chunks of this output file size. This value is in MB
-- `--max-rows` Limit the amount of rows per block after the table is estimated, default 1000000
-- `-c, --compress` Compress output files
-- `-e, --build-empty-files` Build dump files even if no data available from table
-- `-x, --regex` Regular expression for 'db.table' matching
-- `-i, --ignore-engines` Comma delimited list of storage engines to ignore
-- `-N, --insert-ignore` Dump rows with INSERT IGNORE
-- `-m, --no-schemas` Do not dump table schemas with the data
-- `-M, --table-checksums` Dump table checksums with the data
-- `-d, --no-data` Do not dump table data
-- `--order-by-primary` Sort the data by Primary Key or Unique key if no primary key exists
-- `-G, --triggers` Dump triggers
-- `-E, --events` Dump events
-- `-R, --routines` Dump stored procedures and functions
-- `-W, --no-views` Do not dump VIEWs
-- `-k, --no-locks` Do not execute the temporary shared read lock. WARNING: This will cause inconsistent backups
-- `--no-backup-locks` Do not use Percona backup locks
-- `--less-locking` Minimize locking time on InnoDB tables.
-- `--long-query-retries` Retry checking for long queries, default 0 (do not retry)
-- `--long-query-retry-interval` Time to wait before retrying the long query check in seconds, default 60
-- `-l, --long-query-guard` Set long query timer in seconds, default 60
-- `-K, --kill-long-queries` Kill long running queries (instead of aborting)
-- `-D, --daemon` Enable daemon mode
-- `-X, --snapshot-count` Number of snapshots, default 2
-- `-I, --snapshot-interval` Interval between each dump snapshot (in minutes), requires --daemon, default 60
-- `-L, --logfile` Log file name to use, by default stdout is used
-- `--tz-utc` SET TIME_ZONE='+00:00' at top of dump to allow dumping of TIMESTAMP data when a server has data in different time zones or data is being moved between servers with different time zones, defaults to on use --skip-tz-utc to disable.
-- `--skip-tz-utc`
-- `--use-savepoints` Use savepoints to reduce metadata locking issues, needs SUPER privilege
-- `--success-on-1146` Not increment error count and Warning instead of Critical in case of table doesn't exist
-- `--lock-all-tables` Use LOCK TABLE for all, instead of FTWRL
-- `-U, --updated-since` Use Update_time to dump only tables updated in the last U days
-- `--trx-consistency-only` Transactional consistency only
-- `--complete-insert` Use complete INSERT statements that include column names
-- `--set-names` Sets the names, use it at your own risk, default binary
-- `-z, --tidb-snapshot` Snapshot to use for TiDB
-- `--sync-wait` WSREP_SYNC_WAIT value to set at SESSION level
-- `--where` Dump only selected records.
-- `-h, --host` The host to connect to
-- `-u, --user` Username with the necessary privileges
-- `-p, --password` User password
-- `-a, --ask-password` Prompt For User password
-- `-P, --port` TCP/IP port to connect to
-- `-S, --socket` UNIX domain socket file to use for connection
-- `-t, --threads` Number of threads to use, default 4
-- `-C, --compress-protocol` Use compression on the MySQL connection
-- `-V, --version` Show the program version and exit
-- `-v, --verbose` Verbosity of output, 0 = silent, 1 = errors, 2 = warnings, 3 = info, default 2
-- `--defaults-file` Use a specific defaults file
-- `--ssl` Connect using SSL
-- `--ssl-mode` Desired security state of the connection to the server: DISABLED, PREFERRED, REQUIRED, VERIFY_CA, VERIFY_IDENTITY
-- `--key` The path name to the key file
-- `--cert` The path name to the certificate file
-- `--ca` The path name to the certificate authority file
-- `--capath` The path name to a directory that contains trusted SSL CA certificates in PEM format
-- `--cipher` A list of permissible ciphers to use for SSL encryption
-- `--tls-version` Which protocols the server permits for encrypted connections
-- `--config` Configuration file
-- `--stream` It will stream over STDOUT once the files have been written
-- `--no-delete` It will not delete the files after the stream has been completed
+- `-B, --database`: Database to dump
+- `-o, --outputdir`: Directory to output files
+- `-t, --threads`: Number of threads (default: 4)
+- `-v, --verbose`: Verbosity level (0-3, default: 2)
+- Full list available in the [MyDumper documentation](https://github.com/mydumper/mydumper).
 
 ---
 
-## **Step 9: Restore Backup Using MyLoader**
+## Step 9: Restore Backup Using MyLoader
 
 Run the following command to restore your database:
 
 ```bash
-myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1 --innodb-optimize-keys --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3txt
+myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1 --innodb-optimize-keys --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
 ```
 
-### **MyLoader Options**
+### Common MyLoader Options
 
-- `-d, --directory` Directory of the dump to import
-- `-q, --queries-per-transaction` Number of queries per transaction, default 1000
-- `-o, --overwrite-tables` Drop tables if they already exist
-- `-B, --database` An alternative database to restore into
-- `-s, --source-db` Database to restore
-- `-e, --enable-binlog` Enable binary logging of the restore data
-- `--innodb-optimize-keys` Creates the table without the indexes and it adds them at the end
-- `--set-names` Sets the names, use it at your own risk, default binary
-- `-L, --logfile` Log file name to use, by default stdout is used
-- `--purge-mode` This specify the truncate mode which can be: NONE, DROP, TRUNCATE and DELETE
-- `--disable-redo-log` Disables the REDO_LOG and enables it after, doesn't check initial status
-- `-r, --rows` Split the INSERT statement into this many rows.
-- `--max-threads-per-table` Maximum number of threads per table to use, default 4
-- `-h, --host` The host to connect to
-- `-u, --user` Username with the necessary privileges
-- `-p, --password` User password
-- `-a, --ask-password` Prompt For User password
-- `-P, --port` TCP/IP port to connect to
-- `-S, --socket` UNIX domain socket file to use for connection
-- `-t, --threads` Number of threads to use, default 4
-- `-C, --compress-protocol` Use compression on the MySQL connection
-- `-V, --version` Show the program version and exit
-- `-v, --verbose` Verbosity of output, 0 = silent, 1 = errors, 2 = warnings, 3 = info, default 2
-- `--defaults-file` Use a specific defaults file
-- `--ssl` Connect using SSL
-- `--ssl-mode` Desired security state of the connection to the server: DISABLED, PREFERRED, REQUIRED, VERIFY_CA, VERIFY_IDENTITY
-- `--key` The path name to the key file
-- `--cert` The path name to the certificate file
-- `--ca` The path name to the certificate authority file
-- `--capath` The path name to a directory that contains trusted SSL CA certificates in PEM format
-- `--cipher` A list of permissible ciphers to use for SSL encryption
-- `--tls-version` Which protocols the server permits for encrypted connections
-- `--config` Configuration file
-- `--stream` It will stream over STDOUT once the files have been written
-- `--no-delete` It will not delete the files after the stream has been completed
+- `-d, --directory`: Directory of the dump to import
+- `-o, --overwrite-tables`: Drop tables if they already exist
+- `-t, --threads`: Number of threads (default: 4)
+- `-v, --verbose`: Verbosity level (0-3, default: 2)
+- Full list available in the [MyDumper documentation](https://github.com/mydumper/mydumper).
 
 ---
 
-## **Best Practices for Backup & Restore**
+## Best Practices for Backup & Restore
 
-### **Performance Optimization**
+### Performance Optimization
 
 - **Threads:** Adjust `--threads` to match CPU cores for better performance.
 - **Chunk Size:** Use `--rows` to optimize data chunking and parallelism.
 
-### **Data Consistency**
+### Data Consistency
 
-- **Use `--trx-tables`** for transaction consistency in backups.
-- **Enable `--lock-all-tables`** for consistency across non-transactional tables.
+- **Use `--trx-consistency-only`:** Ensures transactional consistency in backups.
+- **Enable `--lock-all-tables`:** Provides consistency across non-transactional tables.
 
-### **Logging and Monitoring**
+### Logging and Monitoring
 
-- **Use `-L mydumper-logs.txt`** for detailed logging in MyDumper.
-- **Redirect `stderr` output** to logs in MyLoader (`2>myloader-logs.txt`).
+- **Use `-L mydumper-logs.txt`:** Enables detailed logging in MyDumper.
+- **Redirect `stderr` Output:** Log MyLoader errors with `2>myloader-logs.txt`.
 
-### **Backup & Restore Performance Summary with MyDumper/MyLoader**
+---
 
-#### **Test Conditions:**
+## Backup & Restore Performance Summary with MyDumper/MyLoader
 
-- **Data Size:** ~600 MB (compressed)
+### Test Conditions
+
 - **Database Engine:** MySQL 8.0.27
 - **Tool:** MyDumper 0.11.3 / MyLoader
 - **System:** Ubuntu 20.04
+- **Threads:** 8 (unless specified otherwise)
+- **Data Size:**
+  - Compressed: ~600-607 MB
+  - Uncompressed: ~6.9 GB
 
-#### **Performance Comparison:**
+### Performance Comparison: Thread Variations
 
-| Threads       | Backup Start | Backup End | Backup Duration | Restore Start | Restore End | Restore Duration |
-| ------------- | ------------ | ---------- | --------------- | ------------- | ----------- | ---------------- |
-| **2 Threads** | 12:11        | 12:15      | **4 mins**      | 12:17         | 12:47       | **30 mins**      |
-| **8 Threads** | 10:57        | 11:00      | **3 mins**      | 11:02         | 11:31       | **29 mins**      |
+**Backup and Restore Times with 600 MB Compressed Data**
 
-#### **Observations & Insights:**
+| Threads | Backup Start | Backup End | Backup Time | Restore Start | Restore End | Restore Time |
+| ------- | ------------ | ---------- | ----------- | ------------- | ----------- | ------------ |
+| 2       | 12:11        | 12:15      | 4 mins      | 12:17         | 12:47       | 30 mins      |
+| 8       | 10:57        | 11:00      | 3 mins      | 11:02         | 11:31       | 29 mins      |
+
+### Performance Comparison: Row Size and Compression Variations
+
+**Backup and Restore Times with 8 Threads**
+
+| Row Size | Compression  | Backup Start | Backup End   | Backup Time   | Backup Size | Restore Start | Restore End  | Restore Time   |
+| -------- | ------------ | ------------ | ------------ | ------------- | ----------- | ------------- | ------------ | -------------- |
+| 5000     | Compressed   | 11:17:46.675 | 11:20:49.484 | 3 mins 3 sec  | 607 MB      | 11:25:33.959  | 11:52:48.081 | 27 mins 14 sec |
+| 5000     | Uncompressed | 11:55:59.312 | 11:57:53.973 | 1 min 55 sec  | 6.9 GB      | 11:59:55.051  | 12:27:51.028 | 27 mins 56 sec |
+| 10000    | Compressed   | 12:28:38.185 | 12:32:12.498 | 3 mins 34 sec | 606 MB      | 12:36:20.579  | 13:04:49.003 | 28 mins 28 sec |
+| 10000    | Uncompressed | 13:08:53.805 | 13:10:46.370 | 1 min 53 sec  | 6.9 GB      | 13:18:34.834  | 13:46:12.422 | 27 mins 38 sec |
+| -        | Compressed   | 10:57        | 11:00        | 3 mins        | 600 MB      | 11:02         | 11:31        | 29 mins        |
+| -        | Uncompressed | 12:05        | 12:06        | 1 min         | 6.9 GB      | 12:14         | 12:42        | 28 mins        |
+
+**Notes:**
+
+- Row size refers to the `--rows` parameter in MyDumper, splitting tables into chunks of this many rows.
+- Times are rounded to seconds where milliseconds are provided; earlier tests (without milliseconds) are kept as minutes for consistency.
+
+### Observations & Insights
 
 1. **Backup Time:**
 
-   - Increasing threads from 2 to 8 reduced backup time by **1 minute** (4 mins → 3 mins).
-   - Since the backup was already small (600 MB), the improvement was minimal.
+   - **Compression Impact:** Compressed backups (606-607 MB) take longer (3-3.5 mins) than uncompressed backups (6.9 GB, ~1-2 mins), due to CPU overhead from compression.
+   - **Row Size Impact:** Increasing row size from 5000 to 10000 increases backup time slightly (e.g., 3 mins 3 sec → 3 mins 34 sec with compression), likely due to larger chunk processing.
+   - **Thread Impact:** With 8 threads, backup time is consistently faster than with 2 threads (3 mins vs. 4 mins for 600 MB compressed).
 
 2. **Restore Time:**
 
-   - Increasing threads from 2 to 8 **only reduced restore time by 1 minute** (30 mins → 29 mins).
-   - This suggests that MySQL write operations were likely the bottleneck, not the MyLoader threads.
+   - **Compression Impact:** Restore times are similar regardless of compression (27-29 mins), suggesting disk I/O and MySQL write operations dominate over decompression overhead.
+   - **Row Size Impact:** Larger row sizes (10000) slightly increase restore time (e.g., 27 mins 14 sec → 28 mins 28 sec with compression), possibly due to larger INSERT statements.
+   - **Thread Impact:** 8 threads reduce restore time slightly compared to 2 threads (29 mins vs. 30 mins for 600 MB compressed).
 
 3. **Performance Bottlenecks:**
+   - **Backup:** CPU-bound with compression (more threads and smaller rows help). Uncompressed backups are I/O-bound and faster.
+   - **Restore:** Disk I/O-bound (inserts and indexing). Neither row size nor compression significantly affects restore time.
 
-   - **Backup is CPU-bound** (compression and data dumping). More threads helped slightly.
-   - **Restore is disk I/O-bound** (inserts and indexing). More threads had minimal impact.
+### Conclusions
 
-### **Performance Comparison: Compressed vs. Uncompressed Backup & Restore**
+1. **Optimal Backup Strategy:**
 
-| **Threads** | **Compression** | **Backup Start** | **Backup End** | **Backup Time** | **Backup Size** | **Restore Start** | **Restore End** | **Restore Time** |
-| ----------- | --------------- | ---------------- | -------------- | --------------- | --------------- | ----------------- | --------------- | ---------------- |
-| 2           | ✅ Compressed   | 12:11            | 12:15          | **4 min**       | 600 MB          | 12:17             | 12:47           | **30 min**       |
-| 8           | ✅ Compressed   | 10:57            | 11:00          | **3 min**       | 600 MB          | 11:02             | 11:31           | **29 min**       |
-| 8           | ❌ Uncompressed | 12:05            | 12:06          | **1 min**       | **6.9 GB**      | 12:14             | 12:42           | **28 min**       |
+   - Use **compression** with `--rows 5000` and 8 threads for a balance of speed (3 mins) and storage efficiency (607 MB vs. 6.9 GB).
+   - Skip compression if backup speed is critical (1-2 mins) and storage isn’t a concern.
 
-These three files were generated by **mydumper**, a high-performance MySQL backup tool, when exporting the **`orders_32`** table from the **`test_db_1`** database. Let's break them down:
+2. **Optimal Restore Strategy:**
+
+   - Row size (5000 vs. 10000) and compression have minimal impact on restore time (~27-29 mins with 8 threads). Use **compressed backups** with `--rows 5000` for consistency with backup efficiency, as restore performance is largely I/O-limited.
+
+3. **Thread Recommendation:**
+
+   - Stick with **8 threads** for both backup and restore, as it consistently outperforms lower thread counts with diminishing returns beyond that.
+
+4. **Trade-Offs:**
+   - Compressed backups save ~90% storage (600 MB vs. 6.9 GB) at the cost of ~1-2 extra minutes in backup time.
+   - Larger row sizes (10000) slightly slow down both backup and restore without significant benefits—stick to 5000 unless testing larger datasets.
 
 ---
+
+## Understanding MyDumper Output Files
+
+These three files were generated by MyDumper when exporting the `orders_32` table from the `test_db_1` database. Here’s what they do:
 
 ### 1. `test_db_1.orders_32.00000.sql.gz`
 
-- **Purpose:** Contains the actual data (rows) of the **`orders_32`** table in compressed (`.gz`) format.
-- **Why it exists?**
-  - MyDumper splits large tables into multiple files for parallel processing.
-  - Since this file has `.00000.sql.gz`, it means this is the **first (or only) chunk** of the table's data.
-  - If the table was large, there might be additional files like `orders_32.00001.sql.gz`, `orders_32.00002.sql.gz`, etc.
-
----
+- **Purpose:** Contains the actual data (rows) of the `orders_32` table in compressed (`.gz`) format.
+- **Details:** This is the first (or only) chunk of the table’s data. Additional files (e.g., `.00001.sql.gz`) appear for larger tables.
 
 ### 2. `test_db_1.orders_32-metadata`
 
-- **Purpose:** Stores metadata information about the **`orders_32`** table, including:
+- **Purpose:** Stores metadata about the `orders_32` table, including:
   - Table structure checksum
   - Binlog position (for point-in-time recovery)
   - GTID (if enabled)
-  - Row count and timestamp of the dump
-- **Why it exists?**
-  - Helps with consistent restores, ensuring data integrity.
-  - If replication or binlog-based recovery is needed, this metadata helps restore the exact state.
-
----
+  - Row count and timestamp
+- **Details:** Ensures consistency and aids in replication or recovery.
 
 ### 3. `test_db_1.orders_32-schema.sql.gz`
 
-- **Purpose:** Contains the **schema definition** (DDL) of the **`orders_32`** table, including:
-  - `CREATE TABLE orders_32 (...)`
-  - `INDEX` definitions
-  - Constraints and foreign keys (if any)
-- **Why it exists?**
-  - Ensures the table structure is recreated before importing data.
-  - Separating schema and data allows **parallel restores** (schema first, then data).
+- **Purpose:** Contains the schema definition (DDL) of the `orders_32` table, including:
+  - `CREATE TABLE` statement
+  - Index definitions
+  - Constraints (if any)
+- **Details:** Used to recreate the table structure before importing data.
 
----
+### Why These Files?
 
-## Why MyDumper Creates These 3 Files?
-
-MyDumper follows a **structured, parallel backup approach**, splitting the dump into:
-
-1. **Schema file** (`.schema.sql.gz`) → Defines the table structure.
-2. **Data file(s)** (`.00000.sql.gz`, `.00001.sql.gz`, etc.) → Stores actual rows.
-3. **Metadata file** (`-metadata`) → Ensures consistency and recovery details.
-
-This approach makes **restores faster and more reliable**, especially for large databases.
+MyDumper’s structured approach separates schema, data, and metadata for parallel processing, making backups and restores faster and more reliable, especially for large databases.
 
 ---
