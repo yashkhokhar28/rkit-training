@@ -1,7 +1,3 @@
-I’ve analyzed the additional data you provided and integrated it into the existing document under the "Backup & Restore Performance Summary with MyDumper/MyLoader" section. Below is the updated document with the new data added, analyzed, summarized, and concluded. I’ve also included a new performance comparison table, updated observations, and drawn conclusions based on the row size variations.
-
----
-
 # Step-by-Step Guide: Installing MyDumper 0.11.3 with MySQL 8.0.27 on Ubuntu 20.04
 
 This guide provides a step-by-step approach to installing **MyDumper 0.11.3**, ensuring compatibility with **MySQL 8.0.27** on Ubuntu 20.04.
@@ -161,7 +157,7 @@ myloader 0.11.3, built against MySQL 8.0.27
 Run the following command to back up your database:
 
 ```bash
-mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compress --triggers --events --routines --complete-insert --tz-utc --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
+mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compress --triggers --events --routines --complete-insert --tz-utc --host localhost --user <user> --password <password> --threads 8 --verbose 3
 ```
 
 ### Common MyDumper Options
@@ -179,7 +175,7 @@ mydumper --database test_db_1 --outputdir /home/ubuntu/backup --no-locks --compr
 Run the following command to restore your database:
 
 ```bash
-myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1 --innodb-optimize-keys --host localhost --user root --password Miracle@1234 --threads 8 --verbose 3
+myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1 --innodb-optimize-keys --host localhost --user <user> --password <password> --threads 8 --verbose 3
 ```
 
 ### Common MyLoader Options
@@ -267,27 +263,6 @@ myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1
 3. **Performance Bottlenecks:**
    - **Backup:** CPU-bound with compression (more threads and smaller rows help). Uncompressed backups are I/O-bound and faster.
    - **Restore:** Disk I/O-bound (inserts and indexing). Neither row size nor compression significantly affects restore time.
-
-### Conclusions
-
-1. **Optimal Backup Strategy:**
-
-   - Use **compression** with `--rows 5000` and 8 threads for a balance of speed (3 mins) and storage efficiency (607 MB vs. 6.9 GB).
-   - Skip compression if backup speed is critical (1-2 mins) and storage isn’t a concern.
-
-2. **Optimal Restore Strategy:**
-
-   - Row size (5000 vs. 10000) and compression have minimal impact on restore time (~27-29 mins with 8 threads). Use **compressed backups** with `--rows 5000` for consistency with backup efficiency, as restore performance is largely I/O-limited.
-
-3. **Thread Recommendation:**
-
-   - Stick with **8 threads** for both backup and restore, as it consistently outperforms lower thread counts with diminishing returns beyond that.
-
-4. **Trade-Offs:**
-   - Compressed backups save ~90% storage (600 MB vs. 6.9 GB) at the cost of ~1-2 extra minutes in backup time.
-   - Larger row sizes (10000) slightly slow down both backup and restore without significant benefits—stick to 5000 unless testing larger datasets.
-
----
 
 ## Understanding MyDumper Output Files
 
