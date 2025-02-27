@@ -1,0 +1,190 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EmployeeTaskManager",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/CLTask": {
+      "get": {
+        "tags": [
+          "CLTask"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CLTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CLTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOTSK01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CLTask/ID": {
+      "get": {
+        "tags": [
+          "CLTask"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CLTask"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DTOTSK01": {
+        "type": "object",
+        "properties": {
+          "K01101": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "K01102": {
+            "type": "string",
+            "nullable": true
+          },
+          "K01103": {
+            "type": "string",
+            "nullable": true
+          },
+          "K01104": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "K01105": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "K01106": {
+            "$ref": "#/components/schemas/EnmStatus"
+          },
+          "K01107": {
+            "$ref": "#/components/schemas/EnmPriority"
+          },
+          "K01108": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnmPriority": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EnmStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "dTw0cWKQI5vWFQ9tDIP/gM9eDl1fVNR/14ppccNi4yc=",
+  "Source": "EmployeeTaskManager",
+  "BasePath": "_content/EmployeeTaskManager",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
