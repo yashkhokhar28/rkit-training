@@ -1,5 +1,153 @@
 [
   {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLDepartmentController",
+    "Method": "GetAllDepartments",
+    "RelativePath": "api/CLDepartment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLDepartmentController",
+    "Method": "AddDepartment",
+    "RelativePath": "api/CLDepartment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTODPT01",
+        "Type": "EmployeeTaskManager.Models.DTO.DTODPT01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLDepartmentController",
+    "Method": "EditDepartment",
+    "RelativePath": "api/CLDepartment",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTODPT01",
+        "Type": "EmployeeTaskManager.Models.DTO.DTODPT01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLDepartmentController",
+    "Method": "GetDepartmentByID",
+    "RelativePath": "api/CLDepartment/ID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLDepartmentController",
+    "Method": "DeleteDepartment",
+    "RelativePath": "api/CLDepartment/ID",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLEmployeeController",
+    "Method": "GetAllTasks",
+    "RelativePath": "api/CLEmployee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLEmployeeController",
+    "Method": "AddTask",
+    "RelativePath": "api/CLEmployee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTOEMP01",
+        "Type": "EmployeeTaskManager.Models.DTO.DTOEMP01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLEmployeeController",
+    "Method": "EditTask",
+    "RelativePath": "api/CLEmployee",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objDTOEMP01",
+        "Type": "EmployeeTaskManager.Models.DTO.DTOEMP01",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLEmployeeController",
+    "Method": "GetTaskByID",
+    "RelativePath": "api/CLEmployee/ID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EmployeeTaskManager.Controllers.CLEmployeeController",
+    "Method": "DeleteTask",
+    "RelativePath": "api/CLEmployee/ID",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EmployeeTaskManager.Controllers.CLTaskController",
     "Method": "GetAllTasks",
     "RelativePath": "api/CLTask",

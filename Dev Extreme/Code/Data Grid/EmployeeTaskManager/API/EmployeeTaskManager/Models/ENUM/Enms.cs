@@ -29,22 +29,22 @@
         /// <summary>
         /// 
         /// </summary>
-        Pending,
+        Pending = 0,
 
         /// <summary>
         /// 
         /// </summary>
-        InProgress,
+        InProgress = 1,
 
         /// <summary>
         /// 
         /// </summary>
-        Completed,
+        Completed = 2,
 
         /// <summary>
         /// 
         /// </summary>
-        Overdue
+        Overdue = 3
     }
 
     /// <summary>
@@ -55,17 +55,17 @@
         /// <summary>
         /// 
         /// </summary>
-        Low,
+        Low = 0,
 
         /// <summary>
         /// 
         /// </summary>
-        Medium,
+        Medium = 1,
 
         /// <summary>
         /// 
         /// </summary>
-        High,
+        High = 2,
     }
 
 

@@ -46,14 +46,14 @@ namespace EmployeeTaskManager.Models.DTO
         /// </summary>
         [JsonProperty("K01106")]
         [JsonPropertyName("K01106")]
-        public EnmStatus K01F06 { get; set; }
+        public int K01F06 { get; set; }
 
         /// <summary>
         /// priority
         /// </summary>
         [JsonProperty("K01107")]
         [JsonPropertyName("K01107")]
-        public EnmPriority K01F07 { get; set; }
+        public int K01F07 { get; set; }
 
         /// <summary>
         /// due_date

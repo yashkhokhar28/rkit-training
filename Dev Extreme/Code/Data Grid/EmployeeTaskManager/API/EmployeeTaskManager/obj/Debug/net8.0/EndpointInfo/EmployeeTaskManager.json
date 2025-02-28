@@ -5,6 +5,250 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/CLDepartment": {
+      "get": {
+        "tags": [
+          "CLDepartment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CLDepartment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CLDepartment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTODPT01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CLDepartment/ID": {
+      "get": {
+        "tags": [
+          "CLDepartment"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CLDepartment"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CLEmployee": {
+      "get": {
+        "tags": [
+          "CLEmployee"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CLEmployee"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CLEmployee"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DTOEMP01"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CLEmployee/ID": {
+      "get": {
+        "tags": [
+          "CLEmployee"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CLEmployee"
+        ],
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/CLTask": {
       "get": {
         "tags": [
@@ -130,6 +374,58 @@
   },
   "components": {
     "schemas": {
+      "DTODPT01": {
+        "type": "object",
+        "properties": {
+          "T01101": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "T01102": {
+            "type": "string",
+            "nullable": true
+          },
+          "T01103": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DTOEMP01": {
+        "type": "object",
+        "properties": {
+          "P01101": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "P01102": {
+            "type": "string",
+            "nullable": true
+          },
+          "P01103": {
+            "type": "string",
+            "nullable": true
+          },
+          "P01104": {
+            "type": "string",
+            "nullable": true
+          },
+          "P01105": {
+            "type": "string",
+            "nullable": true
+          },
+          "P01106": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "P01107": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "DTOTSK01": {
         "type": "object",
         "properties": {
@@ -154,10 +450,12 @@
             "format": "int32"
           },
           "K01106": {
-            "$ref": "#/components/schemas/EnmStatus"
+            "type": "integer",
+            "format": "int32"
           },
           "K01107": {
-            "$ref": "#/components/schemas/EnmPriority"
+            "type": "integer",
+            "format": "int32"
           },
           "K01108": {
             "type": "string",
@@ -165,25 +463,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "EnmPriority": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
-      },
-      "EnmStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "type": "integer",
-        "format": "int32"
       }
     }
   }
