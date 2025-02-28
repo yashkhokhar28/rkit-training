@@ -75,8 +75,7 @@
               "RelativeToolTip": "Models\\DTO\\DTODPT01.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAkwAgAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T06:30:01.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T06:30:01.278Z"
             },
             {
               "$type": "Document",
@@ -88,8 +87,7 @@
               "RelativeToolTip": "Models\\DTO\\DTOTSK01.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAwwCUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T06:30:01.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T06:30:01.861Z"
             },
             {
               "$type": "Document",
@@ -101,8 +99,7 @@
               "RelativeToolTip": "Models\\POCO\\TSK01.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAuwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T07:34:56.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:34:56.362Z"
             },
             {
               "$type": "Document",
@@ -114,8 +111,7 @@
               "RelativeToolTip": "Extension\\DTOToPOCOExtension.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAxwCUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T07:37:43.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T07:37:43.857Z"
             },
             {
               "$type": "Document",
@@ -127,8 +123,7 @@
               "RelativeToolTip": "Controllers\\CLTaskController.cs",
               "ViewState": "AgIAADQAAAAAAAAAAAAqwEAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T06:12:50.871Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T06:12:50.871Z"
             },
             {
               "$type": "Document",
@@ -140,8 +135,7 @@
               "RelativeToolTip": "Models\\ENUM\\Enms.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAgwD0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T06:21:17.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T06:21:17.952Z"
             },
             {
               "$type": "Document",
@@ -153,8 +147,7 @@
               "RelativeToolTip": "BL\\BLEmployee.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T06:12:08.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T06:12:08.526Z"
             },
             {
               "$type": "Document",
@@ -166,8 +159,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABkAAAAAAAAAAADwvyoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-28T05:35:09.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-28T05:35:09.021Z"
             }
           ]
         }

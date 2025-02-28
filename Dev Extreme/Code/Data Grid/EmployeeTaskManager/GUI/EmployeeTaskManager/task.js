@@ -2,6 +2,20 @@ $(() => {
   console.log("Document is Ready!!");
 
   const APIURL = "http://localhost:5210/api/CLTask";
+  const EmployeeAPIURL = "http://localhost:5210/api/CLEmployee";
+  const DepartmentAPIURL = "http://localhost:5210/api/CLDepartment";
+
+  const statusOptions = [
+    { value: 0, text: "Pending" },
+    { value: 1, text: "In Progress" },
+    { value: 2, text: "Completed" },
+    { value: 3, text: "Overdue" },
+  ];
+  const priorityOptions = [
+    { value: 0, text: "Low" },
+    { value: 1, text: "Medium" },
+    { value: 2, text: "High" },
+  ];
 
   var DisplayMessage = (message, type, displayTime) => {
     DevExpress.ui.notify(message, type, displayTime);
@@ -14,29 +28,54 @@ $(() => {
       return $.ajax({
         url: APIURL,
         method: "GET",
-        success: (result) => {
-          console.log(result);
-
-          if (result.IsError) {
-            DisplayMessage(result.message, "error", 1000);
-          } else {
-            DisplayMessage(result.message, "success", 1000);
+      }).then(
+        (result) => {
+          console.log("Task Load Response:", result);
+          DisplayMessage(
+            result.message,
+            result.isError ? "error" : "success",
+            1000
+          );
+          if (result.isError) {
+            throw result.message;
           }
-          return result.Data;
+          return result.data;
         },
-        error: function (xhr) {
+        (xhr) => {
           throw "Network error: " + xhr.statusText;
-        },
-      });
+        }
+      );
     },
 
-    // Insert a new record
+    byKey: (key) => {
+      return $.ajax({
+        url: `${APIURL}/ID?ID=${key}`,
+        method: "GET",
+      }).then(
+        (result) => {
+          console.log("byKey Response for ID " + key + ":", result);
+          if (result.isError) {
+            DisplayMessage(result.message, "error", 1000);
+            throw result.message;
+          }
+          const task = result.data[0];
+          if (!task || typeof task !== "object") {
+            throw "Invalid task data returned from API";
+          }
+          return task;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+
     insert: (values) => {
       const dtoTask = {
         K01102: values.k01F02 !== undefined ? values.k01F02 : "",
         K01103: values.k01F03 !== undefined ? values.k01F03 : "",
-        K01104: values.k01F04 !== undefined ? values.k01F04 : 0,
-        K01105: values.k01F05 !== undefined ? values.k01F05 : 0,
+        K01104: values.k01F04 !== undefined ? values.k01F04 : 0, // Employee ID from lookup
+        K01105: values.k01F05 !== undefined ? values.k01F05 : 0, // Department ID from lookup
         K01106: values.k01F06 !== undefined ? values.k01F06 : 0,
         K01107: values.k01F07 !== undefined ? values.k01F07 : 0,
         K01108:
@@ -44,55 +83,52 @@ $(() => {
             ? values.k01F08
             : new Date().toISOString(),
       };
+      console.log("Insert Payload:", dtoTask);
       return $.ajax({
         url: APIURL,
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(dtoTask),
-        success: (result) => {
-          if (result.IsError) {
-            DisplayMessage(result.message, "error", 1000);
-          } else {
-            DisplayMessage(result.message, "success", 1000);
-          }
-        },
-      });
-    },
-
-    // Update an existing record
-    update: (key, values) => {
-      return $.ajax({
-        url: `${APIURL}/ID?ID=${key}`,
-        method: "GET",
       }).then(
         (result) => {
-          console.log("GET Response for ID " + key + ":", result);
-          if (result.IsError) {
-            DisplayMessage(result.Message, "error", 1000);
-            throw result.Message;
+          DisplayMessage(
+            result.message,
+            result.isError ? "error" : "success",
+            1000
+          );
+          if (result.isError) {
+            throw result.message;
           }
-          // Extract the first task from the array in result.Data
-          const existingTask = result.data[0];
-          if (!existingTask || typeof existingTask !== "object") {
-            throw "Invalid task data returned from API";
-          }
+          return result.Data;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+
+    update: (key, values) => {
+      return taskStore.byKey(key).then(
+        (existingTask) => {
+          console.log("Existing Task for Update:", existingTask);
           const dtoTask = {
             K01101: key,
             K01102:
-              values.k01F02 != undefined ? values.k01F02 : existingTask.k01F02,
+              values.k01F02 !== undefined ? values.k01F02 : existingTask.k01F02,
             K01103:
-              values.k01F03 != undefined ? values.k01F03 : existingTask.k01F03,
+              values.k01F03 !== undefined ? values.k01F03 : existingTask.k01F03,
             K01104:
-              values.k01F04 != undefined ? values.k01F04 : existingTask.k01F04,
+              values.k01F04 !== undefined ? values.k01F04 : existingTask.k01F04,
             K01105:
-              values.k01F05 != undefined ? values.k01F05 : existingTask.k01F05,
+              values.k01F05 !== undefined ? values.k01F05 : existingTask.k01F05,
             K01106:
-              values.k01F06 != undefined ? values.k01F06 : existingTask.k01F06,
+              values.k01F06 !== undefined ? values.k01F06 : existingTask.k01F06,
             K01107:
-              values.k01F07 != undefined ? values.k01F07 : existingTask.k01F07,
+              values.k01F07 !== undefined ? values.k01F07 : existingTask.k01F07,
             K01108:
-              values.k01F08 != undefined ? values.k01F08 : existingTask.k01F08,
+              values.k01F08 !== undefined ? values.k01F08 : existingTask.k01F08,
           };
+          console.log("Update Payload:", dtoTask);
           return $.ajax({
             url: APIURL,
             method: "PUT",
@@ -101,12 +137,12 @@ $(() => {
           }).then(
             (result) => {
               DisplayMessage(
-                result.Message,
-                result.IsError ? "error" : "success",
+                result.message,
+                result.isError ? "error" : "success",
                 1000
               );
-              if (result.IsError) {
-                throw result.Message;
+              if (result.isError) {
+                throw result.message;
               }
             },
             (xhr) => {
@@ -120,24 +156,122 @@ $(() => {
       );
     },
 
-    // Delete a record
     remove: (key) => {
       return $.ajax({
         url: `${APIURL}/ID?ID=${key}`,
         method: "DELETE",
-        success: (result) => {
-          console.log(result);
+      }).then(
+        (result) => {
+          console.log("Delete Response:", result);
+          DisplayMessage(
+            result.message,
+            result.isError ? "error" : "success",
+            1000
+          );
           if (result.isError) {
-            DisplayMessage(result.message, "error", 3000);
-          } else {
-            DisplayMessage(result.message, "success", 1000);
+            throw result.message;
           }
         },
-      });
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
     },
   });
 
-  var dataGridInstance = $("#taskGrid").dxDataGrid({
+  var employeeStore = new DevExpress.data.CustomStore({
+    key: "p01F01",
+
+    load: () => {
+      return $.ajax({
+        url: EmployeeAPIURL,
+        method: "GET",
+      }).then(
+        (result) => {
+          console.log("Employee API Response:", result);
+          if (result.isError) {
+            DisplayMessage(result.message, "error", 1000);
+            throw result.message;
+          }
+          return result.data;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+
+    byKey: (key) => {
+      return $.ajax({
+        url: `${EmployeeAPIURL}/ID?ID=${key}`,
+        method: "GET",
+      }).then(
+        (result) => {
+          console.log("byKey Response for ID " + key + ":", result);
+          if (result.isError) {
+            DisplayMessage(result.message, "error", 1000);
+            throw result.message;
+          }
+          const task = result.data[0];
+          if (!task || typeof task !== "object") {
+            throw "Invalid task data returned from API";
+          }
+          return task;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+  });
+
+  var departmentStore = new DevExpress.data.CustomStore({
+    key: "t01F01",
+
+    load: () => {
+      return $.ajax({
+        url: DepartmentAPIURL,
+        method: "GET",
+      }).then(
+        (result) => {
+          console.log("Department API Response:", result);
+          if (result.isError) {
+            DisplayMessage(result.message, "error", 1000);
+            throw result.message;
+          }
+          return result.data;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+
+    byKey: (key) => {
+      return $.ajax({
+        url: `${DepartmentAPIURL}/ID?ID=${key}`,
+        method: "GET",
+      }).then(
+        (result) => {
+          console.log("byKey Response for ID " + key + ":", result);
+          if (result.isError) {
+            DisplayMessage(result.message, "error", 1000);
+            throw result.message;
+          }
+          const task = result.data[0];
+          if (!task || typeof task !== "object") {
+            throw "Invalid task data returned from API";
+          }
+          return task;
+        },
+        (xhr) => {
+          throw "Network error: " + xhr.statusText;
+        }
+      );
+    },
+  });
+
+  $("#taskGrid").dxDataGrid({
     dataSource: taskStore,
     customizeColumns: (columns) => {
       columns[0].width = 100;
@@ -176,22 +310,30 @@ $(() => {
         dataField: "k01F04",
         dataType: "number",
         caption: "Assigned To",
+        lookup: {
+          dataSource: employeeStore,
+          valueExpr: "p01F01", // Employee ID
+          displayExpr: (employee) =>
+            employee
+              ? `${employee.p01F02} ${employee.p01F03 || ""}`.trim()
+              : "",
+        },
       },
       {
         dataField: "k01F05",
         dataType: "number",
         caption: "Department",
+        lookup: {
+          dataSource: departmentStore,
+          valueExpr: "t01F01", // Department ID
+          displayExpr: "t01F02", // Department Name
+        },
       },
       {
         dataField: "k01F06",
         caption: "Status",
         lookup: {
-          dataSource: [
-            { value: 0, text: "Pending" },
-            { value: 1, text: "In Progress" },
-            { value: 2, text: "Completed" },
-            { value: 3, text: "Overdue" },
-          ],
+          dataSource: statusOptions,
           valueExpr: "value",
           displayExpr: "text",
         },
@@ -200,11 +342,7 @@ $(() => {
         dataField: "k01F07",
         caption: "Priority",
         lookup: {
-          dataSource: [
-            { value: 0, text: "Low" },
-            { value: 1, text: "Medium" },
-            { value: 2, text: "High" },
-          ],
+          dataSource: priorityOptions,
           valueExpr: "value",
           displayExpr: "text",
         },
