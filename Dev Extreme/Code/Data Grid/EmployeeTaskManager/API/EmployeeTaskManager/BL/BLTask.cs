@@ -8,6 +8,7 @@ using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using MySql.Data.MySqlClient;
 using ServiceStack;
+using Newtonsoft.Json;
 
 namespace EmployeeTaskManager.BL
 {
@@ -37,6 +38,69 @@ namespace EmployeeTaskManager.BL
                 lstTasks = objIDbConnection.Select<TSK01>();
             }
             return lstTasks;
+        }
+
+        public (List<TSK01> Tasks, long TotalCount) GetTasksWithOptions(TaskLoadOptions taskLoadOptions)
+        {
+            using (IDbConnection objIDbConnection = objIDbConnectionFactory.OpenDbConnection())
+            {
+                var query = objIDbConnection.From<TSK01>();
+
+                // Apply Filtering
+                if (!string.IsNullOrEmpty(taskLoadOptions.Filter))
+                {
+                    var filter = JsonConvert.DeserializeObject<List<object>>(taskLoadOptions.Filter);
+
+                    if (filter.Count >= 3)
+                    {
+                        string field = filter[0].ToString().ToLowerInvariant();
+                        string operation = filter[1].ToString().ToLowerInvariant();
+                        string value = filter[2].ToString();
+
+                        switch (operation)
+                        {
+                            case "contains":
+                                query.Where($"{field} LIKE @0", $"%{value}%");
+                                break;
+                            case "=":
+                                query.Where(field, value);
+                                break;
+                            case "<>":
+                                query.Where($"{field} != @0", value);
+                                break;
+                            case ">":
+                                query.Where($"{field} > @0", value);
+                                break;
+                            case "<":
+                                query.Where($"{field} < @0", value);
+                                break;
+                        }
+                    }
+                }
+
+                // Get Total Count Before Paging
+                long totalCount = objIDbConnection.Count(query);
+
+                // Apply Sorting
+                if (!string.IsNullOrEmpty(taskLoadOptions.Sort))
+                {
+                    var sort = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(taskLoadOptions.Sort);
+                    foreach (var s in sort)
+                    {
+                        string field = s["selector"].ToString().ToLowerInvariant();
+                        bool desc = (bool)s["desc"];
+                        query = desc ? query.OrderByDescending(field) : query.OrderBy(field);
+                    }
+                }
+
+                // Apply Paging
+                query.Skip(taskLoadOptions.Skip).Take(taskLoadOptions.Take);
+
+                // Execute Query
+                var tasks = objIDbConnection.Select(query);
+
+                return (tasks, totalCount);
+            }
         }
 
         public TSK01 GetTaskByID(int ID)

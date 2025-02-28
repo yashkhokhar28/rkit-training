@@ -4,6 +4,7 @@ using EmployeeTaskManager.Models.DTO;
 using EmployeeTaskManager.Models.ENUM;
 using EmployeeTaskManager.Models.POCO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace EmployeeTaskManager.Controllers
 {
@@ -23,19 +24,35 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllTasks()
+        public IActionResult GetAllTasks([FromQuery] TaskLoadOptions taskLoadOptions)
         {
-            List<TSK01> lstTasks = objBLTask.GetAllTask();
-            if (lstTasks.Count > 0)
+            //List<TSK01> lstTasks = objBLTask.GetAllTask();
+            //if (lstTasks.Count > 0)
+            //{
+            //    objResponse.IsError = false;
+            //    objResponse.Message = "Tasks Fetched Successfully";
+            //    objResponse.Data = objBLConverter.ToDataTable(lstTasks);
+            //}
+            //else
+            //{
+            //    objResponse.IsError = true;
+            //    objResponse.Message = "Error Occured";
+            //    objResponse.Data = null;
+            //}
+            //return Ok(objResponse);
+
+            try
             {
+                taskLoadOptions = taskLoadOptions ?? new TaskLoadOptions(); // Default if null
+                var (tasks, totalCount) = objBLTask.GetTasksWithOptions(taskLoadOptions);
                 objResponse.IsError = false;
                 objResponse.Message = "Tasks Fetched Successfully";
-                objResponse.Data = objBLConverter.ToDataTable(lstTasks);
+                return Ok(new { Data = objBLConverter.ToDataTable(tasks), TotalCount = totalCount });
             }
-            else
+            catch (Exception ex)
             {
                 objResponse.IsError = true;
-                objResponse.Message = "Error Occured";
+                objResponse.Message = $"Error fetching tasks: {ex.Message}";
                 objResponse.Data = null;
             }
             return Ok(objResponse);

@@ -24,10 +24,17 @@ $(() => {
   var taskStore = new DevExpress.data.CustomStore({
     key: "k01F01",
 
-    load: () => {
+    load: (loadOptions) => {
+      let params = {
+        // skip: loadOptions.skip || 0,
+        take: loadOptions.take || 10,
+        // filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
+        sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
+      };
       return $.ajax({
         url: APIURL,
         method: "GET",
+        data: params,
       }).then(
         (result) => {
           console.log("Task Load Response:", result);
@@ -278,6 +285,15 @@ $(() => {
     },
     showBorders: true,
     columnAutoWidth: true,
+    // Paging and Scrolling
+    paging: { pageSize: 10 },
+    pager: {
+      visible: true,
+      showPageSizeSelector: true,
+      allowedPageSizes: [5, 10, 20],
+      showInfo: true,
+    },
+    scrolling: { mode: "virtual" },
     filterRow: {
       visible: true,
     },
@@ -356,5 +372,7 @@ $(() => {
     ],
   });
 
-  taskStore.load();
+  taskStore.load({
+    sort: [{ selector: "k01F01", desc: true }],
+  });
 });
