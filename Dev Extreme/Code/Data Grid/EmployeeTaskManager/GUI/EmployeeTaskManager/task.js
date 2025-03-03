@@ -18,18 +18,22 @@ $(() => {
   ];
 
   var DisplayMessage = (message, type, displayTime) => {
-    DevExpress.ui.notify(message, type, displayTime);
+    DevExpress.ui.notify({
+      message: message,
+      type: type,
+      displayTime: displayTime,
+      position: { my: "bottom center", at: "bottom center", offset: "0 -20" },
+    });
   };
 
   var taskStore = new DevExpress.data.CustomStore({
     key: "k01F01",
-
     load: (loadOptions) => {
       let params = {
         // skip: loadOptions.skip || 0,
         take: loadOptions.take || 10,
         // filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
-        sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
+        // sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
       };
       return $.ajax({
         url: APIURL,
@@ -46,7 +50,7 @@ $(() => {
           if (result.isError) {
             throw result.message;
           }
-          return result.data;
+          return { data: result.data, totalCount: result.totalCount };
         },
         (xhr) => {
           throw "Network error: " + xhr.statusText;
@@ -81,8 +85,8 @@ $(() => {
       const dtoTask = {
         K01102: values.k01F02 !== undefined ? values.k01F02 : "",
         K01103: values.k01F03 !== undefined ? values.k01F03 : "",
-        K01104: values.k01F04 !== undefined ? values.k01F04 : 0, // Employee ID from lookup
-        K01105: values.k01F05 !== undefined ? values.k01F05 : 0, // Department ID from lookup
+        K01104: values.k01F04 !== undefined ? values.k01F04 : 0,
+        K01105: values.k01F05 !== undefined ? values.k01F05 : 0,
         K01106: values.k01F06 !== undefined ? values.k01F06 : 0,
         K01107: values.k01F07 !== undefined ? values.k01F07 : 0,
         K01108:
@@ -278,101 +282,234 @@ $(() => {
     },
   });
 
-  $("#taskGrid").dxDataGrid({
-    dataSource: taskStore,
-    customizeColumns: (columns) => {
-      columns[0].width = 100;
-    },
-    showBorders: true,
-    columnAutoWidth: true,
-    // Paging and Scrolling
-    paging: { pageSize: 10 },
-    pager: {
-      visible: true,
-      showPageSizeSelector: true,
-      allowedPageSizes: [5, 10, 20],
-      showInfo: true,
-    },
-    scrolling: { mode: "virtual" },
-    filterRow: {
-      visible: true,
-    },
-    sorting: {
-      mode: "multiple",
-    },
-    editing: {
-      mode: "form",
-      allowAdding: true,
-      allowUpdating: true,
-      allowDeleting: true,
-    },
-    columns: [
+  $("#dashboard").dxTabPanel({
+    items: [
       {
-        dataField: "k01F01",
-        dataType: "number",
-        caption: "Task ID",
-      },
-      {
-        dataField: "k01F02",
-        dataType: "string",
-        caption: "Title",
-      },
-      {
-        dataField: "k01F03",
-        dataType: "string",
-        caption: "Description",
-      },
-      {
-        dataField: "k01F04",
-        dataType: "number",
-        caption: "Assigned To",
-        lookup: {
-          dataSource: employeeStore,
-          valueExpr: "p01F01", // Employee ID
-          displayExpr: (employee) =>
-            employee
-              ? `${employee.p01F02} ${employee.p01F03 || ""}`.trim()
-              : "",
+        title: "Tasks",
+        template: () => {
+          return $("<div>").dxDataGrid({
+            dataSource: taskStore,
+            customizeColumns: (columns) => {
+              columns[0].width = 100;
+            },
+            showBorders: true,
+            columnAutoWidth: true,
+
+            paging: { pageSize: 10 },
+            pager: {
+              visible: true,
+              showPageSizeSelector: true,
+              allowedPageSizes: [5, 10, 20],
+              showInfo: true,
+            },
+            scrolling: { mode: "virtual" },
+            filterRow: {
+              visible: true,
+            },
+            sorting: {
+              mode: "multiple",
+            },
+            editing: {
+              mode: "form",
+              allowAdding: true,
+              allowUpdating: true,
+              allowDeleting: true,
+            },
+            columns: [
+              {
+                dataField: "k01F01",
+                dataType: "number",
+                caption: "Task ID",
+              },
+              {
+                dataField: "k01F02",
+                dataType: "string",
+                caption: "Title",
+              },
+              {
+                dataField: "k01F03",
+                dataType: "string",
+                caption: "Description",
+              },
+              {
+                dataField: "k01F04",
+                dataType: "number",
+                caption: "Assigned To",
+                lookup: {
+                  dataSource: employeeStore,
+                  valueExpr: "p01F01", // Employee ID
+                  displayExpr: (employee) =>
+                    employee
+                      ? `${employee.p01F02} ${employee.p01F03 || ""}`.trim()
+                      : "",
+                },
+              },
+              {
+                dataField: "k01F05",
+                dataType: "number",
+                caption: "Department",
+                lookup: {
+                  dataSource: departmentStore,
+                  valueExpr: "t01F01", // Department ID
+                  displayExpr: "t01F02", // Department Name
+                },
+              },
+              {
+                dataField: "k01F06",
+                caption: "Status",
+                lookup: {
+                  dataSource: statusOptions,
+                  valueExpr: "value",
+                  displayExpr: "text",
+                },
+              },
+              {
+                dataField: "k01F07",
+                caption: "Priority",
+                lookup: {
+                  dataSource: priorityOptions,
+                  valueExpr: "value",
+                  displayExpr: "text",
+                },
+              },
+              {
+                dataField: "k01F08",
+                dataType: "date",
+                caption: "Due Date",
+                format: "dd-MM-yyyy",
+              },
+            ],
+          });
         },
       },
       {
-        dataField: "k01F05",
-        dataType: "number",
-        caption: "Department",
-        lookup: {
-          dataSource: departmentStore,
-          valueExpr: "t01F01", // Department ID
-          displayExpr: "t01F02", // Department Name
+        title: "Employees",
+        template: () => {
+          return $("<div>").dxDataGrid({
+            dataSource: employeeStore,
+            showBorders: true,
+            columnAutoWidth: true,
+            paging: { pageSize: 10 },
+            pager: {
+              visible: true,
+              showPageSizeSelector: true,
+              allowedPageSizes: [5, 10, 20],
+              showInfo: true,
+            },
+            scrolling: { mode: "virtual" },
+            editing: {
+              mode: "form",
+              allowAdding: true,
+              allowUpdating: true,
+              allowDeleting: true,
+            },
+            filterRow: { visible: true },
+            sorting: { mode: "multiple" },
+            columns: [
+              {
+                dataField: "p01F01",
+                caption: "Employee ID",
+                width: 100,
+                allowEditing: false,
+              },
+              {
+                dataField: "p01F02",
+                caption: "First Name",
+                validationRules: [{ type: "required" }],
+              },
+              {
+                dataField: "p01F03",
+                caption: "Last Name",
+                validationRules: [{ type: "required" }],
+              },
+              {
+                dataField: "p01F04",
+                caption: "Email",
+                validationRules: [{ type: "email" }],
+              },
+              { dataField: "p01F05", caption: "Role" },
+              {
+                dataField: "p01F06",
+                caption: "Department",
+                lookup: {
+                  dataSource: departmentStore,
+                  valueExpr: "t01F01",
+                  displayExpr: "t01F02",
+                },
+              },
+              {
+                dataField: "p01F07",
+                caption: "Hire Date",
+                dataType: "date",
+                format: "dd-MM-yyyy",
+              },
+            ],
+          });
         },
       },
       {
-        dataField: "k01F06",
-        caption: "Status",
-        lookup: {
-          dataSource: statusOptions,
-          valueExpr: "value",
-          displayExpr: "text",
+        title: "Departments",
+        template: () => {
+          return $("<div>").dxDataGrid({
+            dataSource: departmentStore,
+            showBorders: true,
+            columnAutoWidth: true,
+            paging: { pageSize: 10 },
+            pager: {
+              visible: true,
+              showPageSizeSelector: true,
+              allowedPageSizes: [5, 10, 20],
+              showInfo: true,
+            },
+            scrolling: { mode: "virtual" },
+            editing: {
+              mode: "form",
+              allowAdding: true,
+              allowUpdating: true,
+              allowDeleting: true,
+              form: {
+                items: [
+                  { dataField: "t01F02", label: { text: "Name" } },
+                  { dataField: "t01F03", label: { text: "Manager" } },
+                ],
+              },
+            },
+            filterRow: { visible: true },
+            sorting: { mode: "multiple" },
+            columns: [
+              {
+                dataField: "t01F01",
+                caption: "Department ID",
+                width: 100,
+                allowEditing: false,
+              },
+              {
+                dataField: "t01F02",
+                caption: "Name",
+                validationRules: [{ type: "required" }],
+              },
+              {
+                dataField: "t01F03",
+                caption: "Manager",
+                lookup: {
+                  dataSource: employeeStore,
+                  valueExpr: "p01F01",
+                  displayExpr: (employee) =>
+                    employee
+                      ? `${employee.p01F02} ${employee.p01F03 || ""}`.trim()
+                      : "",
+                },
+              },
+            ],
+          });
         },
-      },
-      {
-        dataField: "k01F07",
-        caption: "Priority",
-        lookup: {
-          dataSource: priorityOptions,
-          valueExpr: "value",
-          displayExpr: "text",
-        },
-      },
-      {
-        dataField: "k01F08",
-        dataType: "date",
-        caption: "Due Date",
-        format: "dd-MM-yyyy",
       },
     ],
+    animationEnabled: true,
+    swipeEnabled: true,
+    tabWidth: 150,
+    height: "100%",
   });
 
-  taskStore.load({
-    sort: [{ selector: "k01F01", desc: true }],
-  });
+  taskStore.load({});
 });

@@ -114,7 +114,7 @@ namespace EmployeeTaskManager.BL
         }
 
         public void PreSave(DTOTSK01 objDTOTSK01)
-        { 
+        {
             objTSK01 = objDTOTSK01.Convert<TSK01>();
 
             switch (objDTOTSK01.K01F06)
@@ -153,8 +153,6 @@ namespace EmployeeTaskManager.BL
                     break;
             }
 
-
-
             if (EnmEntryType == EnmEntryType.E && objDTOTSK01.K01F01 > 0)
             {
                 id = objDTOTSK01.K01F01;
@@ -163,6 +161,32 @@ namespace EmployeeTaskManager.BL
 
         public Response ValidationSave()
         {
+
+            // Validate Assigned To and Department
+            using (IDbConnection db = objIDbConnectionFactory.OpenDbConnection())
+            {
+                if (objTSK01.K01F04 > 0)
+                {
+                    var employee = db.SingleById<EMP01>(objTSK01.K01F04);
+                    if (employee == null || employee.P01F01 == 0)
+                    {
+                        objResponse.IsError = true;
+                        objResponse.Message = "Invalid Employee ID: Employee does not exist.";
+                    }
+                    // Optional: Restrict to department
+                    if (objTSK01.K01F05 > 0 && employee.P01F06 != objTSK01.K01F05)
+                    {
+                        objResponse.IsError = true;
+                        objResponse.Message = "Employee does not belong to the selected department.";
+                    }
+                }
+                if (objTSK01.K01F05 > 0 && db.SingleById<DPT01>(objTSK01.K01F05) == null)
+                {
+                    objResponse.IsError = true;
+                    objResponse.Message = "Invalid Department ID: Department does not exist.";
+                }
+            }
+
             if (EnmEntryType == EnmEntryType.E)
             {
                 if (!(id > 0))
@@ -172,6 +196,7 @@ namespace EmployeeTaskManager.BL
                 }
                 else if (GetTaskByID(id) == null)
                 {
+                    objResponse.IsError = true;
                     objResponse.Message = "Task Not Found";
                 }
             }
