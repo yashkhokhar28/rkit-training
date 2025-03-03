@@ -1,24 +1,23 @@
 ﻿namespace EmployeeTaskManager.Models.POCO
 {
     /// <summary>
-    /// 
+    /// Represents a department in the EmployeeTaskManager system.
     /// </summary>
     public class DPT01
     {
         /// <summary>
-        /// department_id
+        /// Department ID (Primary Key)
         /// </summary>
         public int T01F01 { get; set; }
 
         /// <summary>
-        /// name
+        /// Department Name
         /// </summary>
-        public string T01F02 { get; set; }
+        public string T01F02 { get; set; } = null!;
 
         /// <summary>
-        /// manager_id
+        /// Manager ID (Foreign Key to USR01.R01F01)
         /// </summary>
-        public int T01F03 { get; set; }
-
+        public int T01F03 { get; set; } 
     }
 }

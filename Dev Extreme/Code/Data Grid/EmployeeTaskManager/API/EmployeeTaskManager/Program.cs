@@ -50,6 +50,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<BLTask>();
 builder.Services.AddScoped<BLEmployee>();
 builder.Services.AddScoped<BLDepartment>();
+builder.Services.AddScoped<BLAuth>();
 
 
 builder.Services.AddEndpointsApiExplorer();

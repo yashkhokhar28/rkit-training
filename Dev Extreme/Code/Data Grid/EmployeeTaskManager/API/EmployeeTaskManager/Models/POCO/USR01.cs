@@ -1,33 +1,55 @@
-﻿namespace EmployeeTaskManager.Models.POCO
+﻿using EmployeeTaskManager.Models.ENUM; // Assuming this namespace contains EnmRole
+
+namespace EmployeeTaskManager.Models.POCO
 {
     /// <summary>
-    /// 
+    /// Represents a user/employee in the EmployeeTaskManager system.
     /// </summary>
     public class USR01
     {
         /// <summary>
-        /// user_id
+        /// User/Employee ID (Primary Key)
         /// </summary>
         public int R01F01 { get; set; }
 
         /// <summary>
-        /// username
+        /// Username (Unique)
         /// </summary>
-        public string R01F02 { get; set; }
+        public string R01F02 { get; set; } = null!; 
 
         /// <summary>
-        /// password_hash
+        /// Password Hash
         /// </summary>
-        public string R01F03 { get; set; }
+        public string R01F03 { get; set; } = null!; 
 
         /// <summary>
-        /// role
+        /// Role (Admin, Manager, Employee)
         /// </summary>
-        public int R01F04 { get; set; }
+        public EnmRole R01F04 { get; set; } = EnmRole.Employee; 
 
         /// <summary>
-        /// employee_id
+        /// First Name
         /// </summary>
-        public int R01F05 { get; set; }
+        public string R01F05 { get; set; } = null!; 
+
+        /// <summary>
+        /// Last Name
+        /// </summary>
+        public string R01F06 { get; set; } = null!; 
+
+        /// <summary>
+        /// Email (Unique)
+        /// </summary>
+        public string R01F07 { get; set; } = null!; 
+
+        /// <summary>
+        /// Department ID (Foreign Key to DPT01.T01F01)
+        /// </summary>
+        public int R01F08 { get; set; }
+
+        /// <summary>
+        /// Hire Date
+        /// </summary>
+        public DateTime R01F09 { get; set; } 
     }
 }

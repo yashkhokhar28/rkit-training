@@ -24,41 +24,55 @@ namespace EmployeeTaskManager.Controllers
             objBLConverter = new BLConverter();
         }
 
-        [HttpGet("GetAllUsers")]
+        [HttpGet]
         public IActionResult GetAllUsers()
         {
-            var response = _blAuth.GetAllUser();
-            return response.IsError ? BadRequest(response) : Ok(response);
+            objResponse = _blAuth.GetAllUser();
+            return objResponse.IsError ? StatusCode(500, objResponse) : Ok(objResponse);
         }
 
-        [HttpGet("GetUserById/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
-            var response = _blAuth.GetUserByID(id);
-            return response.IsError ? NotFound(response) : Ok(response);
+            objResponse = _blAuth.GetUserByID(id);
+            return objResponse.IsError ? NotFound(objResponse) : Ok(objResponse);
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
-            var response = _blAuth.Delete(id);
-            return response.IsError ? BadRequest(response) : Ok(response);
+            objResponse = _blAuth.Delete(id);
+            return objResponse.IsError ? BadRequest(objResponse) : Ok(objResponse);
         }
 
-        [HttpPost("Save")]
-        public IActionResult SaveUser([FromBody] DTOUSR01 userDto, [FromQuery] EnmEntryType entryType)
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] DTOUSR01 objDTOUSR01)
         {
-            _blAuth.EnmEntryType = entryType;
-            _blAuth.PreSave(userDto.Convert<USR01>());
-            var response = _blAuth.Save();
-            return response.IsError ? BadRequest(response) : Ok(response);
+            if (objDTOUSR01 == null)
+            {
+                objResponse.IsError = true;
+                objResponse.Message = "Invalid user data.";
+                return BadRequest(objResponse);
+            }
+
+            _blAuth.EnmEntryType = EnmEntryType.A;
+            _blAuth.PreSave(objDTOUSR01);
+            objResponse = _blAuth.Save();
+            return objResponse.IsError ? BadRequest(objResponse) : Ok(objResponse);
         }
 
-        [HttpPost("Login")]
-        public IActionResult Login([FromBody] DTOUSR02 userDto)
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] DTOUSR02 objDTOUSR02)
         {
-            var response = _blAuth.Login(userDto);
-            return response.IsError ? Unauthorized(response) : Ok(response);
+            if (objDTOUSR02 == null || string.IsNullOrWhiteSpace(objDTOUSR02.R01F02) || string.IsNullOrWhiteSpace(objDTOUSR02.R01F02))
+            {
+                objResponse.IsError = true;
+                objResponse.Message = "Username and password are required.";
+                return BadRequest(objResponse);
+            }
+
+            objResponse = _blAuth.Login(objDTOUSR02);
+            return objResponse.IsError ? Unauthorized(objResponse) : Ok(objResponse);
         }
     }
 }

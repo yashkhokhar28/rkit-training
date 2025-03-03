@@ -8,6 +8,8 @@ using EmployeeTaskManager.Models;
 using System.Data;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
+using EmployeeTaskManager.Extension;
+using ServiceStack;
 
 namespace EmployeeTaskManager.BL
 {
@@ -22,6 +24,7 @@ namespace EmployeeTaskManager.BL
         public int id;
         public BLConverter objBLConverter;
         private readonly IConfiguration _config;
+
         #endregion
 
         public BLAuth(IDbConnectionFactory dbConnectionFactory, IConfiguration config)
@@ -122,9 +125,9 @@ namespace EmployeeTaskManager.BL
             return objResponse;
         }
 
-        public void PreSave(USR01 objDTOUSR01)
+        public void PreSave(DTOUSR01 objDTOUSR01)
         {
-            objUSR01 = objDTOUSR01;
+            objUSR01 = objDTOUSR01.Convert<USR01>();
             id = EnmEntryType == EnmEntryType.E ? objUSR01.R01F01 : 0;
         }
 
@@ -146,7 +149,9 @@ namespace EmployeeTaskManager.BL
         {
             using (IDbConnection db = objIDbConnectionFactory.OpenDbConnection())
             {
-                return db.Scalar<string>("SELECT R01F04 FROM USR01 WHERE R01F02 = @username", new { username });
+                // Convert EnmRole to string when fetching from DB
+                var role = db.Scalar<EnmRole>("SELECT R01F04 FROM USR01 WHERE R01F02 = @username", new { username });
+                return role.ToString();
             }
         }
 
@@ -156,22 +161,26 @@ namespace EmployeeTaskManager.BL
             {
                 using (IDbConnection db = objIDbConnectionFactory.OpenDbConnection())
                 {
+                    // Fetch user by username
                     var user = db.Single<USR01>(e => e.R01F02 == objDTOUSR02.R01F02);
-                    if (user == null || !BCrypt.Net.BCrypt.Verify(objDTOUSR02.R01F02, user.R01F02))
+                    if (user == null || objDTOUSR02.R01F03 != user.R01F03) // Compare password hash directly
                     {
                         objResponse.IsError = true;
                         objResponse.Message = "Invalid username or password.";
                         return objResponse;
                     }
 
-                    var role = GetRole(user.R01F02);
+                    // Get role as string
+                    string role = GetRole(user.R01F02);
 
                     // Generate JWT Token
                     JWTHelper objJWTHelper = new JWTHelper(_config);
-                    var token = objJWTHelper.GenerateJWTToken(user.R01F02, user.R01F01, role, 1);
+                    var tokenResponse = objJWTHelper.GenerateJWTToken(user.R01F02, user.R01F01, role, 1);
+
+                    // Prepare login response data
                     var loginData = new
                     {
-                        Token = token,
+                        Token = tokenResponse, // Access Token property from TokenResponse
                         UserID = user.R01F01,
                         Username = user.R01F02,
                         Role = role

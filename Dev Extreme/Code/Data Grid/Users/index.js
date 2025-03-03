@@ -130,9 +130,6 @@ $(document).ready(() => {
           width: 700,
           height: 400,
         },
-        form: {
-          items: ["FullName", "Email", "PhoneNumber", "Department"],
-        },
       },
       columns: [
         {
