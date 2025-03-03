@@ -1,36 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj": {}
+    "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj": {}
   },
   "projects": {
-    "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj": {
+    "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
+        "projectUniqueName": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
         "projectName": "EmployeeTaskManager",
-        "projectPath": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
-        "packagesPath": "C:\\Users\\Yash.k\\.nuget\\packages\\",
-        "outputPath": "C:\\Yash Khokhar\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\obj\\",
+        "projectPath": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
+        "packagesPath": "C:\\Users\\yash.k\\.nuget\\packages\\",
+        "outputPath": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -38,17 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
@@ -90,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
