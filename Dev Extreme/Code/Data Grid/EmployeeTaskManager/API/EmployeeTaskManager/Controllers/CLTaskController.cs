@@ -3,6 +3,7 @@ using EmployeeTaskManager.Models;
 using EmployeeTaskManager.Models.DTO;
 using EmployeeTaskManager.Models.ENUM;
 using EmployeeTaskManager.Models.POCO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -59,6 +60,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpGet("ID")]
+        [Authorize(Policy = "Admin")]
         public IActionResult GetTaskByID(int ID)
         {
             TSK01 objTSK01 = objBLTask.GetTaskByID(ID);
@@ -78,6 +80,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpDelete("ID")]
+        [Authorize(Policy = "Admin")]
         public IActionResult DeleteTask(int ID)
         {
             objResponse = objBLTask.Delete(ID);
@@ -85,6 +88,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddTask(DTOTSK01 objDTOTSK01)
         {
             objBLTask.EnmEntryType = EnmEntryType.A;
@@ -98,6 +102,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPut]
+        [Authorize(Policy = "Admin")]
         public IActionResult EditTask(DTOTSK01 objDTOTSK01)
         {
             objBLTask.EnmEntryType = EnmEntryType.E;

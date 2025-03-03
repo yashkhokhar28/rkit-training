@@ -4560,31 +4560,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yashk\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/yashkhokhar/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\YK\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
+      "projectUniqueName": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/EmployeeTaskManager.csproj",
       "projectName": "EmployeeTaskManager",
-      "projectPath": "D:\\YK\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
-      "packagesPath": "C:\\Users\\yashk\\.nuget\\packages\\",
-      "outputPath": "D:\\YK\\rkit-training\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\obj\\",
+      "projectPath": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/EmployeeTaskManager.csproj",
+      "packagesPath": "/Users/yashkhokhar/.nuget/packages/",
+      "outputPath": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\yashk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/yashkhokhar/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4602,8 +4595,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net7.0": {
@@ -4657,6 +4649,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.19, 7.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[7.0.19, 7.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.19, 7.0.19]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4665,7 +4671,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/yashkhokhar/.dotnet/sdk/8.0.300/RuntimeIdentifierGraph.json"
       }
     }
   }

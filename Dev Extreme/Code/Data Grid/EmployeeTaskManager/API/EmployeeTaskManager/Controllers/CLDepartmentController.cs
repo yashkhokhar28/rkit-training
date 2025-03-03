@@ -3,6 +3,7 @@ using EmployeeTaskManager.Models;
 using EmployeeTaskManager.Models.DTO;
 using EmployeeTaskManager.Models.ENUM;
 using EmployeeTaskManager.Models.POCO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeTaskManager.Controllers
@@ -61,6 +62,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpDelete("ID")]
+        [Authorize(Policy = "Admin")]
         public IActionResult DeleteDepartment(int ID)
         {
             objResponse = objBLDepartment.Delete(ID);
@@ -68,6 +70,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult AddDepartment(DTODPT01 objDTODPT01)
         {
             objBLDepartment.EnmEntryType = EnmEntryType.A;
@@ -81,6 +84,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPut]
+        [Authorize(Policy = "Admin")]
         public IActionResult EditDepartment(DTODPT01 objDTODPT01)
         {
             objBLDepartment.EnmEntryType = EnmEntryType.E;

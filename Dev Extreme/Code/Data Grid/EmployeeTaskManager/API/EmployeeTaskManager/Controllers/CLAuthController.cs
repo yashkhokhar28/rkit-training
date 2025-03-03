@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using EmployeeTaskManager.Extension;
 using EmployeeTaskManager.Models.POCO;
 using EmployeeTaskManager.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeTaskManager.Controllers
 {
@@ -39,6 +40,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public IActionResult DeleteUser(int id)
         {
             objResponse = _blAuth.Delete(id);
@@ -46,6 +48,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPost("register")]
+        [Authorize(Policy = "Admin")]
         public IActionResult Register([FromBody] DTOUSR01 objDTOUSR01)
         {
             if (objDTOUSR01 == null)

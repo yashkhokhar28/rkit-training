@@ -117,41 +117,41 @@ namespace EmployeeTaskManager.BL
         {
             objTSK01 = objDTOTSK01.Convert<TSK01>();
 
-            switch (objDTOTSK01.K01F06)
-            {
-                case 0:
-                    objTSK01.K01F06 = EnmStatus.Pending;
-                    break;
-                case 1:
-                    objTSK01.K01F06 = EnmStatus.InProgress;
-                    break;
-                case 2:
-                    objTSK01.K01F06 = EnmStatus.Completed;
-                    break;
-                case 3:
-                    objTSK01.K01F06 = EnmStatus.Overdue;
-                    break;
-                default:
-                    objTSK01.K01F06 = EnmStatus.Overdue;
-                    break;
-            }
+            // switch (objDTOTSK01.K01F06)
+            // {
+            //     case 0:
+            //         objTSK01.K01F06 = EnmStatus.Pending;
+            //         break;
+            //     case 1:
+            //         objTSK01.K01F06 = EnmStatus.InProgress;
+            //         break;
+            //     case 2:
+            //         objTSK01.K01F06 = EnmStatus.Completed;
+            //         break;
+            //     case 3:
+            //         objTSK01.K01F06 = EnmStatus.Overdue;
+            //         break;
+            //     default:
+            //         objTSK01.K01F06 = EnmStatus.Overdue;
+            //         break;
+            // }
 
             // Convert Priority from integer to string
-            switch (objDTOTSK01.K01F07)
-            {
-                case 0:
-                    objTSK01.K01F07 = EnmPriority.Low;
-                    break;
-                case 1:
-                    objTSK01.K01F07 = EnmPriority.Medium;
-                    break;
-                case 2:
-                    objTSK01.K01F07 = EnmPriority.High;
-                    break;
-                default:
-                    objTSK01.K01F07 = EnmPriority.Low;
-                    break;
-            }
+            // switch (objDTOTSK01.K01F07)
+            // {
+            //     case 0:
+            //         objTSK01.K01F07 = EnmPriority.Low;
+            //         break;
+            //     case 1:
+            //         objTSK01.K01F07 = EnmPriority.Medium;
+            //         break;
+            //     case 2:
+            //         objTSK01.K01F07 = EnmPriority.High;
+            //         break;
+            //     default:
+            //         objTSK01.K01F07 = EnmPriority.Low;
+            //         break;
+            // }
 
             if (EnmEntryType == EnmEntryType.E && objDTOTSK01.K01F01 > 0)
             {
@@ -167,14 +167,14 @@ namespace EmployeeTaskManager.BL
             {
                 if (objTSK01.K01F04 > 0)
                 {
-                    var employee = db.SingleById<EMP01>(objTSK01.K01F04);
-                    if (employee == null || employee.P01F01 == 0)
+                    var employee = db.SingleById<USR01>(objTSK01.K01F04);
+                    if (employee == null || employee.R01F01 == 0)
                     {
                         objResponse.IsError = true;
                         objResponse.Message = "Invalid Employee ID: Employee does not exist.";
                     }
                     // Optional: Restrict to department
-                    if (objTSK01.K01F05 > 0 && employee.P01F05 != objTSK01.K01F05)
+                    if (objTSK01.K01F05 > 0 && employee.R01F08 != objTSK01.K01F05)
                     {
                         objResponse.IsError = true;
                         objResponse.Message = "Employee does not belong to the selected department.";

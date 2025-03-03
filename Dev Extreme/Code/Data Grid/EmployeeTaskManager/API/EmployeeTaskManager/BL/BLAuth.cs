@@ -43,7 +43,7 @@ namespace EmployeeTaskManager.BL
                 {
                     var users = db.Select<USR01>();
                     objResponse.IsError = false;
-                    objResponse.Data = objBLConverter.ObjectToDataTable(users);
+                    objResponse.Data = objBLConverter.ToDataTable(users);
                     objResponse.Message = "Users fetched successfully.";
                 }
             }

@@ -6,6 +6,7 @@ using EmployeeTaskManager.BL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,38 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(builder.Configuration.GetConnectionString("EmployeeTaskManager"), MySqlDialect.Provider));
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeTaskManager API", Version = "v1" });
+
+    // Define the JWT Bearer scheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token (e.g., 'Bearer {token}')",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    // Apply the security requirement globally to all endpoints
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 
 // JWT Configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,7 +81,6 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddScoped<BLTask>();
-builder.Services.AddScoped<BLEmployee>();
 builder.Services.AddScoped<BLDepartment>();
 builder.Services.AddScoped<BLAuth>();
 
