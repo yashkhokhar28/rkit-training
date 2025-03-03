@@ -26,18 +26,13 @@
         public string P01F04 { get; set; }
 
         /// <summary>
-        /// role
-        /// </summary>
-        public string P01F05 { get; set; }
-
-        /// <summary>
         /// department_id
         /// </summary>
-        public int P01F06 { get; set; }
+        public int P01F05 { get; set; }
 
         /// <summary>
         /// hire_date
         /// </summary>
-        public DateTime P01F07 { get; set; }
+        public DateTime P01F06 { get; set; }
     }
 }

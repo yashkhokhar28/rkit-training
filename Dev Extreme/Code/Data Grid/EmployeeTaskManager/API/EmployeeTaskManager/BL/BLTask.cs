@@ -174,7 +174,7 @@ namespace EmployeeTaskManager.BL
                         objResponse.Message = "Invalid Employee ID: Employee does not exist.";
                     }
                     // Optional: Restrict to department
-                    if (objTSK01.K01F05 > 0 && employee.P01F06 != objTSK01.K01F05)
+                    if (objTSK01.K01F05 > 0 && employee.P01F05 != objTSK01.K01F05)
                     {
                         objResponse.IsError = true;
                         objResponse.Message = "Employee does not belong to the selected department.";

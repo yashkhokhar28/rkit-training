@@ -3,6 +3,9 @@ using ServiceStack.OrmLite;
 using ServiceStack;
 using System.Configuration;
 using EmployeeTaskManager.BL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,29 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(builder.Configuration.GetConnectionString("EmployeeTaskManager"), MySqlDialect.Provider));
+
+// JWT Configuration
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("ManagerOrAdmin", policy => policy.RequireRole("Admin", "Manager"));
+    options.AddPolicy("Employee", policy => policy.RequireRole("Employee"));
+});
 
 builder.Services.AddScoped<BLTask>();
 builder.Services.AddScoped<BLEmployee>();
@@ -41,7 +67,11 @@ if (app.Environment.IsDevelopment())
 // Enable CORS globally
 app.UseCors("EmployeeTaskManagerGUI"); // Use the correct policy name
 
+
+// Configure the HTTP request pipeline
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

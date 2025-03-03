@@ -65,3 +65,15 @@ F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskM
 F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\obj\Debug\net7.0\EmployeeTaskManager.pdb
 F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\obj\Debug\net7.0\EmployeeTaskManager.genruntimeconfig.cache
 F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\obj\Debug\net7.0\ref\EmployeeTaskManager.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\BCrypt.Net-Next.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.Bcl.Memory.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+F:\Yash Khokhar\Dev Extreme\Code\Data Grid\EmployeeTaskManager\API\EmployeeTaskManager\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

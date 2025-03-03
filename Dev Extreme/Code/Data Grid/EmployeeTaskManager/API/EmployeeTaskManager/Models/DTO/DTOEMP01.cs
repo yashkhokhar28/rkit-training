@@ -34,24 +34,17 @@ namespace EmployeeTaskManager.Models.DTO
         public string P01F04 { get; set; }
 
         /// <summary>
-        /// role
+        /// department_id
         /// </summary>
         [JsonProperty("P01105")]
         [JsonPropertyName("P01105")]
-        public string P01F05 { get; set; }
-
-        /// <summary>
-        /// department_id
-        /// </summary>
-        [JsonProperty("P01106")]
-        [JsonPropertyName("P01106")]
-        public int P01F06 { get; set; }
+        public int P01F05 { get; set; }
 
         /// <summary>
         /// hire_date
         /// </summary>
-        [JsonProperty("P01107")]
-        [JsonPropertyName("P01107")]
-        public DateTime P01F07 { get; set; }
+        [JsonProperty("P01106")]
+        [JsonPropertyName("P01106")]
+        public DateTime P01F06 { get; set; }
     }
 }
