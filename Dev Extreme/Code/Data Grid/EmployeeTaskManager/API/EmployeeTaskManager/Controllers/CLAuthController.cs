@@ -32,14 +32,14 @@ namespace EmployeeTaskManager.Controllers
             return objResponse.IsError ? StatusCode(500, objResponse) : Ok(objResponse);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("ID")]
         public IActionResult GetUserById(int id)
         {
             objResponse = _blAuth.GetUserByID(id);
             return objResponse.IsError ? NotFound(objResponse) : Ok(objResponse);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("ID")]
         [Authorize(Policy = "Admin")]
         public IActionResult DeleteUser(int id)
         {
@@ -76,6 +76,22 @@ namespace EmployeeTaskManager.Controllers
 
             objResponse = _blAuth.Login(objDTOUSR02);
             return objResponse.IsError ? Unauthorized(objResponse) : Ok(objResponse);
+        }
+
+        [HttpPut]
+        public IActionResult EditUser([FromBody] DTOUSR01 objDTOUSR01)
+        {
+            if (objDTOUSR01 == null)
+            {
+                objResponse.IsError = true;
+                objResponse.Message = "Invalid user data.";
+                return BadRequest(objResponse);
+            }
+
+            _blAuth.EnmEntryType = EnmEntryType.E;
+            _blAuth.PreSave(objDTOUSR01);
+            objResponse = _blAuth.Save();
+            return objResponse.IsError ? BadRequest(objResponse) : Ok(objResponse);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace EmployeeTaskManager.BL
         }
 
         public (List<TSK01> Tasks, long TotalCount) GetTasksWithOptions(TaskLoadOptions taskLoadOptions)
+        
         {
             using (IDbConnection objIDbConnection = objIDbConnectionFactory.OpenDbConnection())
             {

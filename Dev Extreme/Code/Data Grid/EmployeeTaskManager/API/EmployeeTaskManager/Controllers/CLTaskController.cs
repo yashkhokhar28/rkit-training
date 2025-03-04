@@ -44,7 +44,6 @@ namespace EmployeeTaskManager.Controllers
 
             try
             {
-                taskLoadOptions = taskLoadOptions ?? new TaskLoadOptions(); // Default if null
                 var (tasks, totalCount) = objBLTask.GetTasksWithOptions(taskLoadOptions);
                 objResponse.IsError = false;
                 objResponse.Message = "Tasks Fetched Successfully";
@@ -60,7 +59,6 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpGet("ID")]
-        [Authorize(Policy = "Admin")]
         public IActionResult GetTaskByID(int ID)
         {
             TSK01 objTSK01 = objBLTask.GetTaskByID(ID);
@@ -80,7 +78,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpDelete("ID")]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "ManagerOrAdmin")]
         public IActionResult DeleteTask(int ID)
         {
             objResponse = objBLTask.Delete(ID);
@@ -88,7 +86,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "ManagerOrAdmin")]
         public IActionResult AddTask(DTOTSK01 objDTOTSK01)
         {
             objBLTask.EnmEntryType = EnmEntryType.A;
@@ -102,7 +100,7 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpPut]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "ManagerOrAdmin")]
         public IActionResult EditTask(DTOTSK01 objDTOTSK01)
         {
             objBLTask.EnmEntryType = EnmEntryType.E;

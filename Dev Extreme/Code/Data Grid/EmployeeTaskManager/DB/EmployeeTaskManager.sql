@@ -56,15 +56,15 @@ ADD FOREIGN KEY (K01F05) REFERENCES DPT01(T01F01);
 
 -- Insert dummy record into DPT01
 INSERT INTO DPT01 (T01F02, T01F03) VALUES
-('IT Department', 1); -- T01F03 (manager_id) will be updated after USR01 insert
+('Developer', 1); -- T01F03 (manager_id) will be updated after USR01 insert
 
 -- Insert dummy record into USR01
 INSERT INTO USR01 (R01F02, R01F03, R01F04, R01F05, R01F06, R01F07, R01F08, R01F09) VALUES
-('john.doe', 'hashed_password_123', 'Admin', 'John', 'Doe', 'john.doe@example.com', 1, '2023-01-01');
+('admin', 'admin', 'Admin', 'Yash', 'Khokhar', 'yashkhokhar28@gmail.com', 1, '2023-03-04');
 
 -- Update DPT01 to set correct manager_id after USR01 insert
 UPDATE DPT01 SET T01F03 = 1 WHERE T01F01 = 1;
-
+UPDATE USR01 SET R01F04 = 'Manager' Where R01F01 = 3;
 -- Insert dummy record into TSK01
 INSERT INTO TSK01 (K01F02, K01F03, K01F04, K01F05, K01F06, K01F07, K01F08) VALUES
 ('Setup Server', 'Set up a new server for the IT department', 1, 1, 'Pending', 'High', '2023-12-31');
