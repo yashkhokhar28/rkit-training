@@ -4560,26 +4560,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yash.k\\.nuget\\packages\\": {}
+    "/Users/yashkhokhar/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
+      "projectUniqueName": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/EmployeeTaskManager.csproj",
       "projectName": "EmployeeTaskManager",
-      "projectPath": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\EmployeeTaskManager.csproj",
-      "packagesPath": "C:\\Users\\yash.k\\.nuget\\packages\\",
-      "outputPath": "F:\\Yash Khokhar\\Dev Extreme\\Code\\Data Grid\\EmployeeTaskManager\\API\\EmployeeTaskManager\\obj\\",
+      "projectPath": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/EmployeeTaskManager.csproj",
+      "packagesPath": "/Users/yashkhokhar/.nuget/packages/",
+      "outputPath": "/Users/yashkhokhar/Documents/rkit-training/Dev Extreme/Code/Data Grid/EmployeeTaskManager/API/EmployeeTaskManager/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yash.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/yashkhokhar/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4592,6 +4590,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4646,6 +4649,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.19, 7.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[7.0.19, 7.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.19, 7.0.19]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4654,7 +4671,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/yashkhokhar/.dotnet/sdk/8.0.300/RuntimeIdentifierGraph.json"
       }
     }
   }

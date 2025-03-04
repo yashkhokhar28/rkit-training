@@ -350,6 +350,7 @@ export function loadDashboard() {
               mode: "form",
               allowAdding: true,
               allowDeleting: true,
+              allowUpdating: true,
               form: {
                 items: [
                   { dataField: "r01F02", label: { text: "Username" } },

@@ -33,9 +33,9 @@ namespace EmployeeTaskManager.Controllers
         }
 
         [HttpGet("ID")]
-        public IActionResult GetUserById(int id)
+        public IActionResult GetUserById(int ID)
         {
-            objResponse = _blAuth.GetUserByID(id);
+            objResponse = _blAuth.GetUserByID(ID);
             return objResponse.IsError ? NotFound(objResponse) : Ok(objResponse);
         }
 

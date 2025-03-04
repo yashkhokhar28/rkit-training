@@ -3,6 +3,7 @@ import { getAuthHeader, DisplayMessage } from "./utils.js";
 
 const taskStore = new DevExpress.data.CustomStore({
   key: "k01F01",
+
   load: (loadOptions) => {
     let params = {
       skip: loadOptions.skip || 0,
@@ -10,40 +11,35 @@ const taskStore = new DevExpress.data.CustomStore({
       filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
       sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
     };
+
     return $.ajax({
       url: TaskAPIURL,
       method: "GET",
       data: params,
       headers: getAuthHeader(),
-    }).then(
-      (result) => {
-        DisplayMessage(
-          result.Message,
-          result.IsError ? "error" : "success",
-          1000
-        );
-        if (result.IsError) {
-          throw result.Message;
+    })
+      .then((result) => {
+        console.log("Task load result:", result);
+        if (result.isError) {
+          throw new Error(result.message || "Failed to load tasks");
         }
-        return { data: result.data, totalCount: result.totalCount };
-      },
-      (xhr) => {
-        DisplayMessage(
-          `Failed to load tasks: ${
-            xhr.responseJSON?.Message || xhr.statusText
-          }`,
-          "error",
-          2000
-        );
-        throw `Network error: ${xhr.statusText}`;
-      }
-    );
+        DisplayMessage("Tasks loaded successfully", "success", 1000);
+        return {
+          data: result.data || [],
+          totalCount: result.totalCount || 0,
+        };
+      })
+      .catch((xhr) => {
+        console.error("Error loading tasks:", xhr);
+        const errorMessage =
+          xhr.responseJSON?.message || xhr.statusText || "Unknown error";
+        DisplayMessage(`Failed to load tasks: ${errorMessage}`, "error", 2000);
+        throw new Error(errorMessage);
+      });
   },
 
   byKey: (key) => {
     console.log("Fetching task with key:", key);
-    console.log("Request URL:", `${TaskAPIURL}/ID?ID=${key}`);
-    console.log("Auth Headers:", getAuthHeader());
     return $.ajax({
       url: `${TaskAPIURL}/ID?ID=${key}`,
       method: "GET",
@@ -51,9 +47,8 @@ const taskStore = new DevExpress.data.CustomStore({
     })
       .then((result) => {
         console.log("byKey response:", result);
-        if (result.IsError) {
-          DisplayMessage(result.Message || "Unknown error", "error", 2000);
-          throw new Error(result.Message || "Unknown error");
+        if (result.isError) {
+          throw new Error(result.message || "Unknown error fetching task");
         }
         if (
           !result.data ||
@@ -65,14 +60,9 @@ const taskStore = new DevExpress.data.CustomStore({
         return result.data[0];
       })
       .catch((xhr) => {
-        console.error("AJAX Error in byKey:", {
-          status: xhr.status,
-          statusText: xhr.statusText,
-          response: xhr.responseJSON || xhr.responseText,
-          url: xhr.responseURL || `${TaskAPIURL}/ID?ID=${key}`,
-        });
+        console.error("AJAX Error in byKey:", xhr);
         const errorMessage =
-          xhr.responseJSON?.Message || xhr.statusText || "Network error";
+          xhr.responseJSON?.message || xhr.statusText || "Network error";
         DisplayMessage(`Failed to fetch task: ${errorMessage}`, "error", 2000);
         throw new Error(errorMessage);
       });
@@ -88,20 +78,28 @@ const taskStore = new DevExpress.data.CustomStore({
       K01107: values.k01F07 || 0,
       K01108: values.k01F08 || new Date().toISOString(),
     };
+
     return $.ajax({
       url: TaskAPIURL,
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify(dtoTask),
       headers: getAuthHeader(),
-    }).then((result) => {
-      if (result.IsError) {
-        DisplayMessage(result.Message, "error", 3000);
-        throw result.Message;
-      }
-      DisplayMessage("Task added successfully", "success", 2000);
-      return result.data; // Fixed to match expected `data` casing
-    });
+    })
+      .then((result) => {
+        if (result.isError) {
+          throw new Error(result.message || "Failed to add task");
+        }
+        DisplayMessage("Task added successfully", "success", 2000);
+        return result.data;
+      })
+      .catch((xhr) => {
+        console.error("Error adding task:", xhr);
+        const errorMessage =
+          xhr.responseJSON?.message || xhr.statusText || "Unknown error";
+        DisplayMessage(`Failed to add task: ${errorMessage}`, "error", 3000);
+        throw new Error(errorMessage);
+      });
   },
 
   update: (key, values) => {
@@ -112,21 +110,15 @@ const taskStore = new DevExpress.data.CustomStore({
         console.log("Existing task fetched:", existingTask);
         const dtoTask = {
           K01101: key,
-          K01102:
-            values.k01F02 !== undefined ? values.k01F02 : existingTask.k01F02,
-          K01103:
-            values.k01F03 !== undefined ? values.k01F03 : existingTask.k01F03,
-          K01104:
-            values.k01F04 !== undefined ? values.k01F04 : existingTask.k01F04,
-          K01105:
-            values.k01F05 !== undefined ? values.k01F05 : existingTask.k01F05,
-          K01106:
-            values.k01F06 !== undefined ? values.k01F06 : existingTask.k01F06,
-          K01107:
-            values.k01F07 !== undefined ? values.k01F07 : existingTask.k01F07,
-          K01108:
-            values.k01F08 !== undefined ? values.k01F08 : existingTask.k01F08,
+          K01102: values.k01F02 ?? existingTask.k01F02,
+          K01103: values.k01F03 ?? existingTask.k01F03,
+          K01104: values.k01F04 ?? existingTask.k01F04,
+          K01105: values.k01F05 ?? existingTask.k01F05,
+          K01106: values.k01F06 ?? existingTask.k01F06,
+          K01107: values.k01F07 ?? existingTask.k01F07,
+          K01108: values.k01F08 ?? existingTask.k01F08,
         };
+
         console.log("DTO for update:", dtoTask);
         return $.ajax({
           url: `${TaskAPIURL}`,
@@ -134,19 +126,18 @@ const taskStore = new DevExpress.data.CustomStore({
           contentType: "application/json",
           data: JSON.stringify(dtoTask),
           headers: getAuthHeader(),
-        }).then((result) => {
-          if (result.IsError) {
-            // Fixed casing to match API
-            DisplayMessage(result.Message, "error", 3000);
-            throw result.Message;
-          }
-          DisplayMessage("Task updated successfully", "success", 2000);
         });
+      })
+      .then((result) => {
+        if (result.isError) {
+          throw new Error(result.message || "Failed to update task");
+        }
+        DisplayMessage("Task updated successfully", "success", 2000);
       })
       .catch((error) => {
         console.error("Error in update method:", error);
         DisplayMessage(
-          `Failed to fetch task for update: ${error.message || error}`,
+          `Update failed: ${error.message || error}`,
           "error",
           3000
         );
@@ -159,13 +150,20 @@ const taskStore = new DevExpress.data.CustomStore({
       url: `${TaskAPIURL}/${key}`,
       method: "DELETE",
       headers: getAuthHeader(),
-    }).then((result) => {
-      if (result.IsError) {
-        DisplayMessage(result.Message, "error", 3000);
-        throw result.Message;
-      }
-      DisplayMessage("Task deleted successfully", "success", 2000);
-    });
+    })
+      .then((result) => {
+        if (result.isError) {
+          throw new Error(result.message || "Failed to delete task");
+        }
+        DisplayMessage("Task deleted successfully", "success", 2000);
+      })
+      .catch((xhr) => {
+        console.error("Error deleting task:", xhr);
+        const errorMessage =
+          xhr.responseJSON?.message || xhr.statusText || "Unknown error";
+        DisplayMessage(`Failed to delete task: ${errorMessage}`, "error", 3000);
+        throw new Error(errorMessage);
+      });
   },
 });
 
