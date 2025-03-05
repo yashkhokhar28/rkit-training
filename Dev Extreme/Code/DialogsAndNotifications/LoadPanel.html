@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recipe Manager</title>
+
+    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+
+    <!-- DevExtreme Theme -->
+    <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
+
+    <!-- DevExtreme Library -->
+    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        #gridContainer {
+            flex: 1;
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 8px;
+            background: #1e1e1e;
+        }
+
+        .details-container {
+            flex: 1;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        .details-container h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .recipe-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .recipe-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="dx-viewport">
+
+    <div class="button-container">
+        <div id="button"></div>
+    </div>
+
+    <div class="container">
+        <!-- Data Grid -->
+        <div id="gridContainer"></div>
+
+        <!-- Recipe Details -->
+        <div class="details-container">
+            <!-- Load Panel -->
+            <div class="loadpanel"></div>
+            <h5>Recipe Details</h5>
+            <div id="recipe">
+                <img class="recipe-image" src="" alt="Recipe Image" />
+                <p><strong>Cuisine:</strong> <span class="cuisine"></span></p>
+                <p><strong>Prep Time:</strong> <span class="prep-time"></span> minutes</p>
+                <p><strong>Cook Time:</strong> <span class="cook-time"></span> minutes</p>
+                <p><strong>Servings:</strong> <span class="servings"></span></p>
+                <p><strong>Difficulty:</strong> <span class="difficulty"></span></p>
+                <p><strong>Calories per Serving:</strong> <span class="calories"></span></p>
+                <p><strong>Rating:</strong> <span class="rating"></span> (<span class="review-count"></span> reviews)
+                </p>
+                <p><strong>Ingredients:</strong> <br><span class="ingredient-list"></span></p>
+                <p><strong>Instructions:</strong> <br><span class="instruction-list"></span></p>
+                <p><strong>Meal Type:</strong> <span class="meal-type"></span></p>
+                <p><strong>Tags:</strong> <span class="tags"></span></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="./LoadPanel.js"></script>
+
+</body>
+
+</html>
