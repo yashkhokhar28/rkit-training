@@ -5,15 +5,12 @@ const departmentStore = new DevExpress.data.CustomStore({
   key: "t01F01",
 
   load: () => {
-    console.log("Loading departments...");
     return $.ajax({
       url: DepartmentAPIURL,
       method: "GET",
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("Load response:", result);
-
         if (result.isError) {
           DisplayMessage(result.message, "error", 2000);
           throw new Error(result.message || "Failed to load departments");
@@ -31,15 +28,12 @@ const departmentStore = new DevExpress.data.CustomStore({
   },
 
   byKey: (key) => {
-    console.log("Fetching department by key:", key);
     return $.ajax({
       url: `${DepartmentAPIURL}/ID?ID=${key}`,
       method: "GET",
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("byKey response:", result);
-
         if (result.isError) {
           DisplayMessage(result.message, "error", 2000);
           throw new Error(result.message || "Failed to fetch department");
@@ -57,7 +51,6 @@ const departmentStore = new DevExpress.data.CustomStore({
   },
 
   insert: (values) => {
-    console.log("Inserting new department:", values);
     const dtoDepartment = {
       T01102: values.t01F02 || "",
       T01103: values.t01F03 || 0,
@@ -71,8 +64,6 @@ const departmentStore = new DevExpress.data.CustomStore({
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("Insert response:", result);
-
         if (result.isError) {
           DisplayMessage(result.message, "error", 3000);
           throw new Error(result.message || "Failed to add department");
@@ -95,11 +86,9 @@ const departmentStore = new DevExpress.data.CustomStore({
   },
 
   update: (key, values) => {
-    console.log("Updating department with key:", key);
     return departmentStore
       .byKey(key)
       .then((existingDepartment) => {
-        console.log("Existing department fetched:", existingDepartment);
         const dtoDepartment = {
           T01101: key,
           T01102:
@@ -121,8 +110,6 @@ const departmentStore = new DevExpress.data.CustomStore({
         });
       })
       .then((result) => {
-        console.log("Update response:", result);
-
         if (result.isError) {
           DisplayMessage(result.message, "error", 3000);
           throw new Error(result.message || "Failed to update department");
@@ -144,15 +131,12 @@ const departmentStore = new DevExpress.data.CustomStore({
   },
 
   remove: (key) => {
-    console.log("Removing department with key:", key);
     return $.ajax({
       url: `${DepartmentAPIURL}/ID?ID=${key}`,
       method: "DELETE",
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("Remove response:", result);
-
         if (result.isError) {
           DisplayMessage(result.message, "error", 3000);
           throw new Error(result.message || "Failed to delete department");

@@ -4,7 +4,6 @@ import { DisplayMessage, getAuthHeader } from "./utils.js";
 const userStore = new DevExpress.data.CustomStore({
   key: "r01F01",
 
-  // ✅ Improved error handling in load()
   load: () => {
     return $.ajax({
       url: AuthAPIURL,
@@ -12,7 +11,6 @@ const userStore = new DevExpress.data.CustomStore({
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("User load result:", result);
         if (result.isError) {
           throw new Error(result.message || "Failed to load users");
         }
@@ -28,16 +26,13 @@ const userStore = new DevExpress.data.CustomStore({
       });
   },
 
-  // ✅ Improved byKey error handling
   byKey: (key) => {
-    console.log("Fetching user with key:", key);
     return $.ajax({
       url: `${AuthAPIURL}/ID?ID=${key}`,
       method: "GET",
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("byKey response:", result);
         if (result.isError) {
           throw new Error(result.message || "Unknown error fetching user");
         }
@@ -59,7 +54,6 @@ const userStore = new DevExpress.data.CustomStore({
       });
   },
 
-  // ✅ Improved insert() method
   insert: (values) => {
     const dtoUser = {
       R01102: values.r01F02 || "",
@@ -95,7 +89,6 @@ const userStore = new DevExpress.data.CustomStore({
       });
   },
 
-  // ✅ Improved remove() method
   remove: (key) => {
     return $.ajax({
       url: `${AuthAPIURL}/ID?ID=${key}`,
@@ -117,13 +110,10 @@ const userStore = new DevExpress.data.CustomStore({
       });
   },
 
-  // ✅ Improved update() method
   update: (key, values) => {
-    console.log("Updating user with key:", key);
     return userStore
       .byKey(key)
       .then((existingUser) => {
-        console.log("Existing user fetched:", existingUser);
         if (!key) {
           throw new Error("Key is null or undefined!");
         }
@@ -143,7 +133,6 @@ const userStore = new DevExpress.data.CustomStore({
           R01109: values.r01F09 ?? existingUser.r01F09,
         };
 
-        console.log("DTO for update:", dtoUser);
         return $.ajax({
           url: AuthAPIURL,
           method: "PUT",

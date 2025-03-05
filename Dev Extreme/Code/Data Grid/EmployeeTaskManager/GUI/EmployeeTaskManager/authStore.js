@@ -4,8 +4,6 @@ import { loadDashboard } from "./tasks.js";
 
 const authStore = {
   login: (username, password) => {
-    console.log("Attempting login for:", username);
-
     return $.ajax({
       url: `${AuthAPIURL}/login`,
       method: "POST",
@@ -13,8 +11,6 @@ const authStore = {
       data: JSON.stringify({ R01102: username, R01103: password }),
     })
       .then((result) => {
-        console.log("Login response:", result);
-
         if (result.isError) {
           throw new Error(result.message || "Login failed due to server error");
         }

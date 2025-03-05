@@ -5,15 +5,12 @@ const taskStore = new DevExpress.data.CustomStore({
   key: "k01F01",
 
   load: (loadOptions) => {
-    console.log("Load options:", loadOptions); // Log skip, take, etc.
     let params = {
       skip: loadOptions.skip || 0,
-      take: loadOptions.take || 10,
+      take: loadOptions.take || 100,
       filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
       sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
     };
-
-    console.log("Request params:", params); // Log what’s sent to API
 
     return $.ajax({
       url: TaskAPIURL,
@@ -22,7 +19,6 @@ const taskStore = new DevExpress.data.CustomStore({
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("Raw API response:", result); // Log the full response
         if (result.isError) {
           throw new Error(result.message || "Failed to load tasks");
         }
@@ -42,14 +38,12 @@ const taskStore = new DevExpress.data.CustomStore({
   },
 
   byKey: (key) => {
-    console.log("Fetching task with key:", key);
     return $.ajax({
       url: `${TaskAPIURL}/ID?ID=${key}`,
       method: "GET",
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("byKey response:", result);
         if (result.isError) {
           throw new Error(result.message || "Unknown error fetching task");
         }
@@ -106,11 +100,9 @@ const taskStore = new DevExpress.data.CustomStore({
   },
 
   update: (key, values) => {
-    console.log("Updating task with key:", key);
     return taskStore
       .byKey(key)
       .then((existingTask) => {
-        console.log("Existing task fetched:", existingTask);
         const dtoTask = {
           K01101: key,
           K01102: values.k01F02 ?? existingTask.k01F02,
@@ -122,7 +114,6 @@ const taskStore = new DevExpress.data.CustomStore({
           K01108: values.k01F08 ?? existingTask.k01F08,
         };
 
-        console.log("DTO for update:", dtoTask);
         return $.ajax({
           url: `${TaskAPIURL}`,
           method: "PUT",
