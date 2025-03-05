@@ -8,12 +8,12 @@
         /// <summary>
         /// 
         /// </summary>
-        public int Skip { get; set; }
+        public int? Skip { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int Take { get; set; }
+        public int? Take { get; set; }
 
         /// <summary>
         /// 

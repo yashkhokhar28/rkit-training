@@ -41,7 +41,6 @@ namespace EmployeeTaskManager.BL
         }
 
         public (List<TSK01> Tasks, long TotalCount) GetTasksWithOptions(TaskLoadOptions taskLoadOptions)
-        
         {
             using (IDbConnection objIDbConnection = objIDbConnectionFactory.OpenDbConnection())
             {
@@ -51,7 +50,6 @@ namespace EmployeeTaskManager.BL
                 if (!string.IsNullOrEmpty(taskLoadOptions.Filter))
                 {
                     var filter = JsonConvert.DeserializeObject<List<object>>(taskLoadOptions.Filter);
-
                     if (filter.Count >= 3)
                     {
                         string field = filter[0].ToString().ToLowerInvariant();
@@ -94,8 +92,11 @@ namespace EmployeeTaskManager.BL
                     }
                 }
 
-                // Apply Paging
-                query.Skip(taskLoadOptions.Skip).Take(taskLoadOptions.Take);
+                // Apply Paging for Infinite Scrolling
+                if (taskLoadOptions.Skip.HasValue && taskLoadOptions.Take.HasValue)
+                {
+                    query.Skip(taskLoadOptions.Skip.Value).Take(taskLoadOptions.Take.Value);
+                }
 
                 // Execute Query
                 var tasks = objIDbConnection.Select(query);

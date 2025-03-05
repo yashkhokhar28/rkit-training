@@ -5,12 +5,15 @@ const taskStore = new DevExpress.data.CustomStore({
   key: "k01F01",
 
   load: (loadOptions) => {
+    console.log("Load options:", loadOptions); // Log skip, take, etc.
     let params = {
       skip: loadOptions.skip || 0,
       take: loadOptions.take || 10,
       filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
       sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
     };
+
+    console.log("Request params:", params); // Log what’s sent to API
 
     return $.ajax({
       url: TaskAPIURL,
@@ -19,14 +22,14 @@ const taskStore = new DevExpress.data.CustomStore({
       headers: getAuthHeader(),
     })
       .then((result) => {
-        console.log("Task load result:", result);
+        console.log("Raw API response:", result); // Log the full response
         if (result.isError) {
           throw new Error(result.message || "Failed to load tasks");
         }
         DisplayMessage("Tasks loaded successfully", "success", 1000);
         return {
-          data: result.data || [],
-          totalCount: result.totalCount || 0,
+          data: result.data || result.Data || [], // Handle both cases
+          totalCount: result.totalCount || result.TotalCount || 0,
         };
       })
       .catch((xhr) => {

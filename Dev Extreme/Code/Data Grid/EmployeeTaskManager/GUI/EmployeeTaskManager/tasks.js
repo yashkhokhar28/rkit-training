@@ -3,7 +3,7 @@ import { authStore } from "./authStore.js";
 import { departmentStore } from "./departmentStore.js";
 import { userStore } from "./userStore.js";
 import { statusOptions, priorityOptions, roleOptions } from "./enums.js";
-import { getAuthState, DisplayMessage, toggleTheme } from "./utils.js";
+import { getAuthState, toggleTheme } from "./utils.js";
 
 let employeeStore;
 
@@ -58,21 +58,45 @@ export function loadDashboard() {
         template: () => {
           return $("<div>").dxDataGrid({
             dataSource: taskStore,
+            height: "600px", // or a larger value like 600
             showBorders: true,
+            onContentReady: (e) => {
+              const items = e.component.getDataSource().items();
+              console.log(
+                "Content ready, items length:",
+                items.length,
+                "Items:",
+                items
+              );
+            },
+            onScroll: (e) => {
+              console.log(
+                "Scrolled, scrollTop:",
+                e.scrollTop,
+                "scrollHeight:",
+                e.element[0].scrollHeight
+              );
+            },
             showColumnLines: true,
             showRowLines: true,
             rowAlternationEnabled: true,
             columnAutoWidth: true,
             columnHidingEnabled: true,
-            // allowColumnResizing: true,
-            paging: { pageSize: 10 },
-            pager: {
-              visible: true,
-              showPageSizeSelector: true,
-              allowedPageSizes: [5, 10, 20],
-              showInfo: true,
+            scrolling: {
+              mode: "infinite", // Correct mode
+              displayMode: "full", // Ensure full display
+              useNative: true, // Use browser’s native scrolling
+              preloadEnabled: true, // Preload next chunk before reaching bottom
             },
-            scrolling: { mode: "virtual" },
+            paging: {
+              pageSize: 10, // Matches your backend
+              enabled: true, // Ensure paging is enabled
+            },
+            remoteOperations: {
+              paging: true,
+              filtering: true,
+              sorting: true,
+            },
             filterRow: { visible: true },
             headerFilter: { visible: true },
             sorting: { mode: "multiple" },
@@ -293,14 +317,7 @@ export function loadDashboard() {
             rowAlternationEnabled: true,
             columnAutoWidth: true,
             columnHidingEnabled: true,
-            paging: { pageSize: 10 },
-            pager: {
-              visible: true,
-              showPageSizeSelector: true,
-              allowedPageSizes: [5, 10, 20],
-              showInfo: true,
-            },
-            scrolling: { mode: "virtual" },
+            scrolling: { mode: "infinite" },
             filterRow: { visible: true },
             headerFilter: { visible: true },
             sorting: { mode: "multiple" },
@@ -462,14 +479,7 @@ export function loadDashboard() {
             rowAlternationEnabled: true,
             columnAutoWidth: true,
             columnHidingEnabled: true,
-            paging: { pageSize: 10 },
-            pager: {
-              visible: true,
-              showPageSizeSelector: true,
-              allowedPageSizes: [5, 10, 20],
-              showInfo: true,
-            },
-            scrolling: { mode: "virtual" },
+            scrolling: { mode: "infinite" },
             filterRow: { visible: true },
             headerFilter: { visible: true },
             sorting: { mode: "multiple" },
