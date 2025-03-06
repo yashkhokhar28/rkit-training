@@ -199,22 +199,11 @@ export function loadDashboard() {
             },
             onRowPrepared: function (e) {
               if (e.rowType === "data") {
-                if (e.data.k01F07 === "High") {
-                  e.rowElement.css("background-color", "#ffe6e6");
-                } else if (e.data.k01F07 === "Medium") {
-                  e.rowElement.css("background-color", "#fff5e6");
-                }
-                if (e.data.k01F08) {
-                  const dueDate = new Date(e.data.k01F08);
-                  const today = new Date();
-                  const diffDays = Math.ceil(
-                    (dueDate - today) / (1000 * 60 * 60 * 24)
-                  );
-                  if (diffDays < 0) {
-                    e.rowElement.css("color", "red");
-                  } else if (diffDays <= 3) {
-                    e.rowElement.css("color", "orange");
-                  }
+                console.log(e.data.k01F07);
+                if (e.data.k01F07 == "2") {
+                  e.rowElement.css("color", "red");
+                } else if (e.data.k01F07 == "1") {
+                  e.rowElement.css("color", "orange");
                 }
               }
             },
