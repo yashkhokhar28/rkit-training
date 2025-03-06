@@ -254,3 +254,54 @@
   - `onRowExpanding` (Handles row expansion)
 
 ---
+
+### **4.14 Export**
+
+- **Properties:**
+
+  - `export.enabled` → Enables/disables export functionality.
+  - `export.fileName` → Sets the default exported file name.
+  - `export.allowExportSelectedData` → Allows exporting selected rows only.
+
+- **Methods:**
+
+  - `.exportToExcel(selectionOnly)` → Exports grid data to Excel.
+
+- **Events:**
+  - `onExporting` → Fires before the export starts.
+  - `onExported` → Fires after export completes.
+
+---
+
+### **4.15 Adaptability**
+
+#### **4.15.1 Grid Adaptability Overview**
+
+- **Properties:**
+
+  - `columnHidingEnabled` → Enables automatic column hiding.
+  - `adaptivityEnabled` → Enables adaptive layout for grids.
+
+- **Events:**
+  - `onAdaptiveDetailRowPreparing` → Handles the preparation of the adaptive row.
+
+---
+
+#### **4.15.2 Grid Columns Hiding Priority**
+
+- **Properties:**
+
+  - `columns[].hidingPriority` → Defines the priority for hiding columns (lower numbers hide first).
+
+- **Example:**
+
+  ```js
+  $("#gridContainer").dxDataGrid({
+    columnHidingEnabled: true,
+    columns: [
+      { dataField: "ID", hidingPriority: 3 },
+      { dataField: "Name", hidingPriority: 1 },
+      { dataField: "Department", hidingPriority: 2 },
+    ],
+  });
+  ```
