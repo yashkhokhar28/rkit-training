@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("EmployeeTaskManagerGUI", policy =>
-        policy.WithOrigins("http://127.0.0.1:5506")
+        policy.WithOrigins("http://127.0.0.1:5501")
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
