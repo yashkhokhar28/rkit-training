@@ -64,7 +64,7 @@ mysql_config --version
 
 **Expected Output:**
 
-```
+```sql
 8.0.27
 ```
 
@@ -134,7 +134,7 @@ mydumper --version
 
 **Expected Output:**
 
-```
+```bash
 mydumper 0.11.3, built against MySQL 8.0.27
 ```
 
@@ -146,7 +146,7 @@ myloader --version
 
 **Expected Output:**
 
-```
+```bash
 myloader 0.11.3, built against MySQL 8.0.27
 ```
 
@@ -221,7 +221,7 @@ myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1
 
 ### Performance Comparison: Thread Variations
 
-**Backup and Restore Times with 600 MB Compressed Data**
+## **Backup and Restore Times with 600 MB Compressed Data**
 
 | Threads | Backup Start | Backup End | Backup Time | Restore Start | Restore End | Restore Time |
 | ------- | ------------ | ---------- | ----------- | ------------- | ----------- | ------------ |
@@ -230,7 +230,7 @@ myloader --directory /home/ubuntu/backup --overwrite-tables --database test_db_1
 
 ### Performance Comparison: Row Size and Compression Variations
 
-**Backup and Restore Times with 8 Threads**
+## **Backup and Restore Times with 8 Threads**
 
 | Row Size | Compression  | Backup Start | Backup End   | Backup Time   | Backup Size | Restore Start | Restore End  | Restore Time   |
 | -------- | ------------ | ------------ | ------------ | ------------- | ----------- | ------------- | ------------ | -------------- |

@@ -8,7 +8,7 @@
 | ACID Compliance | Partial (depends on storage engine)            | Full ACID compliance in all configurations           |
 | Concurrency     | Less efficient locking mechanism (table-level) | More efficient (row-level locking, MVCC)             |
 
-### 💡 Verdict:
+### 💡 Verdict 1
 
 - Choose PostgreSQL if you need complex queries, data integrity, and reliable concurrency.
 - Choose MySQL if you need simplicity and fast reads for high-volume web apps.
@@ -24,7 +24,7 @@
 | Extensibility         | Limited                | Highly Extensible                  | PostgreSQL |
 | Stored Procedures     | Yes                    | Yes (with more languages)          | PostgreSQL |
 
-### 💡 Verdict:
+### 💡 Verdict 2
 
 PostgreSQL wins in terms of features, especially for complex applications like analytics platforms, financial systems, or geo-based services.
 
@@ -36,7 +36,7 @@ PostgreSQL wins in terms of features, especially for complex applications like a
 | Write-Heavy Workloads | Slower due to table-level locks | Better concurrency (row-level locks)    | PostgreSQL |
 | Complex Queries       | Slower for joins and subqueries | Faster for complex joins and subqueries | PostgreSQL |
 
-### 💡 Verdict:
+### 💡 Verdict 3
 
 - MySQL is better for read-heavy apps like blogs or CMS systems.
 - PostgreSQL is better for write-heavy or complex apps like e-commerce, analytics, or financial systems.
@@ -49,7 +49,7 @@ PostgreSQL wins in terms of features, especially for complex applications like a
 | Enterprise Support   | Available (via Oracle)          | Available (via various vendors) |
 | Open-Source Approach | Owned by Oracle (some concerns) | Fully community-driven          |
 
-### 💡 Verdict:
+### 💡 Verdict
 
 - If you prefer community-driven development, PostgreSQL is the way to go.
 - MySQL has a bigger community, but some developers have concerns about Oracle’s control.
@@ -61,7 +61,7 @@ PostgreSQL wins in terms of features, especially for complex applications like a
 | Data Encryption  | Basic | Advanced (row-level)    | PostgreSQL |
 | Access Control   | Basic | Advanced (fine-grained) | PostgreSQL |
 
-### 💡 Verdict:
+### 💡 Verdict 4
 
 PostgreSQL is more secure for apps that deal with sensitive data.
 
@@ -72,7 +72,7 @@ PostgreSQL is more secure for apps that deal with sensitive data.
 | Vertical Scaling   | Good                     | Excellent  | PostgreSQL |
 | Horizontal Scaling | Excellent (via sharding) | Good       | MySQL      |
 
-### 💡 Verdict:
+### 💡 Verdict 5
 
 - MySQL is better for horizontal scaling (like distributed systems).
 - PostgreSQL is better for vertical scaling (like handling massive datasets on a single server).

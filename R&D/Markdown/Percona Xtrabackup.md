@@ -1,6 +1,6 @@
-## **1. Setup**
+# **1. Setup**
 
-### **Database Setup**
+## **Database Setup**
 
 - A console application was created to generate **multiple databases**.
 - For this test, a database named **`test_db_1`** was created, containing **100 tables** (`orders_1` to `orders_100`).
@@ -137,7 +137,7 @@ Without these privileges, Percona XtraBackup may fail to complete the backup pro
 | **Encrypted Backup**   | Secures backup data with AES encryption             | Sensitive data, regulatory compliance |
 | **Streaming Backup**   | Sends backup directly to another server             | Remote/offsite backups                |
 
-# XtraBackup Commands
+## XtraBackup Commands
 
 ## Introduction
 

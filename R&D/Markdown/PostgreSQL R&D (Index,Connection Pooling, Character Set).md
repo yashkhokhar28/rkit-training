@@ -1,8 +1,8 @@
 # **Database Connection Pooling, Thread Management, and Optimizations in MySQL and PostgreSQL**
 
-### **1. Connection Pooling Technique in MySQL**
+## **1. Connection Pooling Technique in MySQL**
 
-#### **What is Connection Pooling?**
+### **What is Connection Pooling?**
 
 Connection pooling is a technique used to maintain a pool of reusable database connections. When a client needs a database connection, it borrows one from the pool. Once the operation is completed, the connection is returned to the pool, making it available for future use. This technique reduces the overhead of creating and destroying connections repeatedly.
 
@@ -63,7 +63,7 @@ In this case:
 
 Batch processing, combined with transactions, can significantly improve performance. For both MySQL and PostgreSQL, we use **transactions** to ensure that multiple database operations are executed atomically. Batch insertion optimizes the process by sending multiple records in a single insert operation, which reduces the overhead.
 
-**Example: Batch Insertions and Transactions**
+## **Example: Batch Insertions and Transactions**
 
 ```csharp
 using (var transaction = connection.BeginTransaction())
@@ -79,7 +79,7 @@ using (var transaction = connection.BeginTransaction())
 
 In this example, all database operations are wrapped in a transaction. This ensures that all records are inserted atomically and that any error in the process will roll back the entire transaction, maintaining data consistency.
 
-# **Encoding and Character Set Management in MySQL and PostgreSQL**
+## **Encoding and Character Set Management in MySQL and PostgreSQL**
 
 ### **Encoding in MySQL**
 
@@ -173,6 +173,7 @@ using (var connection = new MySqlConnection(connectionString))
    ```
 
 3. **Using SQL Command After Connection**:
+
    ```sql
    SET CLIENT_ENCODING TO 'UTF8';
    ```
@@ -221,7 +222,7 @@ class Program
 | **Client-Side Encoding** | Specify in connection string using `Charset` | Specify using `Client Encoding`    |
 | **Multilingual Support** | Supported (requires `utf8mb4`)               | Supported natively with `UTF-8`    |
 
-# **Index Types in MySQL and PostgreSQL**
+## **Index Types in MySQL and PostgreSQL**
 
 ### **1. General Index (Default Index)**
 

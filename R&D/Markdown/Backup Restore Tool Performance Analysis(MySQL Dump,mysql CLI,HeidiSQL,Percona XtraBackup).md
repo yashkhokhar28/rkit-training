@@ -1,6 +1,6 @@
-## **1. Setup**
+# **1. Setup**
 
-### **Database Setup**
+## **Database Setup**
 
 - Created a console application that generates **multiple databases**.
 - For this test, a database named **test_db_1** was created, which contained **100 tables**, named `orders_1` to `orders_100`.

@@ -1,6 +1,6 @@
 # **Summary Report: MyDumper Performance Issues & Fixes**
 
-#### Why No Significant Improvement?
+## Why No Significant Improvement?
 
 - **Single-Core CPU (`nproc = 1`)**: Your one core can’t parallelize MyDumper’s threading beyond 1-2 threads, making higher counts (e.g., 8) ineffective and compression slow. Backup/restore gains are capped by sequential processing.
 - **Tiny InnoDB Buffer Pool (128 MB)**: Only ~1.5% of your 8.5 GB database fits in memory, forcing disk I/O to dominate restores and limit row-size tweak benefits.
@@ -8,7 +8,7 @@
 - **Disk I/O Bottleneck**: With low memory caching and one core, your disk (likely HDD if slow) can’t keep up, flattening performance curves.
 - **Suboptimal MyDumper Settings**: High threads waste CPU, compression adds overhead, and row sizes (5000-10000) aren’t ideal for your 128,975-row tables.
 
-#### What Should Be Done Now?
+## What Should Be Done Now?
 
 Given your 4 GB RAM and current setup, here’s the tailored fix:
 
@@ -24,16 +24,21 @@ Given your 4 GB RAM and current setup, here’s the tailored fix:
    **How to Apply**:
 
    - Edit `/etc/mysql/my.cnf`:
+
      ```bash
      sudo nano /etc/mysql/my.cnf
      ```
+
      Add/update under `[mysqld]`:
-     ```
+
+     ```sql
      [mysqld]
      innodb_buffer_pool_size = 2G
      innodb_log_file_size = 512M
      ```
+
    - Stop MySQL, remove old logs, restart:
+
      ```bash
      sudo service mysql stop
      sudo rm /var/lib/mysql/ib_logfile*
@@ -70,15 +75,15 @@ Given your 4 GB RAM and current setup, here’s the tailored fix:
    - **Upgrade Hardware**: A multi-core CPU (e.g., 4 cores) would unlock MyDumper’s parallelism, potentially halving times. An SSD would boost I/O, cutting restores further.
      - **Impact**: Backup <2 mins, restore <15 mins possible.
 
-#### Expected Outcomes
+## Expected Outcomes
 
 - **Backup**: ~2-2.5 mins (from 3-4 mins) with no compression and optimized chunks.
 - **Restore**: ~20-23 mins (from 29-30 mins) with better caching and log handling.
 - **Limit**: Single core and disk speed cap bigger gains without hardware upgrades.
 
-# InnoDB Buffer Pool Size (`innodb_buffer_pool_size`)
+## InnoDB Buffer Pool Size (`innodb_buffer_pool_size`)
 
-#### Use Case
+## Use Case
 
 The InnoDB buffer pool is a memory area where MySQL caches table data, indexes, and other structures for the InnoDB storage engine. Its primary purposes are:
 
@@ -88,12 +93,12 @@ The InnoDB buffer pool is a memory area where MySQL caches table data, indexes, 
 
 Think of it as a fast-access workspace—bigger means more of your database fits without hitting the disk.
 
-#### Your Current Setting
+### Your Current Setting
 
 - **Value**: 128 MB (134217728 bytes).
 - **Problem**: Your 8.5 GB database is ~66 times larger than 128 MB. Only ~1.5% fits in memory, so MySQL constantly reads/writes to disk.
 
-#### Impact on Backup (MyDumper)
+### Impact on Backup (MyDumper)
 
 - **Minor Role**: MyDumper reads data directly from MySQL, exporting it to files. A small buffer pool slows reads slightly if MySQL must fetch uncached data from disk. For your 8.5 GB database, this might add seconds to minutes, depending on disk speed.
 - **Consistency Checks**: Options like `--triggers` or `--events` may trigger index lookups, slowed by disk I/O if data isn’t cached.
@@ -114,9 +119,9 @@ Think of it as a fast-access workspace—bigger means more of your database fits
 
 ---
 
-### InnoDB Log File Size (`innodb_log_file_size`)
+## InnoDB Log File Size (`innodb_log_file_size`)
 
-#### Use Case
+Use Case
 
 The InnoDB log files (aka redo logs) track all changes to the database (inserts, updates, deletes) before they’re permanently written to disk. Their purposes are:
 
@@ -126,17 +131,17 @@ The InnoDB log files (aka redo logs) track all changes to the database (inserts,
 
 It’s like a scratchpad—larger logs let MySQL batch more changes before committing them.
 
-#### Your Current Setting
+Your Current Setting
 
 - **Value**: 48 MB (50331648 bytes).
 - **Problem**: Tiny for 8.5 GB and 12.9M rows. Logs fill fast, triggering frequent “checkpoints” (flushing to disk), which stalls writes.
 
-#### Impact on Backup (MyDumper)
+Impact on Backup (MyDumper)
 
 - **Minimal Role**: MyDumper reads data, not writes, so logs are mostly used for consistency (e.g., `--trx-consistency-only`). A small log might slow transaction snapshots slightly, but impact is negligible (seconds at most).
 - **Your Case**: Backup times (e.g., 3-4 mins) aren’t log-bound—CPU and I/O overshadow this.
 
-#### Impact on Restore (MyLoader)
+Impact on Restore (MyLoader)
 
 - **Major Bottleneck**: MyLoader writes 12.9M rows, creating millions of log entries:
   - 48 MB fills in seconds with bulk inserts (e.g., 128,975 rows per table × 100 tables).
@@ -144,7 +149,7 @@ It’s like a scratchpad—larger logs let MySQL batch more changes before commi
   - Restores drag (e.g., 29-30 mins) as log flushes pile up.
 - **Why No Gains**: Threads/row sizes don’t help when MyLoader waits on disk syncs—your single core can’t hide this delay.
 
-#### Proposed Change: 512 MB
+Proposed Change: 512 MB
 
 - **Why**: 512 MB holds ~10x more changes before flushing. For 12.9M rows, it batches larger transactions, reducing pauses.
 - **Backup Impact**: Negligible—logs aren’t the bottleneck here.

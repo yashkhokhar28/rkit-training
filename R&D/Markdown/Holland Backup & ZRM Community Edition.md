@@ -31,7 +31,7 @@ Users looking for **modular and extensible backup solutions** with custom plugin
 
 Zmanda Recovery Manager (ZRM) **Community Edition** is a **specialized MySQL backup solution** that supports **logical, raw (LVM snapshots), and binary log backups**, making it a robust choice for database administrators.
 
-### **Key Features:**
+### **Key Features :**
 
 - **Multiple Backup Methods** – Supports `mysqldump`, **LVM snapshots**, and **binary log backups**.
 - **Automated Scheduling** – Cron-based backups with **pre/post-backup scripts** for customization.
@@ -40,7 +40,7 @@ Zmanda Recovery Manager (ZRM) **Community Edition** is a **specialized MySQL bac
 - **Monitoring & Logging** – Provides **detailed logs, email alerts, and backup verification** for reliability.
 - **Flexible Restoration** – Supports **full recovery, point-in-time recovery (PITR), and selective table restoration**.
 
-### **Ideal Use Cases:**
+### **Ideal Use Cases :**
 
 Large-scale **MySQL environments requiring PITR**.  
 Databases needing **secure, encrypted backups with compression**.  

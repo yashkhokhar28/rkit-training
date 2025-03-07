@@ -229,6 +229,7 @@ This will provide detailed timing information for each step of the query executi
 
   - Defines server-specific settings, such as the default storage engine, max connections, buffer sizes, and log file locations.
   - Example:
+
     ```ini
     [mysqld]
     default-storage-engine=InnoDB
@@ -240,6 +241,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL** (`postgresql.conf`):
   - Similar configuration with server settings like port, memory usage, and logging.
   - Example:
+
     ```conf
     listen_addresses = 'localhost'
     port = 5432
@@ -256,6 +258,7 @@ This will provide detailed timing information for each step of the query executi
 
   - `innodb_buffer_pool_size` and `query_cache_size` control memory usage.
   - Example:
+
     ```ini
     innodb_buffer_pool_size=1G
     query_cache_size=64M
@@ -264,6 +267,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - `shared_buffers` and `work_mem` are used to allocate memory for caching and query operations.
   - Example:
+
     ```conf
     shared_buffers = 1GB
     work_mem = 4MB
@@ -282,6 +286,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Authentication is handled by `pg_hba.conf`, which defines which users can access which databases and from where.
   - Example:
+
     ```conf
     local   all             postgres                                md5
     host    all             all             192.168.1.0/24           md5
@@ -295,6 +300,7 @@ This will provide detailed timing information for each step of the query executi
 
   - Replication settings are configured in `my.ini` under the `[mysqld]` section, including the `log-bin` and `server-id` for master-slave replication.
   - Example:
+
     ```ini
     server-id = 1
     log-bin = mysql-bin
@@ -304,6 +310,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Replication is managed in `postgresql.conf`, with parameters like `wal_level`, `max_wal_senders`, and `hot_standby` for master-slave replication.
   - Example:
+
     ```conf
     wal_level = replica
     max_wal_senders = 3
@@ -318,6 +325,7 @@ This will provide detailed timing information for each step of the query executi
 
   - Logs are configured with options such as `log-error`, `general_log`, and `slow_query_log`.
   - Example:
+
     ```ini
     log-error=/var/log/mysql/error.log
     general_log=1
@@ -327,6 +335,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Logs are configured using the `log_statement` and `log_directory` parameters in `postgresql.conf`.
   - Example:
+
     ```conf
     log_statement = 'all'
     log_directory = '/var/log/postgresql'
@@ -340,6 +349,7 @@ This will provide detailed timing information for each step of the query executi
 
   - Settings like `innodb_buffer_pool_size` and `key_buffer_size` control the memory allocation for InnoDB and MyISAM engines.
   - Example:
+
     ```ini
     innodb_buffer_pool_size=1G
     key_buffer_size=128M
@@ -348,6 +358,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Memory parameters like `shared_buffers`, `effective_cache_size`, and `work_mem` manage buffer and memory allocation.
   - Example:
+
     ```conf
     shared_buffers = 1GB
     effective_cache_size = 4GB
@@ -362,6 +373,7 @@ This will provide detailed timing information for each step of the query executi
 
   - The location of the data directory is configured in `my.ini` under the `datadir` directive.
   - Example:
+
     ```ini
     datadir=/var/lib/mysql
     ```
@@ -369,6 +381,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Data directory and other paths are configured under `data_directory` and `temp_tablespaces` in `postgresql.conf`.
   - Example:
+
     ```conf
     data_directory = '/var/lib/postgresql/data'
     temp_tablespaces = '/var/lib/postgresql/tmp'
@@ -382,6 +395,7 @@ This will provide detailed timing information for each step of the query executi
 
   - Log and temporary directories are defined in `my.ini`, and backups or binlog files can be specified.
   - Example:
+
     ```ini
     tmpdir=/tmp
     ```
@@ -389,6 +403,7 @@ This will provide detailed timing information for each step of the query executi
 - **PostgreSQL**:
   - Similar to MySQL, PostgreSQL allows configuration of log and temporary file directories in `postgresql.conf`.
   - Example:
+
     ```conf
     log_directory = '/var/log/postgresql'
     tmp_tablespaces = '/tmp'
