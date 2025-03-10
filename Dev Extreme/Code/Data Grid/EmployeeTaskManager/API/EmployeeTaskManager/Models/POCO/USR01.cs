@@ -1,5 +1,4 @@
-﻿using EmployeeTaskManager.Models.ENUM; // Assuming this namespace contains EnmRole
-
+﻿using EmployeeTaskManager.Models.ENUM;
 namespace EmployeeTaskManager.Models.POCO
 {
     /// <summary>

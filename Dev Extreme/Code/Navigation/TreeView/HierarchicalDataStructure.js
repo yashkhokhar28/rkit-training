@@ -158,7 +158,7 @@ $(() => {
     selectionMode: "multiple",
 
     // Determines if child nodes should be selected when a parent is selected
-    selectNodesRecursive: false,
+    selectNodesRecursive: true,
 
     // Controls visibility of checkboxes: "none", "normal", "selectAll"
     showCheckBoxesMode: "normal",

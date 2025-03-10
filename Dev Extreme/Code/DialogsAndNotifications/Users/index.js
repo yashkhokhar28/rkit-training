@@ -312,7 +312,7 @@ $(() => {
       url: "https://67a9f61d65ab088ea7e526d8.mockapi.io/users",
       method: "POST",
       contentType: "application/json",
-      data: jsonData, // Send as hierarchical JSON
+      data: jsonData,
       success: () => {
         DevExpress.ui.notify("User saved successfully!", "success", 2000);
         popup.option("visible", false);

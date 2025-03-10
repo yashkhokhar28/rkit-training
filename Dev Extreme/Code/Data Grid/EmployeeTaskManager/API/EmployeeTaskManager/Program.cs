@@ -1,7 +1,6 @@
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using ServiceStack;
-using System.Configuration;
 using EmployeeTaskManager.BL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -15,32 +14,41 @@ var builder = WebApplication.CreateBuilder(args);
 // Add CORS Policy
 builder.Services.AddCors(options =>
 {
+    // Define a CORS policy named "EmployeeTaskManagerGUI" for cross-origin requests
     options.AddPolicy("EmployeeTaskManagerGUI", policy =>
-        policy.WithOrigins("http://127.0.0.1:5507")
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+        policy.WithOrigins("http://127.0.0.1:5507") // Allow requests from this specific origin (local development GUI)
+              .AllowAnyMethod()                     // Permit all HTTP methods (GET, POST, etc.)
+              .AllowAnyHeader());                   // Permit all request headers
 });
 
+// Add MVC controllers with Newtonsoft.Json support for JSON serialization
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-builder.Services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(builder.Configuration.GetConnectionString("EmployeeTaskManager"), MySqlDialect.Provider));
+// Register the database connection factory as a singleton service
+builder.Services.AddSingleton<IDbConnectionFactory>(
+    new OrmLiteConnectionFactory(
+        builder.Configuration.GetConnectionString("EmployeeTaskManager"), // Connection string from configuration
+        MySqlDialect.Provider)                                          // Use MySQL dialect for ORM Lite
+);
 
+// Configure Swagger for API documentation
 builder.Services.AddSwaggerGen(options =>
 {
+    // Define Swagger document metadata
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeTaskManager API", Version = "v1" });
 
-    // Define the JWT Bearer scheme
+    // Define JWT Bearer authentication scheme for Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
+        In = ParameterLocation.Header,          // Token is passed in the Authorization header
         Description = "Please enter a valid token (e.g., 'Bearer {token}')",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT"
+        Name = "Authorization",                 // Header name for the token
+        Type = SecuritySchemeType.Http,         // HTTP-based authentication
+        Scheme = "bearer",                      // Bearer scheme
+        BearerFormat = "JWT"                    // Token format is JWT
     });
 
-    // Apply the security requirement globally to all endpoints
+    // Apply JWT authentication requirement globally to all endpoints
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -52,39 +60,46 @@ builder.Services.AddSwaggerGen(options =>
                     Id = "Bearer"
                 }
             },
-            new string[] { }
+            new string[] { }  // No additional scopes required
         }
     });
 });
 
-// JWT Configuration
+// Configure JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        // Define token validation parameters
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            ValidateIssuer = true,                            // Validate the token issuer
+            ValidateAudience = true,                          // Validate the token audience
+            ValidateLifetime = true,                          // Ensure the token hasn't expired
+            ValidateIssuerSigningKey = true,                  // Validate the signing key
+            ValidIssuer = builder.Configuration["Jwt:Issuer"], // Expected issuer from configuration
+            ValidAudience = builder.Configuration["Jwt:Audience"], // Expected audience from configuration
+            IssuerSigningKey = new SymmetricSecurityKey(      // Signing key for token verification
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
 
+// Configure Authorization Policies
 builder.Services.AddAuthorization(options =>
 {
+    // Policy for Admin-only access
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    // Policy for Manager or Admin access
     options.AddPolicy("ManagerOrAdmin", policy => policy.RequireRole("Admin", "Manager"));
+    // Policy for Employee access
     options.AddPolicy("Employee", policy => policy.RequireRole("Employee"));
 });
 
-builder.Services.AddScoped<BLTask>();
-builder.Services.AddScoped<BLDepartment>();
-builder.Services.AddScoped<BLAuth>();
+// Register business logic services with scoped lifetime
+builder.Services.AddScoped<BLTask>();        // Task management service
+builder.Services.AddScoped<BLDepartment>();  // Department management service
+builder.Services.AddScoped<BLAuth>();        // Authentication and user management service
 
-
+// Add API explorer and Swagger generation services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -93,19 +108,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Enable Swagger UI in development environment for API testing and documentation
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Enable CORS globally
-app.UseCors("EmployeeTaskManagerGUI"); // Use the correct policy name
-
+// Enable CORS globally using the defined policy
+app.UseCors("EmployeeTaskManagerGUI"); // Apply the CORS policy for GUI access
 
 // Configure the HTTP request pipeline
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthentication(); // Enable JWT authentication middleware
+app.UseAuthorization();  // Enable authorization middleware
 
-
+// Map controller endpoints
 app.MapControllers();
 
-app.Run();
+app.Run(); // Start the application

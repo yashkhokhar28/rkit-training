@@ -65,6 +65,7 @@ const peripheralData = [
         id: "3_1",
         name: "Wired",
         icon: "fas fa-headset",
+        expanded: true,
         items: [
           {
             id: "3_1_1",

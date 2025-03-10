@@ -61,43 +61,6 @@ $(() => {
                   to: 0,
                 },
               },
-              toolbarItems: [
-                {
-                  locateInMenu: "always",
-                  widget: "dxButton",
-                  toolbar: "top",
-                  options: {
-                    text: "More info",
-                    onClick() {
-                      const message = `More info clicked`;
-                      DevExpress.ui.notify(
-                        {
-                          message,
-                          position: {
-                            my: "center top",
-                            at: "center top",
-                          },
-                        },
-                        "success",
-                        3000
-                      );
-                    },
-                  },
-                },
-                {
-                  widget: "dxButton",
-                  toolbar: "bottom",
-                  location: "after",
-                  options: {
-                    text: "Close",
-                    stylingMode: "outlined",
-                    type: "normal",
-                    onClick() {
-                      popup.hide();
-                    },
-                  },
-                },
-              ],
             });
 
           container.append(popover);

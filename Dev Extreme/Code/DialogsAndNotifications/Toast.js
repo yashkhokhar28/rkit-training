@@ -15,7 +15,7 @@ $(() => {
                 !recipe.name.toLowerCase().includes("beef")
             );
             console.log(filteredRecipes);
-            return filteredRecipes; // DataGrid expects an array
+            return filteredRecipes;
           } else {
             console.error("Unexpected response structure:", result);
             return [];

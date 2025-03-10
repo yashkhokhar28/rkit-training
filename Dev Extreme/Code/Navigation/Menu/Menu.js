@@ -5,7 +5,7 @@ $(() => {
     .dxMenu({
       dataSource: peripheralData,
       activeStateEnabled: true,
-      adaptivityEnabled: true,
+      adaptivityEnabled: false,
       orientation: orientation,
       hideSubmenuOnMouseLeave: true,
       displayExpr: "name",
