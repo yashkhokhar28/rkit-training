@@ -1,7 +1,6 @@
 $(() => {
   console.log("Document is Ready");
 
-  // Initialize Popup
   let popup;
   try {
     popup = $("#pop-up")
@@ -9,7 +8,8 @@ $(() => {
         title: "Recipe Details",
         container: ".dx-viewport",
         visible: false,
-        // fullScreen: true,
+        fullScreen: true,
+        resizeEnabled: true,
         showTitle: true,
         showCloseButton: true,
         closeOnOutsideClick: true,
