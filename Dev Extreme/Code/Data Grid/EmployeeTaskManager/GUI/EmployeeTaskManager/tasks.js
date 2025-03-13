@@ -26,6 +26,11 @@ export function loadDashboard() {
           options: {
             text: isDark ? "☀️" : "🌙",
             onClick: () => {
+              /**
+               * Function: toggleTheme
+               * Description: Toggle Theme in Dark & Light
+               * Called in: utils.js
+               */
               toggleTheme();
               const newIsDark = sessionStorage.getItem("theme") === "dark";
               toolbarInstance.option(

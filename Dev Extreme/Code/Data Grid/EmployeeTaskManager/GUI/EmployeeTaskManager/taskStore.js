@@ -4,6 +4,14 @@ import { getAuthHeader, DisplayMessage } from "./utils.js";
 const taskStore = new DevExpress.data.CustomStore({
   key: "k01F01",
 
+  /**
+   * Function: load
+   * Description: Fetches tasks from the API with support for pagination, filtering, and sorting.
+   * Called in: Task grid initialization and refresh.
+   * Parameters:
+   *   - {loadOptions: object}: Options for skip, take, filter, and sort.
+   * Returns: Promise resolving with data and total count or rejecting with error.
+   */
   load: (loadOptions) => {
     let params = {
       skip: loadOptions.skip || 0,
@@ -11,7 +19,6 @@ const taskStore = new DevExpress.data.CustomStore({
       filter: loadOptions.filter ? JSON.stringify(loadOptions.filter) : null,
       sort: loadOptions.sort ? JSON.stringify(loadOptions.sort) : null,
     };
-
     return $.ajax({
       url: TaskAPIURL,
       method: "GET",
@@ -24,7 +31,7 @@ const taskStore = new DevExpress.data.CustomStore({
         }
         DisplayMessage("Tasks loaded successfully", "success", 1000);
         return {
-          data: result.data || result.Data || [], // Handle both cases
+          data: result.data || result.Data || [],
           totalCount: result.totalCount || result.TotalCount || 0,
         };
       })
@@ -37,6 +44,14 @@ const taskStore = new DevExpress.data.CustomStore({
       });
   },
 
+  /**
+   * Function: byKey
+   * Description: Fetches a single task by its ID from the API.
+   * Called in: Task selection or update operations.
+   * Parameters:
+   *   - {key: string}: The ID of the task to fetch.
+   * Returns: Promise resolving with task object or rejecting with error.
+   */
   byKey: (key) => {
     return $.ajax({
       url: `${TaskAPIURL}/ID?ID=${key}`,
@@ -65,6 +80,14 @@ const taskStore = new DevExpress.data.CustomStore({
       });
   },
 
+  /**
+   * Function: insert
+   * Description: Creates a new task by sending data to the API.
+   * Called in: Task creation form submission.
+   * Parameters:
+   *   - {values: object}: Object containing task data.
+   * Returns: Promise resolving with created task data or rejecting with error.
+   */
   insert: (values) => {
     const dtoTask = {
       K01102: values.k01F02 || "",
@@ -75,7 +98,6 @@ const taskStore = new DevExpress.data.CustomStore({
       K01107: values.k01F07 || 0,
       K01108: values.k01F08 || new Date().toISOString(),
     };
-
     return $.ajax({
       url: TaskAPIURL,
       method: "POST",
@@ -99,6 +121,15 @@ const taskStore = new DevExpress.data.CustomStore({
       });
   },
 
+  /**
+   * Function: update
+   * Description: Updates an existing task with new values.
+   * Called in: Task edit form submission.
+   * Parameters:
+   *   - {key: string}: The ID of the task to update.
+   *   - {values: object}: Object containing updated task data.
+   * Returns: Promise resolving on success or rejecting with error.
+   */
   update: (key, values) => {
     return taskStore
       .byKey(key)
@@ -113,7 +144,6 @@ const taskStore = new DevExpress.data.CustomStore({
           K01107: values.k01F07 ?? existingTask.k01F07,
           K01108: values.k01F08 ?? existingTask.k01F08,
         };
-
         return $.ajax({
           url: `${TaskAPIURL}`,
           method: "PUT",
@@ -139,6 +169,14 @@ const taskStore = new DevExpress.data.CustomStore({
       });
   },
 
+  /**
+   * Function: remove
+   * Description: Deletes a task by its ID.
+   * Called in: Task deletion action.
+   * Parameters:
+   *   - {key: string}: The ID of the task to delete.
+   * Returns: Promise resolving on success or rejecting with error.
+   */
   remove: (key) => {
     return $.ajax({
       url: `${TaskAPIURL}/${key}`,
