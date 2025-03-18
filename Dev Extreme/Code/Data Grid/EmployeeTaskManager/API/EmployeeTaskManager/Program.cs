@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 {
     // Define a CORS policy named "EmployeeTaskManagerGUI" for cross-origin requests
     options.AddPolicy("EmployeeTaskManagerGUI", policy =>
-        policy.WithOrigins("http://127.0.0.1:5507") // Allow requests from this specific origin (local development GUI)
+        policy.WithOrigins("http://127.0.0.1:5508") // Allow requests from this specific origin (local development GUI)
               .AllowAnyMethod()                     // Permit all HTTP methods (GET, POST, etc.)
               .AllowAnyHeader());                   // Permit all request headers
 });

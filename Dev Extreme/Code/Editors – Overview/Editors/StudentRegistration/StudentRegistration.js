@@ -172,7 +172,7 @@ $(document).ready(() => {
     .dxDropDownBox({
       dataSource: makeAsyncDataSource("jobRole.json"),
       displayExpr: "name",
-      valueExpr: "name",
+      valueExpr: "id",
       placeholder: "Job Role",
       dropDownButtonTemplate: () => $("<span>").text("▼"),
       dropDownOptions: { closeOnOutsideClick: true },

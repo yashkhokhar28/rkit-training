@@ -216,7 +216,6 @@ export function loadDashboard() {
               {
                 dataField: "k01F01",
                 caption: "Task ID",
-                // width: 100,
                 allowEditing: false,
                 hidingPriority: 7,
               },
