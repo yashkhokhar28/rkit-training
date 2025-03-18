@@ -38,28 +38,28 @@ $(() => {
         width: 200,
         cellTemplate: (container, options) => {
           // Create a container for the load indicator
-          const $indicator = $("<div>").appendTo(container);
+          const indicator = $("<div>").appendTo(container);
 
           // Initialize the dxLoadIndicator
-          $indicator.dxLoadIndicator({
+          indicator.dxLoadIndicator({
             height: 40,
             width: 40,
           });
 
           // Create an image element
-          const $img = $("<img>").attr("src", options.value).css({
+          const img = $("<img>").attr("src", options.value).css({
             maxWidth: "100%",
             height: "auto",
             display: "none", // Hidden initially
           });
 
           // Append the image to the container
-          $img.appendTo(container);
+          img.appendTo(container);
 
           // When the image loads, hide the indicator and show the image
-          $img.on("load", () => {
-            $indicator.dxLoadIndicator("instance").option("visible", false);
-            $img.css("display", "block");
+          img.on("load", () => {
+            indicator.dxLoadIndicator("instance").option("visible", false);
+            img.css("display", "block");
           });
         },
       },
