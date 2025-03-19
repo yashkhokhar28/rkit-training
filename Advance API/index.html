@@ -7,75 +7,167 @@
     <title>Advance API</title>
     <link rel="icon" type="image/x-icon"
         href="https://img.freepik.com/premium-vector/api-icon_268104-6791.jpg?semt=ais_hybrid">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
+        .card-base {
+            background: #ffffff;
         }
 
-        .card-img-top {
-            height: 200px;
-            object-fit: contain;
-            padding: 20px;
+        .card-hover:hover {
+            background: #f7f7f7;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .card-hover:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-hover:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-link:hover {
+            color: #1f2937;
+            /* gray-800 */
+            transform: translateY(-2px);
+        }
+
+        .footer-fade-in {
+            animation: footerFadeIn 1s ease-out;
+        }
+
+        @keyframes footerFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
-<body>
-    <div class="container my-5">
-        <div class="row m-3">
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div class="container mx-auto px-6 py-16 max-w-6xl">
+        <!-- Header -->
+        <header class="mb-16 text-center fade-in">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800">
+                Advance API
+            </h1>
+            <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                Elevate your API development skills
+            </p>
+        </header>
 
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1: Debugging in Visual Studio -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://1000logos.net/wp-content/uploads/2023/04/Visual-Studio-Logo-2019.png"
-                        class="card-img-top" alt="Visual Studio Logo">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Debugging in Visual Studio</h5>
-                        <p class="card-text">Master the debugging tools in Visual Studio to troubleshoot and fix issues
-                            in your applications efficiently.</p>
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://1000logos.net/wp-content/uploads/2023/04/Visual-Studio-Logo-2019.png"
+                    alt="Visual Studio Logo" class="h-48 w-full object-contain p-6 transition-transform duration-300">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Debugging in Visual Studio</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Master debugging tools to troubleshoot applications
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
                         <a href="https://github.com/yashkhokhar28/rkit-training/tree/main/Advance%20API/Code/Debugging%20in%20Visual%20Studio/Practice/DebuggingInVisualStudio"
-                            class="btn btn-outline-primary">Practice</a>
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
                         <a href="https://github.com/yashkhokhar28/rkit-training/tree/main/Advance%20API/Code/Debugging%20in%20Visual%20Studio/Practice/DebuggingInVisualStudio"
-                            class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Advance%20API/Documentation/Debugging%20in%20ASP.NET%20Framework%20Web%20API.md')">
-                            View Documentation
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Advance%20API/Documentation/Debugging%20in%20ASP.NET%20Framework%20Web%20API.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 2: C# Advance -->
-            <div class=" col-md-4">
-                <div class="card">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" class="card-img-top"
-                        alt="C# Logo">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">C# Advance</h5>
-                        <p class="card-text">Explore advanced features of C#, including LINQ, async
-                            programming, and
-                            design patterns for efficient development.</p>
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" alt="C# Logo"
+                    class="h-48 w-full object-contain p-6 transition-transform duration-300">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">C# Advance</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Explore LINQ, async programming, and design patterns
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
                         <a href="https://github.com/yashkhokhar28/rkit-training/tree/main/Advance%20API/Code/C%23%20Advance/Practice/CSharpAdvanceApp"
-                            class="btn btn-outline-primary">Practice</a>
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
                         <a href="https://github.com/yashkhokhar28/rkit-training/tree/main/Advance%20API/Code/C%23%20Advance/Demo/StockPortfolioAPI"
-                            class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Advance%20API/Documentation/C%23%20Advance.md')">
-                            View Documentation
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Advance%20API/Documentation/C%23%20Advance.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 py-8 border-t border-gray-200 footer-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2025 RKIT Training
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Home
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Courses
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        About
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Contact
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-gray-400 text-xs">
+                    Built for developers, by developers
+                </p>
+            </div>
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.0/marked.min.js"></script>
     <script>
-
         const ShowDocumentation = (filePath) => {
             localStorage.setItem("markdownFilePath", filePath);
             window.location.href = "documentation.html";

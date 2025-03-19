@@ -6,136 +6,268 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevExtreme Topics</title>
     <link rel="icon" type="image/x-icon" href="https://cdn.iconscout.com/icon/free/png-256/free-devexpress-283216.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
+        .card-base {
+            background: #ffffff;
         }
 
-        .card-img-top {
-            height: 200px;
-            object-fit: contain;
-            padding: 20px;
+        .card-hover:hover {
+            background: #f7f7f7;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .card-hover:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-hover:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-link:hover {
+            color: #1f2937;
+            /* gray-800 */
+            transform: translateY(-2px);
+        }
+
+        .footer-fade-in {
+            animation: footerFadeIn 1s ease-out;
+        }
+
+        @keyframes footerFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
-<body>
-    <div class="container my-5">
-        <div class="row m-3">
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div class="container mx-auto px-6 py-16 max-w-6xl">
+        <!-- Header -->
+        <header class="mb-16 text-center fade-in">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800">
+                DevExtreme Topics
+            </h1>
+            <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                Enhance your UI skills with DevExtreme
+            </p>
+        </header>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1: Basics of DevExtreme -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxXHu1rmEA4aZ-deroJeCT_r4mneeIRcj3Q&s"
-                        class="card-img-top" alt="DevExtreme Logo" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Basics of DevExtreme</h5>
-                        <p class="card-text">Introduction to DevExtreme components and their usage in modern web
-                            applications.</p>
-                        <a href="./Code/Basics of DevExtreme/index.html" class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Basics%20of%20Devextreme.md')">
-                            View Documentation
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxXHu1rmEA4aZ-deroJeCT_r4mneeIRcj3Q&s"
+                    alt="DevExtreme Logo" class="h-48 w-full object-contain p-6 transition-transform duration-300"
+                    loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Basics of DevExtreme</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Intro to DevExtreme components for web apps
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="./Code/Basics of DevExtreme/index.html"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Basics%20of%20Devextreme.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 2: Editors – Overview -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://img.setka.io/clients/D3SuW9_Vtk6NhYeFXfduUy55A4Dromkt/post_images/working-with-rich-text-editors-in-2023_-industry-overview-and-challenges-2023101718551676.png"
-                        class="card-img-top" alt="Editors" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Editors - Overview</h5>
-                        <p class="card-text">Explore DevExtreme form editors like TextBox, DateBox, and more.</p>
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://img.setka.io/clients/D3SuW9_Vtk6NhYeFXfduUy55A4Dromkt/post_images/working-with-rich-text-editors-in-2023_-industry-overview-and-challenges-2023101718551676.png"
+                    alt="Editors" class="h-48 w-full object-contain p-6 transition-transform duration-300"
+                    loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Editors - Overview</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Explore form editors like TextBox and DateBox
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
                         <a href="./Code/Editors – Overview/Editors/index.html"
-                            class="btn btn-outline-primary">Practice</a>
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
                         <a href="./Code/Editors – Overview/Editors/StudentRegistration/StudentRegistration.html"
-                            class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Editors%20–%20Overview.md')">
-                            View Documentation
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Editors%20–%20Overview.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 3: Data Layer -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzk7VCaCQ6pJ9eYy3bxaOKI-gwzUzFXKRdxA&s"
-                        class="card-img-top" alt="Data Layer" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Data Layer</h5>
-                        <p class="card-text">Learn about data binding, stores, and the DevExtreme data layer.</p>
-                        <a href="./Code/DataLayer/index.html" class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Data%20Layer.md')">
-                            View Documentation
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzk7VCaCQ6pJ9eYy3bxaOKI-gwzUzFXKRdxA&s"
+                    alt="Data Layer" class="h-48 w-full object-contain p-6 transition-transform duration-300"
+                    loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Data Layer</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Learn data binding and DevExtreme stores
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="./Code/DataLayer/index.html"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/Data%20Layer.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row m-3">
             <!-- Card 4: DataGrid -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2sRStCQ5gPZVcbJU6Oo47y8AYsBh7QVyc_A&s"
-                        class="card-img-top" alt="DataGrid" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">DataGrid</h5>
-                        <p class="card-text">Master the DevExtreme DataGrid for handling tabular data.</p>
-                        <a href="./Code/Data Grid/index.html" class="btn btn-outline-primary">Practice</a>
-                        <a href="#" class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success"
-                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/DataGrid.md')">
-                            View Documentation
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2sRStCQ5gPZVcbJU6Oo47y8AYsBh7QVyc_A&s"
+                    alt="DataGrid" class="h-48 w-full object-contain p-6 transition-transform duration-300"
+                    loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">DataGrid</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Handle tabular data with DevExtreme DataGrid
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="./Code/Data Grid/index.html"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
+                        <a href="#" class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button
+                            onclick="ShowDocumentation('https://raw.githubusercontent.com/yashkhokhar28/rkit-training/refs/heads/main/Dev%20Extreme/Documentation/DataGrid.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 5: Navigation -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjyHq55A1mlf9hcqE7mlWTv88LglZtxGIt8A&s"
-                        class="card-img-top" alt="Navigation" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Navigation</h5>
-                        <p class="card-text">Understand navigation components like menu, tabs, and drawer.</p>
-                        <a href="#" class="btn btn-outline-primary">Practice</a>
-                        <a href="#" class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success" onclick="ShowDocumentation('Navigation.md')">
-                            View Documentation
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjyHq55A1mlf9hcqE7mlWTv88LglZtxGIt8A&s"
+                    alt="Navigation" class="h-48 w-full object-contain p-6 transition-transform duration-300"
+                    loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Navigation</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Use menu, tabs, and drawer components
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#" class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
+                        <a href="#" class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button onclick="ShowDocumentation('Navigation.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Card 6: Dialogues & Notification -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTknOXPPdaggamRI_xU88VbYeRLWSYjIZGf_A&s"
-                        class="card-img-top" alt="Dialogues & Notification" loading="lazy">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Dialogues & Notification</h5>
-                        <p class="card-text">Explore alert popups, toast messages, and notifications in DevExtreme.</p>
-                        <a href="#" class="btn btn-outline-primary">Practice</a>
-                        <a href="#" class="btn btn-outline-primary">Demo</a>
-                        <button class="btn btn-outline-success" onclick="ShowDocumentation('Dialogues.md')">
-                            View Documentation
+            <div
+                class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTknOXPPdaggamRI_xU88VbYeRLWSYjIZGf_A&s"
+                    alt="Dialogues & Notification"
+                    class="h-48 w-full object-contain p-6 transition-transform duration-300" loading="lazy">
+                <div class="p-6 text-center">
+                    <h5 class="text-xl font-semibold text-gray-800 mb-2">Dialogues & Notification</h5>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Implement alerts, toasts, and notifications
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#" class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Practice
+                        </a>
+                        <a href="#" class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            Demo
+                        </a>
+                        <button onclick="ShowDocumentation('Dialogues.md')"
+                            class="text-gray-700 font-medium transition-all duration-300 btn-hover">
+                            View Docs
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 py-8 border-t border-gray-200 footer-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2025 RKIT Training
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Home
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Courses
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        About
+                    </a>
+                    <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+                        Contact
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-gray-400 text-xs">
+                    Built for developers, by developers
+                </p>
+            </div>
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.0/marked.min.js"></script>
     <script>
         const ShowDocumentation = (filePath) => {
