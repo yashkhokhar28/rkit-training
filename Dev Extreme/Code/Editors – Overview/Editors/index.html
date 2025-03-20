@@ -1,164 +1,242 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editors - Overview</title>
 
-    <!-- Google Icons -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editors - Overview</title>
+  <link rel="icon" type="image/x-icon" href="https://cdn.iconscout.com/icon/free/png-256/free-devexpress-283216.png">
+  <!-- Google Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- jQuery -->
+  <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+  <!-- DevExtreme Dark Theme -->
+  <link rel="stylesheet" href="../Content/dx.material.blue.dark.css">
+  <!-- DevExtreme Library -->
+  <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card-base {
+      background: #ffffff;
+    }
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
+    .card-hover:hover {
+      background: #f7f7f7;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
 
-    <!-- DevExtreme Dark Theme -->
-    <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
 
-    <!-- DevExtreme Library -->
-    <script type="text/javascript" src="../Scripts/dx.all.js"></script>
+    .card-hover:hover .material-icons {
+      transform: scale(1.1) rotate(2deg);
+    }
 
-    <!-- Custom Dark Theme CSS -->
-    <style>
-      /* Global Styles */
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #121212;
-        /* Dark Background */
-        color: #ffffff;
-        /* Light Text */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
       }
 
-      /* Container */
-      .container {
-        max-width: 1200px;
-        width: 90%;
-        padding: 20px;
-        text-align: center;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-hover:hover {
+      transform: translateX(5px);
+    }
+
+    .footer-link:hover {
+      color: #1f2937;
+      /* gray-800 */
+      transform: translateY(-2px);
+    }
+
+    .footer-fade-in {
+      animation: footerFadeIn 1s ease-out;
+    }
+
+    @keyframes footerFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
       }
 
-      /* Page Title */
-      .title {
-        font-size: 28px;
-        margin-bottom: 20px;
-        color: #e0e0e0;
-        font-weight: bold;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
+  </style>
+</head>
 
-      /* Grid Layout */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        justify-content: center;
-        align-items: center;
-      }
+<body class="bg-gray-50 min-h-screen font-sans">
+  <div class="container mx-auto px-6 py-16 max-w-6xl">
+    <!-- Header -->
+    <header class="mb-16 text-center fade-in">
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-800">
+        Editors - Overview
+      </h1>
+      <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+        Explore DevExtreme editor components
+      </p>
+    </header>
 
-      /* Card Styling */
-      .card {
-        background: #1e1e1e;
-        /* Dark Card Background */
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease,
-          background 0.3s ease;
-        border: 1px solid #333;
-      }
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Card 1: Check Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">check_box</span>
+          <a href="../CheckBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Check Box
+          </a>
+        </div>
+      </div>
 
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
-        background-color: #007bff;
-        color: #fff;
-      }
+      <!-- Card 2: Date Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">event</span>
+          <a href="./DateBox/DateBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Date Box
+          </a>
+        </div>
+      </div>
 
-      /* Icon Styling */
-      .card .icon {
-        font-size: 40px;
-        margin-bottom: 10px;
-        color: #00bcd4;
-        /* Neon Cyan */
-        transition: color 0.3s ease;
-      }
+      <!-- Card 3: Drop Down Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span
+            class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">arrow_drop_down_circle</span>
+          <a href="./DropDownBox/DropDownBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Drop Down Box
+          </a>
+        </div>
+      </div>
 
-      .card:hover .icon {
-        color: #fff;
-      }
+      <!-- Card 4: Number Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">calculate</span>
+          <a href="./NumberBox/NumberBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Number Box
+          </a>
+        </div>
+      </div>
 
-      /* Link Styling */
-      .card a {
-        text-decoration: none;
-        color: inherit;
-        font-size: 20px;
-        font-weight: 600;
-        display: block;
-      }
+      <!-- Card 5: Select Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">list</span>
+          <a href="./SelectBox/SelectBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Select Box
+          </a>
+        </div>
+      </div>
 
-      /* Hover Glow Effect */
-      .card:hover a {
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-      }
-    </style>
-  </head>
+      <!-- Card 6: Text Area -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">text_fields</span>
+          <a href="./TextArea/TextArea.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Text Area
+          </a>
+        </div>
+      </div>
 
-  <body>
-    <div class="container">
-      <h2 class="title">Editors - Overview</h2>
-      <div class="grid">
-        <div class="card">
-          <span class="material-icons icon">check_box</span>
-          <a href="../CheckBox.html">Check Box</a>
+      <!-- Card 7: Text Box -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">title</span>
+          <a href="./TextBox/TextBox.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Text Box
+          </a>
         </div>
-        <div class="card">
-          <span class="material-icons icon">event</span>
-          <a href="./DateBox/DateBox.html">Date Box</a>
+      </div>
+
+      <!-- Card 8: Button -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">touch_app</span>
+          <a href="./Button/Button.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Button
+          </a>
         </div>
-        <div class="card">
-          <span class="material-icons icon">arrow_drop_down_circle</span>
-          <a href="./DropDownBox/DropDownBox.html">Drop Down Box</a>
+      </div>
+
+      <!-- Card 9: File Uploader -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">cloud_upload</span>
+          <a href="./FileUploader/FileUploader.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            File Uploader
+          </a>
         </div>
-        <div class="card">
-          <span class="material-icons icon">calculate</span>
-          <a href="./NumberBox/NumberBox.html">Number Box</a>
+      </div>
+
+      <!-- Card 10: Validation -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span
+            class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">verified_user</span>
+          <a href="./Validation/Validation.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Validation
+          </a>
         </div>
-        <div class="card">
-          <span class="material-icons icon">list</span>
-          <a href="./SelectBox/SelectBox.html">Select Box</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">text_fields</span>
-          <a href="./TextArea/TextArea.html">Text Area</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">title</span>
-          <a href="./TextBox/TextBox.html">Text Box</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">touch_app</span>
-          <a href="./Button/Button.html">Button</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">cloud_upload</span>
-          <a href="./FileUploader/FileUploader.html">File Uploader</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">verified_user</span>
-          <a href="./Validation/Validation.html">Validation</a>
-        </div>
-        <div class="card">
-          <span class="material-icons icon">radio_button_checked</span>
-          <a href="./RadioGroup/RadioGroup.html">Radio Group</a>
+      </div>
+
+      <!-- Card 11: Radio Group -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span
+            class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">radio_button_checked</span>
+          <a href="./RadioGroup/RadioGroup.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Radio Group
+          </a>
         </div>
       </div>
     </div>
-  </body>
+
+    <!-- Footer -->
+    <footer class="mt-20 py-8 border-t border-gray-200 footer-fade-in">
+      <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">
+          © 2025 RKIT Training
+        </p>
+      </div>
+      <div class="text-center mt-4">
+        <p class="text-gray-400 text-xs">
+          Built for developers, by developers
+        </p>
+      </div>
+    </footer>
+  </div>
+</body>
+
 </html>

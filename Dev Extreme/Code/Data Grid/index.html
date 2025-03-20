@@ -2,147 +2,287 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DataGrid Features</title>
-
+  <link rel="icon" type="image/x-icon" href="https://cdn.iconscout.com/icon/free/png-256/free-devexpress-283216.png">
   <!-- Google Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- jQuery -->
   <script type="text/javascript" src="../Scripts/jquery-3.5.1.js"></script>
-
   <!-- DevExtreme Dark Theme -->
-  <link rel="stylesheet" href="../Content/dx.material.blue.dark.css" />
-
+  <link rel="stylesheet" href="../Content/dx.material.blue.dark.css">
   <!-- DevExtreme Library -->
   <script type="text/javascript" src="../Scripts/dx.all.js"></script>
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: "Arial", sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-      overflow: hidden;
+    .card-base {
+      background: #ffffff;
     }
 
-    .scrollable-container {
-      overflow-y: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+    .card-hover:hover {
+      background: #f7f7f7;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .container {
-      max-width: 1200px;
-      width: 90%;
-      text-align: center;
-      padding: 20px;
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
     }
 
-    .title {
-      font-size: 28px;
-      margin-bottom: 20px;
-      color: #e0e0e0;
-      font-weight: bold;
+    .card-hover:hover .material-icons {
+      transform: scale(1.1) rotate(2deg);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .card {
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid #333;
+    .btn-hover:hover {
+      transform: translateX(5px);
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0px 6px 12px rgba(0, 150, 255, 0.5);
-      background-color: #007bff;
-      color: #fff;
+    .footer-link:hover {
+      color: #1f2937;
+      /* gray-800 */
+      transform: translateY(-2px);
     }
 
-    .card .icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-      color: #00bcd4;
-      transition: color 0.3s ease;
+    .footer-fade-in {
+      animation: footerFadeIn 1s ease-out;
     }
 
-    .card:hover .icon {
-      color: #fff;
-    }
+    @keyframes footerFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
 
-    .card a {
-      text-decoration: none;
-      color: inherit;
-      font-size: 20px;
-      font-weight: 600;
-      display: block;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
-<body class="scrollable-container">
-  <div class="container">
-    <h2 class="title">DataGrid Features</h2>
-    <div class="grid">
-      <div class="card">
-        <span class="material-icons icon">view_list</span><a href="./Data/index.html">Data</a>
+<body class="bg-gray-50 min-h-screen font-sans">
+  <div class="container mx-auto px-6 py-16 max-w-6xl">
+    <!-- Header -->
+    <header class="mb-16 text-center fade-in">
+      <h1 class="text-5xl md:text-6xl font-bold text-gray-800">
+        DataGrid Features
+      </h1>
+      <p class="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+        Explore advanced features of DevExtreme DataGrid
+      </p>
+    </header>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Card 1: Data -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">view_list</span>
+          <a href="./Data/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Data
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">sync</span><a href="./PagingAndScrolling/index.html">Paging and Scrolling</a>
+
+      <!-- Card 2: Paging and Scrolling -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">sync</span>
+          <a href="./PagingAndScrolling/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Paging and Scrolling
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">edit</span><a href="./Editing/index.html  ">Editing</a>
+
+      <!-- Card 3: Editing -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">edit</span>
+          <a href="./Editing/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Editing
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">group</span><a href="./Grouping/index.html">Grouping</a>
+
+      <!-- Card 4: Grouping -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">group</span>
+          <a href="./Grouping/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Grouping
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">filter_list</span><a href="./Filtering/index.html">Filtering</a>
+
+      <!-- Card 5: Filtering -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">filter_list</span>
+          <a href="./Filtering/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Filtering
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">sort</span><a href="./Sorting/index.html">Sorting</a>
+
+      <!-- Card 6: Sorting -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">sort</span>
+          <a href="./Sorting/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Sorting
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">check_box</span><a href="./Selection/index.html">Selection</a>
+
+      <!-- Card 7: Selection -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">check_box</span>
+          <a href="./Selection/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Selection
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">view_column</span><a href="./Columns/index.html">Columns</a>
+
+      <!-- Card 8: Columns -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">view_column</span>
+          <a href="./Columns/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Columns
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">save</span><a href="./StatePersistence/index.html">State Persistence</a>
+
+      <!-- Card 9: State Persistence -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">save</span>
+          <a href="./StatePersistence/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            State Persistence
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">view_module</span><a href="./Template/index.html">Template</a>
+
+      <!-- Card 10: Template -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">view_module</span>
+          <a href="./Template/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Template
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">calculate</span><a href="./DataSummaries/index.html">Data Summaries</a>
+
+      <!-- Card 11: Data Summaries -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">calculate</span>
+          <a href="./DataSummaries/index.html"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Data Summaries
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">layers</span><a href="">Master-Detail</a>
+
+      <!-- Card 12: Master-Detail -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">layers</span>
+          <a href="#"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Master-Detail
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">upload</span><a href="">Export</a>
+
+      <!-- Card 13: Export -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">upload</span>
+          <a href="#"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Export
+          </a>
+        </div>
       </div>
-      <div class="card">
-        <span class="material-icons icon">devices</span><a href="">Adaptability</a>
+
+      <!-- Card 14: Adaptability -->
+      <div
+        class="card-base card-hover rounded-xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 fade-in">
+        <div class="p-6 text-center">
+          <span class="material-icons text-4xl text-gray-700 mb-4 transition-transform duration-300">devices</span>
+          <a href="#"
+            class="text-xl font-semibold text-gray-800 hover:text-gray-900 transition-all duration-300 btn-hover block">
+            Adaptability
+          </a>
+        </div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 py-8 border-t border-gray-200 footer-fade-in">
+      <div class="flex flex-col md:flex-row justify-between items-center max-w-4xl mx-auto">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">
+          © 2025 RKIT Training
+        </p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+            Home
+          </a>
+          <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+            Courses
+          </a>
+          <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+            About
+          </a>
+          <a href="#" class="text-gray-600 text-sm font-medium transition-all duration-300 footer-link">
+            Contact
+          </a>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <p class="text-gray-400 text-xs">
+          Built for developers, by developers
+        </p>
+      </div>
+    </footer>
   </div>
 </body>
 
