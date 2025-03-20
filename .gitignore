@@ -1,0 +1,107 @@
+# =========================
+# General Ignore Rules
+# =========================
+# Ignore system files (Mac & Windows)
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Ignore logs & temp files
+logs/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swn
+*.out
+
+# Ignore dependency files (Node.js)
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log
+
+# Ignore compiled & generated files
+dist/
+build/
+coverage/
+public/
+
+# =========================
+# HTML, CSS, JavaScript, jQuery
+# =========================
+# Ignore cache & temp files
+*.sass-cache/
+*.css.map
+*.scssc
+*.lessc
+*.min.*
+*.gz
+
+# Ignore Live Server & VS Code settings
+.vscode/
+*.live-server.json
+
+# =========================
+# ASP.NET & C#
+# =========================
+# Ignore Visual Studio & JetBrains IDEs
+.vs/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.ps1
+*.user
+*.cache
+
+# Ignore build & compiled files
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.nuget/
+*.nupkg
+*.dbmdl
+
+# Ignore ASP.NET Core config files (if secrets are present)
+appsettings.json
+appsettings.*.json
+secrets.json
+.env
+
+# Ignore debug & test artifacts
+*.testsettings
+*.vsmdi
+TestResults/
+coverage/
+
+# Ignore generated JavaScript files (for TypeScript projects)
+*.js.map
+
+# Ignore database files
+*.sqlite
+*.db
+*.mdf
+*.ldf
+
+# =========================
+# Miscellaneous
+# =========================
+# Ignore sensitive & credentials files
+*.pem
+*.crt
+*.key
+secrets.json
+config.json
+
+# Ignore third-party tools
+*.zip
+*.tar.gz
+*.7z
+*.rar
+*.bak
