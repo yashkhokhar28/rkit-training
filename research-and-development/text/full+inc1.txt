@@ -1,0 +1,95 @@
+mysql -u root -e "
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
+CREATE TABLE orders1 (id INT PRIMARY KEY, item VARCHAR(50));
+CREATE TABLE orders2 (id INT PRIMARY KEY, item VARCHAR(50));
+"
+
+for i in {1..100}; do
+  mysql -u root -e "
+  USE test;
+  INSERT INTO orders1 VALUES ($i, 'Item1_$i');
+  INSERT INTO orders2 VALUES ($i, 'Item2_$i');
+  "
+done
+
+xtrabackup --backup --target-dir=/home/ubuntu/xtrabackup --user=root
+
+for i in {101..150}; do
+  mysql -u root -e "
+  USE test;
+  INSERT INTO orders1 VALUES ($i, 'Item1_$i');
+  INSERT INTO orders2 VALUES ($i, 'Item2_$i');
+  "
+done
+
+xtrabackup --backup --target-dir=/home/ubuntu/xtrabackup_inc --incremental-basedir=/home/ubuntu/xtrabackup --user=root
+
+xtrabackup --prepare --apply-log-only --target-dir=/home/ubuntu/xtrabackup
+
+xtrabackup --prepare --target-dir=/home/ubuntu/xtrabackup --incremental-dir=/home/ubuntu/xtrabackup_inc
+
+xtrabackup --prepare --target-dir=/home/ubuntu/xtrabackup
+
+sudo systemctl stop mysql
+
+sudo mv /var/lib/mysql /var/lib/mysql.bak
+
+xtrabackup --copy-back --target-dir=/home/ubuntu/xtrabackup
+
+sudo chown -R mysql:mysql /var/lib/mysql
+
+sudo systemctl start mysql
+
+mysql -u root -e "
+USE test;
+SELECT COUNT(*) FROM orders1;
+SELECT COUNT(*) FROM orders2;
+"
+
+-- restore previous
+
+sudo systemctl stop mysql
+
+sudo mv /var/lib/mysql /var/lib/mysql.current
+
+sudo cp -a /var/lib/mysql.bak /var/lib/mysql
+
+sudo chown -R mysql:mysql /var/lib/mysql
+sudo find /var/lib/mysql -type d -exec chmod 750 {} \;
+sudo find /var/lib/mysql -type f -exec chmod 660 {} \;
+
+sudo systemctl start mysql
+
+mysql -u root -p
+SHOW DATABASES;
+
+
+
+>>> Creating 'test' database and inserting 100 rows...
+>>> Performing full backup...
+>>> Inserting 50 more rows into both tables...
+>>> Performing incremental backup...
+>>> Preparing full backup (apply-log-only)...
+>>> Merging incremental backup...
+>>> Final prepare (make ready to restore)...
+>>> Stopping MySQL for restore...
+>>> Backing up current data directory...
+>>> Copying restored data...
+>>> Starting MySQL...
+>>> Validating restored data:
++----------------+
+| orders1_count  |
++----------------+
+| 150            |
++----------------+
+| orders2_count  |
++----------------+
+| 150            |
++----------------+
+
+
+
+
+

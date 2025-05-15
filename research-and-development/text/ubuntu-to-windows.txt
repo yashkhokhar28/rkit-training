@@ -1,0 +1,2 @@
+tar cvzf backup.tar.gz backup/
+scp -r ubuntu@172.16.25.125:/home/ubuntu/backup.tar.gz .
