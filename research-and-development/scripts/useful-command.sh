@@ -64,3 +64,91 @@ DROP DATABASE IF EXISTS test_8;
 DROP DATABASE IF EXISTS test_9;
 DROP DATABASE IF EXISTS test_10;
 "
+
+mysql -u root -e "
+CREATE DATABASE IF NOT EXISTS test_all_types;
+USE test_all_types;
+
+-- Create 10 tables with same structure (no PRIMARY KEY)
+$(for i in {1..10}; do
+cat <<EOF
+CREATE TABLE IF NOT EXISTS all_types_${i} (
+    id INT,
+    tinyint_col TINYINT,
+    smallint_col SMALLINT,
+    mediumint_col MEDIUMINT,
+    int_col INT,
+    bigint_col BIGINT,
+    decimal_col DECIMAL(10,2),
+    float_col FLOAT,
+    double_col DOUBLE,
+    bit_col BIT(8),
+    bool_col BOOLEAN,
+    date_col DATE,
+    datetime_col DATETIME,
+    timestamp_col TIMESTAMP NULL DEFAULT NULL,
+    time_col TIME,
+    year_col YEAR,
+    char_col CHAR(10),
+    varchar_col VARCHAR(255),
+    binary_col BINARY(16),
+    varbinary_col VARBINARY(255),
+    tinytext_col TINYTEXT,
+    text_col TEXT,
+    mediumtext_col MEDIUMTEXT,
+    longtext_col LONGTEXT,
+    tinyblob_col TINYBLOB,
+    blob_col BLOB,
+    mediumblob_col MEDIUMBLOB,
+    longblob_col LONGBLOB,
+    json_col JSON,
+    enum_col ENUM('small', 'medium', 'large'),
+    set_col SET('a', 'b', 'c', 'd')
+);
+EOF
+done)
+
+-- Insert dummy data into each table
+$(for i in {1..10}; do
+cat <<EOF
+INSERT INTO all_types_${i} (
+    id, tinyint_col, smallint_col, mediumint_col, int_col, bigint_col, decimal_col,
+    float_col, double_col, bit_col, bool_col, date_col, datetime_col, timestamp_col,
+    time_col, year_col, char_col, varchar_col, binary_col, varbinary_col, tinytext_col,
+    text_col, mediumtext_col, longtext_col, tinyblob_col, blob_col, mediumblob_col,
+    longblob_col, json_col, enum_col, set_col
+) VALUES (
+    ${i}, 1, 2, 3, 4, 5, 123.45,
+    1.23, 4.56, b'10101010', true, '2023-01-01', '2023-01-01 12:00:00', NULL,
+    '12:34:56', 2023, 'char_data', 'varchar data', 'binary_data_123456', 'varbinary_data',
+    'tinytext example', 'text example', 'medium text example', 'long text example',
+    'tinyblobdata', 'blobdata', 'mediumblobdata', 'longblobdata', 
+    JSON_OBJECT('key', 'value'), 'medium', 'a,b'
+);
+EOF
+done)
+
+-- Select counts from all tables
+SELECT 'all_types_1' AS table_name, COUNT(*) FROM all_types_1
+UNION ALL
+SELECT 'all_types_2', COUNT(*) FROM all_types_2
+UNION ALL
+SELECT 'all_types_3', COUNT(*) FROM all_types_3
+UNION ALL
+SELECT 'all_types_4', COUNT(*) FROM all_types_4
+UNION ALL
+SELECT 'all_types_5', COUNT(*) FROM all_types_5
+UNION ALL
+SELECT 'all_types_6', COUNT(*) FROM all_types_6
+UNION ALL
+SELECT 'all_types_7', COUNT(*) FROM all_types_7
+UNION ALL
+SELECT 'all_types_8', COUNT(*) FROM all_types_8
+UNION ALL
+SELECT 'all_types_9', COUNT(*) FROM all_types_9
+UNION ALL
+SELECT 'all_types_10', COUNT(*) FROM all_types_10;
+"
+
+# Drop database when done:
+mysql -u root -e "DROP DATABASE IF EXISTS test_all_types;"

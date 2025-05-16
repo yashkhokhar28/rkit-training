@@ -90,6 +90,13 @@ if [[ "$MODE" == "full" ]]; then
         META_FILE="$BACKUP_DIR/${DB}_meta_${TIMESTAMP}.txt"
         TRACK_FILE="$BACKUP_DIR/${DB}_incremental_start.txt"
 
+        # Capture binlog position BEFORE backup begins
+        read BINLOG_FILE BINLOG_POS <<< "$(get_master_status)"
+        echo "$BINLOG_FILE $BINLOG_POS" > "$TRACK_FILE"
+        echo "Binlog File: $BINLOG_FILE" > "$META_FILE"
+        echo "Position: $BINLOG_POS" >> "$META_FILE"
+        log_message "Recorded binlog start for $DB: $BINLOG_FILE:$BINLOG_POS"
+
         # Log the start of full backup
         log_message "Starting full backup for $DB..."
 
@@ -104,17 +111,6 @@ if [[ "$MODE" == "full" ]]; then
 
         # Get the size of the backup file
         FILESIZE=$(du -sh "$BACKUP_FILE" | awk '{print $1}')
-
-        # Fetch the current binary log file and position
-        read BINLOG_FILE BINLOG_POS <<< "$(get_master_status)"
-
-        # Save binlog info to a metadata file
-        echo "Binlog File: $BINLOG_FILE" > "$META_FILE"
-        echo "Position: $BINLOG_POS" >> "$META_FILE"
-
-        # Save the binlog start position to be used for next incremental backup
-        echo "$BINLOG_FILE $BINLOG_POS" > "$TRACK_FILE"
-        log_message "Incremental tracking reset for $DB: $BINLOG_FILE:$BINLOG_POS"
 
         # Compress the SQL backup and delete the uncompressed version
         gzip "$BACKUP_FILE"
@@ -137,9 +133,10 @@ elif [[ "$MODE" == "incremental" ]]; then
             continue
         fi
 
-        # Read the tracked binlog file and start position from tracking file
-        read BINLOG_FILE START_POSITION < "$TRACK_FILE"
-        log_message "Using tracked start position for $DB: $BINLOG_FILE:$START_POSITION"
+        # Capture current binlog state BEFORE extraction
+        read CUR_BINLOG CUR_POS <<< "$(get_master_status)"
+        echo "$CUR_BINLOG $CUR_POS" > "$TRACK_FILE"
+        log_message "Recording new tracking position: $CUR_BINLOG:$CUR_POS"
 
         # Generate timestamp to name the new incremental backup
         TIMESTAMP=$(date +"%Y%m%d%H%M%S")
@@ -148,7 +145,9 @@ elif [[ "$MODE" == "incremental" ]]; then
         log_message "Starting cumulative incremental backup for $DB..."
 
         # Extract binlog entries for the database starting from last recorded position
-        mysqlbinlog --start-position="$START_POSITION" --database="$DB" "/var/lib/mysql/$BINLOG_FILE" > "$INC_FILE_RAW"
+        mysqlbinlog --start-position="$START_POSITION" \
+                    --stop-position="$CUR_POS" \
+                    --database="$DB" "/var/lib/mysql/$BINLOG_FILE" > "$INC_FILE_RAW"
 
         # Check if mysqlbinlog command succeeded
         if [[ $? -ne 0 ]]; then
