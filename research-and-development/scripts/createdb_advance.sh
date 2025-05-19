@@ -4,14 +4,14 @@ mysql_user="root"
 mysql_cmd="mysql -u $mysql_user"
 
 # Create 10 databases
-for dbid in {1..10}; do
+for dbid in {1..5}; do
   echo "Creating database test_db_${dbid}..."
   $mysql_cmd -e "CREATE DATABASE IF NOT EXISTS test_db_${dbid};"
 done
 
 # Create 10 tables in each DB
-for dbid in {1..10}; do
-  for tid in {1..10}; do
+for dbid in {1..5}; do
+  for tid in {1..2}; do
     echo "Creating table all_types_${tid} in test_db_${dbid}..."
     $mysql_cmd test_db_${dbid} -e "
       CREATE TABLE IF NOT EXISTS all_types_${tid} (
@@ -52,8 +52,8 @@ for dbid in {1..10}; do
 done
 
 # Insert 1000 rows per table per db, 100 rows per insert batch
-for dbid in {1..10}; do
-  for tid in {1..10}; do
+for dbid in {1..5}; do
+  for tid in {1..2}; do
     for start in {1..1000..100}; do
       end=$((start + 99))
       if (( end > 1000 )); then
@@ -92,8 +92,8 @@ done
 
 # Verify counts
 echo "Verifying row counts..."
-for dbid in {1..10}; do
-  for tid in {1..10}; do
+for dbid in {1..5}; do
+  for tid in {1..2}; do
     count=$($mysql_cmd -N -e "SELECT COUNT(*) FROM test_db_${dbid}.all_types_${tid};")
     echo "test_db_${dbid}.all_types_${tid} has $count rows."
   done

@@ -3,21 +3,36 @@
 MYSQL_USER="root"
 mysql_cmd="mysql -u $MYSQL_USER"
 
-enum_values=('small' 'medium' 'large')
+# Prompt user for database names and number of rows
+read -p "Enter database name(s) (space-separated): " -a DB_NAMES
+read -p "Enter the number of rows to insert into each table: " ROW_COUNT
 
-for dbid in {1..5}; do
-  for tid in {1..2}; do
-    echo "Starting inserts into all_types_${tid} in test_db_${dbid}..."
-    for i in {1..10000}; do
-      # Log every 1000 rows inserted
+# Validate row count
+if [[ -z "$ROW_COUNT" || "$ROW_COUNT" -le 0 ]]; then
+  echo "Invalid row count. Exiting."
+  exit 1
+fi
+
+# Enum and Set values for cycling
+enum_values=('small' 'medium' 'large')
+set_val='a,b'
+
+# Loop over each database
+for DB_NAME in "${DB_NAMES[@]}"; do
+  echo "Starting inserts for database: $DB_NAME"
+
+  # Insert into all_types_1 and all_types_2
+  for tid in 1 2; do
+    echo "Inserting into table all_types_${tid} in $DB_NAME..."
+
+    for ((i=1; i<=ROW_COUNT; i++)); do
       if (( i % 1000 == 1 )); then
-        echo "Inserting rows $i - $((i+999)) into all_types_${tid} in test_db_${dbid}..."
+        echo "Inserting rows $i - $((i+999 < ROW_COUNT ? i+999 : ROW_COUNT))..."
       fi
 
-      enum_val=${enum_values[$(( (i-1) % 3 ))]}   # cycles through small, medium, large
-      set_val='a,b'  # example fixed value
+      enum_val=${enum_values[$(( (i-1) % 3 ))]}
 
-      $mysql_cmd test_db_${dbid} -e "
+      $mysql_cmd "$DB_NAME" -e "
         INSERT INTO all_types_${tid} (
           id, tinyint_col, smallint_col, mediumint_col, int_col, bigint_col,
           decimal_col, float_col, double_col, bit_col, bool_col, date_col,
@@ -33,8 +48,11 @@ for dbid in {1..5}; do
         );
       "
     done
-    echo "Completed inserts into all_types_${tid} in test_db_${dbid}."
+
+    echo "Completed inserts into all_types_${tid} in $DB_NAME."
   done
+
+  echo "Finished all inserts for $DB_NAME."
 done
 
-echo "All inserts completed."
+echo "✅ All inserts completed for all databases."
